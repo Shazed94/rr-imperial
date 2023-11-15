@@ -1,10 +1,7 @@
 "use client";
-import gsap from "gsap";
-import { scrollTrigger } from "gsap/ScrollTrigger";
 import { LottieAboutLeft } from "./LottieComponents";
 import { useEffect, useRef } from "react";
 import Aos from "aos";
-gsap.registerPlugin(scrollTrigger);
 
 const AboutRRImperial = () => {
   const h2 = useRef();
