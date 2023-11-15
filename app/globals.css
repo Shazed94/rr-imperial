@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "tahoma-regular";
+    src: url("/font/TAHOMA_0.TTF");
+}
+
+@font-face {
+    font-family: "tahoma-bold";
+    src: url("/font/TAHOMAB0.TTF");
+}
+
+@font-face {
+    font-family: "tahoma-extrabold";
+    src: url("/font/TAHOMABD.TTF");
+}
+
+/* [data-aos="distance-200"] {
+    transform: translateX(-200px);
+    opacity: 0;
+    transition-property: transform, opacity;
+
+    &.aos-animate {
+        transform: translateX(0);
+        opacity: 1;
+    }
+} */
