@@ -165,7 +165,8 @@ const KeyStrength = () => {
               </p>
             </div>
             <div className="p-6 rounded-[24px] flex flex-col justify-between border gap-3">
-              <LottieIcon />
+              {/* <LottieIcon /> */}
+              <img src={"img/homepage/7.png"} alt="" className="w-16" />
               <h4 className="text-333 text-f18 font-tahoma-bold">4500+</h4>
               <p className="text-333 text-f14 font-tahoma-regular uppercase">
                 PROUD DEALERS
