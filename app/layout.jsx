@@ -1,7 +1,6 @@
 import { Roboto } from "next/font/google";
 import "aos/dist/aos.css";
 import "react-medium-image-zoom/dist/styles.css";
-import "react-quill/dist/quill.snow.css";
 import "./globals.css";
 
 const roboto = Roboto({
