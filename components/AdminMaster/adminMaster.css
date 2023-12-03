@@ -1,0 +1,8 @@
+.rightbar_content.active {
+    margin-left: 70px;
+    width: calc(100% - 70px);
+}
+
+.rightbar_content.active .topbar {
+    width: calc(100% - 70px);
+}
