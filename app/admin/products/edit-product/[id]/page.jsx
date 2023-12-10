@@ -177,7 +177,6 @@ const EditProduct = ({ params }) => {
     formdata.append("_method", "PUT");
     formdata.append("name", productName.current.value);
     formdata.append("specification", specification.current.value);
-
     if (productImage.current.files[0]) {
       formdata.append("image", productImage.current.files[0]);
     }
@@ -227,7 +226,6 @@ const EditProduct = ({ params }) => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       )
-
       .then((response) => {
         Swal.fire({
           icon: "success",
@@ -236,7 +234,6 @@ const EditProduct = ({ params }) => {
         });
         router.push("/admin/products/all-products")
       });
-
     e.preventDefault();
   };
 
