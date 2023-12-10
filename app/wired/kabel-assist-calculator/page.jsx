@@ -1,5 +1,6 @@
 "use client";
 import Footer from "@/components/Footer/Footer";
+import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import Header from "@/components/Header/Header";
 import { Eraser } from "@/components/SvgComponents";
 import WiredMaster from "@/components/Wired/WiredMaster";
@@ -13,7 +14,8 @@ import {
   TabsHeader,
   ThemeProvider,
 } from "@material-tailwind/react";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const KabelAssistCalculator = () => {
   const customTheme = {
@@ -27,6 +29,60 @@ const KabelAssistCalculator = () => {
       },
     },
   };
+  const [areaOfConductor, setAreaOfConductor] = useState([]);
+  const [recommendValue, setRecommendValue] = useState({});
+  const [powerOptionValue, setPowerOptionValue] = useState([]);
+
+  const [value, setValue] = useState(0.37);
+  const [power, setPower] = useState("kw");
+  const [nominalValue, setNominalValue] = useState(1);
+  const [nominalValueJson, setNominalValueJson] = useState();
+
+  const onClear2 = () => {
+    document.getElementById("nominal_select").selectedIndex = 0;
+    setNominalValue(1);
+  };
+
+  const onClear1 = () => {
+    document.getElementById("powerOptionValue").selectedIndex = 0;
+    setPower("kw");
+    setValue(0.37);
+  };
+
+  useEffect(() => {
+    axios
+      .get(`${BACKEND_BASE_URL}/api/get-nominal-area-of-conductor`)
+      .then((res) => {
+        setAreaOfConductor(res.data.nominal_area_of_conductor);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`${BACKEND_BASE_URL}/api/get-kw-hp/${power}`).then((res) => {
+      setPowerOptionValue(res.data.options_values);
+      for (const [value] of Object.entries(res.data.options_values[0])) {
+        setValue(`${value}`);
+      }
+    });
+  }, [power]);
+
+  useEffect(() => {
+    axios
+      .get(`${BACKEND_BASE_URL}/api/get-calculator-value/${power}/${value}`)
+      .then((res) => {
+        setRecommendValue(res.data.calculator_values);
+      });
+  }, [value, power]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${BACKEND_BASE_URL}/api/get-current-ratting-of-wire-and-cables-value/${nominalValue}`
+      )
+      .then((res) => {
+        setNominalValueJson(res.data.wire_and_cables_calculator_values);
+      });
+  }, [nominalValue]);
   return (
     <div>
       <Header />
@@ -74,16 +130,26 @@ const KabelAssistCalculator = () => {
                       <div className="flex justify-between gap-4 lg:gap-10">
                         <div className="w-40 lg:w-72">
                           <Select
-                            label="Select Version"
-                            className=""
+                            label="Select motor output"
+                            id="powerOptionValue"
                             animate={{
                               mount: { y: 0 },
                               unmount: { y: 25 },
                             }}
+                            onChange={(val) => setValue(val)}
+                            selected={"Select motor output"}
                           >
-                            <Option>option 1</Option>
-                            <Option>option 2</Option>
-                            <Option>option 3</Option>
+                            {powerOptionValue?.map((data) =>
+                              power === "kw" ? (
+                                <Option key={data.key} value={data.kw}>
+                                  {data.kw}
+                                </Option>
+                              ) : (
+                                <Option value={data.hp} key={data.hp}>
+                                  {data.hp}
+                                </Option>
+                              )
+                            )}
                           </Select>
                         </div>
                         <div className="w-40 lg:w-72">
@@ -93,16 +159,20 @@ const KabelAssistCalculator = () => {
                               mount: { y: 0 },
                               unmount: { y: 25 },
                             }}
+                            onChange={(val) => setPower(val)}
+                            value={power}
                           >
-                            <Option>option 1</Option>
-                            <Option>option 2</Option>
-                            <Option>option 3</Option>
+                            <Option value="kw">kW</Option>
+                            <Option value="hp">HP</Option>
                           </Select>
                         </div>
                       </div>
                     </div>
                     <div className="w-full lg:w-1/3 flex justify-center mt-5 lg:mt-0">
-                      <button className="w-24 flex items-center justify-center border-2 border-[#F1F2F2] py-2">
+                      <button
+                        className="w-24 flex items-center justify-center border-2 border-[#F1F2F2] py-2"
+                        onClick={onClear1}
+                      >
                         <Eraser fill="#ED1D24" className="w-5 h-5 me-2" />
                         <span className="text-[#ED1D24]">Clear</span>
                       </button>
@@ -115,11 +185,15 @@ const KabelAssistCalculator = () => {
                     </h4>
                     <div className="flex justify-center gap-4 lg:gap-8 mb-14">
                       <div className="flex flex-col items-center px-14 py-1 bg-white">
-                        <span className="text-[#939598]">1.00</span>
+                        <span className="text-[#939598]">
+                          {recommendValue?.full_load_current_1}
+                        </span>
                         <span className="text-[#939598]">AMP</span>
                       </div>
                       <div className="flex flex-col items-center px-14 py-1 bg-[#D1D3D4]">
-                        <span className="text-[#939598]">1.00</span>
+                        <span className="text-[#939598]">
+                          {recommendValue?.full_load_current_2}
+                        </span>
                         <span className="text-[#939598]">AMP</span>
                       </div>
                     </div>
@@ -133,42 +207,62 @@ const KabelAssistCalculator = () => {
                           Overload Relay Range
                         </span>
                         <div className="flex flex-col items-center w-40 py-1 bg-white">
-                          <span className="text-[#939598]">0.00</span>
+                          <span className="text-[#939598]">
+                            {" "}
+                            {
+                              recommendValue?.star_delta_starter_overload_relay_range
+                            }
+                          </span>
                           <span className="text-[#939598]">AMP</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center">
                         <span className="text-f14 mb-1">Max. Backup fuse</span>
                         <div className="flex flex-col items-center w-40 py-1 bg-[#D1D3D4]">
-                          <span className="text-white">0.00</span>
+                          <span className="text-white">
+                            {recommendValue?.star_delta_starter_max_backup_fuse}
+                          </span>
                           <span className="text-white">AMP</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center">
                         <span className="text-f14 mb-1">Recommended Cable</span>
                         <div className="flex flex-col items-center w-40 py-1 bg-white">
-                          <span className="text-[#939598]">1.00</span>
+                          <span className="text-[#939598]">
+                            {
+                              recommendValue?.star_delta_starter_recommended_cable
+                            }
+                          </span>
                           <span className="text-[#939598]">Sq. mm Al</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center">
                         <span className="text-f14 mb-1">Size Supply Side</span>
                         <div className="flex flex-col items-center w-40 py-1 bg-[#D1D3D4]">
-                          <span className="text-white">0.60</span>
+                          <span className="text-white">
+                            {" "}
+                            {
+                              recommendValue?.star_delta_starter_size_supply_side
+                            }
+                          </span>
                           <span className="text-white">Sq. mm Cu</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center">
                         <span className="text-f14 mb-1">Size Motor Side</span>
                         <div className="flex flex-col items-center w-40 py-1 bg-white">
-                          <span className="text-[#939598]">1.00</span>
+                          <span className="text-[#939598]">
+                            {recommendValue?.star_delta_starter_size_motor_side}
+                          </span>
                           <span className="text-[#939598]">Sq.mm Al</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center">
                         <span className="text-f14 mb-1">Size Supply Side</span>
                         <div className="flex flex-col items-center w-40 py-1 bg-[#D1D3D4]">
-                          <span className="text-white">0.60</span>
+                          <span className="text-white">
+                            {recommendValue?.star_delta_starter_none}
+                          </span>
                           <span className="text-white">Sq. mm Cu</span>
                         </div>
                       </div>
@@ -182,14 +276,24 @@ const KabelAssistCalculator = () => {
                           Overload Relay Range
                         </span>
                         <div className="flex flex-col items-center w-40 py-1 bg-white">
-                          <span className="text-[#939598]">0.00</span>
+                          <span className="text-[#939598]">
+                            {" "}
+                            {
+                              recommendValue?.direct_online_starter_overload_relay_range
+                            }
+                          </span>
                           <span className="text-[#939598]">AMP</span>
                         </div>
                       </div>
                       <div className="flex flex-col items-center">
                         <span className="text-f14 mb-1">Max. Backup fuse</span>
                         <div className="flex flex-col items-center w-40 py-1 bg-[#D1D3D4]  mb-1">
-                          <span className="text-white">0.00</span>
+                          <span className="text-white">
+                            {" "}
+                            {
+                              recommendValue?.direct_online_starter_max_backup_fuse
+                            }
+                          </span>
                           <span className="text-white">AMP</span>
                         </div>
                         <span>(415V)</span>
@@ -197,7 +301,11 @@ const KabelAssistCalculator = () => {
                       <div className="flex flex-col items-center">
                         <span className="text-f14 mb-1">Recommended Cable</span>
                         <div className="flex flex-col items-center w-40 py-1 bg-white  mb-1">
-                          <span className="text-[#939598]">1.00</span>
+                          <span className="text-[#939598]">
+                            {
+                              recommendValue?.direct_online_starter_recommended_cable
+                            }
+                          </span>
                           <span className="text-[#939598]">Sq. mm Al</span>
                         </div>
                         <span>(3Ph)</span>
@@ -205,7 +313,9 @@ const KabelAssistCalculator = () => {
                       <div className="flex flex-col items-center">
                         <span className="text-f14 mb-1">Size Supply Side</span>
                         <div className="flex flex-col items-center w-40 py-1 bg-[#D1D3D4] mb-1">
-                          <span className="text-white">0.60</span>
+                          <span className="text-white">
+                            {recommendValue?.direct_online_starter_size}
+                          </span>
                           <span className="text-white">Sq. mm Cu</span>
                         </div>
                         <span>(50 Hz)</span>
@@ -230,16 +340,28 @@ const KabelAssistCalculator = () => {
                         Nominal area of conductor
                       </span>
                       <div className="flex items-center w-64">
-                        <Select label="Select Version" className="select">
-                          <Option>option 1</Option>
-                          <Option>option 2</Option>
-                          <Option>option 3</Option>
+                        <Select
+                          label="Select Version"
+                          onChange={(val) => setNominalValue(val)}
+                          id="nominal_select"
+                        >
+                          {areaOfConductor?.map((data) => (
+                            <Option
+                              value={data.nominal_area_of_conductor}
+                              key={data.nominal_area_of_conductor}
+                            >
+                              {data.nominal_area_of_conductor}
+                            </Option>
+                          ))}
                         </Select>
                         <span className="min-w-max ms-3">Sq. mm.</span>
                       </div>
                     </div>
                     <div className="w-full lg:w-2/3 flex justify-center mt-5 lg:mt-0">
-                      <button className="w-24 flex items-center justify-center border-2 border-[#F1F2F2] py-2">
+                      <button
+                        className="w-24 flex items-center justify-center border-2 border-[#F1F2F2] py-2"
+                        onClick={onClear2}
+                      >
                         <Eraser fill="#ED1D24" className="w-5 h-5 me-2" />
                         <span className="text-[#ED1D24]">Clear</span>
                       </button>
@@ -253,10 +375,10 @@ const KabelAssistCalculator = () => {
                         </h4>
                         <div className="flex justify-center gap-7">
                           <button className="border border-[#D1D3D4] flex justify-center items-center px-10 py-2">
-                            1.00
+                            {nominalValueJson?.four_core_RR_kabel_XLPE_cables_1}
                           </button>
                           <button className="border border-[#D1D3D4] bg-[#D1D3D4] flex justify-center items-center px-10 py-2">
-                            0.60
+                            {nominalValueJson?.four_core_RR_kabel_XLPE_cables_2}
                           </button>
                         </div>
                       </div>
@@ -266,10 +388,10 @@ const KabelAssistCalculator = () => {
                         </h4>
                         <div className="flex justify-center gap-7">
                           <button className="border border-[#D1D3D4] flex justify-center items-center px-10 py-2">
-                            1.00
+                            {nominalValueJson?.four_core_RR_kabel_PVC_cables_1}
                           </button>
                           <button className="border border-[#D1D3D4] bg-[#D1D3D4] flex justify-center items-center px-10 py-2">
-                            0.60
+                            {nominalValueJson?.four_core_RR_kabel_PVC_cables_2}
                           </button>
                         </div>
                       </div>
@@ -279,10 +401,10 @@ const KabelAssistCalculator = () => {
                         </h4>
                         <div className="flex justify-center gap-7">
                           <button className="border border-[#D1D3D4] flex justify-center items-center px-10 py-2">
-                            1.00
+                            {nominalValueJson?.three_core_RR_kabel_PVC_cables_1}
                           </button>
                           <button className="border border-[#D1D3D4] bg-[#D1D3D4] flex justify-center items-center px-10 py-2">
-                            0.60
+                            {nominalValueJson?.three_core_RR_kabel_PVC_cables_2}
                           </button>
                         </div>
                       </div>
@@ -293,10 +415,14 @@ const KabelAssistCalculator = () => {
                         </h4>
                         <div className="flex justify-center gap-7">
                           <button className="border border-[#D1D3D4] flex justify-center items-center px-10 py-2">
-                            1.00
+                            {
+                              nominalValueJson?.single_core_RR_kabel_XLPE_cables_1
+                            }
                           </button>
                           <button className="border border-[#D1D3D4] bg-[#D1D3D4] flex justify-center items-center px-10 py-2">
-                            0.60
+                            {
+                              nominalValueJson?.single_core_RR_kabel_XLPE_cables_2
+                            }
                           </button>
                         </div>
                       </div>
@@ -316,10 +442,10 @@ const KabelAssistCalculator = () => {
                       </div>
                       <div className="flex justify-center gap-7">
                         <button className="bg-white flex justify-center items-center px-10 py-2">
-                          1.00
+                          {nominalValueJson?.three_core_RR_kabel_XLPE_cables_1}
                         </button>
                         <button className="border border-[#D1D3D4] bg-[#D1D3D4] flex justify-center items-center px-10 py-2">
-                          0.60
+                          {nominalValueJson?.three_core_RR_kabel_XLPE_cables_2}
                         </button>
                       </div>
                     </div>
@@ -332,11 +458,11 @@ const KabelAssistCalculator = () => {
                       </div>
                       <div className="flex justify-center gap-7">
                         <button className="bg-white flex justify-center items-center px-10 py-2">
-                          1.00
+                          {nominalValueJson?.current_ratings_for_building_wires}
                         </button>
-                        <button className="border border-[#D1D3D4] bg-[#D1D3D4] flex justify-center items-center px-10 py-2">
+                        {/* <button className="border border-[#D1D3D4] bg-[#D1D3D4] flex justify-center items-center px-10 py-2">
                           0.60
-                        </button>
+                        </button> */}
                       </div>
                     </div>
 

@@ -1,6 +1,5 @@
 "use client";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
-import { Eraser } from "@/components/SvgComponents";
 import {
   Option,
   Select,
