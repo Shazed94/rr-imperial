@@ -2,6 +2,18 @@ import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+//! ================== Dashboard Counts ===================
+export const read_card_counts = async () => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/card-count-master`;
+
+  try {
+    const result = await axios.get(URL);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
 //! ================== Read All Product ===================
 export const read_all_Products = async () => {
   let URL = `${BACKEND_BASE_URL}/api/admin/products`;
@@ -668,6 +680,60 @@ export const delete_Career = async (id) => {
   }
 
   let URL = `${BACKEND_BASE_URL}/api/admin/careers/delete/${id}`;
+  if (isConfirm) {
+    try {
+      const deleteResult = await axios.delete(URL);
+      return deleteResult;
+    } catch (e) {
+      return false;
+    }
+  }
+};
+
+// =============================== Contact ==================================
+
+//! ================== Read All Contacts ===================
+export const read_all_Contact = async () => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/contacts/all`;
+  try {
+    const result = await axios.get(URL);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== View Single Contact ===================
+export const view_Contact = async (contactId) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/contacts/${contactId}`;
+
+  try {
+    const result = await axios.get(URL);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Delete single Career ===================
+export const delete_Contact = async (id) => {
+  const isConfirm = await Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "green",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    return result.isConfirmed;
+  });
+
+  if (!isConfirm) {
+    return;
+  }
+
+  let URL = `${BACKEND_BASE_URL}/api/admin/contacts/all/delete/${id}`
   if (isConfirm) {
     try {
       const deleteResult = await axios.delete(URL);

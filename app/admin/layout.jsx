@@ -9,7 +9,11 @@ import {
   FaVideo,
   FaUsers,
 } from "react-icons/fa";
-import { AiOutlineDashboard, AiOutlineFilePdf } from "react-icons/ai";
+import {
+  AiFillContacts,
+  AiOutlineDashboard,
+  AiOutlineFilePdf,
+} from "react-icons/ai";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { BsSliders, BsCalculator, BsLightbulb } from "react-icons/bs";
 import { BiNews } from "react-icons/bi";
@@ -98,7 +102,11 @@ const Layout = (props) => {
       >
         <div className="h-full ">
           <div className="topbar flex justify-between items-center bg-[#c33030] text-white py-[20px] px-8 border-b-2 border-white mb-[2px] group-[.w-20]/sidebar:py-[9px]">
-            <Link href="/" target="_blank" className="logo group-[.w-20]/sidebar:opacity-0 group-[.w-20]/sidebar:w-0 transition-all duration-500">
+            <Link
+              href="/"
+              target="_blank"
+              className="logo group-[.w-20]/sidebar:opacity-0 group-[.w-20]/sidebar:w-0 transition-all duration-500"
+            >
               {" "}
               RR Imperial{" "}
             </Link>
@@ -239,6 +247,15 @@ const Layout = (props) => {
               >
                 <BsLightbulb className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                 <span className="text-base font-bold">Career</span>
+              </Link>
+              <Link
+                href="/admin/contact"
+                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                  path == "/admin/contact" && "bg-[#E71D1D]"
+                }`}
+              >
+                <AiFillContacts className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                <span className="text-base font-bold">Contact</span>
               </Link>
               <Link
                 href="/admin/regional-offices"

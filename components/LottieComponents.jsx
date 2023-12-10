@@ -1,5 +1,5 @@
 "use client";
-import Lottie, { useLottie, useLottieInteractivity } from "lottie-react";
+import Lottie from "lottie-react";
 import heroVideo from "../public/lottie/Slider.json";
 import aboutLeftVideo from "../public/lottie/AboutLeft.json";
 import learnMoreAboutUsBtn from "../public/lottie/BesideButton.json";
@@ -14,7 +14,6 @@ import whoWeAre from "../public/lottie/WhoWeAreHome.json";
 import media from "../public/lottie/MediaHome.json";
 import product from "../public/lottie/ProductPageMainBanner.json";
 import downloadIcon from "../public/lottie/DownloadIcon.json";
-import { useRef } from "react";
 
 export function LottieSlider() {
   return <Lottie animationData={heroVideo} loop={true} />;

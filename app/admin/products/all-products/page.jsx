@@ -59,7 +59,7 @@ const AllProducts = () => {
   const TABLE_HEAD = [
     "#",
     "Product Name",
-    "News Title",
+    "Product Category",
     "Featured Image",
     "Handle",
   ];
@@ -138,7 +138,7 @@ const AllProducts = () => {
                           </td>
                           <td className={classes}>
                             {/* view button */}
-                            {/* <Link href={`view/${data.id}`}> */}
+                          
                             <button
                               onClick={() => {
                                 viewProduct(data.id);
@@ -153,9 +153,8 @@ const AllProducts = () => {
                                 size="1.5em"
                               />
                             </button>
-                            {/* </Link> */}
                             {/* edit button */}
-                            {/* <Link href={`edit-product/${data.id}`}>
+                            <Link href={`edit-product/${data.id}`}>
                               <button className="py-1 px-2 bg-yellow-800 rounded-lg me-1 mb-1">
                                 <BiEdit
                                   style={{
@@ -165,7 +164,7 @@ const AllProducts = () => {
                                   size="1.5em"
                                 />
                               </button>
-                            </Link> */}
+                            </Link>
                             {/* delete button */}
                             <button
                               onClick={() => deleteData(data.id)}

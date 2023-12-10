@@ -27,7 +27,7 @@ import Parse from "html-react-parser";
 import dynamic from "next/dynamic";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
-const AdminVideos = () => {
+const AdminCareer = () => {
   const videoTitle = useRef();
   const videoDesc = useRef();
   const videoLink = useRef();
@@ -395,4 +395,4 @@ const AdminVideos = () => {
   );
 };
 
-export default AdminVideos;
+export default AdminCareer;
