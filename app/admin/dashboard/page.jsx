@@ -12,7 +12,7 @@ import { BiNews } from "react-icons/bi";
 import { CgEventbrite } from "react-icons/cg";
 import { BsLightbulb } from "react-icons/bs";
 import { MdContactPhone } from "react-icons/md";
-import DashboardLinkButton from "@/components/ButtonComponents";
+import {DashboardLinkButton} from "@/components/ButtonComponents";
 import { read_card_counts } from "@/utility/api";
 
 const AdminDashboard = () => {

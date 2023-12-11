@@ -15,6 +15,7 @@ import {
   ThemeProvider,
 } from "@material-tailwind/react";
 import axios from "axios";
+
 import React, { useEffect, useState } from "react";
 
 const KabelAssistCalculator = () => {
@@ -33,7 +34,7 @@ const KabelAssistCalculator = () => {
   const [recommendValue, setRecommendValue] = useState({});
   const [powerOptionValue, setPowerOptionValue] = useState([]);
 
-  const [value, setValue] = useState(0.37);
+  const [outputValue, setOutputValue] = useState(0.37);
   const [power, setPower] = useState("kw");
   const [nominalValue, setNominalValue] = useState(1);
   const [nominalValueJson, setNominalValueJson] = useState();
@@ -46,7 +47,7 @@ const KabelAssistCalculator = () => {
   const onClear1 = () => {
     document.getElementById("powerOptionValue").selectedIndex = 0;
     setPower("kw");
-    setValue(0.37);
+    setOutputValue(0.37);
   };
 
   useEffect(() => {
@@ -61,18 +62,20 @@ const KabelAssistCalculator = () => {
     axios.get(`${BACKEND_BASE_URL}/api/get-kw-hp/${power}`).then((res) => {
       setPowerOptionValue(res.data.options_values);
       for (const [value] of Object.entries(res.data.options_values[0])) {
-        setValue(`${value}`);
+        setOutputValue(`${value}`);
       }
     });
   }, [power]);
 
   useEffect(() => {
     axios
-      .get(`${BACKEND_BASE_URL}/api/get-calculator-value/${power}/${value}`)
+      .get(
+        `${BACKEND_BASE_URL}/api/get-calculator-value/${power}/${outputValue}`
+      )
       .then((res) => {
         setRecommendValue(res.data.calculator_values);
       });
-  }, [value, power]);
+  }, [outputValue, power]);
 
   useEffect(() => {
     axios
@@ -129,28 +132,30 @@ const KabelAssistCalculator = () => {
                       <span className="min-w-max">Motor Output</span>
                       <div className="flex justify-between gap-4 lg:gap-10">
                         <div className="w-40 lg:w-72">
-                          <Select
+                          <select
                             label="Select motor output"
-                            id="powerOptionValue"
                             animate={{
                               mount: { y: 0 },
                               unmount: { y: 25 },
                             }}
-                            onChange={(val) => setValue(val)}
-                            selected={"Select motor output"}
+                            // onChange={(val) => setOutputValue(val)}
+                            onChange={(e) => setOutputValue(e.target.value)}
+                            value={outputValue}
+                            id="powerOptionValue"
+                            className="powerOptionValue rounded-lg w-40 border-gray-400"
                           >
                             {powerOptionValue?.map((data) =>
                               power === "kw" ? (
-                                <Option key={data.key} value={data.kw}>
+                                <option key={data.id} value={data.kw}>
                                   {data.kw}
-                                </Option>
+                                </option>
                               ) : (
-                                <Option value={data.hp} key={data.hp}>
+                                <option value={data.hp} key={data.id}>
                                   {data.hp}
-                                </Option>
+                                </option>
                               )
                             )}
-                          </Select>
+                          </select>
                         </div>
                         <div className="w-40 lg:w-72">
                           <Select
@@ -340,20 +345,25 @@ const KabelAssistCalculator = () => {
                         Nominal area of conductor
                       </span>
                       <div className="flex items-center w-64">
-                        <Select
+                        <select
+                          // value={nominalValue}
                           label="Select Version"
-                          onChange={(val) => setNominalValue(val)}
+                          // onChange={(val) => setNominalValue(val)}
+                          onChange={(e) => {
+                            setNominalValue(e.target.value);
+                          }}
                           id="nominal_select"
+                          className="rounded-lg w-40 border-gray-400"
                         >
                           {areaOfConductor?.map((data) => (
-                            <Option
+                            <option
                               value={data.nominal_area_of_conductor}
                               key={data.nominal_area_of_conductor}
                             >
                               {data.nominal_area_of_conductor}
-                            </Option>
+                            </option>
                           ))}
-                        </Select>
+                        </select>
                         <span className="min-w-max ms-3">Sq. mm.</span>
                       </div>
                     </div>

@@ -11,25 +11,10 @@ import { ProductHome } from "@/components/LottieComponents";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 
-const ProductCategory = ({ params }) => {
-  let paramName = params.productCategory.replace(/-/g, " ");
+const ShramikProductCategory = ({ params }) => {
+  // let paramName = params.productCategory.replace(/-/g, " ");
   const [productInfo, setProductInfo] = useState([{}]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 10;
-  const totalPages = Math.ceil(productInfo?.length / productsPerPage);
-  const paginatedProducts = productInfo?.slice(
-    (currentPage - 1) * productsPerPage,
-    currentPage * productsPerPage
-  );
 
-  const handleChangePage = (page) => {
-    // Check if page is within valid range
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
-
-  console.log(currentPage);
   const fetchProductData = () => {
     axios
       .get(
@@ -53,7 +38,7 @@ const ProductCategory = ({ params }) => {
 
       <div className="container max-w-5xl text-center py-6 lg:py-14">
         <h3 className="text-[#E62020] text-f28 lg:text-f38 font-bold uppercase ">
-          {paramName}
+          {/* {paramName} */}
         </h3>
       </div>
       <div className="container px-4 lg:px-0">
@@ -175,7 +160,7 @@ const ProductCategory = ({ params }) => {
       >
         <div className="">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-14">
-            {paginatedProducts?.map((data) => (
+            {productInfo?.map((data) => (
               <Link
                 key={data.id}
                 href={`${params.productCategory}/${data.slug}`}
@@ -197,38 +182,19 @@ const ProductCategory = ({ params }) => {
             ))}
           </div>
 
-          <div className="flex justify-center gap-4">
-            <button
-              disabled={currentPage == 1}
-              className="disabled:text-gray-300"
-              onClick={() => handleChangePage(currentPage - 1)}
-            >
-              Previous Page
-            </button>
-
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <>
-                <button
-                  key={index + 1}
-                  className={
-                    index + 1 === currentPage
-                      ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white"
-                      : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]"
-                  }
-                  onClick={() => handleChangePage(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              </>
-            ))}
-
-            <button
-              disabled={currentPage === totalPages}
-              className="disabled:text-gray-300"
-              onClick={() => handleChangePage(currentPage + 1)}
-            >
-              Next Page
-            </button>
+          <div className="flex justify-center items-center gap-4 mb-14">
+            <div className="w-10 h-10 bg-[#E62020] flex justify-center items-center text-white">
+              1
+            </div>
+            <div className="w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]">
+              2
+            </div>
+            <div className="w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]">
+              3
+            </div>
+            <div className="w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]">
+              4
+            </div>
           </div>
         </div>
       </ProductsMaster>
@@ -238,4 +204,4 @@ const ProductCategory = ({ params }) => {
   );
 };
 
-export default ProductCategory;
+export default ShramikProductCategory;

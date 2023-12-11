@@ -79,43 +79,41 @@ const ProductDetails = ({ params }) => {
           </Button>
         </div>
       </div>
-      <div className="container grid grid-cols-2 lg:grid-cols-8 place-items-center gap-2 py-12">
-        <Link href="#">
-          <button
-            className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-              params.productCategory === "house-wire-cables"
-                ? "bg-[#E62020]"
-                : "bg-[#D1D3D4]"
-            }  hover:bg-[#E62020] transition-colors `}
-          >
-            HOUSE WIRE CABLES
-          </button>
+      <div className="container grid grid-cols-2 lg:grid-cols-8 place-items-center gap-4 lg:gap-2 py-12">
+        <Link
+          href="/products/house-wire"
+          scroll={false}
+          className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
+            params.productCategory === "house-wire"
+              ? "bg-[#E62020]"
+              : "bg-[#D1D3D4]"
+          }  hover:bg-[#E62020] transition-colors `}
+        >
+          <button>HOUSE WIRE CABLES</button>
         </Link>
-
-        <Link href="#">
-          <button
-            className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-              params.productCategory === "low-voltage-cables"
-                ? "bg-[#E62020]"
-                : "bg-[#D1D3D4]"
-            } hover:bg-[#E62020] transition-colors `}
-          >
-            LOW VOLTAGE CABLES
-          </button>
+        <Link
+          href="/products/low-voltage-cables"
+          scroll={false}
+          className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
+            params.productCategory === "low-voltage-cables"
+              ? "bg-[#E62020]"
+              : "bg-[#D1D3D4]"
+          } hover:bg-[#E62020] transition-colors `}
+        >
+          <button>LOW VOLTAGE CABLES</button>
         </Link>
-
-        <Link href="#">
-          <button
-            className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-              params.productCategory === "medium-voltage-cables"
-                ? "bg-[#E62020]"
-                : "bg-[#D1D3D4]"
-            } hover:bg-[#E62020] transition-colors `}
-          >
-            MEDIUM VOLTAGE CABLES
-          </button>
+        <Link
+          href="/products/medium-voltage-cables"
+          scroll={false}
+          className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
+            params.productCategory === "medium-voltage-cables"
+              ? "bg-[#E62020]"
+              : "bg-[#D1D3D4]"
+          } hover:bg-[#E62020] transition-colors `}
+        >
+          <button>MEDIUM VOLTAGE CABLES</button>
         </Link>
-        <Link href="#">
+        <Link href="/products/high-voltage-cables" scroll={false}>
           <button
             className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
               params.productCategory === "high-voltage-cables"
@@ -126,10 +124,10 @@ const ProductDetails = ({ params }) => {
             HIGH VOLTAGE CABLES
           </button>
         </Link>
-        <Link href="#">
+        <Link href="/products/fire-survival" scroll={false}>
           <button
             className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-              params.productCategory === "fire-survival-cables"
+              params.productCategory === "fire-survival"
                 ? "bg-[#E62020]"
                 : "bg-[#D1D3D4]"
             } hover:bg-[#E62020] transition-colors `}
@@ -137,7 +135,7 @@ const ProductDetails = ({ params }) => {
             FIRE SURVIVAL CABLES
           </button>
         </Link>
-        <Link href="#">
+        <Link href="/products/communication-cables" scroll={false}>
           <button
             className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
               params.productCategory === "communication-cables"
@@ -148,10 +146,10 @@ const ProductDetails = ({ params }) => {
             COMMUNICATION CABLES
           </button>
         </Link>
-        <Link href="#">
+        <Link href="/products/instrumentation-cables" scroll={false}>
           <button
             className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-              params.productCategory === "instrumation-cables"
+              params.productCategory === "instrumentation-cables"
                 ? "bg-[#E62020]"
                 : "bg-[#D1D3D4]"
             } hover:bg-[#E62020] transition-colors `}
@@ -159,10 +157,10 @@ const ProductDetails = ({ params }) => {
             INSTRUMENTATION CABLES
           </button>
         </Link>
-        <Link href="#">
+        <Link href="/products/overhead-conductor" scroll={false}>
           <button
             className={`w-40 px-4 py-3 font-normal text- rounded-xl text-white ${
-              params.productCategory === "overhead-cables"
+              params.productCategory === "overhead-conductor"
                 ? "bg-[#E62020]"
                 : "bg-[#D1D3D4]"
             } hover:bg-[#E62020] transition-colors`}

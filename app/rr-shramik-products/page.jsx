@@ -1,13 +1,12 @@
-"use client";
+import { SearchBoxButton } from "@/components/ButtonComponents";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import { RRShramik } from "@/components/LottieComponents";
 import QuickNavigation from "@/components/QuickNavigation";
-import { Button, Input } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { MdOutlineArrowDropDown } from "react-icons/md";
+
 
 const page = () => {
   return (
@@ -32,31 +31,11 @@ const page = () => {
               </p>
             </div>
             <div className="container mb-10">
-              <div className="relative flex w-full">
-                <Input
-                  type="email"
-                  className="ps-44 lg:ps-56 py-6 rounded-2xl !bg-[#F2F5F6] placeholder:text-gray-500 focus:!border focus:!border-[#cdcdcd] focus:!border-t focus-within:outline-none"
-                  labelProps={{
-                    className: "hidden",
-                  }}
-                  placeholder="Inpur Search Keywords Here"
-                />
-                <Button
-                  size="md"
-                  color="gray"
-                  className="!absolute left-1 top-1 h-[42px] px-3 shadow-none bg-white text-[#6D6E71] rounded-s-lg"
-                  // containerProps={{
-                  //   className: "w-20",
-                  // }}
-                >
-                  Select Category{" "}
-                  <MdOutlineArrowDropDown className="inline ms-3" size={20} />
-                </Button>
-              </div>
+            <SearchBoxButton />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
               <Link
-                href="#"
+                 href="/rr-shramik-products/category"
                 data-aos="fade-right-150"
                 data-aos-delay="600"
                 className="group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"
@@ -75,7 +54,7 @@ const page = () => {
                 </span>
               </Link>
               <Link
-                href="#"
+                href="/rr-shramik-products/category"
                 data-aos="fade-right-150"
                 data-aos-delay="400"
                 className="group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"
@@ -94,7 +73,7 @@ const page = () => {
                 </span>
               </Link>
               <Link
-                href="#"
+                href="/rr-shramik-products/category"
                 data-aos="fade-right-150"
                 data-aos-delay="200"
                 className="group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"
@@ -113,7 +92,7 @@ const page = () => {
                 </span>
               </Link>
               <Link
-                href="#"
+                href="/rr-shramik-products/category"
                 data-aos="fade-right-150"
                 className="group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"
               >
@@ -133,7 +112,7 @@ const page = () => {
             </div>
             <div className="grid grid-cols-[repeat(1,minmax(0,1fr))] lg:grid-cols-[repeat(3,minmax(0,320px))] place-content-center gap-8 mx-auto">
               <Link
-                href="#"
+               href="/rr-shramik-products/category"
                 data-aos="fade-left-150"
                 data-aos-delay="400"
                 className=" group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"
@@ -151,7 +130,7 @@ const page = () => {
                 </span>
               </Link>
               <Link
-                href="#"
+                href="/rr-shramik-products/category"
                 data-aos="fade-left-150"
                 data-aos-delay="200"
                 className="group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"
@@ -169,7 +148,7 @@ const page = () => {
                 </span>
               </Link>
               <Link
-                href="#"
+                href="/rr-shramik-products/category"
                 data-aos="fade-left-150"
                 className="group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"
               >
