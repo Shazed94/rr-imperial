@@ -14,6 +14,8 @@ import dynamic from "next/dynamic";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 const AddProduct = () => {
+  const [isSubmitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
   const productName = useRef();
   const productImage = useRef();
   const productSmallImage = useRef();
@@ -26,16 +28,6 @@ const AddProduct = () => {
   const operatingTempDesc = useRef();
   const minBendingRadiusDesc = useRef();
   const standardDesc = useRef();
-
-  //   const GetTableDesign = async () => {
-  //     await axios
-  //       .get(
-  //         `${BACKEND_BASE_URL}/api/admin/products/get-table-design/${designId.current.value}`
-  //       )
-  //       .then((res) => {
-  //         setProductTableDesign(res?.data?.product_table_design?.table_design);
-  //       });
-  //   };
 
   //================= Fetch Product Categories ===========================
   const [category, setCategory] = useState([]);
@@ -166,6 +158,13 @@ const AddProduct = () => {
     setInputFields2(data);
   };
 
+  const handleSubmit = () => {
+    setSubmitted(true);
+  };
+  const handleInput = () => {
+    setSubmitted(false);
+  };
+
   // ============================= form submit to backend ======================
 
   const [applicationValue, setApplicationValue] = useState("");
@@ -177,7 +176,7 @@ const AddProduct = () => {
 
   const storeData = async (e) => {
     e.preventDefault();
-    console.log(productImage.current.files[0]);
+
     const formdata = new FormData();
     formdata.append("name", productName.current.value);
     formdata.append("specification", specification.current.value);
@@ -258,6 +257,9 @@ const AddProduct = () => {
               char_image2: "",
             },
           ]);
+          setSubmitted(false)
+        } else {
+          setError(response.data.errors);
         }
       });
   };
@@ -286,21 +288,27 @@ const AddProduct = () => {
                 onSubmit={storeData}
               >
                 <div className="mb-1 flex flex-col gap-2 col-span-6">
-                  <label
-                    htmlFor="productName"
-                    className="block text-sm font-medium text-gray-900 dark:text-white"
-                  >
+                  <label className="block text-sm font-medium text-gray-900 dark:text-white">
                     Product Name
                   </label>
 
                   <input
-                    id="productName"
                     ref={productName}
                     type="text"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className={`bg-gray-50 border ${
+                      isSubmitted && !productName.current.value
+                        ? "focus:border-red-600 focus:ring-red-600"
+                        : "border-gray-300 ring-gray-300"
+                    } border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:border-blue-500 focus:ring-blue-500`}
                     placeholder="Product Name"
                     required
+                    onChange={handleInput}
                   />
+                  {isSubmitted && !productName.current.value && (
+                    <small className="text-red-500 text-xs mt-1">
+                      Product Name is required
+                    </small>
+                  )}
                 </div>
 
                 <div className="mb-1 flex flex-col gap-2 col-span-6">
@@ -310,10 +318,20 @@ const AddProduct = () => {
                   <input
                     ref={specification}
                     type="text"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className={`bg-gray-50 border ${
+                      isSubmitted && !specification.current.value
+                        ? "focus:border-red-600 focus:ring-red-600"
+                        : "border-gray-300 ring-gray-300"
+                    } border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 focus:border-blue-500 focus:ring-blue-500`}
                     placeholder="Specification"
                     required
+                    onChange={handleInput}
                   />
+                  {isSubmitted && !specification.current.value && (
+                    <small className="text-red-500 text-xs mt-1">
+                      Specification is required
+                    </small>
+                  )}
                 </div>
 
                 <div className="mb-1 flex flex-col gap-2 col-span-6">
@@ -343,6 +361,12 @@ const AddProduct = () => {
                       </div>
                     );
                   })}
+
+                  {error && (
+                    <small className="text-red-500 text-xs mt-1">
+                      {error?.image}
+                    </small>
+                  )}
                 </div>
                 <div className="mb-1 flex flex-col gap-2 col-span-6">
                   <label className="block text-sm font-medium text-gray-900 dark:text-white">
@@ -372,6 +396,11 @@ const AddProduct = () => {
                       </div>
                     );
                   })}
+                   {error && (
+                    <small className="text-red-500 text-xs mt-1">
+                      {error?.small_image}
+                    </small>
+                  )}
                 </div>
                 <div className="mb-1 flex flex-col gap-2 col-span-6">
                   <label className="block text-sm font-medium text-gray-900 dark:text-white">
@@ -742,6 +771,7 @@ const AddProduct = () => {
                   <button
                     type="submit"
                     className="flex items-center gap-2 mt-5 px-6 py-3  rounded-lg border-0 bg-cyan-400 text-white"
+                    onClick={handleSubmit}
                   >
                     <FiSave /> &nbsp; <span>Save</span>
                   </button>

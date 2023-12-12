@@ -1,6 +1,7 @@
 "use client";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import {
+  delete_Career,
   delete_Video,
   edit_Video,
   read_all_Career,
@@ -59,15 +60,15 @@ const AdminCareer = () => {
 
   // =============================== Delete Data ===============================
   const deleteData = (id) => {
-    delete_Video(id).then((res) => {
+    delete_Career(id).then((res) => {
       if (res) {
         Swal.fire({
           icon: "success",
           text: res.data.message,
           confirmButtonColor: "#5eba86",
         });
-        read_all_Videos().then((res) => {
-          setVideoInfo(res.data.allVideos);
+        read_all_Career().then((res) => {
+          setCareerInfo(res.data?.careers);
         });
       }
     });

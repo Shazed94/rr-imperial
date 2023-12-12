@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import toast, { Toaster } from "react-hot-toast";
 import { setCookie } from "cookies-next";
+import { AiFillEye } from "react-icons/ai";
+import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const router = useRouter();
@@ -14,6 +16,16 @@ const Login = () => {
   const [adminPassError, setAdminPassError] = useState("");
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
+
+  const [passType, setPassType] = useState("password");
+  const handlePasswordType = () => {
+    if (passType == "password") {
+      setPassType("text");
+    }
+    if (passType == "text") {
+      setPassType("password");
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +41,6 @@ const Login = () => {
       );
 
       if (response.data.status === 400) {
-       
         if (response.data.errors) {
           const { email, password } = response.data.errors;
           setAdminEmailError(email);
@@ -70,7 +81,8 @@ const Login = () => {
           },
           error: {
             style: {
-              background: "red",
+              background: "#fff",
+              color: "#000",
             },
           },
         }}
@@ -119,11 +131,22 @@ const Login = () => {
               <div className="w-full">
                 <input
                   ref={AdminPassword}
-                  type="password"
+                  type={passType}
                   id="password"
                   className="bg-gray-200 pl-12 py-2 md:py-4 focus:outline-none w-full"
                   placeholder="Password"
                 />
+
+                <div
+                  className="absolute right-4 top-4"
+                  onClick={handlePasswordType}
+                >
+                  {passType == "password" ? (
+                    <AiFillEye size="1.2em" />
+                  ) : (
+                    <FaEyeSlash size="1.2em" />
+                  )}
+                </div>
                 <small className="small_msg">
                   {adminPassError && adminPassError}
                 </small>
@@ -131,7 +154,7 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full"
+              className="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full select-none"
             >
               Login
             </button>
