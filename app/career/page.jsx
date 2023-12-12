@@ -44,6 +44,7 @@ const CurrentOpenings = () => {
         if (response.data.status === 200) {
           setError("");
           e.target.reset();
+          toast.success("CV submitted successfully");
         } else {
           setError(response.data?.errors);
         }
