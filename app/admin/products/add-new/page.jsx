@@ -8,13 +8,20 @@ import AdminMaster from "@/components/AdminMaster/AdminMaster";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 // import ReactQuill from "react-quill";
 // import { QuillScript } from "@/utility/QuillScript";
-import { AiOutlineClose, AiOutlinePlusCircle } from "react-icons/ai";
+import {
+  AiFillCloseSquare,
+  AiOutlineClose,
+  AiOutlinePlusCircle,
+} from "react-icons/ai";
 import { FiSave } from "react-icons/fi";
 import dynamic from "next/dynamic";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 const AddProduct = () => {
   const [isSubmitted, setSubmitted] = useState(false);
+  const [selectedImages, setSelectedImages] = useState([]);
+ const [singlePermissionChecked, setSinglePermissionChecked] = useState([]);
+
   const [error, setError] = useState(false);
   const productName = useRef();
   const productImage = useRef();
@@ -23,6 +30,7 @@ const AddProduct = () => {
   const categoryId = useRef();
   const specification = useRef();
   const applicationDesc = useRef();
+  const propertiesDesc = useRef();
   const constructionDesc = useRef();
   const voltageGradeDesc = useRef();
   const operatingTempDesc = useRef();
@@ -165,10 +173,39 @@ const AddProduct = () => {
     setSubmitted(false);
   };
 
+  const onSelectFile = (event) => {
+    const selectedFiles = event.target.files;
+    const selectedFilesArray = Array.from(selectedFiles);
+    const imagesArray = selectedFilesArray.map((file) => {
+      return file;
+    });
+
+    setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+
+    // FOR BUG IN CHROME
+    event.target.value = "";
+  };
+
+  function deleteHandler(image) {
+    setSelectedImages(selectedImages.filter((e) => e !== image));
+    URL.revokeObjectURL(image);
+  }
+
+  const handlePermission = (e) => {
+    if (e.target.checked) {
+      setSinglePermissionChecked([...singlePermissionChecked, e.target.value]);
+    } else {
+      setSinglePermissionChecked(
+        singlePermissionChecked.filter((id) => id !== e.target.value)
+      );
+    }
+  };
+
   // ============================= form submit to backend ======================
 
   const [applicationValue, setApplicationValue] = useState("");
   const [constructionValue, setConstructionValue] = useState("");
+  const [propertiesValue, setPropertiesValue] = useState("");
   const [voltageGradeValue, setVoltageGradeValue] = useState("");
   const [operatingTempValue, setOperatingTempValue] = useState("");
   const [minBendingRadiusValue, setMinBendingRadiusValue] = useState("");
@@ -212,16 +249,22 @@ const AddProduct = () => {
 
     formdata.append("application", applicationValue);
     formdata.append("construction", constructionValue);
+    formdata.append("properties", propertiesValue);
     formdata.append("voltage_grade", voltageGradeValue);
     formdata.append("operating_temp", operatingTempValue);
     formdata.append("min_bending_radius", minBendingRadiusValue);
     formdata.append("standard", standardValue);
-    if (cableDesignParameter.current.files[0]) {
-      formdata.append(
-        "cable_design_parameter",
-        cableDesignParameter.current.files[0]
-      );
-    }
+
+     selectedImages.forEach((item) => {
+       formdata.append("cable_design_parameter[]", item);
+     });
+
+    // if (cableDesignParameter.current.files[0]) {
+    //   formdata.append(
+    //     "cable_design_parameter[]",
+    //     cableDesignParameter.current.files[0]
+    //   );
+    // }
 
     await axios
       .post(`${BACKEND_BASE_URL}/api/admin/products/store`, formdata, {
@@ -238,6 +281,7 @@ const AddProduct = () => {
           e.target.reset();
           setApplicationValue("", "html");
           setConstructionValue("", "html");
+          setPropertiesValue("", "html");
           setVoltageGradeValue("", "html");
           setOperatingTempValue("", "html");
           setMinBendingRadiusValue("", "html");
@@ -257,7 +301,7 @@ const AddProduct = () => {
               char_image2: "",
             },
           ]);
-          setSubmitted(false)
+          setSubmitted(false);
         } else {
           setError(response.data.errors);
         }
@@ -396,7 +440,7 @@ const AddProduct = () => {
                       </div>
                     );
                   })}
-                   {error && (
+                  {error && (
                     <small className="text-red-500 text-xs mt-1">
                       {error?.small_image}
                     </small>
@@ -633,14 +677,6 @@ const AddProduct = () => {
                     value={applicationValue}
                     onChange={(newContent) => setApplicationValue(newContent)}
                   />
-                  {/* <ReactQuill
-                      className=" block w-full text-gray-700 bg-transparent appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner min-h-[250px] h-full pb-[50px]"
-                      theme="snow"
-                      value={applicationValue}
-                      ref={applicationDesc}
-                      modules={QuillScript.modules}
-                      formats={QuillScript.formats}
-                    /> */}
                 </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-6">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -653,14 +689,18 @@ const AddProduct = () => {
                     value={constructionValue}
                     onChange={(newContent) => setConstructionValue(newContent)}
                   />
-                  {/* <ReactQuill
-                      className=" block w-full  text-gray-700 bg-transparent appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner min-h-[250px] h-full pb-[50px]"
-                      theme="snow"
-                      value={applicationValue}
-                      ref={constructionDesc}
-                      modules={QuillScript.modules}
-                      formats={QuillScript.formats}
-                    /> */}
+                </div>
+                <div className="mb-1 flex flex-col gap-6 col-span-6">
+                  <Typography variant="h6" color="blue-gray" className="-mb-3">
+                    Properties
+                  </Typography>
+                  <JoditEditor
+                    ref={propertiesDesc}
+                    // config={config}
+                    tabIndex={1}
+                    value={propertiesValue}
+                    onChange={(newContent) => setPropertiesValue(newContent)}
+                  />
                 </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-6">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -673,14 +713,6 @@ const AddProduct = () => {
                     value={voltageGradeValue}
                     onChange={(newContent) => setVoltageGradeValue(newContent)}
                   />
-                  {/* <ReactQuill
-                      className=" block w-full  text-gray-700 bg-transparent appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner min-h-[250px] h-full pb-[50px]"
-                      theme="snow"
-                      value={voltageGradeValue}
-                      ref={voltageGradeDesc}
-                      modules={QuillScript.modules}
-                      formats={QuillScript.formats}
-                    /> */}
                 </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-6">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -693,14 +725,6 @@ const AddProduct = () => {
                     value={operatingTempValue}
                     onChange={(newContent) => setOperatingTempValue(newContent)}
                   />
-                  {/* <ReactQuill
-                      className=" block w-full  text-gray-700 bg-transparent appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner min-h-[250px] h-full pb-[50px]"
-                      theme="snow"
-                      value={operatingTempValue}
-                      ref={operatingTempDesc}
-                      modules={QuillScript.modules}
-                      formats={QuillScript.formats}
-                    /> */}
                 </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-6">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -715,14 +739,6 @@ const AddProduct = () => {
                       setMinBendingRadiusValue(newContent)
                     }
                   />
-                  {/* <ReactQuill
-                      className=" block w-full  text-gray-700 bg-transparent appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner min-h-[250px] h-full pb-[50px]"
-                      theme="snow"
-                      value={minBendingRadiusValue}
-                      ref={minBendingRadiusDesc}
-                      modules={QuillScript.modules}
-                      formats={QuillScript.formats}
-                    /> */}
                 </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-6">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -735,37 +751,42 @@ const AddProduct = () => {
                     value={standardValue}
                     onChange={(newContent) => setStandardValue(newContent)}
                   />
-                  {/* <ReactQuill
-                      className=" block w-full  text-gray-700 bg-transparent appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner min-h-[250px] h-full pb-[50px]"
-                      theme="snow"
-                      value={standardValue}
-                      ref={standardDesc}
-                      modules={QuillScript.modules}
-                      formats={QuillScript.formats}
-                    /> */}
                 </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-12">
+                  <Typography variant="h6" color="blue-gray" className="-mb-3">
+                    Cable Design Parameter
+                  </Typography>
                   <input
+                    multiple
                     type="file"
                     className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-4  file:border-0 file:text-sm file:font-semibold
                                 file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 border border-gray-300 rounded-lg"
                     ref={cableDesignParameter}
-                    onChange={handleTableImage}
+                    onChange={onSelectFile}
                   />
-                  {files3.map((file, key) => {
-                    return (
-                      <div key={key} className="Row">
-                        <span className="Filename">
+                  
+                  {selectedImages &&
+                    selectedImages.map((image, index) => {
+                      return (
+                        <div key={index} className="flex">
                           <img
-                            width={80}
-                            height={50}
-                            src={URL.createObjectURL(file)}
-                            alt={file.name}
+                            src={URL.createObjectURL(image)}
+                            height="68"
+                            width="68"
+                            alt="upload"
                           />
-                        </span>
-                      </div>
-                    );
-                  })}
+                          <div className="d-flex justify-content-between">
+                            <p>{index + 1}</p>
+                            <AiFillCloseSquare
+                              className="cursor "
+                              size="1.5rem"
+                              color="red"
+                              onClick={() => deleteHandler(image)}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
                 </div>
                 <div className="col-span-12 flex justify-center">
                   <button

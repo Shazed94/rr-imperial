@@ -1,6 +1,12 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { LearnMoreAboutUs, LottieIcon } from "./LottieComponents";
+import {
+  DistrictIcon,
+  EmployeeIcon,
+  FullSizeJson,
+  DealerIcon,
+  LearnMoreAboutUs,
+} from "./LottieComponents";
 import AOS from "aos";
 
 const KeyStrength = () => {
@@ -139,29 +145,29 @@ const KeyStrength = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-6"
           >
             <div className="p-6  rounded-[24px] flex flex-col justify-between border gap-3">
-              <img src={"img/homepage/bd.png"} alt="" className="w-16" />
+              <DistrictIcon className={"w-16 h-16"} />
               <h4 className="text-333 text-f18 font-bold">49 Districts</h4>
               <p className="text-333 text-f14 font-normal uppercase">
                 COVERED WITH ANEVER GROWING NETWORK
               </p>
             </div>
             <div className="p-6 rounded-[24px] flex flex-col justify-between border gap-3">
-              <img src={"img/homepage/hub.png"} alt="" className="w-16" />
+              <FullSizeJson className={"w-16 h-16"} />
               <h4 className="text-333 text-f18 font-bold">27 Full Size</h4>
               <p className="text-333 text-f14 font-normal uppercase">
                 OPERATION HUB
               </p>
             </div>
             <div className="p-6 rounded-[24px] flex flex-col justify-between border gap-3">
-              <img src={"img/homepage/employee.png"} alt="" className="w-16" />
+              <EmployeeIcon className={"w-16 h-16"} />
               <h4 className="text-333 text-f18 font-bold">1000+</h4>
               <p className="text-333 text-f14 font-normal uppercase">
                 EMPLOYEES
               </p>
             </div>
             <div className="p-6 rounded-[24px] flex flex-col justify-end border gap-3">
-              {/* <LottieIcon /> */}
-              <img src={"img/homepage/dealer.jpeg"} alt="" className="w-16" />
+              {/* <TwintySevenFullSize /> */}
+              <DealerIcon className={"w-16 h-16"} />
               <h4 className="text-333 text-f18 font-bold">4500+</h4>
               <p className="text-333 text-f14 font-normal uppercase">
                 PROUD DEALERS

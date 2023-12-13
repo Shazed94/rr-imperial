@@ -26,10 +26,7 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 
 const AdminContact = () => {
-  const videoTitle = useRef();
-  const videoDesc = useRef();
-  const videoLink = useRef();
-
+  
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState("");
 

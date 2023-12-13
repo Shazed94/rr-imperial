@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { MdOutlineMenuOpen } from "react-icons/md";
+import { MdAdminPanelSettings, MdManageAccounts, MdOutlineMenuOpen } from "react-icons/md";
 import { Suspense, useEffect, useRef, useState } from "react";
 import {
   FaChevronCircleRight,
@@ -8,6 +8,7 @@ import {
   FaBookReader,
   FaVideo,
   FaUsers,
+  FaHistory,
 } from "react-icons/fa";
 import {
   AiFillContacts,
@@ -130,6 +131,41 @@ const Layout = (props) => {
                   <span className="text-base font-bold ">Dashboard</span>
                   {/* <AiOutlineDashboard className="text-xl ms-4 opacity-0 group-[.active]/sidebar:opacity-100 transition-all duration-500" /> */}
                 </Link>
+              </li>
+              <li className="mb-1 group">
+                <div
+                  href="#"
+                  className="flex justify-between items-center px-8 py-2 group-[.w-20]/sidebar:px-2 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.active]:bg-[#222338] group-[.active]:text-white group-[.selected]:text-gray-50 cursor-pointer sidebar-dropdown-toggle"
+                >
+                  <div className="flex items-center">
+                    <MdManageAccounts className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">Role Management</span>
+                  </div>
+                  <IoChevronDownOutline className="ms-auto group-[.selected]:rotate-180" />
+                </div>
+                <ul className="py-3 hidden group-[.selected]:block select-none user-none">
+                  <Link
+                    href="/admin/role"
+                    className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
+                      path == "/admin/role" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <MdAdminPanelSettings className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span>Role</span>
+                  </Link>
+
+                  <Link
+                    href="/admin/log-history"
+                    className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
+                      path == "/admin/log-history" && "bg-[#E71D1D] text-white"
+                    }`}
+                  >
+                    <FaHistory className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-gray-300 flex items-center hover:text-gray-100">
+                      Log History
+                    </span>
+                  </Link>
+                </ul>
               </li>
               <li className="mb-1 group">
                 <div

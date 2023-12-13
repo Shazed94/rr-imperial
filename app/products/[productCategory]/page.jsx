@@ -15,7 +15,7 @@ const ProductCategory = ({ params }) => {
   let paramName = params.productCategory.replace(/-/g, " ");
   const [productInfo, setProductInfo] = useState([{}]);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 10;
+  const productsPerPage = 12;
   const totalPages = Math.ceil(productInfo?.length / productsPerPage);
   const paginatedProducts = productInfo?.slice(
     (currentPage - 1) * productsPerPage,

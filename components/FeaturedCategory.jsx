@@ -14,7 +14,7 @@ const FeaturedCategory = ({ title, data }) => {
       setAllCategories(res.data.categories);
     });
   }, []);
-  console.log(allCategories);
+
   return (
     <div>
       <section className="featured_categories px-4 lg:px-0 mb-20">

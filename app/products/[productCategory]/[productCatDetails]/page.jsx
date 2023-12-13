@@ -201,101 +201,112 @@ const ProductDetails = ({ params }) => {
               />
             </div>
             <div className="w-full lg:w-1/2 flex flex-wrap flex-col gap-8 items-center lg:ps-6">
-              <div>
-                <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
-                  CHARACTERISTICS
-                </h4>
-                <div className="grid grid-cols-4 lg:grid-cols-6 gap-3">
-                  {singleProduct?.product_characteristics?.map(
-                    (characteristic) => (
-                      <div
-                        key={characteristic.id}
-                        className="flex flex-col items-center text-center"
-                      >
-                        <Image
-                          src={`${BACKEND_BASE_URL}/${characteristic?.image}`}
-                          alt=""
-                          width={45}
-                          height={40}
-                          className="mb-2"
-                        />
-                        <span className="text-[10px] leading-tight">
-                          {characteristic?.label}
-                        </span>
-                      </div>
-                    )
-                  )}
+              {singleProduct?.product_characteristics.length > 0 && (
+                <div>
+                  <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
+                    CHARACTERISTICS
+                  </h4>
+                  <div className="grid grid-cols-4 lg:grid-cols-6 gap-3">
+                    {singleProduct?.product_characteristics?.map(
+                      (characteristic) => (
+                        <div
+                          key={characteristic.id}
+                          className="flex flex-col items-center text-center"
+                        >
+                          <Image
+                            src={`${BACKEND_BASE_URL}/${characteristic?.image}`}
+                            alt=""
+                            width={45}
+                            height={40}
+                            className="mb-2"
+                          />
+                          <span className="text-[10px] leading-tight">
+                            {characteristic?.label}
+                          </span>
+                        </div>
+                      )
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div>
-                <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
-                  INSTALLATION CONDITION
-                </h4>
-                <div className="grid grid-cols-7 gap-3">
-                  {singleProduct?.product_installation_conditions?.map(
-                    (characteristic) => (
-                      <div
-                        key={characteristic.id}
-                        className="flex flex-col items-center text-center"
-                      >
-                        <Image
-                          src={`${BACKEND_BASE_URL}/${characteristic?.ic_image}`}
-                          alt=""
-                          width={45}
-                          height={40}
-                          className="mb-2"
-                        />
-                        <span className="text-[10px] leading-tight">
-                          {characteristic?.ic_label}
-                        </span>
-                      </div>
-                    )
-                  )}
+              )}
+
+              {singleProduct?.product_installation_conditions.length > 0 && (
+                <div>
+                  <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
+                    INSTALLATION CONDITION
+                  </h4>
+                  <div className="grid grid-cols-7 gap-3">
+                    {singleProduct?.product_installation_conditions?.map(
+                      (characteristic) => (
+                        <div
+                          key={characteristic.id}
+                          className="flex flex-col items-center text-center"
+                        >
+                          <Image
+                            src={`${BACKEND_BASE_URL}/${characteristic?.ic_image}`}
+                            alt=""
+                            width={45}
+                            height={40}
+                            className="mb-2"
+                          />
+                          <span className="text-[10px] leading-tight">
+                            {characteristic?.ic_label}
+                          </span>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          {singleProduct?.application && (
+            <div className="mb-10">
+              <h4 className="text-[#E62020] text-f20 font-normal mb-3">
+                APPLICATION
+              </h4>
+
+              {Parse(`${singleProduct?.application}`)}
+            </div>
+          )}
+
+          {singleProduct?.construction && (
+            <div className="mb-10">
+              <h4 className="text-[#E62020] text-f20 font-normal mb-3">
+                CONSTRUCTION
+              </h4>
+              <div className="">{Parse(`${singleProduct?.construction}`)}</div>
+            </div>
+          )}
+
+          {singleProduct?.properties && (
+            <div className="mb-10">
+              <h4 className="text-[#E62020] text-f20 font-normal mb-3">
+                PROPERTIES
+              </h4>
+              <div className="">{Parse(`${singleProduct?.properties}`)}</div>
+            </div>
+          )}
+          {singleProduct?.voltage_grade && (
+            <div className="mb-10">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="">
+                  <h4 className="text-[#E62020] text-f20 font-normal mb-3">
+                    <span className="span"> VOLTAGE GRADE</span>
+                  </h4>
+                  {Parse(`${singleProduct?.voltage_grade}`)}
+                </div>
+                <div className="">
+                  <h4 className="text-[#E62020] text-f20 font-normal mb-3">
+                    <span className="span"> OPERATING TEMP.</span>
+                  </h4>
+                  {Parse(`${singleProduct?.operating_temp}`)}
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className="mb-10">
-            <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-              APPLICATION
-            </h4>
-
-            {Parse(`${singleProduct?.application}`)}
-          </div>
-
-          <div className="mb-10">
-            <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-              CONSTRUCTION
-            </h4>
-            <div className="">{Parse(`${singleProduct?.construction}`)}</div>
-          </div>
-
-          <div className="mb-10">
-            <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-              PROPERTIES
-            </h4>
-            <div className="">{Parse(`${singleProduct?.application}`)}</div>
-          </div>
-
-          <div className="mb-10">
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="">
-                <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-                  <span className="span"> VOLTAGE GRADE</span>
-                </h4>
-                {Parse(`${singleProduct?.voltage_grade}`)}
-              </div>
-              <div className="">
-                <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-                  <span className="span"> OPERATING TEMP.</span>
-                </h4>
-                {Parse(`${singleProduct?.operating_temp}`)}
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-6">
+          {singleProduct?.min_bending_radius &&  <div className="mb-6">
             <div className="grid grid-cols-12 gap-5">
               <div className="col-span-6 lg:col-span-4">
                 <h4 className="text-[#E62020] text-f20 font-normal mb-3">
@@ -358,7 +369,8 @@ const ProductDetails = ({ params }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div>}
+         
 
           <div className="cursor-pointer mt-5" onClick={handleOpen}>
             <img

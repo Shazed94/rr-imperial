@@ -11,7 +11,7 @@ import { FiSave } from "react-icons/fi";
 import Swal from "sweetalert2";
 
 const EditProduct = ({ params }) => {
-  const router = useRouter()
+  const router = useRouter();
   const productName = useRef();
   const productImage = useRef();
   const productSmallImage = useRef();
@@ -19,6 +19,7 @@ const EditProduct = ({ params }) => {
   const categoryId = useRef();
   const specification = useRef();
   const applicationDesc = useRef();
+  const propertiesDesc = useRef();
   const constructionDesc = useRef();
   const voltageGradeDesc = useRef();
   const operatingTempDesc = useRef();
@@ -140,6 +141,7 @@ const EditProduct = ({ params }) => {
 
   const [applicationValue, setApplicationValue] = useState("");
   const [constructionValue, setConstructionValue] = useState("");
+  const [propertiesValue, setPropertiesValue] = useState("");
   const [voltageGradeValue, setVoltageGradeValue] = useState("");
   const [operatingTempValue, setOperatingTempValue] = useState("");
   const [minBendingRadiusValue, setMinBendingRadiusValue] = useState("");
@@ -169,7 +171,7 @@ const EditProduct = ({ params }) => {
   useEffect(() => {
     fetchData();
   }, [params.id]);
- 
+
   // ===================== Updated data to backend ===============================
 
   const updateData = (e) => {
@@ -184,40 +186,41 @@ const EditProduct = ({ params }) => {
       formdata.append("small_image", productSmallImage.current.files[0]);
     }
 
-    // inputFields.forEach((item) => {
-    //   if (item.char_image_label != "" && item.char_image_label != null) {
-    //     formdata.append("label[]", item.char_image_label);
-    //   }
-    //   if ((item.char_image != "" && item.char_image) != null) {
-    //     formdata.append("c_image[]", item.char_image);
-    //   }
-    // });
+    inputFields.forEach((item) => {
+      if (item.char_image_label != "" && item.char_image_label != null) {
+        formdata.append("label[]", item.char_image_label);
+      }
+      if ((item.char_image != "" && item.char_image) != null) {
+        formdata.append("c_image[]", item.char_image);
+      }
+    });
 
-    // inputFields2.forEach((item) => {
-    //   if (item.char_image_label2 != "" && item.char_image_label2 != null) {
-    //     formdata.append("ic_label[]", item.char_image_label2);
-    //   }
-    //   if ((item.char_image2 != "" && item.char_image2) != null) {
-    //     formdata.append("ic_image[]", item.char_image2);
-    //   }
-    // });
+    inputFields2.forEach((item) => {
+      if (item.char_image_label2 != "" && item.char_image_label2 != null) {
+        formdata.append("ic_label[]", item.char_image_label2);
+      }
+      if ((item.char_image2 != "" && item.char_image2) != null) {
+        formdata.append("ic_image[]", item.char_image2);
+      }
+    });
     formdata.append("category_id", categoryId.current.value);
-    // if (checkboxVal.length > 0) {
-    //   formdata.append("color_code", checkboxVal);
-    // }
+    if (checkboxVal.length > 0) {
+      formdata.append("color_code", checkboxVal);
+    }
 
     formdata.append("application", applicationValue);
     formdata.append("construction", constructionValue);
+    formdata.append("properties", propertiesValue);
     formdata.append("voltage_grade", voltageGradeValue);
     formdata.append("operating_temp", operatingTempValue);
     formdata.append("min_bending_radius", minBendingRadiusValue);
     formdata.append("standard", standardValue);
-    // if (cableDesignParameter.current.files[0]) {
-    //   formdata.append(
-    //     "cable_design_parameter",
-    //     cableDesignParameter.current.files[0]
-    //   );
-    // }
+    if (cableDesignParameter.current.files[0]) {
+      formdata.append(
+        "cable_design_parameter",
+        cableDesignParameter.current.files[0]
+      );
+    }
     axios
       .post(
         `${BACKEND_BASE_URL}/api/admin/products/update/${params.id}`,
@@ -232,7 +235,7 @@ const EditProduct = ({ params }) => {
           text: response.data.message,
           confirmButtonColor: "#5eba86",
         });
-        router.push("/admin/products/all-products")
+        router.push("/admin/products/all-products");
       });
     e.preventDefault();
   };
@@ -490,11 +493,13 @@ const EditProduct = ({ params }) => {
                       <option value="0">Main</option>
                       {category.map((data, index) => {
                         return (
-                          <option key={index} value={data.id}  selected={
-                            data.id == editInfo.category_id
-                              ? "selected"
-                              : ""
-                          }>
+                          <option
+                            key={index}
+                            value={data.id}
+                            selected={
+                              data.id == editInfo.category_id ? "selected" : ""
+                            }
+                          >
                             {data.category_name}
                           </option>
                         );
@@ -502,7 +507,7 @@ const EditProduct = ({ params }) => {
                     </select>
                   </div>
                 </div>
-                {/* <div className="mb-1 flex flex-col gap-6 col-span-8">
+                <div className="mb-1 flex flex-col gap-6 col-span-8">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
                     Select Color
                   </Typography>
@@ -580,7 +585,7 @@ const EditProduct = ({ params }) => {
                       onClick={CheckHandler}
                     />
                   </div>
-                </div> */}
+                </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-6">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
                     Application
@@ -603,6 +608,18 @@ const EditProduct = ({ params }) => {
                     tabIndex={1}
                     value={editInfo?.construction}
                     onChange={(newContent) => setConstructionValue(newContent)}
+                  />
+                </div>
+                <div className="mb-1 flex flex-col gap-6 col-span-6">
+                  <Typography variant="h6" color="blue-gray" className="-mb-3">
+                    Properties
+                  </Typography>
+                  <JoditEditor
+                    ref={propertiesDesc}
+                    // config={config}
+                    tabIndex={1}
+                    value={editInfo?.properties}
+                    onChange={(newContent) => setPropertiesValue(newContent)}
                   />
                 </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-6">
@@ -655,7 +672,7 @@ const EditProduct = ({ params }) => {
                     onChange={(newContent) => setStandardValue(newContent)}
                   />
                 </div>
-                {/* <div className="mb-1 flex flex-col gap-6 col-span-12">
+                <div className="mb-1 flex flex-col gap-6 col-span-12">
                   <input
                     multiple
                     type="file"
@@ -665,33 +682,32 @@ const EditProduct = ({ params }) => {
                     onChange={handleTableImage}
                   />
                   <div className="flex items-center gap-4">
-                      {files3.map((file, key) => {
-                    return (
-                      <div key={key} className="">
-                        <span className="">
-                          <img
-                            width={80}
-                            height={50}
-                            src={URL.createObjectURL(file)}
-                            alt={file.name}
-                          />
-                        </span>
-                      </div>
-                    );
-                  })}
-                  {files.length == 0 && (
-                    <img
-                      className="img-thumbnail mt-1"
-                      width={80}
-                      height={50}
-                      src={`${BACKEND_BASE_URL}/${editInfo?.cable_design_parameter}`}
-                      alt={productName}
-                      name="img"
-                    />
-                  )}
+                    {files3.map((file, key) => {
+                      return (
+                        <div key={key} className="">
+                          <span className="">
+                            <img
+                              width={80}
+                              height={50}
+                              src={URL.createObjectURL(file)}
+                              alt={file.name}
+                            />
+                          </span>
+                        </div>
+                      );
+                    })}
+                    {files.length == 0 && (
+                      <img
+                        className="img-thumbnail mt-1"
+                        width={80}
+                        height={50}
+                        src={`${BACKEND_BASE_URL}/${editInfo?.cable_design_parameter}`}
+                        alt={productName}
+                        name="img"
+                      />
+                    )}
                   </div>
-                
-                </div> */}
+                </div>
                 <div className="col-span-12 flex justify-center">
                   <button
                     type="submit"

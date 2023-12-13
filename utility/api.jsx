@@ -733,7 +733,7 @@ export const delete_Contact = async (id) => {
     return;
   }
 
-  let URL = `${BACKEND_BASE_URL}/api/admin/contacts/all/delete/${id}`
+  let URL = `${BACKEND_BASE_URL}/api/admin/contacts/delete/${id}`
   if (isConfirm) {
     try {
       const deleteResult = await axios.delete(URL);

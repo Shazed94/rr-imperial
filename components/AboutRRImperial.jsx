@@ -1,5 +1,11 @@
 "use client";
-import { LottieAboutLeft, LottieAboutLeft1 } from "./LottieComponents";
+import {
+  AwardIcon,
+  CompanyProfileIcon,
+  LottieAboutLeft,
+  LottieAboutLeft1,
+  MissionVisionIcon,
+} from "./LottieComponents";
 import { useEffect, useRef } from "react";
 import Aos from "aos";
 
@@ -102,7 +108,7 @@ const AboutRRImperial = () => {
                 className="grid grod-cols-1 lg:grid-cols-2 gap-6"
               >
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
-                  <img src={"/svg/1.png"} alt="" className="w-14" />
+                  <CompanyProfileIcon className="w-16 h-16" />
                   <h3 className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
                     {" "}
                     Company Profile
@@ -113,7 +119,7 @@ const AboutRRImperial = () => {
                   </p>
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
-                  <img src={"/svg/2.png"} alt="" className="w-16" />
+                  <MissionVisionIcon className="w-16 h-16" />
                   <h3 className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
                     {" "}
                     Mission & Vision
@@ -124,11 +130,7 @@ const AboutRRImperial = () => {
                   </p>
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
-                  <img
-                    src={"/img/homepage/5.png"}
-                    alt=""
-                    className="w-16 h-14"
-                  />
+                  <AwardIcon className="w-16 h-16" />
                   <h3 className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
                     Awards & Certifications
                   </h3>

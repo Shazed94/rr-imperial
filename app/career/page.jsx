@@ -3,7 +3,7 @@
 import Footer from "@/components/Footer/Footer";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import Header from "@/components/Header/Header";
-import { Button, Input, Textarea } from "@material-tailwind/react";
+import { Input } from "@material-tailwind/react";
 import axios from "axios";
 import { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";

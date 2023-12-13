@@ -3,7 +3,13 @@ import Lottie from "lottie-react";
 import heroVideo from "../public/lottie/Slider.json";
 import aboutLeftVideo from "../public/lottie/AboutLeft.json";
 import learnMoreAboutUsBtn from "../public/lottie/BesideButton.json";
-// import icon1 from "../public/lottie/icon.json";
+import awardIcon from "../public/lottie/awardIcon.json";
+import missionVisionIcon from "../public/lottie/missionVisionIcon.json";
+import companyProfileIcon from "../public/lottie/companyProfileIcon.json";
+import districtIcon from "../public/lottie/districtIcon.json";
+import FullSize from "../public/lottie/fullSize.json";
+import employeesIcon from "../public/lottie/employeesIcon.json";
+import dealerIcon from "../public/lottie/dealerIcon.json";
 import ourProfile from "../public/lottie/OurProfileWhoWeAre.json";
 import awardCertification from "../public/lottie/CertificateWhoWeAre.json";
 import researchInnovation from "../public/lottie/ResearchInnovationWhoWeAre.json";
@@ -139,3 +145,28 @@ export function LearnMoreAboutUs({ className }) {
     />
   );
 }
+
+
+export function AwardIcon({ className }) {
+  return <Lottie animationData={awardIcon} className={className} />;
+}
+export function MissionVisionIcon({ className }) {
+  return <Lottie animationData={missionVisionIcon} className={className} />;
+}
+export function CompanyProfileIcon({ className }) {
+  return <Lottie animationData={companyProfileIcon} className={className} />;
+}
+
+export function DistrictIcon({ className }) {
+  return <Lottie animationData={districtIcon} className={className} />;
+}
+export function DealerIcon({ className }) {
+  return <Lottie animationData={dealerIcon} className={className} />;
+}
+export function FullSizeJson({ className }) {
+  return <Lottie animationData={FullSize} className={className} />;
+}
+export function EmployeeIcon({ className }) {
+  return <Lottie animationData={employeesIcon} className={className} />;
+}
+
