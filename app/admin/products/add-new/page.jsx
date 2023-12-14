@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
 import AdminMaster from "@/components/AdminMaster/AdminMaster";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
-// import ReactQuill from "react-quill";
+import Select from "react-select";
 // import { QuillScript } from "@/utility/QuillScript";
 import {
   AiFillCloseSquare,
@@ -20,7 +20,7 @@ const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 const AddProduct = () => {
   const [isSubmitted, setSubmitted] = useState(false);
   const [selectedImages, setSelectedImages] = useState([]);
- const [singlePermissionChecked, setSinglePermissionChecked] = useState([]);
+  const [singlePermissionChecked, setSinglePermissionChecked] = useState([]);
 
   const [error, setError] = useState(false);
   const productName = useRef();
@@ -39,17 +39,34 @@ const AddProduct = () => {
 
   //================= Fetch Product Categories ===========================
   const [category, setCategory] = useState([]);
+  const [colors, setColors] = useState([]);
 
   const renderAllCategories = async () => {
     await axios
-      .get(`${BACKEND_BASE_URL}/api/admin/products/categories`)
+      .get(`${BACKEND_BASE_URL}/api/admin/products/categories`, {
+        headers: {
+          // Authorization: `Bearer ${getLocalStorageWithExpiry("ACCESS_TOKEN")}`,
+        },
+      })
       .then((res) => {
         setCategory(res.data.all_product_categories);
+      });
+  };
+  const renderAllColors = async () => {
+    await axios
+      .get(`${BACKEND_BASE_URL}/api/admin/products/colors`, {
+        headers: {
+          // Authorization: `Bearer ${getLocalStorageWithExpiry("ACCESS_TOKEN")}`,
+        },
+      })
+      .then((res) => {
+        setColors(res.data.all_colors);
       });
   };
 
   useEffect(() => {
     renderAllCategories();
+    renderAllColors();
   }, []);
 
   // Image Preview
@@ -132,6 +149,7 @@ const AddProduct = () => {
     data.splice(index, 1);
     setInputFields(data);
   };
+
   //   ============================= Add Input field 2 ==========================
   const [inputFields2, setInputFields2] = useState([
     {
@@ -166,6 +184,38 @@ const AddProduct = () => {
     setInputFields2(data);
   };
 
+  //   ============================= Add Input field 3 ==========================
+  const [inputFields3, setInputFields3] = useState([
+    {
+      test_name: "",
+      test_method: "",
+      test_value: "",
+    },
+  ]);
+
+  const handleFormChange3 = (index, event) => {
+    let data = [...inputFields3];
+    data[index][event.target.name] = event.target.value;
+    setInputFields3(data);
+  };
+
+  const addFields3 = () => {
+    let newfield = {
+      test_name: "",
+      test_method: "",
+      test_value: "",
+    };
+    setInputFields3([...inputFields3, newfield]);
+  };
+
+  const removeFields3 = (index) => {
+    let data = [...inputFields3];
+    data.splice(index, 1);
+    setInputFields3(data);
+  };
+
+  // =============================================================
+
   const handleSubmit = () => {
     setSubmitted(true);
   };
@@ -191,7 +241,7 @@ const AddProduct = () => {
     URL.revokeObjectURL(image);
   }
 
-  const handlePermission = (e) => {
+  const handleColor = (e) => {
     if (e.target.checked) {
       setSinglePermissionChecked([...singlePermissionChecked, e.target.value]);
     } else {
@@ -201,6 +251,7 @@ const AddProduct = () => {
     }
   };
 
+  console.log(singlePermissionChecked);
   // ============================= form submit to backend ======================
 
   const [applicationValue, setApplicationValue] = useState("");
@@ -243,9 +294,25 @@ const AddProduct = () => {
       }
     });
     formdata.append("category_id", categoryId.current.value);
-    if (checkboxVal.length > 0) {
-      formdata.append("color_code", checkboxVal);
-    }
+
+    // if (checkboxVal.length > 0) {
+    //   formdata.append("color_code", checkboxVal);
+    // }
+    singlePermissionChecked.forEach((color) => {
+      formdata.append("color_id[]", color);
+    });
+
+    inputFields3.forEach((item) => {
+      if (item.test_name != "" && item.test_name != null) {
+        formdata.append("test_name[]", item.test_name);
+      }
+      if ((item.test_method != "" && item.test_method) != null) {
+        formdata.append("test_method[]", item.test_method);
+      }
+      if ((item.test_value != "" && item.test_value) != null) {
+        formdata.append("test_value[]", item.test_value);
+      }
+    });
 
     formdata.append("application", applicationValue);
     formdata.append("construction", constructionValue);
@@ -255,9 +322,9 @@ const AddProduct = () => {
     formdata.append("min_bending_radius", minBendingRadiusValue);
     formdata.append("standard", standardValue);
 
-     selectedImages.forEach((item) => {
-       formdata.append("cable_design_parameter[]", item);
-     });
+    selectedImages.forEach((item) => {
+      formdata.append("cable_design_parameter[]", item);
+    });
 
     // if (cableDesignParameter.current.files[0]) {
     //   formdata.append(
@@ -591,81 +658,112 @@ const AddProduct = () => {
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
                     Select Color
                   </Typography>
-                  <div className="flex flex-wrap w-max gap-2">
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="red"
-                      value="Red-#FF0000"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="yellow"
-                      value="Yellow-#faee11"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="blue"
-                      value="Blue-#1111fa"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="black"
-                      value="Black-#000"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="green"
-                      value="Green-#00c203"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="grey"
-                      value="Grey-#919191"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="white"
-                      value="White-#fff"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="off white"
-                      value="Off white-#F2F1EE"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="brown"
-                      value="Brown-#914900"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
+                  <div className="flex flex-wrap w-full gap-2">
+
+                    {/* <Select
+                      isMulti
+                      options={colors?.map((colorInfo) => {
+                        return {
+                          label: colorInfo.name,
+                          value: colorInfo.id,
+                        };
+                      })}
+                      placeholder="Select Status"
+                      classNamePrefix="react-select"
+                      className="w-full"
+                      onChange={(value = "") => {
+                        handleColor(value);
+                      }}
+                    /> */}
+                    {colors?.map((pData, i) => (
+                      <div key={i} className="mb-3">
+                        <Checkbox
+                          onChange={handleColor}
+                          type="checkbox"
+                          label={pData?.name}
+                          value={pData?.id}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
+                <div className="mb-1 flex flex-col gap-6 col-span-12">
+                  <Typography variant="h6" color="blue-gray" className="-mb-3">
+                    Test Parameters
+                  </Typography>
+                  {inputFields3?.map((input, index) => {
+                    return (
+                      <div key={index} className="flex items-center gap-4">
+                        <div className="flex items-center gap-3 w-[90%]">
+                          <input
+                            name={"test_name"}
+                            value={input.test_name}
+                            size="lg"
+                            placeholder="Test name"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            labelProps={{
+                              className:
+                                "before:content-none after:content-none",
+                            }}
+                            onChange={(event) =>
+                              handleFormChange3(index, event)
+                            }
+                          />
+                          <input
+                            name={"test_method"}
+                            value={input.test_method}
+                            size="lg"
+                            placeholder="Test method"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            labelProps={{
+                              className:
+                                "before:content-none after:content-none",
+                            }}
+                            onChange={(event) =>
+                              handleFormChange3(index, event)
+                            }
+                          />
+                          <input
+                            name={"test_value"}
+                            value={input.test_value}
+                            size="lg"
+                            placeholder="Test value"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            labelProps={{
+                              className:
+                                "before:content-none after:content-none",
+                            }}
+                            onChange={(event) =>
+                              handleFormChange3(index, event)
+                            }
+                          />
+                        </div>
+                        <div className="flex items-center gap-2 w-[10%]">
+                          <div className="">
+                            <div className="">
+                              <AiOutlinePlusCircle
+                                onClick={addFields3}
+                                className="cursor-pointer text-blue-500 rounded-lg"
+                                size={20}
+                              />
+                            </div>
+                          </div>
+                          <div className="">
+                            {inputFields3.length > 1 && (
+                              <div
+                                onClick={() => removeFields3(index)}
+                                className="cursor-pointer text-red-500 rounded-lg"
+                              >
+                                <AiOutlineClose size={20} />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
                 <div className="mb-1 flex flex-col gap-6 col-span-6">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
                     Application
@@ -764,29 +862,29 @@ const AddProduct = () => {
                     ref={cableDesignParameter}
                     onChange={onSelectFile}
                   />
-                  
-                  {selectedImages &&
-                    selectedImages.map((image, index) => {
-                      return (
-                        <div key={index} className="flex">
-                          <img
-                            src={URL.createObjectURL(image)}
-                            height="68"
-                            width="68"
-                            alt="upload"
-                          />
-                          <div className="d-flex justify-content-between">
-                            <p>{index + 1}</p>
-                            <AiFillCloseSquare
-                              className="cursor "
-                              size="1.5rem"
-                              color="red"
-                              onClick={() => deleteHandler(image)}
+                  <div className="flex gap-6">
+                    {selectedImages &&
+                      selectedImages.map((image, index) => {
+                        return (
+                          <div key={index} className="flex">
+                            <img
+                              src={URL.createObjectURL(image)}
+                              height="68"
+                              width="68"
+                              alt="upload"
                             />
+                            <div className="d-flex justify-content-between">
+                              <AiFillCloseSquare
+                                className="cursor "
+                                size="1.8rem"
+                                color="red"
+                                onClick={() => deleteHandler(image)}
+                              />
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                  </div>
                 </div>
                 <div className="col-span-12 flex justify-center">
                   <button

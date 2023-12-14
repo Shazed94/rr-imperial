@@ -306,46 +306,51 @@ const ProductDetails = ({ params }) => {
             </div>
           )}
 
-          {singleProduct?.min_bending_radius &&  <div className="mb-6">
-            <div className="grid grid-cols-12 gap-5">
-              <div className="col-span-6 lg:col-span-4">
-                <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-                  <span className="span"> MIN. BENDING RADIUS</span>
-                </h4>
-                {Parse(`${singleProduct?.min_bending_radius}`)}
+          {singleProduct?.min_bending_radius && (
+            <div className="mb-6">
+              <div className="grid grid-cols-12 gap-5">
+                <div className="col-span-6 lg:col-span-4">
+                  <h4 className="text-[#E62020] text-f20 font-normal mb-3">
+                    <span className="span"> MIN. BENDING RADIUS</span>
+                  </h4>
+                  {Parse(`${singleProduct?.min_bending_radius}`)}
+                </div>
+                <div className="col-span-6 lg:col-span-3">
+                  <h4 className="text-[#E62020] text-f20 font-normal mb-3">
+                    <span className="span">STANDARD</span>
+                  </h4>
+                  {Parse(`${singleProduct?.standard}`)}
+                </div>
               </div>
-              <div className="col-span-6 lg:col-span-3">
-                <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-                  <span className="span">STANDARD</span>
-                </h4>
-                {Parse(`${singleProduct?.standard}`)}
-              </div>
-              <div className="col-span-12 lg:col-span-5">
-                <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-                  <span className="span">COLOR</span>
-                </h4>
-                <div className="text-black flex gap-2">
-                  <div className="min-w-max">Insulated Core:</div>
-                  <div>
-                    {singleProduct?.colors?.map((data, index) => {
-                      var color = data.color_code.split("-");
+            </div>
+          )}
 
-                      return (
-                        <>
-                          <div className="flex flex-wrap items-center">
-                            <div
-                              className="block w-3 h-3 min-w-[12px] rounded-full"
-                              style={{
-                                backgroundColor: color[1],
-                                marginLeft: "5px",
-                              }}
-                            ></div>
-                            <div className="ms-1">{color[0]} &nbsp;</div>
-                          </div>
-                        </>
-                      );
-                    })}
-                    {/* <p className="flex items-center gap-2">
+          <div className="col-span-12 lg:col-span-5">
+            <h4 className="text-[#E62020] text-f20 font-normal mb-3">
+              <span className="span">COLOR</span>
+            </h4>
+            <div className="text-black flex gap-2">
+              <div className="min-w-max">Insulated Core:</div>
+              <div>
+                {singleProduct?.colors?.map((data, index) => {
+                  return (
+                    <>
+                      <div className="flex flex-wrap items-center">
+                        <div
+                          className="block w-3 h-3 min-w-[12px] rounded-full"
+                          style={{
+                            backgroundColor: data?.color_info?.color_code,
+                            marginLeft: "5px",
+                          }}
+                        ></div>
+                        <div className="ms-1">
+                          {data?.color_info?.name} &nbsp;
+                        </div>
+                      </div>
+                    </>
+                  );
+                })}
+                {/* <p className="flex items-center gap-2">
                       <span className="block w-3 h-3 min-w-[12px] rounded-full bg-[#EB2227]"></span>
                       Red
                     </p>
@@ -365,20 +370,23 @@ const ProductDetails = ({ params }) => {
                       <span className="block w-3 h-3 min-w-[12px] rounded-full bg-[#EB2227]"></span>
                       <span>(Red or other colors available on request)</span>
                     </p> */}
-                  </div>
-                </div>
               </div>
             </div>
-          </div>}
-         
-
-          <div className="cursor-pointer mt-5" onClick={handleOpen}>
-            <img
-              src={`${BACKEND_BASE_URL}/${singleProduct?.cable_design_parameter}`}
-              alt=""
-              className="mx-auto"
-            />
           </div>
+          {singleProduct?.product_cable_design_parameter.length > 0 &&
+            singleProduct?.product_cable_design_parameter.map((parameter) => (
+              <div
+                key={parameter.id}
+                className="cursor-pointer mt-5"
+                onClick={handleOpen}
+              >
+                <img
+                  src={`${BACKEND_BASE_URL}/${parameter?.cable_design_parameter}`}
+                  alt=""
+                  className="mx-auto"
+                />
+              </div>
+            ))}
         </div>
       </ProductsMaster>
 
@@ -464,13 +472,18 @@ const ProductDetails = ({ params }) => {
         <DialogBody className="relative">
           <TransformWrapper>
             <TransformComponent className="relative ">
-              <Image
-                src="/img/product/table.png"
-                alt=""
-                className="object-fill"
-                width={1200}
-                height={800}
-              />
+              {singleProduct?.product_cable_design_parameter.map(
+                (parameter) => (
+                  <Image
+                    key={parameter.id}
+                    src={`${BACKEND_BASE_URL}/${parameter?.cable_design_parameter}`}
+                    alt=""
+                    className="object-fill"
+                    width={1200}
+                    height={800}
+                  />
+                )
+              )}
             </TransformComponent>
           </TransformWrapper>
         </DialogBody>

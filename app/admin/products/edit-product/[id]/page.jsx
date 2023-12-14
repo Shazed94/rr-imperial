@@ -1,16 +1,41 @@
 "use client";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
-import { Checkbox, Typography } from "@material-tailwind/react";
+import { Checkbox, Typography, input } from "@material-tailwind/react";
 import axios from "axios";
 import JoditEditor from "jodit-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
-import { AiOutlineClose, AiOutlinePlusCircle } from "react-icons/ai";
+import {
+  AiFillCloseSquare,
+  AiOutlineClose,
+  AiOutlinePlusCircle,
+} from "react-icons/ai";
 import { FiSave } from "react-icons/fi";
 import Swal from "sweetalert2";
+import Select from "react-select";
 
 const EditProduct = ({ params }) => {
+  var selectedColor;
+  const [colors, setColors] = useState([]);
+  const renderAllColors = async () => {
+    await axios
+      .get(`${BACKEND_BASE_URL}/api/admin/products/colors`, {
+        headers: {
+          // Authorization: `Bearer ${getLocalStorageWithExpiry("ACCESS_TOKEN")}`,
+        },
+      })
+      .then((res) => {
+        setColors(res.data.all_colors);
+      });
+  };
+
+  useEffect(() => {
+    renderAllColors();
+  }, []);
+
+  const [selectedImages, setSelectedImages] = useState([]);
+
   const router = useRouter();
   const productName = useRef();
   const productImage = useRef();
@@ -72,39 +97,28 @@ const EditProduct = ({ params }) => {
         : [...prev, e.target.value]
     );
   };
-  //   ============================= Add Input field 1 ==========================
-  const [inputFields, setInputFields] = useState([
-    {
-      char_image_label: "",
-      char_image: "",
-    },
-  ]);
+  const [singlePermissionChecked, setSinglePermissionChecked] = useState([]);
+  const [selectedOldColor, setSelectedOldColor] = useState([]);
 
-  const handleFormChange = (index, event) => {
-    let data = [...inputFields];
-    data[index][event.target.name] = event.target.value;
-    setInputFields(data);
+  const handleColor = (e) => {
+    if (e.target.checked) {
+      setSinglePermissionChecked([...singlePermissionChecked, e.target.value]);
+    } else {
+      setSinglePermissionChecked(
+        singlePermissionChecked.filter((id) => id !== e.target.value)
+      );
+    }
   };
 
-  const handleFileChange = (index, event) => {
-    let data = [...inputFields];
-    data[index][event.target.name] = event.target.files[0];
-    setInputFields(data);
-  };
+  useEffect(() => {
+    let a = [];
+    selectedOldColor.forEach((item) => {
+      a.push(item.color_id);
+    });
 
-  const addFields = () => {
-    let newfield = {
-      char_image_label: "",
-      char_image: "",
-    };
-    setInputFields([...inputFields, newfield]);
-  };
+    setSinglePermissionChecked(a);
+  }, [selectedOldColor]);
 
-  const removeFields = (index) => {
-    let data = [...inputFields];
-    data.splice(index, 1);
-    setInputFields(data);
-  };
   //   ============================= Add Input field 2 ==========================
   const [inputFields2, setInputFields2] = useState([
     {
@@ -139,6 +153,36 @@ const EditProduct = ({ params }) => {
     setInputFields2(data);
   };
 
+  //   ============================= Add Input field 3 ==========================
+  const [inputFields3, setInputFields3] = useState([
+    {
+      test_name: "",
+      test_method: "",
+      test_value: "",
+    },
+  ]);
+
+  const handleFormChange3 = (index, event) => {
+    let data = [...inputFields3];
+    data[index][event.target.name] = event.target.value;
+    setInputFields3(data);
+  };
+
+  const addFields3 = () => {
+    let newfield = {
+      test_name: "",
+      test_method: "",
+      test_value: "",
+    };
+    setInputFields3([...inputFields3, newfield]);
+  };
+
+  const removeFields3 = (index) => {
+    let data = [...inputFields3];
+    data.splice(index, 1);
+    setInputFields3(data);
+  };
+
   const [applicationValue, setApplicationValue] = useState("");
   const [constructionValue, setConstructionValue] = useState("");
   const [propertiesValue, setPropertiesValue] = useState("");
@@ -149,8 +193,8 @@ const EditProduct = ({ params }) => {
 
   const [editInfo, setEditInfo] = useState([]);
   const [category, setCategory] = useState([]);
-  // Edit value
 
+  // Edit value
   const fetchData = () => {
     setFile([]);
     setFile2([]);
@@ -164,6 +208,7 @@ const EditProduct = ({ params }) => {
         if (response.data.status === 200) {
           setEditInfo(response.data.edit_product);
           setCategory(response.data.all_categories);
+          setSelectedOldColor(response.data?.edit_product?.colors);
         }
       });
   };
@@ -171,6 +216,58 @@ const EditProduct = ({ params }) => {
   useEffect(() => {
     fetchData();
   }, [params.id]);
+
+  //   ============================= Add Input field 1 ==========================
+  const [inputFields, setInputFields] = useState([
+    {
+      char_image_label: "",
+      char_image: "",
+    },
+  ]);
+
+  const handleFormChange = (index, event) => {
+    let data = [...inputFields];
+    data[index][event.target.name] = event.target.value;
+    setInputFields(data);
+  };
+
+  const handleFileChange = (index, event) => {
+    let data = [...inputFields];
+    data[index][event.target.name] = event.target.files[0];
+    setInputFields(data);
+  };
+
+  const addFields = () => {
+    let newfield = {
+      char_image_label: "",
+      char_image: "",
+    };
+    setInputFields([...inputFields, newfield]);
+  };
+
+  const removeFields = (index) => {
+    let data = [...inputFields];
+    data.splice(index, 1);
+    setInputFields(data);
+  };
+
+  const onSelectFile = (event) => {
+    const selectedFiles = event.target.files;
+    const selectedFilesArray = Array.from(selectedFiles);
+    const imagesArray = selectedFilesArray.map((file) => {
+      return file;
+    });
+
+    setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+
+    // FOR BUG IN CHROME
+    event.target.value = "";
+  };
+
+  function deleteHandler(image) {
+    setSelectedImages(selectedImages.filter((e) => e !== image));
+    URL.revokeObjectURL(image);
+  }
 
   // ===================== Updated data to backend ===============================
 
@@ -204,9 +301,25 @@ const EditProduct = ({ params }) => {
       }
     });
     formdata.append("category_id", categoryId.current.value);
-    if (checkboxVal.length > 0) {
-      formdata.append("color_code", checkboxVal);
-    }
+    // if (checkboxVal.length > 0) {
+    //   formdata.append("color_code", checkboxVal);
+    // }
+
+    singlePermissionChecked.forEach((item) => {
+      formdata.append("color_id[]", item);
+    });
+
+    inputFields3.forEach((item) => {
+      if (item.test_name != "" && item.test_name != null) {
+        formdata.append("test_name[]", item.test_name);
+      }
+      if ((item.test_method != "" && item.test_method) != null) {
+        formdata.append("test_method[]", item.test_method);
+      }
+      if ((item.test_value != "" && item.test_value) != null) {
+        formdata.append("test_value[]", item.test_value);
+      }
+    });
 
     formdata.append("application", applicationValue);
     formdata.append("construction", constructionValue);
@@ -215,12 +328,11 @@ const EditProduct = ({ params }) => {
     formdata.append("operating_temp", operatingTempValue);
     formdata.append("min_bending_radius", minBendingRadiusValue);
     formdata.append("standard", standardValue);
-    if (cableDesignParameter.current.files[0]) {
-      formdata.append(
-        "cable_design_parameter",
-        cableDesignParameter.current.files[0]
-      );
-    }
+
+    selectedImages.forEach((item) => {
+      formdata.append("cable_design_parameter[]", item);
+    });
+
     axios
       .post(
         `${BACKEND_BASE_URL}/api/admin/products/update/${params.id}`,
@@ -235,9 +347,142 @@ const EditProduct = ({ params }) => {
           text: response.data.message,
           confirmButtonColor: "#5eba86",
         });
-        router.push("/admin/products/all-products");
+        // router.push("/admin/products/all-products");
       });
     e.preventDefault();
+  };
+
+  // =============================== Delete Charasteristic Image ===============================
+  const deleteCharasteristicImage = async (id) => {
+    const isConfirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "green",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      return result.isConfirmed;
+    });
+
+    if (!isConfirm) {
+      return;
+    }
+    if (isConfirm) {
+      axios
+        .delete(
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-characteristic/${id}`
+        )
+        .then((res) => {
+          Swal.fire({
+            icon: "success",
+            text: res.data.message,
+            confirmButtonColor: "#5eba86",
+          });
+          fetchData();
+        });
+    }
+  };
+  // =============================== Delete Installation Condition Image ===============================
+  const deleteInstallationConditionImage = async (id) => {
+    const isConfirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "green",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      return result.isConfirmed;
+    });
+
+    if (!isConfirm) {
+      return;
+    }
+
+    if (isConfirm) {
+      axios
+        .delete(
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-installation-condition/${id}`
+        )
+        .then((res) => {
+          Swal.fire({
+            icon: "success",
+            text: res.data.message,
+            confirmButtonColor: "#5eba86",
+          });
+          fetchData();
+        });
+    }
+  };
+
+  // =============================== Delete Cable Design Image ===============================
+  const deleteCableDesignParameterImage = async (id) => {
+    const isConfirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "green",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      return result.isConfirmed;
+    });
+
+    if (!isConfirm) {
+      return;
+    }
+
+    if (isConfirm) {
+      axios
+        .delete(
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-cable-design-parameter/${id}`
+        )
+        .then((res) => {
+          Swal.fire({
+            icon: "success",
+            text: res.data.message,
+            confirmButtonColor: "#5eba86",
+          });
+          fetchData();
+        });
+    }
+  };
+  // =============================== Delete Test Parameters ===============================
+  const deleteTestParameter = async (id) => {
+    const isConfirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "green",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      return result.isConfirmed;
+    });
+
+    if (!isConfirm) {
+      return;
+    }
+
+    if (isConfirm) {
+      axios
+        .delete(
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-test-parameter/${id}`
+        )
+        .then((res) => {
+          Swal.fire({
+            icon: "success",
+            text: res.data.message,
+            confirmButtonColor: "#5eba86",
+          });
+          fetchData();
+        });
+    }
   };
 
   return (
@@ -373,11 +618,43 @@ const EditProduct = ({ params }) => {
                     />
                   )}
                 </div>
-                {/* <div className="mb-1 flex flex-col gap-2 col-span-6">
+                <div className="mb-1 flex flex-col gap-2 col-span-6">
                   <label className="block text-sm font-medium text-gray-900 dark:text-white">
                     Characteristics Images
                     <span className="text-red-500">*</span>
                   </label>
+                  {editInfo?.product_characteristics?.map((input, index) => {
+                    return (
+                      <div key={index} className="flex items-center gap-4">
+                        <div className="flex items-center gap-3 w-[90%]">
+                          <input
+                            name={"char_image_label"}
+                            defaultValue={input?.label}
+                            size="lg"
+                            placeholder="Label"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onChange={(event) => handleFormChange(index, event)}
+                          />
+                          <img
+                            className="img-thumbnail mt-1"
+                            width={80}
+                            height={50}
+                            src={`${BACKEND_BASE_URL}/${input?.image}`}
+                            alt={productName}
+                            name="img"
+                          />
+                        </div>
+                        <div className="flex items-center gap-2 w-[10%]">
+                          <div
+                            onClick={() => deleteCharasteristicImage(input.id)}
+                            className="cursor-pointer text-red-500 rounded-lg"
+                          >
+                            <AiOutlineClose size={20} />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                   {inputFields?.map((input, index) => {
                     return (
                       <div key={index} className="flex items-center gap-4">
@@ -398,7 +675,20 @@ const EditProduct = ({ params }) => {
                             name={"char_image"}
                             onChange={(event) => handleFileChange(index, event)}
                           />
-                         
+                          {/* {files.map((file, key) => {
+                              return (
+                                <div key={key} className="Row">
+                                  <span className="Filename">
+                                    <img
+                                      width={80}
+                                      height={50}
+                                      src={URL.createObjectURL(file)}
+                                      alt={file.name}
+                                    />
+                                  </span>
+                                </div>
+                              );
+                            })} */}
                         </div>
                         <div className="flex items-center gap-2 w-[10%]">
                           <div className="">
@@ -424,12 +714,50 @@ const EditProduct = ({ params }) => {
                       </div>
                     );
                   })}
-                </div> */}
-                {/* <div className="mb-1 flex flex-col gap-2 col-span-6">
+                </div>
+                <div className="mb-1 flex flex-col gap-2 col-span-6">
                   <label className="block text-sm font-medium text-gray-900 dark:text-white">
                     Installation Condition Images
                     <span className="text-red-500">*</span>
                   </label>
+                  {editInfo?.product_installation_conditions?.map(
+                    (input, index) => {
+                      return (
+                        <div key={index} className="flex items-center gap-4">
+                          <div className="flex items-center gap-3 w-[90%]">
+                            <input
+                              name={"char_image_label"}
+                              defaultValue={input?.ic_label}
+                              size="lg"
+                              placeholder="Label"
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                              onChange={(event) =>
+                                handleFormChange(index, event)
+                              }
+                            />
+                            <img
+                              className="img-thumbnail mt-1"
+                              width={80}
+                              height={50}
+                              src={`${BACKEND_BASE_URL}/${input?.ic_image}`}
+                              alt={productName}
+                              name="img"
+                            />
+                          </div>
+                          <div className="flex items-center gap-2 w-[10%]">
+                            <div
+                              onClick={() =>
+                                deleteInstallationConditionImage(input.id)
+                              }
+                              className="cursor-pointer text-red-500 rounded-lg"
+                            >
+                              <AiOutlineClose size={20} />
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
+                  )}
                   {inputFields2?.map((input, index) => {
                     return (
                       <div key={index} className="flex items-center gap-4">
@@ -483,7 +811,7 @@ const EditProduct = ({ params }) => {
                       </div>
                     );
                   })}
-                </div> */}
+                </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-12">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
                     Select Category
@@ -491,7 +819,7 @@ const EditProduct = ({ params }) => {
                   <div className="w-full">
                     <select label="Main" ref={categoryId} className="w-full">
                       <option value="0">Main</option>
-                      {category.map((data, index) => {
+                      {category?.map((data, index) => {
                         return (
                           <option
                             key={index}
@@ -507,84 +835,175 @@ const EditProduct = ({ params }) => {
                     </select>
                   </div>
                 </div>
-                <div className="mb-1 flex flex-col gap-6 col-span-8">
+                <div className="mb-1 flex flex-col gap-6 col-span-12">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
                     Select Color
                   </Typography>
-                  <div className="flex flex-wrap w-max gap-2">
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="red"
-                      value="Red-#FF0000"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="yellow"
-                      value="Yellow-#faee11"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="blue"
-                      value="Blue-#1111fa"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="black"
-                      value="Black-#000"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="green"
-                      value="Green-#00c203"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="grey"
-                      value="Grey-#919191"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="white"
-                      value="White-#fff"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="off white"
-                      value="Off white-#F2F1EE"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
-                    <Checkbox
-                      ripple={false}
-                      color="blue"
-                      label="brown"
-                      value="Brown-#914900"
-                      className="w-4 h-4"
-                      onClick={CheckHandler}
-                    />
+                  <div className="flex flex-wrap w-full gap-2">
+                    {colors?.map((pData, i) => (
+                      <div key={i} className="mb-3">
+                        {editInfo?.colors?.map((d, index) => {
+                          if (pData?.id == d?.color_id) {
+                            selectedColor = d?.color_id;
+                          }
+                          return (
+                            pData?.id == d?.color_id && (
+                              <Checkbox
+                                onChange={handleColor}
+                                type="checkbox"
+                                label={pData?.name}
+                                value={pData?.id}
+                                defaultChecked="checked"
+                              />
+                            )
+                          );
+                        })}
+
+                        {selectedColor != pData.id && (
+                          <Checkbox
+                            onChange={handleColor}
+                            type="checkbox"
+                            label={pData?.name}
+                            value={pData?.id}
+                          />
+                        )}
+                      </div>
+                    ))}
                   </div>
+                </div>
+                <div className="mb-1 flex flex-col gap-6 col-span-12">
+                  <Typography variant="h6" color="blue-gray" className="-mb-3">
+                    Test Parameters
+                  </Typography>
+                  {editInfo?.product_test_parameter?.map((input, index) => {
+                    return (
+                      <div key={index} className="flex items-center gap-4">
+                        <div className="flex items-center gap-3 w-[90%]">
+                          <input
+                            name={"test_name"}
+                            value={input.test_name}
+                            size="lg"
+                            placeholder="Test name"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            labelProps={{
+                              className:
+                                "before:content-none after:content-none",
+                            }}
+                            onChange={(event) =>
+                              handleFormChange3(index, event)
+                            }
+                          />
+                          <input
+                            name={"test_method"}
+                            value={input.test_method}
+                            size="lg"
+                            placeholder="Test method"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            labelProps={{
+                              className:
+                                "before:content-none after:content-none",
+                            }}
+                            onChange={(event) =>
+                              handleFormChange3(index, event)
+                            }
+                          />
+                          <input
+                            name={"test_value"}
+                            value={input.test_value}
+                            size="lg"
+                            placeholder="Test value"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            labelProps={{
+                              className:
+                                "before:content-none after:content-none",
+                            }}
+                            onChange={(event) =>
+                              handleFormChange3(index, event)
+                            }
+                          />
+                        </div>
+                        <div className="flex items-center gap-2 w-[10%]">
+                          <div
+                            onClick={() => deleteTestParameter(input.id)}
+                            className="cursor-pointer text-red-500 rounded-lg"
+                          >
+                            <AiOutlineClose size={20} />
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  {inputFields3?.map((input, index) => {
+                    return (
+                      <div key={index} className="flex items-center gap-4">
+                        <div className="flex items-center gap-3 w-[90%]">
+                          <input
+                            name={"test_name"}
+                            value={input.test_name}
+                            size="lg"
+                            placeholder="Test name"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            labelProps={{
+                              className:
+                                "before:content-none after:content-none",
+                            }}
+                            onChange={(event) =>
+                              handleFormChange3(index, event)
+                            }
+                          />
+                          <input
+                            name={"test_method"}
+                            value={input.test_method}
+                            size="lg"
+                            placeholder="Test method"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            labelProps={{
+                              className:
+                                "before:content-none after:content-none",
+                            }}
+                            onChange={(event) =>
+                              handleFormChange3(index, event)
+                            }
+                          />
+                          <input
+                            name={"test_value"}
+                            value={input.test_value}
+                            size="lg"
+                            placeholder="Test value"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            labelProps={{
+                              className:
+                                "before:content-none after:content-none",
+                            }}
+                            onChange={(event) =>
+                              handleFormChange3(index, event)
+                            }
+                          />
+                        </div>
+                        <div className="flex items-center gap-2 w-[10%]">
+                          <div className="">
+                            <div className="">
+                              <AiOutlinePlusCircle
+                                onClick={addFields3}
+                                className="cursor-pointer text-blue-500 rounded-lg"
+                                size={20}
+                              />
+                            </div>
+                          </div>
+                          <div className="">
+                            {inputFields3.length > 1 && (
+                              <div
+                                onClick={() => removeFields3(index)}
+                                className="cursor-pointer text-red-500 rounded-lg"
+                              >
+                                <AiOutlineClose size={20} />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-6">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -679,33 +1098,72 @@ const EditProduct = ({ params }) => {
                     className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-4  file:border-0 file:text-sm file:font-semibold
                                 file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 border border-gray-300 rounded-lg"
                     ref={cableDesignParameter}
-                    onChange={handleTableImage}
+                    onChange={onSelectFile}
                   />
                   <div className="flex items-center gap-4">
-                    {files3.map((file, key) => {
-                      return (
-                        <div key={key} className="">
-                          <span className="">
+                    {editInfo?.product_cable_design_parameter?.map(
+                      (parameter) => {
+                        return (
+                          <div
+                            key={parameter.id}
+                            className="cursor-pointer mt-5"
+                          >
                             <img
-                              width={80}
-                              height={50}
-                              src={URL.createObjectURL(file)}
-                              alt={file.name}
+                              src={`${BACKEND_BASE_URL}/${parameter?.cable_design_parameter}`}
+                              alt=""
+                              height="68"
+                              width="68"
+                              className="mx-auto"
                             />
-                          </span>
-                        </div>
-                      );
-                    })}
-                    {files.length == 0 && (
-                      <img
-                        className="img-thumbnail mt-1"
-                        width={80}
-                        height={50}
-                        src={`${BACKEND_BASE_URL}/${editInfo?.cable_design_parameter}`}
-                        alt={productName}
-                        name="img"
-                      />
+                            <div className="d-flex justify-content-between">
+                              <AiFillCloseSquare
+                                className="cursor "
+                                size="1.8rem"
+                                color="red"
+                                onClick={() =>
+                                  deleteCableDesignParameterImage(parameter.id)
+                                }
+                              />
+                            </div>
+                            {files3.map((file, key) => {
+                              return (
+                                <div key={key} className="Row">
+                                  <span className="Filename">
+                                    <img
+                                      width={80}
+                                      height={50}
+                                      src={URL.createObjectURL(file)}
+                                      alt={file.name}
+                                    />
+                                  </span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        );
+                      }
                     )}
+                    {selectedImages &&
+                      selectedImages.map((image, index) => {
+                        return (
+                          <div key={index} className="flex">
+                            <img
+                              src={URL.createObjectURL(image)}
+                              height="68"
+                              width="68"
+                              alt="upload"
+                            />
+                            <div className="d-flex justify-content-between">
+                              <AiFillCloseSquare
+                                className="cursor "
+                                size="1.8rem"
+                                color="red"
+                                onClick={() => deleteHandler(image)}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
                   </div>
                 </div>
                 <div className="col-span-12 flex justify-center">

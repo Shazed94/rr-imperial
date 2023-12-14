@@ -28,7 +28,7 @@ const AllProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
   useEffect(() => {
     read_all_Products().then((res) => {
-      setAllProducts(res.data.all_products);
+      setAllProducts(res.data?.all_products);
     });
   }, []);
   //=================================== view single Product ===================================
@@ -50,7 +50,7 @@ const AllProducts = () => {
           confirmButtonColor: "#5eba86",
         });
         read_all_Products().then((res) => {
-          setAllProducts(res.data.all_products);
+          setAllProducts(res.data?.all_products);
         });
       }
     });
@@ -138,7 +138,7 @@ const AllProducts = () => {
                           </td>
                           <td className={classes}>
                             {/* view button */}
-                          
+
                             <button
                               onClick={() => {
                                 viewProduct(data.id);
@@ -190,7 +190,7 @@ const AllProducts = () => {
         </div>
       </div>
       <Dialog
-        open={open}
+        open={open} size="xxl"
         handler={handleOpen}
         animate={{
           mount: { scale: 1, y: 0 },
@@ -198,7 +198,7 @@ const AllProducts = () => {
         }}
       >
         <DialogHeader>Product Details</DialogHeader>
-        <DialogBody className="max-h-[65vh] overflow-auto">
+        <DialogBody className="max-h-[85vh] overflow-auto">
           <h3 className="mb-1">Product Name: {productInfo?.name}</h3>
           <h5 className="mb-1">
             Category: {productInfo?.category?.category_name}
@@ -220,22 +220,17 @@ const AllProducts = () => {
           {Parse(`Standard: ${productInfo?.standard}`)}
           <div className="flex justify-between items-center gap-3">
             {productInfo?.colors?.map((data, index) => {
-              var color = data.color_code.split("-");
               return (
                 <>
-                  <div className="flex items-center">
-                    <div className="col-md-1">{color[0]} &nbsp;</div>
+                  <div className="flex flex-wrap items-center">
                     <div
-                      className="color_circle"
+                      className="block w-3 h-3 min-w-[12px] rounded-full"
                       style={{
-                        backgroundColor: color[1],
-                        height: "20px",
-                        width: "20px",
-                        borderRadius: "50%",
+                        backgroundColor: data?.color_info?.color_code,
+                        marginLeft: "5px",
                       }}
-                    >
-                      {" "}
-                    </div>
+                    ></div>
+                    <div className="ms-1">{data?.color_info?.name} &nbsp;</div>
                   </div>
                 </>
               );
