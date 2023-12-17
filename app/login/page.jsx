@@ -48,15 +48,19 @@ const Login = () => {
         }
         toast.error(response.data.message);
       } else {
-        setCookie("adminemail", response.data?.loggedInAdmin?.email, {
+        setCookie("admin_access_token", response.data?.admin_access_token, {
           maxAge: 60 * 60 * 24,
         });
-        setCookie("adminName", response.data?.loggedInAdmin?.name, {
+        setCookie("admin_staff", response.data?.data?.admin_staff, {
           maxAge: 60 * 60 * 24,
         });
-        setCookie("LOGGED_IN_ADMIN_ID", response.data?.loggedInAdmin?.id, {
+        setCookie("user_type", response.data?.data?.user_type, {
           maxAge: 60 * 60 * 24,
         });
+        localStorage.setItem(
+          "user_permission_info",
+          JSON.stringify(response.data?.data?.permission_info)
+        );
 
         toast.success(response.data.message);
         // Redirect to the dashboard after successful login

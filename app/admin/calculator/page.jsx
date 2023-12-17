@@ -336,7 +336,7 @@ const AdminCalculator = () => {
                                   recommendValue?.full_load_current_2
                                 }
                               />
-                              <span className="text-[#939598]">AMP</span>
+                              <span className="text-white">AMP</span>
                             </div>
                           </div>
                           <h4 className="text-[#939598] text-center pb-3 border-b-2 border-white mb-5">

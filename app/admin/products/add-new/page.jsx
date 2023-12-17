@@ -1,13 +1,9 @@
 "use client";
-import { Button, Checkbox, Typography } from "@material-tailwind/react";
+import { Checkbox, Typography } from "@material-tailwind/react";
 import Link from "next/link";
-import axios from "axios";
 import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
 import AdminMaster from "@/components/AdminMaster/AdminMaster";
-import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
-import Select from "react-select";
-// import { QuillScript } from "@/utility/QuillScript";
 import {
   AiFillCloseSquare,
   AiOutlineClose,
@@ -15,6 +11,11 @@ import {
 } from "react-icons/ai";
 import { FiSave } from "react-icons/fi";
 import dynamic from "next/dynamic";
+import {
+  create_new_Product,
+  read_all_Category,
+  read_all_Product_Colors,
+} from "@/utility/api";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 const AddProduct = () => {
@@ -41,32 +42,13 @@ const AddProduct = () => {
   const [category, setCategory] = useState([]);
   const [colors, setColors] = useState([]);
 
-  const renderAllCategories = async () => {
-    await axios
-      .get(`${BACKEND_BASE_URL}/api/admin/products/categories`, {
-        headers: {
-          // Authorization: `Bearer ${getLocalStorageWithExpiry("ACCESS_TOKEN")}`,
-        },
-      })
-      .then((res) => {
-        setCategory(res.data.all_product_categories);
-      });
-  };
-  const renderAllColors = async () => {
-    await axios
-      .get(`${BACKEND_BASE_URL}/api/admin/products/colors`, {
-        headers: {
-          // Authorization: `Bearer ${getLocalStorageWithExpiry("ACCESS_TOKEN")}`,
-        },
-      })
-      .then((res) => {
-        setColors(res.data.all_colors);
-      });
-  };
-
   useEffect(() => {
-    renderAllCategories();
-    renderAllColors();
+    read_all_Category().then((res) => {
+      setCategory(res.data.all_product_categories);
+    });
+    read_all_Product_Colors().then((res) => {
+      setColors(res.data.all_colors);
+    });
   }, []);
 
   // Image Preview
@@ -251,7 +233,6 @@ const AddProduct = () => {
     }
   };
 
-  console.log(singlePermissionChecked);
   // ============================= form submit to backend ======================
 
   const [applicationValue, setApplicationValue] = useState("");
@@ -326,53 +307,41 @@ const AddProduct = () => {
       formdata.append("cable_design_parameter[]", item);
     });
 
-    // if (cableDesignParameter.current.files[0]) {
-    //   formdata.append(
-    //     "cable_design_parameter[]",
-    //     cableDesignParameter.current.files[0]
-    //   );
-    // }
-
-    await axios
-      .post(`${BACKEND_BASE_URL}/api/admin/products/store`, formdata, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-
-      .then((response) => {
-        if (response.data.status === 200) {
-          Swal.fire({
-            icon: "success",
-            text: response.data.message,
-            confirmButtonColor: "#5eba86",
-          });
-          e.target.reset();
-          setApplicationValue("", "html");
-          setConstructionValue("", "html");
-          setPropertiesValue("", "html");
-          setVoltageGradeValue("", "html");
-          setOperatingTempValue("", "html");
-          setMinBendingRadiusValue("", "html");
-          setStandardValue("", "html");
-          setFile([]);
-          setFile2([]);
-          setFile3([]);
-          setInputFields([
-            {
-              char_image_label: "",
-              char_image: "",
-            },
-          ]);
-          setInputFields2([
-            {
-              char_image_label2: "",
-              char_image2: "",
-            },
-          ]);
-          setSubmitted(false);
-        } else {
-          setError(response.data.errors);
-        }
-      });
+    create_new_Product().then((response) => {
+      if (response.data.status === 200) {
+        Swal.fire({
+          icon: "success",
+          text: response.data.message,
+          confirmButtonColor: "#5eba86",
+        });
+        e.target.reset();
+        setApplicationValue("", "html");
+        setConstructionValue("", "html");
+        setPropertiesValue("", "html");
+        setVoltageGradeValue("", "html");
+        setOperatingTempValue("", "html");
+        setMinBendingRadiusValue("", "html");
+        setStandardValue("", "html");
+        setFile([]);
+        setFile2([]);
+        setFile3([]);
+        setInputFields([
+          {
+            char_image_label: "",
+            char_image: "",
+          },
+        ]);
+        setInputFields2([
+          {
+            char_image_label2: "",
+            char_image2: "",
+          },
+        ]);
+        setSubmitted(false);
+      } else {
+        setError(response.data.errors);
+      }
+    });
   };
   return (
     // <AdminMaster>
@@ -659,7 +628,6 @@ const AddProduct = () => {
                     Select Color
                   </Typography>
                   <div className="flex flex-wrap w-full gap-2">
-
                     {/* <Select
                       isMulti
                       options={colors?.map((colorInfo) => {

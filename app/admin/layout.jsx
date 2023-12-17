@@ -1,14 +1,13 @@
 "use client";
 import Link from "next/link";
-import { MdAdminPanelSettings, MdManageAccounts, MdOutlineMenuOpen } from "react-icons/md";
+import { MdOutlineMenuOpen } from "react-icons/md";
 import { Suspense, useEffect, useRef, useState } from "react";
 import {
-  FaChevronCircleRight,
   FaProductHunt,
   FaBookReader,
   FaVideo,
   FaUsers,
-  FaHistory,
+  FaUser,
 } from "react-icons/fa";
 import {
   AiFillContacts,
@@ -21,11 +20,14 @@ import { BiNews } from "react-icons/bi";
 import { CgEventbrite } from "react-icons/cg";
 import { HiOfficeBuilding } from "react-icons/hi";
 import { ImExit } from "react-icons/im";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { deleteCookie, getCookie } from "cookies-next";
+import { admin_logout } from "@/utility/api";
+import toast from "react-hot-toast";
 
 const Layout = (props) => {
   const path = usePathname();
-
+  const router = useRouter();
   // start: Sidebar
   const sidebar_toggle = useRef();
   const sidebarRef = useRef();
@@ -93,6 +95,16 @@ const Layout = (props) => {
   }, []);
 
   // end: Sidebar
+  const logoutAdmin = async () => {
+    admin_logout().then((res) => {
+      if (res.data?.status == 200) {
+        deleteCookie("admin_access_token");
+        toast.success(res.data.message);
+        router.replace("/login");
+      }
+    });
+  };
+  let fetchPermissions = localStorage.getItem("user_permission_info");
   return (
     <div className="">
       {/* Sidebar */}
@@ -132,7 +144,8 @@ const Layout = (props) => {
                   {/* <AiOutlineDashboard className="text-xl ms-4 opacity-0 group-[.active]/sidebar:opacity-100 transition-all duration-500" /> */}
                 </Link>
               </li>
-              <li className="mb-1 group">
+
+              {/* <li className="mb-1 group">
                 <div
                   href="#"
                   className="flex justify-between items-center px-8 py-2 group-[.w-20]/sidebar:px-2 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.active]:bg-[#222338] group-[.active]:text-white group-[.selected]:text-gray-50 cursor-pointer sidebar-dropdown-toggle"
@@ -166,30 +179,33 @@ const Layout = (props) => {
                     </span>
                   </Link>
                 </ul>
-              </li>
-              <li className="mb-1 group">
-                <div
-                  href="#"
-                  className="flex justify-between items-center px-8 py-2 group-[.w-20]/sidebar:px-2 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.active]:bg-[#222338] group-[.active]:text-white group-[.selected]:text-gray-50 cursor-pointer sidebar-dropdown-toggle"
-                >
-                  <div className="flex items-center">
-                    <FaProductHunt className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                    <span className="text-base font-bold">Products</span>
-                  </div>
-                  <IoChevronDownOutline className="ms-auto group-[.selected]:rotate-180" />
-                </div>
-                <ul className="py-3 hidden group-[.selected]:block select-none user-none">
-                  <Link
-                    href="/admin/products/product-category"
-                    className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
-                      path == "/admin/products/product-category" &&
-                      "bg-[#E71D1D]"
-                    }`}
-                  >
-                    <FaProductHunt className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                    <span>Product Category</span>
-                  </Link>
-                  {/* <li className="mb-4 flex items-center gap-4 ps-6">
+              </li> */}
+              {getCookie("user_type") == "1" &&
+              getCookie("admin_staff") == "0" ? (
+                <>
+                  <li className="mb-1 group">
+                    <div
+                      href="#"
+                      className="flex justify-between items-center px-8 py-2 group-[.w-20]/sidebar:px-2 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.active]:bg-[#222338] group-[.active]:text-white group-[.selected]:text-gray-50 cursor-pointer sidebar-dropdown-toggle"
+                    >
+                      <div className="flex items-center">
+                        <FaProductHunt className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                        <span className="text-base font-bold">Products</span>
+                      </div>
+                      <IoChevronDownOutline className="ms-auto group-[.selected]:rotate-180" />
+                    </div>
+                    <ul className="py-3 hidden group-[.selected]:block select-none user-none">
+                      <Link
+                        href="/admin/products/product-category"
+                        className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
+                          path == "/admin/products/product-category" &&
+                          "bg-[#E71D1D]"
+                        }`}
+                      >
+                        <FaProductHunt className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                        <span>Product Category</span>
+                      </Link>
+                      {/* <li className="mb-4 flex items-center gap-4 ps-6">
                   <span></span>
                   <Link
                     href="/admin/products/all-products"
@@ -198,120 +214,374 @@ const Layout = (props) => {
                     Table Design
                   </Link>
                 </li> */}
+                      <Link
+                        href="/admin/products/all-products"
+                        className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
+                          path == "/admin/products/all-products" &&
+                          "bg-[#E71D1D] text-white"
+                        }`}
+                      >
+                        <FaProductHunt className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                        <span className="text-gray-300 flex items-center hover:text-gray-100">
+                          All Products
+                        </span>
+                      </Link>
+                    </ul>
+                  </li>
                   <Link
-                    href="/admin/products/all-products"
-                    className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
-                      path == "/admin/products/all-products" &&
-                      "bg-[#E71D1D] text-white"
+                    href="/admin/sliders"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/sliders" && "bg-[#ED2027]"
                     }`}
                   >
-                    <FaProductHunt className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                    <span className="text-gray-300 flex items-center hover:text-gray-100">
-                      All Products
+                    <BsSliders className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">Slider Elements</span>
+                  </Link>
+                  <Link
+                    href="/admin/calculator"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/calculator" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <BsCalculator className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">Calculator</span>
+                  </Link>
+                  <Link
+                    href="/admin/price-list"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/price-list" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <AiOutlineFilePdf className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold"> Price List PDF</span>
+                  </Link>
+                  <Link
+                    href="/admin/news"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/news" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <BiNews className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">News</span>
+                  </Link>
+                  <Link
+                    href="/admin/blogs"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/blogs" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <FaBookReader className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">Blogs</span>
+                  </Link>
+                  <Link
+                    href="/admin/events"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/events" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <CgEventbrite className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">Events</span>
+                  </Link>
+                  <Link
+                    href="/admin/videos"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/videos" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <FaVideo className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">Videos</span>
+                  </Link>
+                  <Link
+                    href="/admin/career"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/career" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <BsLightbulb className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">Career</span>
+                  </Link>
+                  <Link
+                    href="/admin/contact"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/contact" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <AiFillContacts className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">Contact</span>
+                  </Link>
+                  <Link
+                    href="/admin/regional-offices"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/regional-offices" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <HiOfficeBuilding className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">
+                      Regional Offices
                     </span>
                   </Link>
-                </ul>
-              </li>
-              <Link
-                href="/admin/sliders"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/sliders" && "bg-[#ED2027]"
-                }`}
+                  <Link
+                    href="/admin/download-user"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/download-user" && "bg-[#E71D1D]"
+                    }`}
+                  >
+                    <FaUsers className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">Download User</span>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "2" && (
+                        <li key={index} className="mb-1 group">
+                          <div
+                            href="#"
+                            className="flex justify-between items-center px-8 py-2 group-[.w-20]/sidebar:px-2 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.active]:bg-[#222338] group-[.active]:text-white group-[.selected]:text-gray-50 cursor-pointer sidebar-dropdown-toggle"
+                          >
+                            <div className="flex items-center">
+                              <FaProductHunt className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                              <span className="text-base font-bold">
+                                Products
+                              </span>
+                            </div>
+                            <IoChevronDownOutline className="ms-auto group-[.selected]:rotate-180" />
+                          </div>
+                          <ul className="py-3 hidden group-[.selected]:block select-none user-none">
+                            <Link
+                              href="/admin/products/product-category"
+                              className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
+                                path == "/admin/products/product-category" &&
+                                "bg-[#E71D1D]"
+                              }`}
+                            >
+                              <FaProductHunt className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                              <span>Product Category</span>
+                            </Link>
+                            {/* <li className="mb-4 flex items-center gap-4 ps-6">
+                  <span></span>
+                  <Link
+                    href="/admin/products/all-products"
+                    className="text-gray-300 flex items-center hover:text-gray-100"
+                  >
+                    Table Design
+                  </Link>
+                </li> */}
+                            <Link
+                              href="/admin/products/all-products"
+                              className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
+                                path == "/admin/products/all-products" &&
+                                "bg-[#E71D1D] text-white"
+                              }`}
+                            >
+                              <FaProductHunt className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                              <span className="text-gray-300 flex items-center hover:text-gray-100">
+                                All Products
+                              </span>
+                            </Link>
+                          </ul>
+                        </li>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "3" && (
+                        <Link
+                          key={index}
+                          href="/admin/sliders"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/sliders" && "bg-[#ED2027]"
+                          }`}
+                        >
+                          <BsSliders className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">
+                            Slider Elements
+                          </span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "4" && (
+                        <Link
+                          key={index}
+                          href="/admin/calculator"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/calculator" && "bg-[#E71D1D]"
+                          }`}
+                        >
+                          <BsCalculator className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">
+                            Calculator
+                          </span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "5" && (
+                        <Link
+                          key={index}
+                          href="/admin/price-list"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/price-list" && "bg-[#E71D1D]"
+                          }`}
+                        >
+                          <AiOutlineFilePdf className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">
+                            {" "}
+                            Price List PDF
+                          </span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "6" && (
+                        <Link
+                          key={index}
+                          href="/admin/news"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/news" && "bg-[#E71D1D]"
+                          }`}
+                        >
+                          <BiNews className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">News</span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "7" && (
+                        <Link
+                          key={index}
+                          href="/admin/blogs"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/blogs" && "bg-[#E71D1D]"
+                          }`}
+                        >
+                          <FaBookReader className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">Blogs</span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "8" && (
+                        <Link
+                          key={index}
+                          href="/admin/events"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/events" && "bg-[#E71D1D]"
+                          }`}
+                        >
+                          <CgEventbrite className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">Events</span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "9" && (
+                        <Link
+                          key={index}
+                          href="/admin/videos"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/videos" && "bg-[#E71D1D]"
+                          }`}
+                        >
+                          <FaVideo className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">Videos</span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "10" && (
+                        <Link
+                          key={index}
+                          href="/admin/career"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/career" && "bg-[#E71D1D]"
+                          }`}
+                        >
+                          <BsLightbulb className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">Career</span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "11" && (
+                        <Link
+                          key={index}
+                          href="/admin/contact"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/contact" && "bg-[#E71D1D]"
+                          }`}
+                        >
+                          <AiFillContacts className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">Contact</span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "12" && (
+                        <Link
+                          key={index}
+                          href="/admin/regional-offices"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/regional-offices" && "bg-[#E71D1D]"
+                          }`}
+                        >
+                          <HiOfficeBuilding className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">
+                            Regional Offices
+                          </span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "13" && (
+                        <Link
+                          key={index}
+                          href="/admin/download-user"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/download-user" && "bg-[#E71D1D]"
+                          }`}
+                        >
+                          <FaUsers className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">
+                            Download User
+                          </span>
+                        </Link>
+                      )
+                  )}
+                  {JSON.parse(fetchPermissions)?.map(
+                    (data, index) =>
+                      data?.permission_id == "14" && (
+                        <Link
+                          key={index}
+                          href="/admin/users"
+                          className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                            path == "/admin/users" && "bg-[#ED2027]"
+                          }`}
+                        >
+                          <FaUser className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                          <span className="text-base font-bold">Users</span>
+                        </Link>
+                      )
+                  )}
+                </>
+              )}
+
+              <li
+                className="flex items-center px-8 py-2 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer"
+                onClick={logoutAdmin}
               >
-                <BsSliders className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold">Slider Elements</span>
-              </Link>
-              <Link
-                href="/admin/calculator"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/calculator" && "bg-[#E71D1D]"
-                }`}
-              >
-                <BsCalculator className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold">Calculator</span>
-              </Link>
-              <Link
-                href="/admin/price-list"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/price-list" && "bg-[#E71D1D]"
-                }`}
-              >
-                <AiOutlineFilePdf className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold"> Price List PDF</span>
-              </Link>
-              <Link
-                href="/admin/news"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/news" && "bg-[#E71D1D]"
-                }`}
-              >
-                <BiNews className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold">News</span>
-              </Link>
-              <Link
-                href="/admin/blogs"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/blogs" && "bg-[#E71D1D]"
-                }`}
-              >
-                <FaBookReader className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold">Blogs</span>
-              </Link>
-              <Link
-                href="/admin/events"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/events" && "bg-[#E71D1D]"
-                }`}
-              >
-                <CgEventbrite className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold">Events</span>
-              </Link>
-              <Link
-                href="/admin/videos"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/videos" && "bg-[#E71D1D]"
-                }`}
-              >
-                <FaVideo className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold">Videos</span>
-              </Link>
-              <Link
-                href="/admin/career"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/career" && "bg-[#E71D1D]"
-                }`}
-              >
-                <BsLightbulb className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold">Career</span>
-              </Link>
-              <Link
-                href="/admin/contact"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/contact" && "bg-[#E71D1D]"
-                }`}
-              >
-                <AiFillContacts className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold">Contact</span>
-              </Link>
-              <Link
-                href="/admin/regional-offices"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/regional-offices" && "bg-[#E71D1D]"
-                }`}
-              >
-                <HiOfficeBuilding className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold">Regional Offices</span>
-              </Link>
-              <Link
-                href="/admin/download-user"
-                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
-                  path == "/admin/download-user" && "bg-[#E71D1D]"
-                }`}
-              >
-                <FaUsers className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                <span className="text-base font-bold">Download User</span>
-              </Link>
-              <li className="flex items-center px-8 py-2 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer">
                 <ImExit className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                 <span className="text-base font-bold">Logout</span>
               </li>

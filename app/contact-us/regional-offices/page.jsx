@@ -3,6 +3,7 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import QuickNavigation from "@/components/QuickNavigation";
 import SubmitQueryForm from "@/components/SubmitQueryForm";
+import { all_Regional_Office_Front } from "@/utility/api";
 import {
   Button,
   Dialog,
@@ -17,12 +18,13 @@ import {
 } from "@material-tailwind/react";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ContactUs = () => {
   const [open, setOpen] = useState(false);
   const [office, setOffice] = useState("");
   const [activeOffice, setActiveOffice] = useState("barishal");
+  const [regionalOffices, setAllRegionalOffices] = useState([]);
   const handleOpen = (val) => {
     setOpen(!open);
     setOffice(val);
@@ -32,6 +34,12 @@ const ContactUs = () => {
     setActiveOffice(state);
   }
 
+  useEffect(() => {
+    all_Regional_Office_Front().then((res) => {
+      setAllRegionalOffices(res.data?.all_offices);
+    });
+  }, []);
+  console.log(regionalOffices);
   return (
     <div>
       <Header />
@@ -50,7 +58,7 @@ const ContactUs = () => {
               className: "bg-transparent !shadow-none !text-gray-900",
             }}
           >
-            <Tab value="barishal" className="bg-transparent shadow-none">
+            <Tab value="barishal" >
               <Link href="#" scroll={false} className="">
                 <button
                   className={`w-36 px-4 py-4 rounded-xl text-white bg-[#D1D3D4] ${
