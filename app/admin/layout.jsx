@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { MdOutlineMenuOpen } from "react-icons/md";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FaProductHunt,
   FaBookReader,
@@ -104,7 +104,10 @@ const Layout = (props) => {
       }
     });
   };
-  let fetchPermissions = localStorage.getItem("user_permission_info");
+
+  let fetchPermissions = getCookie("user_permission_info");
+  // setFetchPermissions(localStorage.getItem("user_permission_info"));
+console.log(JSON.parse(fetchPermissions))
   return (
     <div className="">
       {/* Sidebar */}

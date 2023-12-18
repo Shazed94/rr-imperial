@@ -1,7 +1,6 @@
 "use client";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import {
-  create_new_PriceList,
   edit_PriceList,
   read_all_PriceList,
   update_PriceList,
@@ -37,35 +36,6 @@ const AdminPriceList = () => {
     });
   }, []);
 
-  // ============================= Add new News =============================
-  const addVideo = (modalValue) => {
-    setModalData(modalValue);
-    setOpen(true);
-  };
-
-  // ============================= form submit to backend ======================
-  const storeData = (e) => {
-    const formdata = new FormData();
-    formdata.append("cable_price_list", priceListPdf.current.files[0]);
-    formdata.append("shramik_price_list", shramikPriceListPdf.current.files[0]);
-
-    create_new_PriceList(formdata).then((response) => {
-      if (response.data.status === 200) {
-        Swal.fire({
-          icon: "success",
-          text: response.data.message,
-          confirmButtonColor: "#5eba86",
-        });
-        read_all_PriceList().then((res) => {
-          setPdfInfo(res.data.price_list);
-        });
-        e.target.reset();
-        setDescVal("", "html");
-        setOpen(false);
-      }
-    });
-    e.preventDefault();
-  };
 
   // Image Preview
   const [files, setFile] = useState([]);
@@ -130,9 +100,9 @@ const AdminPriceList = () => {
         <div className="breadcrumb flex justify-between shadow-lg shadow-cyan-400/80">
           <div className="breadcrumb-item flex items-center ">
             <Link href="/admin/dashboard">Dashboard</Link>
-            <div className="before">Videos</div>
+            <div className="before">Price List</div>
           </div>
-          <div className="breadcrumb-item p-0 text-white">All Videos</div>
+          <div className="breadcrumb-item p-0 text-white">All Price List</div>
         </div>
 
         <div className="content-wrapper">
