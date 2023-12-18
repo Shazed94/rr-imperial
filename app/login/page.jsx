@@ -58,12 +58,12 @@ const Login = () => {
           maxAge: 60 * 60 * 24,
         });
 
-        setCookie( "user_permission_info",
-        JSON.stringify(response.data?.data?.permission_info))
-        // localStorage.setItem(
-        //   "user_permission_info",
-        //   JSON.stringify(response.data?.data?.permission_info)
-        // );
+        // setCookie( "user_permission_info",
+        // JSON.stringify(response.data?.data?.permission_info))
+        localStorage.setItem(
+          "user_permission_info",
+          JSON.stringify(response.data?.data?.permission_info)
+        );
 
         toast.success(response.data.message);
         // Redirect to the dashboard after successful login
