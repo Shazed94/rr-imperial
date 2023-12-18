@@ -107,7 +107,7 @@ const Layout = (props) => {
 
   let fetchPermissions = getCookie("user_permission_info");
   // setFetchPermissions(localStorage.getItem("user_permission_info"));
-console.log(JSON.parse(fetchPermissions))
+// console.log((fetchPermissions))
   return (
     <div className="">
       {/* Sidebar */}
@@ -118,7 +118,7 @@ console.log(JSON.parse(fetchPermissions))
       >
         <div className="h-full ">
           <div className="topbar flex justify-between items-center bg-[#c33030] text-white py-[20px] px-8 border-b-2 border-white mb-[2px] group-[.w-20]/sidebar:py-[9px]">
-            <Link
+            <Link prefetch={false}
               href="/"
               target="_blank"
               className="logo group-[.w-20]/sidebar:opacity-0 group-[.w-20]/sidebar:w-0 transition-all duration-500"
@@ -136,7 +136,7 @@ console.log(JSON.parse(fetchPermissions))
               className="sidebar_content list-none py-8 text-[#b5b4bf] transition-all mb-12"
             >
               <li className="mb-1 group">
-                <Link
+                <Link prefetch={false}
                   href="/admin/dashboard"
                   className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 px-8 py-2 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center ${
                     path == "/admin/dashboard" && "bg-[#E71D1D]"
@@ -198,7 +198,7 @@ console.log(JSON.parse(fetchPermissions))
                       <IoChevronDownOutline className="ms-auto group-[.selected]:rotate-180" />
                     </div>
                     <ul className="py-3 hidden group-[.selected]:block select-none user-none">
-                      <Link
+                      <Link prefetch={false}
                         href="/admin/products/product-category"
                         className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
                           path == "/admin/products/product-category" &&
@@ -217,7 +217,7 @@ console.log(JSON.parse(fetchPermissions))
                     Table Design
                   </Link>
                 </li> */}
-                      <Link
+                      <Link prefetch={false}
                         href="/admin/products/all-products"
                         className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
                           path == "/admin/products/all-products" &&
@@ -231,7 +231,7 @@ console.log(JSON.parse(fetchPermissions))
                       </Link>
                     </ul>
                   </li>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/sliders"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/sliders" && "bg-[#ED2027]"
@@ -240,7 +240,7 @@ console.log(JSON.parse(fetchPermissions))
                     <BsSliders className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                     <span className="text-base font-bold">Slider Elements</span>
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/calculator"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/calculator" && "bg-[#E71D1D]"
@@ -249,7 +249,7 @@ console.log(JSON.parse(fetchPermissions))
                     <BsCalculator className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                     <span className="text-base font-bold">Calculator</span>
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/price-list"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/price-list" && "bg-[#E71D1D]"
@@ -258,7 +258,7 @@ console.log(JSON.parse(fetchPermissions))
                     <AiOutlineFilePdf className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                     <span className="text-base font-bold"> Price List PDF</span>
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/news"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/news" && "bg-[#E71D1D]"
@@ -267,7 +267,7 @@ console.log(JSON.parse(fetchPermissions))
                     <BiNews className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                     <span className="text-base font-bold">News</span>
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/blogs"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/blogs" && "bg-[#E71D1D]"
@@ -276,7 +276,7 @@ console.log(JSON.parse(fetchPermissions))
                     <FaBookReader className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                     <span className="text-base font-bold">Blogs</span>
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/events"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/events" && "bg-[#E71D1D]"
@@ -285,7 +285,7 @@ console.log(JSON.parse(fetchPermissions))
                     <CgEventbrite className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                     <span className="text-base font-bold">Events</span>
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/videos"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/videos" && "bg-[#E71D1D]"
@@ -294,7 +294,7 @@ console.log(JSON.parse(fetchPermissions))
                     <FaVideo className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                     <span className="text-base font-bold">Videos</span>
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/career"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/career" && "bg-[#E71D1D]"
@@ -303,7 +303,7 @@ console.log(JSON.parse(fetchPermissions))
                     <BsLightbulb className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                     <span className="text-base font-bold">Career</span>
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/contact"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/contact" && "bg-[#E71D1D]"
@@ -312,7 +312,7 @@ console.log(JSON.parse(fetchPermissions))
                     <AiFillContacts className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                     <span className="text-base font-bold">Contact</span>
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/regional-offices"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/regional-offices" && "bg-[#E71D1D]"
@@ -323,7 +323,7 @@ console.log(JSON.parse(fetchPermissions))
                       Regional Offices
                     </span>
                   </Link>
-                  <Link
+                  <Link prefetch={false}
                     href="/admin/download-user"
                     className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
                       path == "/admin/download-user" && "bg-[#E71D1D]"
@@ -371,7 +371,7 @@ console.log(JSON.parse(fetchPermissions))
                     Table Design
                   </Link>
                 </li> */}
-                            <Link
+                            <Link prefetch={false}
                               href="/admin/products/all-products"
                               className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
                                 path == "/admin/products/all-products" &&
@@ -390,7 +390,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "3" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/sliders"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -407,7 +407,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "4" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/calculator"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -424,7 +424,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "5" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/price-list"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -442,7 +442,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "6" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/news"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -457,7 +457,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "7" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/blogs"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -472,7 +472,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "8" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/events"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -487,7 +487,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "9" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/videos"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -502,7 +502,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "10" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/career"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -517,7 +517,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "11" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/contact"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -532,7 +532,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "12" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/regional-offices"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -549,7 +549,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "13" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/download-user"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
@@ -566,7 +566,7 @@ console.log(JSON.parse(fetchPermissions))
                   {JSON.parse(fetchPermissions)?.map(
                     (data, index) =>
                       data?.permission_id == "14" && (
-                        <Link
+                        <Link prefetch={false}
                           key={index}
                           href="/admin/users"
                           className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
