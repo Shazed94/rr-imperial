@@ -29,7 +29,7 @@ const AwardsCertificates = () => {
       <Header />
       <WhoWeAreMaster>
         <div className="bg-white p-4 lg:p-8 mb-12" id="who-we-are">
-          <div className="grid grid-cols-12 gap-5 ">
+          <div className="grid grid-cols-12 gap-5 mb-8">
             <div className="col-span-12 md:col-span-5 space-y-4 md:space-y-8 lg:space-y-[72px] md:mt-14 lg:mt-0">
               <div
                 className="group bg-[#E6E7E8] hover:bg-[#E62020] hover:text-white transition flex justify-between gap-5 p-3 lg:mt-[70px] rounded-tl-2xl rounded-bl-2xl cursor-pointer"
@@ -199,9 +199,80 @@ const AwardsCertificates = () => {
               </div>
             </div>
           </div>
-          {/* <div className="w-full h-96 flex justify-center items-center text-6xl bg-gray-600 mb-12">
-            Lottie
-          </div> */}
+          <div className="flex flex-wrap justify-center items-center gap-11 mb-11">
+            <img
+              src="/img/who-we-are/certificate/certificate-1.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-2.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-3.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-4.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-5.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-6.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-7.png"
+              alt=""
+              className=""
+            />
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-10">
+            <img
+              src="/img/who-we-are/certificate/certificate-8.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-9.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-10.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-11.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-12.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-13.png"
+              alt=""
+              className=""
+            />
+            <img
+              src="/img/who-we-are/certificate/certificate-14.png"
+              alt=""
+              className=""
+            />
+          </div>
         </div>
       </WhoWeAreMaster>
       <Footer />

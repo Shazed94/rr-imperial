@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
+import { Policy } from "@/components/LottieComponents";
 import WhoWeAreMaster from "@/components/WhoWeAre/WhoWeAreMaster";
 import Image from "next/image";
 import React from "react";
@@ -11,12 +12,7 @@ const page = () => {
       <WhoWeAreMaster>
         <div className="bg-white p-4 lg:p-8 mb-5 lg:mb-12">
           <div className="relative w-full h-24 md:h-32 lg:h-60 mb-10">
-            <Image
-              src="/img/who-we-are/policy.png"
-              fill
-              alt=""
-              className="object-contain"
-            />
+            <Policy />
           </div>
 
           <div className="">

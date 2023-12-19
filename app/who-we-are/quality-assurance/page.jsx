@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
+import { QualityAssurance } from "@/components/LottieComponents";
 import WhoWeAreMaster from "@/components/WhoWeAre/WhoWeAreMaster";
 import React from "react";
 
@@ -14,12 +15,8 @@ const page = () => {
         >
           <div className="w-full lg:w-1/3 flex justify-center items-center text-6xl my-6 lg:mb-12">
             <div className="relative">
-              <img
-                src="/img/who-we-are/quality-assurance.webp"
-                alt=""
-                className="relative z-10"
-              />
-              <div className="absolute -top-[14px] -left-[12px] w-full h-full bg-[#ED1C24] z-0"></div>
+              <QualityAssurance />
+              {/* <div className="absolute -top-[14px] -left-[12px] w-full h-full bg-[#ED1C24] z-0"></div> */}
             </div>
           </div>
           <div className="w-full lg:w-2/3">

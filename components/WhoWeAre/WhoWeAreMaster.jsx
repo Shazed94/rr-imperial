@@ -167,7 +167,7 @@ const WhoWeAreMaster = (props) => {
                 </>
               )}
             </Link>
-            <Link
+            {/* <Link
               href="research-development"
             
               scroll={false}
@@ -203,7 +203,7 @@ const WhoWeAreMaster = (props) => {
                   </span>
                 </>
               )}
-            </Link>
+            </Link> */}
             <Link
               href="mission"
               scroll={false}

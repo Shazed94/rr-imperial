@@ -87,7 +87,7 @@ const News = () => {
           </div> */}
 
           {/*  */}
-          {allNews.map((news, i) => (
+          {allNews?.map((news, i) => (
             <div key={i} className="flex gap-10 mb-10">
               <div
                 className={`w-1/2 flex flex-col justify-center ${

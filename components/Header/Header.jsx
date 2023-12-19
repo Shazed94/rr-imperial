@@ -83,11 +83,11 @@ const Header = () => {
                     Quality Assurance
                   </MenuItem>
                 </Link>
-                <Link href="/who-we-are/research-development" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                {/* <Link href="/who-we-are/research-development" className="focus-visible:outline-none hover:focus-visible:outline-none">
                   <MenuItem className="hover:focus-visible:outline-none" >
                     Research & Development
                   </MenuItem>
-                </Link>
+                </Link> */}
                 <Link href="/who-we-are/mission" className="focus-visible:outline-none hover:focus-visible:outline-none">
                   <MenuItem className="hover:focus-visible:outline-none">
                     Mission
@@ -367,11 +367,11 @@ const Header = () => {
                     Quality Assurance
                   </MenuItem>
                 </Link>
-                <Link href="/who-we-are/research-development" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                {/* <Link href="/who-we-are/research-development" className="focus-visible:outline-none hover:focus-visible:outline-none">
                   <MenuItem className="hover:focus-visible:outline-none" >
                     Research & Development
                   </MenuItem>
-                </Link>
+                </Link> */}
                 <Link href="/who-we-are/mission" className="focus-visible:outline-none hover:focus-visible:outline-none">
                   <MenuItem className="hover:focus-visible:outline-none">
                     Mission

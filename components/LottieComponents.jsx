@@ -20,6 +20,11 @@ import whoWeAre from "../public/lottie/WhoWeAreHome.json";
 import media from "../public/lottie/MediaHome.json";
 import product from "../public/lottie/ProductPageMainBanner.json";
 import downloadIcon from "../public/lottie/DownloadIcon.json";
+import qualityAssurance from "../public/lottie/QualityAssurance.json";
+import vision from "../public/lottie/Vision.json";
+import policy from "../public/lottie/Policy.json";
+import { useEffect, useRef, useState } from "react";
+// import lottie from "lottie-web";
 
 export function LottieSlider() {
   return <Lottie animationData={heroVideo} loop={true} />;
@@ -146,9 +151,27 @@ export function LearnMoreAboutUs({ className }) {
   );
 }
 
-
 export function AwardIcon({ className }) {
-  return <Lottie animationData={awardIcon} className={className} />;
+  const awardLottie = useRef();
+  const playAnimation = () => {
+    const animationInstance = awardLottie.current;
+    animationInstance.play();
+  };
+  const pauseAnimation = () => {
+    const animationInstance = awardLottie.current;
+    animationInstance.pause();
+  };
+
+  return (
+    <div>
+      <Lottie
+        // lottieRef={awardLottie}
+        animationData={awardIcon}
+        options={{ autoplay: false }}
+        className={className}
+      />
+    </div>
+  );
 }
 export function MissionVisionIcon({ className }) {
   return <Lottie animationData={missionVisionIcon} className={className} />;
@@ -169,4 +192,12 @@ export function FullSizeJson({ className }) {
 export function EmployeeIcon({ className }) {
   return <Lottie animationData={employeesIcon} className={className} />;
 }
-
+export function QualityAssurance({ className }) {
+  return <Lottie animationData={qualityAssurance} className={className} />;
+}
+export function Vision({ className }) {
+  return <Lottie animationData={vision} className={className} />;
+}
+export function Policy({ className }) {
+  return <Lottie animationData={policy} className={className} />;
+}

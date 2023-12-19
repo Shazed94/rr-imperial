@@ -6,6 +6,7 @@ import FeaturedCategory from "@/components/FeaturedCategory";
 import AboutRRImperial from "@/components/AboutRRImperial";
 import KeyStrength from "@/components/KeyStrength";
 import { all_featured_categories } from "@/utility/api";
+import Link from "next/link";
 
 export default async function Home() {
   // const result = await all_featured_categories().then((res) => {
@@ -16,10 +17,10 @@ export default async function Home() {
       <div className="homepage overflow-hidden">
         <Header />
         <section className="lotte_video mb-10 lg:mb-20">
-          <LottieSlider />
+          {/* <LottieSlider /> */}
         </section>
 
-        <FeaturedCategory  />
+        <FeaturedCategory />
 
         <AboutRRImperial />
 
@@ -35,12 +36,12 @@ export default async function Home() {
               to knock us anytime.
             </p>
             <div className="flex justify-center gap-7">
-              <button className="text-f15 text-[#e91111] font-bold bg-white border-2 border-transparent hover:bg-[#333] hover:text-white transition-colors px-[30px] py-[12px] rounded-md">
+              <Link
+                href="/contact-us/head-office"
+                className="text-f15 text-[#e91111] font-bold bg-white border-2 border-transparent hover:bg-[#333] hover:text-white transition-colors px-[50px] py-[12px] rounded-md"
+              >
                 Contact Us
-              </button>
-              <button className="text-f15 bg-transparent text-white border-2 border-white hover:bg-[#333] hover:text-white transition-colors px-[30px] py-[12px] rounded-md font-bold">
-                Learm more
-              </button>
+              </Link>
             </div>
             <img
               src={"svg/graph_1.svg"}

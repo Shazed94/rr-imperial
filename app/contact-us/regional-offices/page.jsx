@@ -222,15 +222,17 @@ const ContactUs = () => {
                     </div>
                     <div className="flex items-center justify-center gap-5 pt-5 ">
                       <img src={"/svg/phone.svg"} alt="" className="w-10" />
+                      <p className="text-black font-normal ">
+                      West Baharchora,PTI Road,Coxsbazar.
+                      </p>
                       <div>
-                        {/* <p>+880 17-55552593</p>
-                        <p>+880 17-55552583</p>
-                        <p>+02-9586528</p> */}
+                        <p>+880 17-01223595</p>
+                        <p>017-55552584</p>
                       </div>
                     </div>
                     <div className="flex items-center justify-center gap-5 pt-5 ">
                       <img src={"/svg/mail.svg"} alt="" className="w-10" />
-                      {/* <p>sales.nawabpur@rr-imperial.com</p> */}
+                      <p>sales.coxsbazar@rrimperial.com</p>
                     </div>
                     <div className="pt-5 flex items-center">
                       <Link

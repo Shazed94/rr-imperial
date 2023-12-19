@@ -8,6 +8,7 @@ import {
 } from "./LottieComponents";
 import { useEffect, useRef } from "react";
 import Aos from "aos";
+import Link from "next/link";
 
 const AboutRRImperial = () => {
   const h2 = useRef();
@@ -109,10 +110,10 @@ const AboutRRImperial = () => {
               >
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
                   <CompanyProfileIcon className="w-16 h-16" />
-                  <h3 className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
+                  <Link href="/who-we-are/our-profile" className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
                     {" "}
                     Company Profile
-                  </h3>
+                  </Link>
                   <p className="text-f14 text-333 font-tahoma-normal">
                     RR Imperials is one of the most awarded electricals company
                     with multiple international certifications
@@ -120,10 +121,10 @@ const AboutRRImperial = () => {
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
                   <MissionVisionIcon className="w-16 h-16" />
-                  <h3 className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
+                  <Link href="/who-we-are/mission" className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
                     {" "}
                     Mission & Vision
-                  </h3>
+                  </Link>
                   <p className="text-f14 text-333 font-tahoma-normal">
                     RR Imperials is one of the most awarded electricals company
                     with multiple international certifications
@@ -131,9 +132,9 @@ const AboutRRImperial = () => {
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
                   <AwardIcon className="w-16 h-16" />
-                  <h3 className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
+                  <Link href="/who-we-are/awards-certifications" className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
                     Awards & Certifications
-                  </h3>
+                  </Link>
                   <p className="text-f14 text-333 font-tahoma-normal">
                     RR Imperials is one of the most awarded electricals company
                     with multiple international certifications
@@ -141,9 +142,9 @@ const AboutRRImperial = () => {
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
                   <img src={"/svg/growth.svg"} alt="" className="w-14" />
-                  <h3 className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
+                  <Link href="/who-we-are/research-innovation" className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
                     Annual Growth
-                  </h3>
+                  </Link>
                   <p className="text-f14 text-333 font-tahoma-normal">
                     RR Imperials is one of the most awarded electricals company
                     with multiple international certifications

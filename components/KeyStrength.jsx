@@ -8,6 +8,7 @@ import {
   LearnMoreAboutUs,
 } from "./LottieComponents";
 import AOS from "aos";
+import Link from "next/link";
 
 const KeyStrength = () => {
   const h4 = useRef();
@@ -121,7 +122,8 @@ const KeyStrength = () => {
               electrical needs are met.
             </p>
             <div className="flex flex-col lg:flex-row lg:items-center gap-5">
-              <button
+              <Link
+                href="who-we-are/our-profile"
                 data-aos="fade-up"
                 data-aos-offset="30"
                 data-aos-easing="ease-in-out"
@@ -129,7 +131,7 @@ const KeyStrength = () => {
                 className="block lg:w-1/2 bg-[#f00e0e] text-white text-center font-bold px-8 py-3 rounded-full"
               >
                 Learn More About Us
-              </button>
+              </Link>
               <div className="lg:w-1/2">
                 <LearnMoreAboutUs />
               </div>
@@ -145,7 +147,7 @@ const KeyStrength = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-6"
           >
             <div className="p-6  rounded-[24px] flex flex-col justify-between border gap-3">
-              <DistrictIcon className={"w-16 h-16"} />
+              {/* <DistrictIcon className={"w-16 h-16"} /> */}
               <h4 className="text-333 text-f18 font-bold">49 Districts</h4>
               <p className="text-333 text-f14 font-normal uppercase">
                 COVERED WITH ANEVER GROWING NETWORK
