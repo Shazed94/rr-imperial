@@ -17,7 +17,7 @@ export default async function Home() {
       <div className="homepage overflow-hidden">
         <Header />
         <section className="lotte_video mb-10 lg:mb-20">
-          {/* <LottieSlider /> */}
+          <LottieSlider />
         </section>
 
         <FeaturedCategory />
