@@ -178,25 +178,25 @@ const ProductDetails = ({ params }) => {
             {singleProduct?.name}
           </h2>
 
-          <div className="flex flex-col lg:flex-row bg-white rounded-[17px] p-4 lg:p-10 mb-12">
+          <div className="flex flex-col lg:flex-row bg-white rounded-[17px] mb-12">
             <div className="w-full lg:w-1/2 flex flex-wrap flex-col items-center justify-center lg:border-r lg:border-r-[#D1D3D4]">
               <Image
                 src={`${BACKEND_BASE_URL}/${singleProduct?.image}`}
                 alt=""
-                width={300}
-                height={60}
+                width={380}
+                height={50}
                 quality={100}
-                className="mx-auto mb-8"
+                className="mx-auto mb-5"
               />
-              <h5 className="text-[#E62020] text-f16 font-normal mb-3">
+              <h5 className="text-[#E62020] text-f16 font-normal mb-5">
                 *REACH | RoHS | CE
               </h5>
               <Image
                 src={`${BACKEND_BASE_URL}/${singleProduct?.small_image}`}
                 alt=""
-                width={200}
-                height={80}
-                quality={100}
+                width={140}
+                height={60}
+                // quality={100}
                 className="mx-auto mb-8"
               />
             </div>

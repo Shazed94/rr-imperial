@@ -436,7 +436,7 @@ const AddProduct = () => {
 
                 <div className="mb-1 flex flex-col gap-2 col-span-6">
                   <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                    Product Image (700*400)&nbsp;{" "}
+                    Product Image
                     <span className="text-red-500">*</span>
                   </label>
 
@@ -470,7 +470,7 @@ const AddProduct = () => {
                 </div>
                 <div className="mb-1 flex flex-col gap-2 col-span-6">
                   <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                    Small Image (120*60)
+                    Small Image
                     <span className="text-red-500">*</span>
                   </label>
 
