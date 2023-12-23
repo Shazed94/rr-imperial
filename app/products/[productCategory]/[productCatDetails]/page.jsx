@@ -201,52 +201,62 @@ const ProductDetails = ({ params }) => {
               />
             </div>
             <div className="w-full lg:w-1/2 flex flex-wrap flex-col gap-8 items-center lg:ps-6">
-              {singleProduct?.product_characteristics.length > 0 && (
-                <div>
-                  <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
-                    CHARACTERISTICS
-                  </h4>
-                  <div className="grid grid-cols-4 lg:grid-cols-6 gap-3">
+              {/* {singleProduct?.product_characteristics.length > 0 && ( */}
+
+              <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
+                CHARACTERISTICS
+              </h4>
+              <div className="relative w-full ">
+                <img
+                  src={`${BACKEND_BASE_URL}/${singleProduct?.c_image}`}
+                  alt=""
+                  className="mb-2 mx-auto"
+                />
+              </div>
+              {/* <div className="grid grid-cols-4 lg:grid-cols-6 gap-3">
                     {singleProduct?.product_characteristics?.map(
                       (characteristic) => (
                         <div
                           key={characteristic.id}
-                          className="flex flex-col items-center text-center"
+                          className="flex flex-col items-center text-center relative"
                         >
                           <Image
                             src={`${BACKEND_BASE_URL}/${characteristic?.c_image}`}
                             alt=""
-                            width={45}
-                            height={40}
+                            fill
                             className="mb-2"
                           />
-                          <span className="text-[10px] leading-tight">
-                            {characteristic?.label}
-                          </span>
+                        
                         </div>
                       )
                     )}
-                  </div>
-                </div>
-              )}
+                  </div> */}
 
-              {singleProduct?.product_installation_conditions.length > 0 && (
-                <div>
-                  <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
-                    INSTALLATION CONDITION
-                  </h4>
-                  <div className="grid grid-cols-7 gap-3">
+              {/* )} */}
+
+              {/* {singleProduct?.product_installation_conditions.length > 0 && ( */}
+             
+                <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
+                  INSTALLATION CONDITION
+                </h4>
+                <div className="relative w-full ">
+                  <img
+                    src={`${BACKEND_BASE_URL}/${singleProduct?.ic_image}`}
+                    alt=""
+                    className="mb-2 mx-auto"
+                  />
+                </div>
+                {/* <div className="grid grid-cols-7 gap-3">
                     {singleProduct?.product_installation_conditions?.map(
                       (characteristic) => (
                         <div
                           key={characteristic.id}
-                          className="flex flex-col items-center text-center"
+                          className="flex flex-col items-center text-center relative"
                         >
                           <Image
                             src={`${BACKEND_BASE_URL}/${characteristic?.ic_image}`}
                             alt=""
-                            width={45}
-                            height={40}
+                           fill
                             className="mb-2"
                           />
                           <span className="text-[10px] leading-tight">
@@ -255,9 +265,9 @@ const ProductDetails = ({ params }) => {
                         </div>
                       )
                     )}
-                  </div>
-                </div>
-              )}
+                  </div> */}
+            
+              {/* )} */}
             </div>
           </div>
           {singleProduct?.application && (
