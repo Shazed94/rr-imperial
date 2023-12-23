@@ -26,6 +26,15 @@ import { admin_logout } from "@/utility/api";
 import toast from "react-hot-toast";
 
 const Layout = (props) => {
+  const [fetchPermissions, setFetchPermissions] = useState();
+  useEffect(() => {
+    let permissions;
+    // Get the value from local storage if it exists
+    permissions = JSON.parse(
+      localStorage.getItem("user_permission_info") || ""
+    );
+    setFetchPermissions(permissions);
+  }, []);
   const path = usePathname();
   const router = useRouter();
   // start: Sidebar
@@ -104,7 +113,7 @@ const Layout = (props) => {
       }
     });
   };
-  let fetchPermissions = localStorage.getItem("user_permission_info");
+
   return (
     <div className="">
       {/* Sidebar */}
@@ -144,42 +153,6 @@ const Layout = (props) => {
                   {/* <AiOutlineDashboard className="text-xl ms-4 opacity-0 group-[.active]/sidebar:opacity-100 transition-all duration-500" /> */}
                 </Link>
               </li>
-
-              {/* <li className="mb-1 group">
-                <div
-                  href="#"
-                  className="flex justify-between items-center px-8 py-2 group-[.w-20]/sidebar:px-2 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.active]:bg-[#222338] group-[.active]:text-white group-[.selected]:text-gray-50 cursor-pointer sidebar-dropdown-toggle"
-                >
-                  <div className="flex items-center">
-                    <MdManageAccounts className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                    <span className="text-base font-bold">Role Management</span>
-                  </div>
-                  <IoChevronDownOutline className="ms-auto group-[.selected]:rotate-180" />
-                </div>
-                <ul className="py-3 hidden group-[.selected]:block select-none user-none">
-                  <Link
-                    href="/admin/role"
-                    className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
-                      path == "/admin/role" && "bg-[#E71D1D]"
-                    }`}
-                  >
-                    <MdAdminPanelSettings className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                    <span>Role</span>
-                  </Link>
-
-                  <Link
-                    href="/admin/log-history"
-                    className={`text-gray-300 flex items-center hover:text-gray-100 hover:bg-[#EA3C3C] mb-2 gap-4 px-8 py-2 ${
-                      path == "/admin/log-history" && "bg-[#E71D1D] text-white"
-                    }`}
-                  >
-                    <FaHistory className="me-4 text-f22 group-[.w-20]/sidebar:me-0" />
-                    <span className="text-gray-300 flex items-center hover:text-gray-100">
-                      Log History
-                    </span>
-                  </Link>
-                </ul>
-              </li> */}
               {getCookie("user_type") == "1" &&
               getCookie("admin_staff") == "0" ? (
                 <>
@@ -329,13 +302,22 @@ const Layout = (props) => {
                     <FaUsers className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                     <span className="text-base font-bold">Download User</span>
                   </Link>
+                  <Link
+                    href="/admin/users"
+                    className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                      path == "/admin/users" && "bg-[#ED2027]"
+                    }`}
+                  >
+                    <FaUser className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                    <span className="text-base font-bold">Users</span>
+                  </Link>
                 </>
               ) : (
                 <>
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "2" && (
-                        <li key={index} className="mb-1 group">
+                        <div key={index} className="mb-1 group">
                           <div
                             href="#"
                             className="flex justify-between items-center px-8 py-2 group-[.w-20]/sidebar:px-2 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.active]:bg-[#222338] group-[.active]:text-white group-[.selected]:text-gray-50 cursor-pointer sidebar-dropdown-toggle"
@@ -381,10 +363,10 @@ const Layout = (props) => {
                               </span>
                             </Link>
                           </ul>
-                        </li>
+                        </div>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "3" && (
                         <Link
@@ -401,7 +383,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "4" && (
                         <Link
@@ -418,7 +400,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "5" && (
                         <Link
@@ -436,7 +418,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "6" && (
                         <Link
@@ -451,7 +433,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "7" && (
                         <Link
@@ -466,7 +448,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "8" && (
                         <Link
@@ -481,7 +463,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "9" && (
                         <Link
@@ -496,7 +478,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "10" && (
                         <Link
@@ -511,7 +493,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "11" && (
                         <Link
@@ -526,7 +508,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "12" && (
                         <Link
@@ -543,7 +525,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "13" && (
                         <Link
@@ -560,7 +542,7 @@ const Layout = (props) => {
                         </Link>
                       )
                   )}
-                  {JSON.parse(fetchPermissions)?.map(
+                  {fetchPermissions?.map(
                     (data, index) =>
                       data?.permission_id == "14" && (
                         <Link
@@ -596,66 +578,6 @@ const Layout = (props) => {
         ref={rightbar}
         className="w-[calc(100%-256px)] ml-64 min-h-screen transition-all duration-500 rightbar_content"
       >
-        {/* <div className="topbar fixed top-0 w-[calc(100%-256px)] transition-all duration-500 z-20">
-        <div className="flex justify-between items-center bg-[#353058] py-[28px] px-8 ">
-          <div className="flex justify-center items-center gap-6">
-            <div className="">
-              <button className="hover:brightness-125 transition-all duration-200">
-                <i className="fa-solid fa-filter me-4"></i>
-              </button>
-              <input
-                type="text"
-                placeholder="search here"
-                className="px-4 py-[16px] w-96 rounded-full text-[#9a97ac] bg-[#2e2c4c] focus:outline-none"
-              />
-            </div>
-            <button className="flex items-center gap-3 text-[#9a97ac] border-[3px] border-[#7499ff] rounded-full px-8 py-3">
-              <i className="fa-solid fa-magnifying-glass"></i> <span>Search</span>
-            </button>
-          </div>
-          <div className="flex items-center justify-between ">
-            <div className="flex items-center pe-40">
-              <div className="flex items-center text-[#908ea0] pe-5 border-r-2 border-[#9a97ac]">
-                <button className="hover:brightness-125 transition-all duration-200">
-                  <i className="fa-solid fa-plus me-3"></i>
-                  <span className="font-bold">Add Contact</span>
-                </button>
-              </div>
-              <div className="flex items-center ps-5 space-x-4">
-                <button className="hover:brightness-125 transition-all duration-200">
-                  <i className="fa-solid fa-user fa-lg"></i>
-                </button>
-                <button className="hover:brightness-125 transition-all duration-200">
-                  <i className="fa-solid fa-message v"></i>
-                </button>
-                <button className="hover:brightness-125 transition-all duration-200">
-                  <div className="relative">
-                    <i className="fa-solid fa-bell fa-lg"></i>
-                    <span className="absolute top-[2px] -right-[2px] w-[10px] h-[10px] rounded-full bg-[#fa72a3]"></span>
-                  </div>
-                </button>
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center gap-5 ">
-                <div className="img_wrapper w-12 h-12 ">
-                  <img
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-                    alt=""
-                    className="w-full h-full  rounded-full object-cover "
-                  />
-                </div>
-                <span className="text-[#9a97ac] border-r-2 border-[#9a97ac] font-bold pe-5">
-                  Nenad Milosevic
-                </span>
-              </div>
-            </div>
-            <button className="hover:brightness-125 transition-all duration-200">
-              <i className="fa-solid fa-right-to-bracket ps-5"></i>
-            </button>
-          </div>
-        </div>
-      </div> */}
         {props.children}
       </div>
     </div>

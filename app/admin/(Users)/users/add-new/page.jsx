@@ -9,8 +9,7 @@ import { getCookie } from "cookies-next";
 import Link from "next/link";
 import { Suspense, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { AiFillEye } from "react-icons/ai";
-import { FaEyeSlash } from "react-icons/fa";
+
 
 const UserAdd = () => {
   const userName = useRef();

@@ -14,20 +14,16 @@ import {
 import { FiSave } from "react-icons/fi";
 import Swal from "sweetalert2";
 import Select from "react-select";
+import { getCookie } from "cookies-next";
+import { read_all_Product_Colors } from "@/utility/api";
 
 const EditProduct = ({ params }) => {
   var selectedColor;
   const [colors, setColors] = useState([]);
   const renderAllColors = async () => {
-    await axios
-      .get(`${BACKEND_BASE_URL}/api/admin/products/colors`, {
-        headers: {
-          // Authorization: `Bearer ${getLocalStorageWithExpiry("ACCESS_TOKEN")}`,
-        },
-      })
-      .then((res) => {
-        setColors(res.data.all_colors);
-      });
+    read_all_Product_Colors().then((res) => {
+      setColors(res.data.all_colors);
+    });
   };
 
   useEffect(() => {
@@ -201,7 +197,10 @@ const EditProduct = ({ params }) => {
     setFile3([]);
     axios
       .get(`${BACKEND_BASE_URL}/api/admin/products/edit/${params.id}`, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${getCookie("admin_access_token")}`,
+        },
       })
 
       .then((response) => {
@@ -338,7 +337,10 @@ const EditProduct = ({ params }) => {
         `${BACKEND_BASE_URL}/api/admin/products/update/${params.id}`,
         formdata,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${getCookie("admin_access_token")}`,
+          },
         }
       )
       .then((response) => {
@@ -372,7 +374,12 @@ const EditProduct = ({ params }) => {
     if (isConfirm) {
       axios
         .delete(
-          `${BACKEND_BASE_URL}/api/admin/products/delete-single-characteristic/${id}`
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-characteristic/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("admin_access_token")}`,
+            },
+          }
         )
         .then((res) => {
           Swal.fire({
@@ -405,7 +412,12 @@ const EditProduct = ({ params }) => {
     if (isConfirm) {
       axios
         .delete(
-          `${BACKEND_BASE_URL}/api/admin/products/delete-single-installation-condition/${id}`
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-installation-condition/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("admin_access_token")}`,
+            },
+          }
         )
         .then((res) => {
           Swal.fire({
@@ -439,7 +451,12 @@ const EditProduct = ({ params }) => {
     if (isConfirm) {
       axios
         .delete(
-          `${BACKEND_BASE_URL}/api/admin/products/delete-single-cable-design-parameter/${id}`
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-cable-design-parameter/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("admin_access_token")}`,
+            },
+          }
         )
         .then((res) => {
           Swal.fire({
@@ -472,7 +489,12 @@ const EditProduct = ({ params }) => {
     if (isConfirm) {
       axios
         .delete(
-          `${BACKEND_BASE_URL}/api/admin/products/delete-single-test-parameter/${id}`
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-test-parameter/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("admin_access_token")}`,
+            },
+          }
         )
         .then((res) => {
           Swal.fire({
@@ -639,7 +661,7 @@ const EditProduct = ({ params }) => {
                             className="img-thumbnail mt-1"
                             width={80}
                             height={50}
-                            src={`${BACKEND_BASE_URL}/${input?.image}`}
+                            src={`${BACKEND_BASE_URL}/${input?.c_image}`}
                             alt={productName}
                             name="img"
                           />

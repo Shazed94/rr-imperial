@@ -307,7 +307,7 @@ const AddProduct = () => {
       formdata.append("cable_design_parameter[]", item);
     });
 
-    create_new_Product().then((response) => {
+    create_new_Product(formdata).then((response) => {
       if (response.data.status === 200) {
         Swal.fire({
           icon: "success",
