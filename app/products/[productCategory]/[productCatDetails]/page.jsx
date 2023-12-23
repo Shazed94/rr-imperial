@@ -214,7 +214,7 @@ const ProductDetails = ({ params }) => {
                           className="flex flex-col items-center text-center"
                         >
                           <Image
-                            src={`${BACKEND_BASE_URL}/${characteristic?.image}`}
+                            src={`${BACKEND_BASE_URL}/${characteristic?.c_image}`}
                             alt=""
                             width={45}
                             height={40}
