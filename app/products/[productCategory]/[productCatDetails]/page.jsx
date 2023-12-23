@@ -335,18 +335,35 @@ const ProductDetails = ({ params }) => {
                 {singleProduct?.colors?.map((data, index) => {
                   return (
                     <>
-                      <div className="flex flex-wrap items-center">
-                        <div
-                          className="block w-3 h-3 min-w-[12px] rounded-full"
-                          style={{
-                            backgroundColor: data?.color_info?.color_code,
-                            marginLeft: "5px",
-                          }}
-                        ></div>
-                        <div className="ms-1">
-                          {data?.color_info?.name} &nbsp;
+                      {data?.color_id == "10" ? (
+                        <div className="flex flex-wrap items-center">
+                          <div
+                            className="block w-4 h-4 min-w-[12px] rounded-full relative overflow-hidden"
+                            style={{
+                              backgroundColor: "#FAEE11",
+                              marginLeft: "5px",
+                            }}
+                          >
+                            <span className="absolute w-full h-1 top-[6px] bg-green-400"></span>
+                          </div>
+                          <div className="ms-1">
+                            {data?.color_info?.name} &nbsp;
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <div className="flex flex-wrap items-center">
+                          <div
+                            className="block w-4 h-4 min-w-[12px] rounded-full"
+                            style={{
+                              backgroundColor: data?.color_info?.color_code,
+                              marginLeft: "5px",
+                            }}
+                          ></div>
+                          <div className="ms-1">
+                            {data?.color_info?.name} &nbsp;
+                          </div>
+                        </div>
+                      )}
                     </>
                   );
                 })}
