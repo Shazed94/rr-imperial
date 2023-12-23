@@ -235,18 +235,18 @@ const ProductDetails = ({ params }) => {
               {/* )} */}
 
               {/* {singleProduct?.product_installation_conditions.length > 0 && ( */}
-             
-                <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
-                  INSTALLATION CONDITION
-                </h4>
-                <div className="relative w-full ">
-                  <img
-                    src={`${BACKEND_BASE_URL}/${singleProduct?.ic_image}`}
-                    alt=""
-                    className="mb-2 mx-auto"
-                  />
-                </div>
-                {/* <div className="grid grid-cols-7 gap-3">
+
+              <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
+                INSTALLATION CONDITION
+              </h4>
+              <div className="relative w-full ">
+                <img
+                  src={`${BACKEND_BASE_URL}/${singleProduct?.ic_image}`}
+                  alt=""
+                  className="mb-2 mx-auto"
+                />
+              </div>
+              {/* <div className="grid grid-cols-7 gap-3">
                     {singleProduct?.product_installation_conditions?.map(
                       (characteristic) => (
                         <div
@@ -266,10 +266,38 @@ const ProductDetails = ({ params }) => {
                       )
                     )}
                   </div> */}
-            
+
               {/* )} */}
             </div>
           </div>
+          {singleProduct?.product_test_parameter?.length > 0 && (
+            <div className="mb-10">
+              <h4 className="text-[#E62020] text-f20 font-normal mb-3">
+                TEST PARAMETERS
+              </h4>
+              <table className="w-full">
+                <thead className="">
+                  <tr className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                    <th className="py-2">TEST</th>
+                    <th className="py-2">TEST METHOD</th>
+                    <th className="py-2">VALUES</th>
+                  </tr>
+                </thead>
+                <tbody className="text-center">
+                  {singleProduct?.product_test_parameter?.map((parameter) => (
+                  <>
+                    <tr key={parameter.id} className="even:bg-white/90 odd:bg-gray-100/50">
+                      <td className="py-2">{parameter?.test_name}</td>
+                      <td className="py-2">{parameter?.test_method}</td>
+                      <td className="py-2">{parameter?.test_value}</td>
+                    </tr>
+                    </>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
           {singleProduct?.application && (
             <div className="mb-10">
               <h4 className="text-[#E62020] text-f20 font-normal mb-3">
