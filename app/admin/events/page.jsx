@@ -2,18 +2,12 @@
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import {
   create_new_Event,
-  create_new_News,
   delete_Event,
-  delete_News,
-  delete_Slider,
+  delete_Event_gallery,
   edit_Event,
-  edit_News,
   read_all_Events,
-  read_all_News,
   update_Event,
-  update_News,
   view_Event,
-  view_News,
 } from "@/utility/api";
 import {
   Button,
@@ -26,8 +20,8 @@ import {
 import moment from "moment";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
-import React, { Suspense, useEffect, useRef, useState } from "react";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import React, { useEffect, useRef, useState } from "react";
+import { AiFillCloseSquare, AiOutlinePlusCircle } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { FaCalendarAlt, FaEye, FaUserTie } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
@@ -40,10 +34,13 @@ const AdminEvents = () => {
   const eventTitle = useRef();
   const eventDesc = useRef();
   const eventImage = useRef();
+  const eventGallery = useRef();
 
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState("");
   const [descVal, setDescVal] = useState("");
+  const [error, setError] = useState();
+  const [message, setMessage] = useState();
 
   //   const handleOpen = () => setOpen(!open);
 
@@ -56,7 +53,7 @@ const AdminEvents = () => {
     });
   }, []);
 
-  // ============================= Add new News =============================
+  // ============================= Add new Event =============================
   const addEvent = (modalValue) => {
     setModalData(modalValue);
     setOpen(true);
@@ -70,6 +67,10 @@ const AdminEvents = () => {
     if (eventImage.current.files[0]) {
       formdata.append("image", eventImage.current.files[0]);
     }
+
+    selectedImages.forEach((item) => {
+      formdata.append("gallery_image[]", item);
+    });
 
     create_new_Event(formdata).then((response) => {
       if (response.data.status === 200) {
@@ -85,12 +86,14 @@ const AdminEvents = () => {
         setDescVal("", "html");
         setFile([]);
         setOpen(false);
+      } else {
+        setError(response.data.errors);
       }
     });
     e.preventDefault();
   };
 
-  // ===================== View single image ===================================
+  // ===================== View single Event ===================================
   const [singleEventInfo, setSingleEventInfo] = useState();
   const showSingleEvent = (modalValue, id) => {
     view_Event(id).then((res) => {
@@ -102,7 +105,6 @@ const AdminEvents = () => {
 
   // Image Preview
   const [files, setFile] = useState([]);
-
   const handleImgPreview = (e) => {
     let allfiles = [];
     for (let i = 0; i < e.target.files.length; i++) {
@@ -112,8 +114,30 @@ const AdminEvents = () => {
       setFile(allfiles);
     }
   };
+  // Gallery Preview
+  const [selectedImages, setSelectedImages] = useState([]);
+  const onSelectFile = (event) => {
+    const selectedFiles = event.target.files;
+    const selectedFilesArray = Array.from(selectedFiles);
+    const imagesArray = selectedFilesArray.map((file) => {
+      return file;
+    });
 
-  //=================================== Edit Slider ===================================
+    setSelectedImages((previousImages) => previousImages.concat(imagesArray));
+
+    // FOR BUG IN CHROME
+    event.target.value = "";
+  };
+
+  function deleteHandler(image) {
+    setSelectedImages(selectedImages.filter((e) => e !== image));
+    URL.revokeObjectURL(image);
+    if (editEventVal?.gallery.length + selectedImages.length < 10) {
+      setMessage("");
+    }
+  }
+
+  //=================================== Edit Event ===================================
   const [editEventVal, setEditEventVal] = useState();
   const [editedEventId, setEditedEventId] = useState();
   const editEvent = (EventId, modalValue) => {
@@ -122,6 +146,18 @@ const AdminEvents = () => {
       setEditEventVal(res.data.editEvent);
       setOpen(true);
       setEditedEventId(EventId);
+    });
+  };
+
+  // Delete Gallery Image
+  const deleteGalleryImage = (id) => {
+    delete_Event_gallery(id).then((res) => {
+      edit_Event(editedEventId).then((res) => {
+        setEditEventVal(res.data.editEvent);
+        if (editEventVal?.gallery.length + selectedImages.length < 10) {
+          setMessage("");
+        }
+      });
     });
   };
 
@@ -135,17 +171,25 @@ const AdminEvents = () => {
     if (eventImage.current.files[0]) {
       formdata.append("image", eventImage.current.files[0]);
     }
+    selectedImages.forEach((item) => {
+      formdata.append("gallery_image[]", item);
+    });
 
     update_Event(editedEventId, formdata).then((response) => {
-      Swal.fire({
-        icon: "success",
-        text: response.data.message,
-        confirmButtonColor: "#5eba86",
-      });
-      read_all_Events().then((res) => {
-        setEventsInfo(res.data.allEvents);
-      });
-      setOpen(false);
+      if (response.data.status === 200) {
+        Swal.fire({
+          icon: "success",
+          text: response.data.message,
+          confirmButtonColor: "#5eba86",
+        });
+        read_all_Events().then((res) => {
+          setEventsInfo(res.data.allEvents);
+        });
+        setOpen(false);
+      } else {
+        setError(response.data.errors);
+        setMessage(response.data.message);
+      }
     });
 
     e.preventDefault();
@@ -198,95 +242,93 @@ const AdminEvents = () => {
                   </Button>
                 </div>
               </div>
-              <Suspense fallback={<div className="text-5xl">Loading...</div>}>
-                <table className="w-full min-w-max table-auto text-left">
-                  <thead>
-                    <tr>
-                      {TABLE_HEAD.map((head) => (
-                        <th
-                          key={head}
-                          className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+              <table className="w-full min-w-max table-auto text-left">
+                <thead>
+                  <tr>
+                    {TABLE_HEAD.map((head) => (
+                      <th
+                        key={head}
+                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                      >
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal leading-none opacity-70"
                         >
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal leading-none opacity-70"
-                          >
-                            {head}
-                          </Typography>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
+                          {head}
+                        </Typography>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
 
-                  <tbody>
-                    {eventsInfo?.map((data, index) => {
-                      const isLast = index === eventsInfo.length - 1;
-                      const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
-                      return (
-                        <tr key={index}>
-                          <td className={classes}>{index + 1}</td>
-                          <td className={classes}>{data?.title}</td>
-                          <td className={classes}>
-                            <img
-                              className="img-thumbnail"
-                              width={140}
-                              height={10}
-                              src={`${BACKEND_BASE_URL}${data?.image}`}
-                              alt={data?.title}
-                            />
-                          </td>
-                          <td className={`${classes}`}>
-                            <div className="flex items-center gap-2">
-                              {/* view button */}
-                              <button
-                                onClick={() => showSingleEvent("View", data.id)}
-                                className="py-1 px-2 bg-cyan-500 rounded-lg me-1 mb-1"
-                              >
-                                <FaEye
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="View"
-                                  size="1.5em"
-                                />{" "}
-                              </button>
-                              {/* edit button */}
-                              <button
-                                onClick={() => editEvent(data.id, "Edit")}
-                                className="py-1 px-2 bg-yellow-300 rounded-lg me-1 mb-1"
-                              >
-                                <BiEdit
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="Edit"
-                                  size="1.5em"
-                                />
-                              </button>
-                              {/* delete button */}
-                              <button
-                                onClick={() => deleteData(data.id)}
-                                className="py-1 px-2 bg-red-600 border-0 rounded-lg me-1 mb-1"
-                              >
-                                <MdDeleteForever
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="Delete"
-                                  size="1.5em"
-                                />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </Suspense>
+                <tbody>
+                  {eventsInfo?.map((data, index) => {
+                    const isLast = index === eventsInfo.length - 1;
+                    const classes = isLast
+                      ? "p-4"
+                      : "p-4 border-b border-blue-gray-50";
+                    return (
+                      <tr key={index}>
+                        <td className={classes}>{index + 1}</td>
+                        <td className={classes}>{data?.title}</td>
+                        <td className={classes}>
+                          <img
+                            className="img-thumbnail"
+                            width={140}
+                            height={10}
+                            src={`${BACKEND_BASE_URL}${data?.image}`}
+                            alt={data?.title}
+                          />
+                        </td>
+                        <td className={`${classes}`}>
+                          <div className="flex items-center gap-2">
+                            {/* view button */}
+                            <button
+                              onClick={() => showSingleEvent("View", data.id)}
+                              className="py-1 px-2 bg-cyan-500 rounded-lg me-1 mb-1"
+                            >
+                              <FaEye
+                                style={{
+                                  color: "white",
+                                }}
+                                title="View"
+                                size="1.5em"
+                              />{" "}
+                            </button>
+                            {/* edit button */}
+                            <button
+                              onClick={() => editEvent(data.id, "Edit")}
+                              className="py-1 px-2 bg-yellow-300 rounded-lg me-1 mb-1"
+                            >
+                              <BiEdit
+                                style={{
+                                  color: "white",
+                                }}
+                                title="Edit"
+                                size="1.5em"
+                              />
+                            </button>
+                            {/* delete button */}
+                            <button
+                              onClick={() => deleteData(data.id)}
+                              className="py-1 px-2 bg-red-600 border-0 rounded-lg me-1 mb-1"
+                            >
+                              <MdDeleteForever
+                                style={{
+                                  color: "white",
+                                }}
+                                title="Delete"
+                                size="1.5em"
+                              />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -335,6 +377,7 @@ const AdminEvents = () => {
                       ref={eventImage}
                       onChange={handleImgPreview}
                     />
+                    <span className="text-red-500">{error?.image}</span>
                     {files.map((file, key) => {
                       return (
                         <div key={key} className="Row">
@@ -350,6 +393,57 @@ const AdminEvents = () => {
                       );
                     })}
                   </div>
+                  <div className="mb-1 flex flex-col gap-2 col-span-12">
+                    <label className="block text-sm font-medium text-gray-900 dark:text-white">
+                      Image Gallery (up to 10 images)&nbsp;{" "}
+                    </label>
+
+                    <input
+                      type="file"
+                      multiple
+                      className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-4  file:border-0 file:text-sm file:font-semibold
+                                file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 border border-gray-300 rounded-lg"
+                      ref={eventGallery}
+                      onChange={onSelectFile}
+                    />
+                    <div className="">
+                      {error?.image_gallery && selectedImages.length > 10 && (
+                        <p className="text-red-500">
+                          {error?.image_gallery}
+                          <span>
+                            please delete <b> {selectedImages.length - 10} </b>{" "}
+                            of them{" "}
+                          </span>
+                        </p>
+                      )}
+
+                      {selectedImages && (
+                        <div className="flex gap-5">
+                          {selectedImages.map((image, index) => {
+                            return (
+                              <div key={index} className=" mt-3 ">
+                                <img
+                                  src={URL.createObjectURL(image)}
+                                  height="68"
+                                  width="68"
+                                  alt="upload"
+                                />
+                                <div className="flex justify-between">
+                                  <p>{index + 1}</p>
+                                  <AiFillCloseSquare
+                                    className="cursor "
+                                    size="1.5rem"
+                                    color="red"
+                                    onClick={() => deleteHandler(image)}
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-6">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -362,14 +456,6 @@ const AdminEvents = () => {
                     value={descVal}
                     onChange={(newContent) => setDescVal(newContent)}
                   />
-                  {/* <ReactQuill
-                      className=" block w-full  text-gray-700 bg-transparent appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner min-h-[250px] h-full pb-[50px]"
-                      theme="snow"
-                      value={applicationValue}
-                      ref={constructionDesc}
-                      modules={QuillScript.modules}
-                      formats={QuillScript.formats}
-                    /> */}
                 </div>
 
                 <div className="flex justify-center">
@@ -447,6 +533,88 @@ const AdminEvents = () => {
                     )}
                   </div>
 
+                  <div className="mb-1 flex flex-col gap-2 col-span-12">
+                    <label className="block text-sm font-medium text-gray-900 dark:text-white">
+                      Image Gallery (up to 10 images)&nbsp;{" "}
+                    </label>
+
+                    <input
+                      type="file"
+                      multiple
+                      className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-4  file:border-0 file:text-sm file:font-semibold
+                                file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 border border-gray-300 rounded-lg"
+                      ref={eventGallery}
+                      onChange={onSelectFile}
+                    />
+
+                    <div className="">
+                      {error?.image_gallery && selectedImages.length > 10 && (
+                        <p className="text-red-500">
+                          {error?.image_gallery}
+                          <span>
+                            please delete <b> {selectedImages.length - 10} </b>{" "}
+                            of them{" "}
+                          </span>
+                        </p>
+                      )}
+                      {message && (
+                        <span className="text-red-500">{message}</span>
+                      )}
+
+                      <div className="flex gap-5">
+                        {editEventVal?.gallery?.map((data, index) => (
+                          <div className="col-md-3 mt-3" key={index}>
+                            <img
+                              src={`${BACKEND_BASE_URL}/${data?.gallery_image}`}
+                              className="w-16 h-16"
+                              alt="upload"
+                            />
+
+                            <div className="flex justify-between">
+                              <p>{index + 1}</p>
+                              <AiFillCloseSquare
+                                className="cursor-pointer"
+                                size="1.5rem"
+                                color="red"
+                                onClick={() => {
+                                  deleteGalleryImage(data.id);
+                                }}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                        {selectedImages && (
+                          <div className="flex flex-wrap gap-5">
+                            {selectedImages.map((image, index) => {
+                              return (
+                                <div key={index} className=" mt-3 ">
+                                  <img
+                                    src={URL.createObjectURL(image)}
+                                    className="w-16 h-16"
+                                    alt="upload"
+                                  />
+                                  <div className="flex justify-between">
+                                    <p>
+                                      {editEventVal?.gallery.length + index + 1}
+                                    </p>
+                                    <AiFillCloseSquare
+                                      className="cursor-pointer "
+                                      size="1.5rem"
+                                      color="red"
+                                      onClick={() => deleteHandler(image)}
+                                    />
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <span>
+                    {editEventVal?.gallery?.length + selectedImages?.length}
+                  </span>
                   <div className="mb-1 flex flex-col gap-6 col-span-12">
                     <Typography
                       variant="h6"
@@ -461,14 +629,6 @@ const AdminEvents = () => {
                       value={editEventVal?.description}
                       onChange={(newContent) => setDescVal(newContent)}
                     />
-                    {/* <ReactQuill
-                      className=" block w-full  text-gray-700 bg-transparent appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner min-h-[250px] h-full pb-[50px]"
-                      theme="snow"
-                      value={applicationValue}
-                      ref={constructionDesc}
-                      modules={QuillScript.modules}
-                      formats={QuillScript.formats}
-                    /> */}
                   </div>
                 </div>
 
@@ -477,7 +637,6 @@ const AdminEvents = () => {
                     type="submit"
                     variant="outlined"
                     color="indigo"
-                    // onClick={handleOpen}
                     className="mx-auto"
                   >
                     <span>Save</span>

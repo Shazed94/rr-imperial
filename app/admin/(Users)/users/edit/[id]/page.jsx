@@ -2,7 +2,11 @@
 
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import ToasterAlert from "@/components/ToasterAlert";
-import { read_all_Permission } from "@/utility/api";
+import {
+  edit_AdminUser,
+  read_all_Permission,
+  update_AdminUser,
+} from "@/utility/api";
 import { Button, Checkbox, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { getCookie } from "cookies-next";
@@ -10,21 +14,19 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
-
-const UserAdd = () => {
+const UserEdit = ({ params }) => {
+  var selectedPermissions;
   const userName = useRef();
   const userEmail = useRef();
-  const userPassword = useRef();
 
-  const [permission, setPermission] = useState([]);
+  const [userInfo, setUserInfo] = useState();
+  const [allPermissions, setAllPermissions] = useState([]);
+
   const [singlePermissionChecked, setSinglePermissionChecked] = useState([]);
-
+  const [selectedOldPermissions, setSelectedOldPermissions] = useState([]);
   const handlePermission = (e) => {
     if (e.target.checked) {
-      setSinglePermissionChecked([
-        ...singlePermissionChecked,
-        parseInt(e.target.value),
-      ]);
+      setSinglePermissionChecked([...singlePermissionChecked, e.target.value]);
     } else {
       setSinglePermissionChecked(
         singlePermissionChecked.filter((id) => id !== e.target.value)
@@ -36,52 +38,43 @@ const UserAdd = () => {
     e.preventDefault();
 
     const formdata = new FormData();
-    formdata.append("name", userName.current.value);
-    formdata.append("email", userEmail.current.value);
-    formdata.append("password", userPassword.current.value);
+    formdata.append("_method", "PUT");
     singlePermissionChecked.forEach((item) => {
       formdata.append("permission_id[]", item);
     });
 
-    try {
-      const response = await axios.post(
-        `${BACKEND_BASE_URL}/api/admin/users/store`,
-        formdata,
-        {
-          headers: {
-            Authorization: `Bearer ${getCookie("admin_access_token")}`,
-          },
-        }
-      );
-
-      if (response.data.status === 400) {
-        if (response.data.errors) {
-          const { email, password } = response.data.errors;
-          setAdminEmailError(email);
-          setAdminPassError(password);
-        }
-        toast.error(response.data.message);
+    update_AdminUser(params.id, formdata).then((res) => {
+      if (res.data.status === 400) {
+        toast.error(res.data.message);
       } else {
-        // setCookie("admin_access_token", response.data?.admin_access_token, {
-        //   maxAge: 60 * 60 * 24,
-        // });
-
-        toast.success(response.data.message);
+        toast.success(res.data.message);
         // Redirect to the dashboard after successful login
       }
-    } catch (error) {
-      console.error(error);
-      toast.error("An error occurred during login.");
-    }
+    });
   };
-  const TABLE_HEAD = ["Permission Name", "Handle"];
+  const TABLE_HEAD = ["Permission Name", "Permission"];
 
   useEffect(() => {
     read_all_Permission().then((res) => {
-      setPermission(res.data.all_permissions);
+      setAllPermissions(res.data.all_permissions);
+    });
+    edit_AdminUser(params.id).then((res) => {
+      setUserInfo(res.data.single_user_info);
+      setSelectedOldPermissions(res.data?.single_user_info?.permission_info);
     });
   }, []);
 
+  useEffect(() => {
+    let a = [];
+    selectedOldPermissions?.forEach((item) => {
+      a.push(item.permission_id);
+    });
+
+    setSinglePermissionChecked(a);
+  }, [selectedOldPermissions]);
+
+
+console.log(singlePermissionChecked)
   return (
     <div className="main__container p-4">
       <ToasterAlert />
@@ -110,12 +103,14 @@ const UserAdd = () => {
                     </label>
 
                     <input
-                      id="userName"
                       ref={userName}
+                      defaultValue={userInfo?.name}
+                      autoComplete="off"
                       type="text"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="News Title"
                       required
+                      disabled
                     />
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-4">
@@ -129,13 +124,15 @@ const UserAdd = () => {
                     <input
                       id="userEmail"
                       ref={userEmail}
+                      defaultValue={userInfo?.email}
                       type="email"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="email"
                       required
+                      disabled
                     />
                   </div>
-                  <div className="mb-1 flex flex-col gap-2 col-span-4">
+                  {/* <div className="mb-1 flex flex-col gap-2 col-span-4">
                     <label
                       htmlFor="userPassword"
                       className="block text-sm font-medium text-gray-900 dark:text-white"
@@ -148,10 +145,10 @@ const UserAdd = () => {
                       ref={userPassword}
                       type="password"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="News Link"
+                      placeholder="password"
                       required
                     />
-                  </div>
+                  </div> */}
 
                   <div className="mb-1 flex flex-col gap-2 col-span-12">
                     <table className="w-full min-w-max table-auto text-left">
@@ -175,22 +172,49 @@ const UserAdd = () => {
                       </thead>
 
                       <tbody>
-                        {permission?.map((data, index) => {
-                          const isLast = index === permission.length - 1;
+                        {allPermissions?.map((AllPermissions, index) => {
+                          const isLast = index === allPermissions.length - 1;
                           const classes = isLast
-                            ? "p-4"
-                            : "p-4 border-b border-blue-gray-50";
+                            ? "px-4 py-2"
+                            : "px-4 py-2 border-b border-blue-gray-50";
                           return (
                             <tr key={index}>
-                              <td className={classes}>{data?.name}</td>
-
+                              <td className={classes}>
+                                {AllPermissions?.name}
+                              </td>
                               <td className={`${classes}`}>
-                                <Checkbox
-                                  className="self-center"
-                                  onChange={handlePermission}
-                                  value={data?.id}
-                                  type="checkbox"
-                                />
+                                {userInfo?.permission_info?.map(
+                                  (permission, i) => {
+                                    if (
+                                      AllPermissions?.id ==
+                                      permission?.permission_id
+                                    ) {
+                                      selectedPermissions =
+                                        permission?.permission_id;
+                                    }
+                                    return (
+                                      AllPermissions?.id ==
+                                      permission?.permission_id && (
+                                        <Checkbox
+                                          key={i}
+                                          className="self-center"
+                                          onChange={handlePermission}
+                                          value={AllPermissions?.id}
+                                          type="checkbox"
+                                          defaultChecked="checked"
+                                        />
+                                      )
+                                    );
+                                  }
+                                )}
+                                {selectedPermissions != AllPermissions?.id && (
+                                  <Checkbox
+                                    // className="self-center"
+                                    onChange={handlePermission}
+                                    value={AllPermissions?.id}
+                                    type="checkbox"
+                                  />
+                                )}
                               </td>
                             </tr>
                           );
@@ -204,7 +228,6 @@ const UserAdd = () => {
                     type="submit"
                     variant="outlined"
                     color="indigo"
-                    // onClick={handleOpen}
                     className="mx-auto"
                   >
                     <span>Save</span>
@@ -219,4 +242,4 @@ const UserAdd = () => {
   );
 };
 
-export default UserAdd;
+export default UserEdit;

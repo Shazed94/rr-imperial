@@ -29,7 +29,7 @@ const AwardsCertificates = () => {
       <Header />
       <WhoWeAreMaster>
         <div className="bg-white p-4 lg:p-8 mb-12" id="who-we-are">
-          <div className="grid grid-cols-12 gap-5 mb-8">
+          <div className="grid grid-cols-12 gap-5 mb-12">
             <div className="col-span-12 md:col-span-5 space-y-4 md:space-y-8 lg:space-y-[72px] md:mt-14 lg:mt-0">
               <div
                 className="group bg-[#E6E7E8] hover:bg-[#E62020] hover:text-white transition flex justify-between gap-5 p-3 lg:mt-[70px] rounded-tl-2xl rounded-bl-2xl cursor-pointer"

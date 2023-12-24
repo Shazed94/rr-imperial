@@ -8,11 +8,11 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Link from "next/link";
-import React, { Suspense, useRef, useState } from "react";
+import React, {  useRef, useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const RoleManagement = () => {
-  const roleName = useRef()
+  const roleName = useRef();
   const [modalData, setModalData] = useState("");
   const [open, setOpen] = useState(false);
   const [permission, setPermission] = useState([]);
@@ -30,7 +30,6 @@ const RoleManagement = () => {
     { role: "Admin", name: "Career" },
     { role: "Admin", name: "Contact" },
   ];
-
 
   // ============================= form submit to backend ======================
   const storeRole = (e) => {
@@ -77,9 +76,7 @@ const RoleManagement = () => {
               <div className="card-body">
                 <span className="top-border"></span>
                 <div className="my-2">
-                  <Link href="role/add-new"
-                    className="flex items-center gap-4"
-                  >
+                  <Link href="role/add-new" className="flex items-center gap-4">
                     <Button
                       className="flex items-center gap-3 rounded-none"
                       color="cyan"
@@ -89,42 +86,41 @@ const RoleManagement = () => {
                     </Button>
                   </Link>
                 </div>
-                <Suspense fallback={<div className="text-5xl">Loading...</div>}>
-                  <table className="w-full min-w-max table-auto text-left">
-                    <thead>
-                      <tr>
-                        {TABLE_HEAD.map((head) => (
-                          <th
-                            key={head}
-                            className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                <table className="w-full min-w-max table-auto text-left">
+                  <thead>
+                    <tr>
+                      {TABLE_HEAD.map((head) => (
+                        <th
+                          key={head}
+                          className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                        >
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal leading-none opacity-70"
                           >
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal leading-none opacity-70"
-                            >
-                              {head}
-                            </Typography>
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
+                            {head}
+                          </Typography>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
 
-                    <tbody>
-                      {sliders?.map((data, index) => {
-                        const isLast = index === sliders.length - 1;
-                        const classes = isLast
-                          ? "p-4"
-                          : "p-4 border-b border-blue-gray-50";
-                        return (
-                          <tr key={index}>
-                            <td className={classes}>{index + 1}</td>
-                            <td className={classes}>{data?.role}</td>
-                            <td className={classes}>{data?.name}</td>
-                            <td className={`${classes}`}>
-                              <div className="flex items-center gap-2">
-                                {/* view button */}
-                                {/* <button
+                  <tbody>
+                    {sliders?.map((data, index) => {
+                      const isLast = index === sliders.length - 1;
+                      const classes = isLast
+                        ? "p-4"
+                        : "p-4 border-b border-blue-gray-50";
+                      return (
+                        <tr key={index}>
+                          <td className={classes}>{index + 1}</td>
+                          <td className={classes}>{data?.role}</td>
+                          <td className={classes}>{data?.name}</td>
+                          <td className={`${classes}`}>
+                            <div className="flex items-center gap-2">
+                              {/* view button */}
+                              {/* <button
                                   onClick={() =>
                                     showSingleSlider("View", data.id)
                                   }
@@ -138,8 +134,8 @@ const RoleManagement = () => {
                                     size="1.5em"
                                   />{" "}
                                 </button> */}
-                                {/* edit button */}
-                                {/* <button
+                              {/* edit button */}
+                              {/* <button
                                   onClick={() => editSlider(data.id, "Edit")}
                                   className="py-1 px-2 bg-yellow-300 rounded-lg me-1 mb-1"
                                 >
@@ -151,8 +147,8 @@ const RoleManagement = () => {
                                     size="1.5em"
                                   />
                                 </button> */}
-                                {/* delete button */}
-                                {/* <button
+                              {/* delete button */}
+                              {/* <button
                                   onClick={() => deleteData(data.id)}
                                   className="py-1 px-2 bg-red-600 border-0 rounded-lg me-1 mb-1"
                                 >
@@ -164,14 +160,13 @@ const RoleManagement = () => {
                                     size="1.5em"
                                   />
                                 </button> */}
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </Suspense>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -195,7 +190,7 @@ const RoleManagement = () => {
                         htmlFor="roleName"
                         className="block text-sm font-medium text-gray-900 dark:text-white"
                       >
-                      Assign Role
+                        Assign Role
                       </label>
 
                       <input
@@ -207,8 +202,6 @@ const RoleManagement = () => {
                         required
                       />
                     </div>
-
-                   
                   </div>
 
                   <div className="flex justify-center">

@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Link from "next/link";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import Swal from "sweetalert2";
 
@@ -109,75 +109,73 @@ const AdminPriceList = () => {
           <div className="card">
             <div className="card-body">
               <span className="top-border"></span>
-              <Suspense fallback={<div className="text-5xl">Loading...</div>}>
-                <table className="w-full min-w-max table-auto text-left mt-5">
-                  <thead>
-                    <tr>
-                      {TABLE_HEAD.map((head) => (
-                        <th
-                          key={head}
-                          className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+              <table className="w-full min-w-max table-auto text-left mt-5">
+                <thead>
+                  <tr>
+                    {TABLE_HEAD.map((head) => (
+                      <th
+                        key={head}
+                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                      >
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal leading-none opacity-70"
                         >
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal leading-none opacity-70"
-                          >
-                            {head}
-                          </Typography>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
+                          {head}
+                        </Typography>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
 
-                  <tbody>
-                    {pdfInfo?.map((data, index) => {
-                      const isLast = index === pdfInfo.length - 1;
-                      const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
-                      return (
-                        <tr key={index}>
-                          <td className={classes}>{index + 1}</td>
-                          <td className={classes}>
-                            <iframe
-                              title="Cable Price List"
-                              src={`${BACKEND_BASE_URL}${data?.cable_price_list}`}
-                              width="100%"
-                              height="350px"
-                            />
-                          </td>
-                          <td className={classes}>
-                            <iframe
-                              title="Cable Price List"
-                              src={`${BACKEND_BASE_URL}${data?.shramik_price_list}`}
-                              width="100%"
-                              height="350px"
-                            />
-                          </td>
-                          <td className={`${classes}`}>
-                            <div className="flex items-center gap-2">
-                              {/* edit button */}
-                              <button
-                                onClick={() => editPriceList(data.id, "Edit")}
-                                className="py-1 px-2 bg-yellow-300 rounded-lg me-1 mb-1"
-                              >
-                                <BiEdit
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="Edit"
-                                  size="1.5em"
-                                />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </Suspense>
+                <tbody>
+                  {pdfInfo?.map((data, index) => {
+                    const isLast = index === pdfInfo.length - 1;
+                    const classes = isLast
+                      ? "p-4"
+                      : "p-4 border-b border-blue-gray-50";
+                    return (
+                      <tr key={index}>
+                        <td className={classes}>{index + 1}</td>
+                        <td className={classes}>
+                          <iframe
+                            title="Cable Price List"
+                            src={`${BACKEND_BASE_URL}${data?.cable_price_list}`}
+                            width="100%"
+                            height="350px"
+                          />
+                        </td>
+                        <td className={classes}>
+                          <iframe
+                            title="Cable Price List"
+                            src={`${BACKEND_BASE_URL}${data?.shramik_price_list}`}
+                            width="100%"
+                            height="350px"
+                          />
+                        </td>
+                        <td className={`${classes}`}>
+                          <div className="flex items-center gap-2">
+                            {/* edit button */}
+                            <button
+                              onClick={() => editPriceList(data.id, "Edit")}
+                              className="py-1 px-2 bg-yellow-300 rounded-lg me-1 mb-1"
+                            >
+                              <BiEdit
+                                style={{
+                                  color: "white",
+                                }}
+                                title="Edit"
+                                size="1.5em"
+                              />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

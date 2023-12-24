@@ -169,7 +169,6 @@ const WhoWeAreMaster = (props) => {
             </Link>
             {/* <Link
               href="research-development"
-            
               scroll={false}
               onClick={() => scrollToSection("who-we-are")}
               className={`flex flex-col items-center hover:bg-white transition lg:rounded-tl-lg lg:rounded-tr-lg px-2 ${

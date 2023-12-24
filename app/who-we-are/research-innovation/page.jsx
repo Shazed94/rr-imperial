@@ -10,7 +10,7 @@ const page = () => {
       <Header />
       <WhoWeAreMaster>
         <div
-          className="flex flex-col lg:flex-row bg-white p-8 gap-9"
+          className="flex flex-col lg:flex-row bg-white p-8 gap-9 "
           id="who-we-are"
         >
           <div className="w-full lg:w-2/3 md:order-2 lg:order-1">
@@ -55,10 +55,17 @@ const page = () => {
             <ResearchInnovation className="md:h-72 lg:h-[30rem]" />
           </div>
         </div>
-        <div className="flex flex-col lg:flex-row bg-white p-4 lg:p-8 gap-9 mb-12" id="who-we-are">
+        <div
+          className="flex flex-col lg:flex-row bg-white p-4 lg:p-8 gap-9 mb-12"
+          id="who-we-are"
+        >
           <div className="w-full lg:w-1/3 flex justify-center items-center mb-5 lg:mb-12">
             <div className="relative ms-3 mt-4 lg:m-0">
-              <img src="/img/who-we-are/research-development.webp" alt="" className="relative z-10" />
+              <img
+                src="/img/who-we-are/research-development.webp"
+                alt=""
+                className="relative z-10"
+              />
               <div className="absolute -top-[14px] -left-[12px] w-full h-full bg-[#ED1C24] z-0"></div>
             </div>
           </div>

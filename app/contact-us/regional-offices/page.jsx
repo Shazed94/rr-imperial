@@ -58,7 +58,7 @@ const ContactUs = () => {
               className: "bg-transparent !shadow-none !text-gray-900",
             }}
           >
-            <Tab value="barishal" >
+            <Tab value="barishal">
               <Link href="#" scroll={false} className="">
                 <button
                   className={`w-36 px-4 py-4 rounded-xl text-white bg-[#D1D3D4] ${
@@ -218,7 +218,9 @@ const ContactUs = () => {
                   <div className="flex justify-between gap-3">
                     <div className="flex items-center justify-center gap-5 pt-5 ">
                       <img src={"/svg/map.svg"} alt="" className="w-10" />
-                      <p className="text-black font-normal "></p>
+                      <p className="text-black font-normal ">
+                        West Baharchora,PTI Road,Coxsbazar.
+                      </p>
                     </div>
                     <div className="flex items-center justify-center gap-5 pt-5 ">
                       <img src={"/svg/phone.svg"} alt="" className="w-10" />

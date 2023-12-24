@@ -17,7 +17,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Link from "next/link";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { FaEye, FaYoutube } from "react-icons/fa";
@@ -184,98 +184,95 @@ const AdminVideos = () => {
                   </Button>
                 </div>
               </div>
-              <Suspense fallback={<div className="text-5xl">Loading...</div>}>
-                <table className="w-full min-w-max table-auto text-left">
-                  <thead>
-                    <tr>
-                      {TABLE_HEAD.map((head) => (
-                        <th
-                          key={head}
-                          className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                        >
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal leading-none opacity-70"
-                          >
-                            {head}
-                          </Typography>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
 
-                  <tbody>
-                    {videoInfo?.map((data, index) => {
-                      const isLast = index === videoInfo.length - 1;
-                      const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
-                      return (
-                        <tr key={index}>
-                          <td className={classes}>{index + 1}</td>
-                          <td className={classes}>{data?.title}</td>
-                          <td className={classes}>
+              <table className="w-full min-w-max table-auto text-left">
+                <thead>
+                  <tr>
+                    {TABLE_HEAD.map((head) => (
+                      <th
+                        key={head}
+                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                      >
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal leading-none opacity-70"
+                        >
+                          {head}
+                        </Typography>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {videoInfo?.map((data, index) => {
+                    const isLast = index === videoInfo.length - 1;
+                    const classes = isLast
+                      ? "p-4"
+                      : "p-4 border-b border-blue-gray-50";
+                    return (
+                      <tr key={index}>
+                        <td className={classes}>{index + 1}</td>
+                        <td className={classes}>{data?.title}</td>
+                        <td className={classes}>
+                          <button
+                            className="bg-transparent text-red-600 border-0"
+                            onClick={() => showSingleVideoData("View", data.id)}
+                          >
+                            <FaYoutube size="2.5em" />
+                          </button>
+                        </td>
+                        <td className={`${classes}`}>
+                          <div className="flex items-center gap-2">
+                            {/* view button */}
                             <button
-                              className="bg-transparent text-red-600 border-0"
                               onClick={() =>
                                 showSingleVideoData("View", data.id)
                               }
+                              className="py-1 px-2 bg-cyan-500 rounded-lg me-1 mb-1"
                             >
-                              <FaYoutube size="2.5em" />
+                              <FaEye
+                                style={{
+                                  color: "white",
+                                }}
+                                title="View"
+                                size="1.5em"
+                              />{" "}
                             </button>
-                          </td>
-                          <td className={`${classes}`}>
-                            <div className="flex items-center gap-2">
-                              {/* view button */}
-                              <button
-                                onClick={() =>
-                                  showSingleVideoData("View", data.id)
-                                }
-                                className="py-1 px-2 bg-cyan-500 rounded-lg me-1 mb-1"
-                              >
-                                <FaEye
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="View"
-                                  size="1.5em"
-                                />{" "}
-                              </button>
-                              {/* edit button */}
-                              <button
-                                onClick={() => editVideo(data.id, "Edit")}
-                                className="py-1 px-2 bg-yellow-300 rounded-lg me-1 mb-1"
-                              >
-                                <BiEdit
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="Edit"
-                                  size="1.5em"
-                                />
-                              </button>
-                              {/* delete button */}
-                              <button
-                                onClick={() => deleteData(data.id)}
-                                className="py-1 px-2 bg-red-600 border-0 rounded-lg me-1 mb-1"
-                              >
-                                <MdDeleteForever
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="Delete"
-                                  size="1.5em"
-                                />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </Suspense>
+                            {/* edit button */}
+                            <button
+                              onClick={() => editVideo(data.id, "Edit")}
+                              className="py-1 px-2 bg-yellow-300 rounded-lg me-1 mb-1"
+                            >
+                              <BiEdit
+                                style={{
+                                  color: "white",
+                                }}
+                                title="Edit"
+                                size="1.5em"
+                              />
+                            </button>
+                            {/* delete button */}
+                            <button
+                              onClick={() => deleteData(data.id)}
+                              className="py-1 px-2 bg-red-600 border-0 rounded-lg me-1 mb-1"
+                            >
+                              <MdDeleteForever
+                                style={{
+                                  color: "white",
+                                }}
+                                title="Delete"
+                                size="1.5em"
+                              />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

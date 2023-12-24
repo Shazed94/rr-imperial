@@ -14,20 +14,16 @@ import {
 import { FiSave } from "react-icons/fi";
 import Swal from "sweetalert2";
 import Select from "react-select";
+import { getCookie } from "cookies-next";
+import { read_all_Product_Colors } from "@/utility/api";
 
 const EditProduct = ({ params }) => {
   var selectedColor;
   const [colors, setColors] = useState([]);
   const renderAllColors = async () => {
-    await axios
-      .get(`${BACKEND_BASE_URL}/api/admin/products/colors`, {
-        headers: {
-          // Authorization: `Bearer ${getLocalStorageWithExpiry("ACCESS_TOKEN")}`,
-        },
-      })
-      .then((res) => {
-        setColors(res.data.all_colors);
-      });
+  await read_all_Product_Colors().then((res) => {
+      setColors(res.data.all_colors);
+    });
   };
 
   useEffect(() => {
@@ -40,6 +36,8 @@ const EditProduct = ({ params }) => {
   const productName = useRef();
   const productImage = useRef();
   const productSmallImage = useRef();
+  const productCharImage = useRef();
+  const productInstallationImage = useRef();
   const cableDesignParameter = useRef();
   const categoryId = useRef();
   const specification = useRef();
@@ -55,6 +53,8 @@ const EditProduct = ({ params }) => {
   const [files, setFile] = useState([]);
   const [files2, setFile2] = useState([]);
   const [files3, setFile3] = useState([]);
+  const [files4, setFile4] = useState([]);
+  const [files5, setFile5] = useState([]);
 
   const handleImgPreview = (e) => {
     let allfiles = [];
@@ -75,13 +75,23 @@ const EditProduct = ({ params }) => {
       setFile2(allfiles2);
     }
   };
-  const handleTableImage = (e) => {
+
+  const handleCharImgPreview = (e) => {
     let allfiles3 = [];
     for (let i = 0; i < e.target.files.length; i++) {
       allfiles3.push(e.target.files[i]);
     }
     if (allfiles3.length > 0) {
       setFile3(allfiles3);
+    }
+  };
+  const handleInstallationImgPreview = (e) => {
+    let allfiles4 = [];
+    for (let i = 0; i < e.target.files.length; i++) {
+      allfiles4.push(e.target.files[i]);
+    }
+    if (allfiles4.length > 0) {
+      setFile4(allfiles4);
     }
   };
 
@@ -199,9 +209,13 @@ const EditProduct = ({ params }) => {
     setFile([]);
     setFile2([]);
     setFile3([]);
+    setFile4([]);
     axios
       .get(`${BACKEND_BASE_URL}/api/admin/products/edit/${params.id}`, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${getCookie("admin_access_token")}`,
+        },
       })
 
       .then((response) => {
@@ -282,24 +296,30 @@ const EditProduct = ({ params }) => {
     if (productSmallImage.current.files[0]) {
       formdata.append("small_image", productSmallImage.current.files[0]);
     }
+    if (productCharImage.current.files[0]) {
+      formdata.append("c_image", productCharImage.current.files[0]);
+    }
+    if (productInstallationImage.current.files[0]) {
+      formdata.append("ic_image", productInstallationImage.current.files[0]);
+    }
+    // inputFields.forEach((item) => {
+    //   if (item.char_image_label != "" && item.char_image_label != null) {
+    //     formdata.append("label[]", item.char_image_label);
+    //   }
+    //   if ((item.char_image != "" && item.char_image) != null) {
+    //     formdata.append("c_image[]", item.char_image);
+    //   }
+    // });
 
-    inputFields.forEach((item) => {
-      if (item.char_image_label != "" && item.char_image_label != null) {
-        formdata.append("label[]", item.char_image_label);
-      }
-      if ((item.char_image != "" && item.char_image) != null) {
-        formdata.append("c_image[]", item.char_image);
-      }
-    });
+    // inputFields2.forEach((item) => {
+    //   if (item.char_image_label2 != "" && item.char_image_label2 != null) {
+    //     formdata.append("ic_label[]", item.char_image_label2);
+    //   }
+    //   if ((item.char_image2 != "" && item.char_image2) != null) {
+    //     formdata.append("ic_image[]", item.char_image2);
+    //   }
+    // });
 
-    inputFields2.forEach((item) => {
-      if (item.char_image_label2 != "" && item.char_image_label2 != null) {
-        formdata.append("ic_label[]", item.char_image_label2);
-      }
-      if ((item.char_image2 != "" && item.char_image2) != null) {
-        formdata.append("ic_image[]", item.char_image2);
-      }
-    });
     formdata.append("category_id", categoryId.current.value);
     // if (checkboxVal.length > 0) {
     //   formdata.append("color_code", checkboxVal);
@@ -338,7 +358,10 @@ const EditProduct = ({ params }) => {
         `${BACKEND_BASE_URL}/api/admin/products/update/${params.id}`,
         formdata,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${getCookie("admin_access_token")}`,
+          },
         }
       )
       .then((response) => {
@@ -372,7 +395,12 @@ const EditProduct = ({ params }) => {
     if (isConfirm) {
       axios
         .delete(
-          `${BACKEND_BASE_URL}/api/admin/products/delete-single-characteristic/${id}`
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-characteristic/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("admin_access_token")}`,
+            },
+          }
         )
         .then((res) => {
           Swal.fire({
@@ -405,7 +433,12 @@ const EditProduct = ({ params }) => {
     if (isConfirm) {
       axios
         .delete(
-          `${BACKEND_BASE_URL}/api/admin/products/delete-single-installation-condition/${id}`
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-installation-condition/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("admin_access_token")}`,
+            },
+          }
         )
         .then((res) => {
           Swal.fire({
@@ -439,7 +472,12 @@ const EditProduct = ({ params }) => {
     if (isConfirm) {
       axios
         .delete(
-          `${BACKEND_BASE_URL}/api/admin/products/delete-single-cable-design-parameter/${id}`
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-cable-design-parameter/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("admin_access_token")}`,
+            },
+          }
         )
         .then((res) => {
           Swal.fire({
@@ -472,7 +510,12 @@ const EditProduct = ({ params }) => {
     if (isConfirm) {
       axios
         .delete(
-          `${BACKEND_BASE_URL}/api/admin/products/delete-single-test-parameter/${id}`
+          `${BACKEND_BASE_URL}/api/admin/products/delete-single-test-parameter/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${getCookie("admin_access_token")}`,
+            },
+          }
         )
         .then((res) => {
           Swal.fire({
@@ -543,7 +586,7 @@ const EditProduct = ({ params }) => {
 
                 <div className="mb-1 flex flex-col gap-2 col-span-6">
                   <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                    Product Image (700*400)&nbsp;{" "}
+                    Product Image
                     <span className="text-red-500">*</span>
                   </label>
 
@@ -581,7 +624,7 @@ const EditProduct = ({ params }) => {
                 </div>
                 <div className="mb-1 flex flex-col gap-2 col-span-6">
                   <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                    Small Image (120*60)
+                    Small Image
                     <span className="text-red-500">*</span>
                   </label>
 
@@ -607,7 +650,7 @@ const EditProduct = ({ params }) => {
                       </div>
                     );
                   })}
-                  {files.length == 0 && (
+                  {files2.length == 0 && (
                     <img
                       className="img-thumbnail mt-1"
                       width={80}
@@ -623,7 +666,40 @@ const EditProduct = ({ params }) => {
                     Characteristics Images
                     <span className="text-red-500">*</span>
                   </label>
-                  {editInfo?.product_characteristics?.map((input, index) => {
+                  <input
+                    // required
+                    type="file"
+                    className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-4  file:border-0 file:text-sm file:font-semibold
+                                file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 border border-gray-300 rounded-lg"
+                    ref={productCharImage}
+                    onChange={handleCharImgPreview}
+                  />
+                  {files3.map((file, key) => {
+                    return (
+                      <div key={key} className="Row">
+                        <span className="Filename">
+                          <img
+                            width={80}
+                            height={50}
+                            src={URL.createObjectURL(file)}
+                            alt={file.name}
+                          />
+                        </span>
+                      </div>
+                    );
+                  })}
+                  {files3.length == 0 && (
+                    <img
+                      className="img-thumbnail mt-1"
+                      width={80}
+                      height={50}
+                      src={`${BACKEND_BASE_URL}/${editInfo?.c_image}`}
+                      alt={productName}
+                      name="img"
+                    />
+                  )}
+
+                  {/* {editInfo?.product_characteristics?.map((input, index) => {
                     return (
                       <div key={index} className="flex items-center gap-4">
                         <div className="flex items-center gap-3 w-[90%]">
@@ -639,7 +715,7 @@ const EditProduct = ({ params }) => {
                             className="img-thumbnail mt-1"
                             width={80}
                             height={50}
-                            src={`${BACKEND_BASE_URL}/${input?.image}`}
+                            src={`${BACKEND_BASE_URL}/${input?.c_image}`}
                             alt={productName}
                             name="img"
                           />
@@ -654,8 +730,8 @@ const EditProduct = ({ params }) => {
                         </div>
                       </div>
                     );
-                  })}
-                  {inputFields?.map((input, index) => {
+                  })} */}
+                  {/* {inputFields?.map((input, index) => {
                     return (
                       <div key={index} className="flex items-center gap-4">
                         <div className="flex items-center gap-3 w-[90%]">
@@ -668,27 +744,13 @@ const EditProduct = ({ params }) => {
                             onChange={(event) => handleFormChange(index, event)}
                           />
                           <input
-                            // required
                             type="file"
                             className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-4  file:border-0 file:text-sm file:font-semibold
                                 file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 border border-gray-300 rounded-lg"
                             name={"char_image"}
                             onChange={(event) => handleFileChange(index, event)}
                           />
-                          {/* {files.map((file, key) => {
-                              return (
-                                <div key={key} className="Row">
-                                  <span className="Filename">
-                                    <img
-                                      width={80}
-                                      height={50}
-                                      src={URL.createObjectURL(file)}
-                                      alt={file.name}
-                                    />
-                                  </span>
-                                </div>
-                              );
-                            })} */}
+                          
                         </div>
                         <div className="flex items-center gap-2 w-[10%]">
                           <div className="">
@@ -713,14 +775,46 @@ const EditProduct = ({ params }) => {
                         </div>
                       </div>
                     );
-                  })}
+                  })} */}
                 </div>
                 <div className="mb-1 flex flex-col gap-2 col-span-6">
                   <label className="block text-sm font-medium text-gray-900 dark:text-white">
                     Installation Condition Images
                     <span className="text-red-500">*</span>
                   </label>
-                  {editInfo?.product_installation_conditions?.map(
+                  <input
+                    // required
+                    type="file"
+                    className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-4  file:border-0 file:text-sm file:font-semibold
+                                file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 border border-gray-300 rounded-lg"
+                    ref={productInstallationImage}
+                    onChange={handleInstallationImgPreview}
+                  />
+                  {files4.map((file, key) => {
+                    return (
+                      <div key={key} className="Row">
+                        <span className="Filename">
+                          <img
+                            width={80}
+                            height={50}
+                            src={URL.createObjectURL(file)}
+                            alt={file.name}
+                          />
+                        </span>
+                      </div>
+                    );
+                  })}
+                  {files4.length == 0 && (
+                    <img
+                      className="img-thumbnail mt-1"
+                      width={80}
+                      height={50}
+                      src={`${BACKEND_BASE_URL}/${editInfo?.ic_image}`}
+                      alt={productName}
+                      name="img"
+                    />
+                  )}
+                  {/* {editInfo?.product_installation_conditions?.map(
                     (input, index) => {
                       return (
                         <div key={index} className="flex items-center gap-4">
@@ -757,8 +851,8 @@ const EditProduct = ({ params }) => {
                         </div>
                       );
                     }
-                  )}
-                  {inputFields2?.map((input, index) => {
+                  )} */}
+                  {/* {inputFields2?.map((input, index) => {
                     return (
                       <div key={index} className="flex items-center gap-4">
                         <div className="flex items-center gap-3 w-[90%]">
@@ -777,7 +871,6 @@ const EditProduct = ({ params }) => {
                             }
                           />
                           <input
-                            // required
                             type="file"
                             className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-4  file:border-0 file:text-sm file:font-semibold
                                 file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 border border-gray-300 rounded-lg"
@@ -810,7 +903,7 @@ const EditProduct = ({ params }) => {
                         </div>
                       </div>
                     );
-                  })}
+                  })} */}
                 </div>
                 <div className="mb-1 flex flex-col gap-6 col-span-12">
                   <Typography variant="h6" color="blue-gray" className="-mb-3">
@@ -1125,7 +1218,7 @@ const EditProduct = ({ params }) => {
                                 }
                               />
                             </div>
-                            {files3.map((file, key) => {
+                            {files5.map((file, key) => {
                               return (
                                 <div key={key} className="Row">
                                   <span className="Filename">

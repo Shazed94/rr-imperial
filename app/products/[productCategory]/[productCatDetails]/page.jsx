@@ -178,75 +178,85 @@ const ProductDetails = ({ params }) => {
             {singleProduct?.name}
           </h2>
 
-          <div className="flex flex-col lg:flex-row bg-white rounded-[17px] p-4 lg:p-10 mb-12">
+          <div className="flex flex-col lg:flex-row bg-white rounded-[17px] mb-12 py-10">
             <div className="w-full lg:w-1/2 flex flex-wrap flex-col items-center justify-center lg:border-r lg:border-r-[#D1D3D4]">
               <Image
                 src={`${BACKEND_BASE_URL}/${singleProduct?.image}`}
                 alt=""
-                width={300}
-                height={60}
+                width={380}
+                height={50}
                 quality={100}
-                className="mx-auto mb-8"
+                className="mx-auto mb-5"
               />
-              <h5 className="text-[#E62020] text-f16 font-normal mb-3">
+              <h5 className="text-[#E62020] text-f16 font-normal mb-5">
                 *REACH | RoHS | CE
               </h5>
               <Image
                 src={`${BACKEND_BASE_URL}/${singleProduct?.small_image}`}
                 alt=""
-                width={200}
-                height={80}
-                quality={100}
+                width={240}
+                height={60}
+                // quality={100}
                 className="mx-auto mb-8"
               />
             </div>
             <div className="w-full lg:w-1/2 flex flex-wrap flex-col gap-8 items-center lg:ps-6">
-              {singleProduct?.product_characteristics.length > 0 && (
-                <div>
-                  <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
-                    CHARACTERISTICS
-                  </h4>
-                  <div className="grid grid-cols-4 lg:grid-cols-6 gap-3">
+              {/* {singleProduct?.product_characteristics.length > 0 && ( */}
+
+              <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
+                CHARACTERISTICS
+              </h4>
+              <div className="relative w-full ">
+                <img
+                  src={`${BACKEND_BASE_URL}/${singleProduct?.c_image}`}
+                  alt=""
+                  className="mb-2 mx-auto"
+                />
+              </div>
+              {/* <div className="grid grid-cols-4 lg:grid-cols-6 gap-3">
                     {singleProduct?.product_characteristics?.map(
                       (characteristic) => (
                         <div
                           key={characteristic.id}
-                          className="flex flex-col items-center text-center"
+                          className="flex flex-col items-center text-center relative"
                         >
                           <Image
-                            src={`${BACKEND_BASE_URL}/${characteristic?.image}`}
+                            src={`${BACKEND_BASE_URL}/${characteristic?.c_image}`}
                             alt=""
-                            width={45}
-                            height={40}
+                            fill
                             className="mb-2"
                           />
-                          <span className="text-[10px] leading-tight">
-                            {characteristic?.label}
-                          </span>
+                        
                         </div>
                       )
                     )}
-                  </div>
-                </div>
-              )}
+                  </div> */}
 
-              {singleProduct?.product_installation_conditions.length > 0 && (
-                <div>
-                  <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
-                    INSTALLATION CONDITION
-                  </h4>
-                  <div className="grid grid-cols-7 gap-3">
+              {/* )} */}
+
+              {/* {singleProduct?.product_installation_conditions.length > 0 && ( */}
+
+              <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
+                INSTALLATION CONDITION
+              </h4>
+              <div className="relative w-full ">
+                <img
+                  src={`${BACKEND_BASE_URL}/${singleProduct?.ic_image}`}
+                  alt=""
+                  className="mb-2 mx-auto"
+                />
+              </div>
+              {/* <div className="grid grid-cols-7 gap-3">
                     {singleProduct?.product_installation_conditions?.map(
                       (characteristic) => (
                         <div
                           key={characteristic.id}
-                          className="flex flex-col items-center text-center"
+                          className="flex flex-col items-center text-center relative"
                         >
                           <Image
                             src={`${BACKEND_BASE_URL}/${characteristic?.ic_image}`}
                             alt=""
-                            width={45}
-                            height={40}
+                           fill
                             className="mb-2"
                           />
                           <span className="text-[10px] leading-tight">
@@ -255,11 +265,39 @@ const ProductDetails = ({ params }) => {
                         </div>
                       )
                     )}
-                  </div>
-                </div>
-              )}
+                  </div> */}
+
+              {/* )} */}
             </div>
           </div>
+          {singleProduct?.product_test_parameter?.length > 0 && (
+            <div className="mb-10">
+              <h4 className="text-[#E62020] text-f20 font-normal mb-3">
+                TEST PARAMETERS
+              </h4>
+              <table className="w-full">
+                <thead className="">
+                  <tr className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                    <th className="py-2">TEST</th>
+                    <th className="py-2">TEST METHOD</th>
+                    <th className="py-2">VALUES</th>
+                  </tr>
+                </thead>
+                <tbody className="text-center">
+                  {singleProduct?.product_test_parameter?.map((parameter) => (
+                  <>
+                    <tr key={parameter.id} className="even:bg-white/90 odd:bg-gray-100/50">
+                      <td className="py-2">{parameter?.test_name}</td>
+                      <td className="py-2">{parameter?.test_method}</td>
+                      <td className="py-2">{parameter?.test_value}</td>
+                    </tr>
+                    </>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
           {singleProduct?.application && (
             <div className="mb-10">
               <h4 className="text-[#E62020] text-f20 font-normal mb-3">
@@ -335,18 +373,35 @@ const ProductDetails = ({ params }) => {
                 {singleProduct?.colors?.map((data, index) => {
                   return (
                     <>
-                      <div className="flex flex-wrap items-center">
-                        <div
-                          className="block w-3 h-3 min-w-[12px] rounded-full"
-                          style={{
-                            backgroundColor: data?.color_info?.color_code,
-                            marginLeft: "5px",
-                          }}
-                        ></div>
-                        <div className="ms-1">
-                          {data?.color_info?.name} &nbsp;
+                      {data?.color_id == "10" ? (
+                        <div className="flex flex-wrap items-center">
+                          <div
+                            className="block w-4 h-4 min-w-[12px] rounded-full relative overflow-hidden"
+                            style={{
+                              backgroundColor: "#FAEE11",
+                              marginLeft: "5px",
+                            }}
+                          >
+                            <span className="absolute w-full h-1 top-[6px] bg-green-400"></span>
+                          </div>
+                          <div className="ms-1">
+                            {data?.color_info?.name} &nbsp;
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <div className="flex flex-wrap items-center">
+                          <div
+                            className="block w-4 h-4 min-w-[12px] rounded-full"
+                            style={{
+                              backgroundColor: data?.color_info?.color_code,
+                              marginLeft: "5px",
+                            }}
+                          ></div>
+                          <div className="ms-1">
+                            {data?.color_info?.name} &nbsp;
+                          </div>
+                        </div>
+                      )}
                     </>
                   );
                 })}

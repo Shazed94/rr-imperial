@@ -20,7 +20,7 @@ import {
 import moment from "moment";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { FaCalendarAlt, FaEye, FaUserTie } from "react-icons/fa";
@@ -201,99 +201,96 @@ const AdminNews = () => {
                   </Button>
                 </div>
               </div>
-              <Suspense fallback={<div className="text-5xl">Loading...</div>}>
-                <table className="w-full min-w-max table-auto text-left">
-                  <thead>
-                    <tr>
-                      {TABLE_HEAD.map((head) => (
-                        <th
-                          key={head}
-                          className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                        >
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal leading-none opacity-70"
-                          >
-                            {head}
-                          </Typography>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
 
-                  <tbody>
-                    {allNews?.map((data, index) => {
-                      const isLast = index === allNews.length - 1;
-                      const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
-                      return (
-                        <tr key={index}>
-                          <td className={classes}>{index + 1}</td>
-                          <td className={classes}>{data?.author}</td>
-                          <td className={classes}>{data?.title}</td>
-                          <td className={classes}>{data?.src_link}</td>
-                          <td className={classes}>
-                            <img
-                              className="img-thumbnail"
-                              width={140}
-                              height={10}
-                              src={`${BACKEND_BASE_URL}${data?.image}`}
-                              alt={data?.title}
-                            />
-                          </td>
-                          <td className={`${classes}`}>
-                            <div className="flex items-center gap-2">
-                              {/* view button */}
-                              <button
-                                onClick={() =>
-                                  showSingleSlider("View", data.id)
-                                }
-                                className="py-1 px-2 bg-cyan-500 rounded-lg me-1 mb-1"
-                              >
-                                <FaEye
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="View"
-                                  size="1.5em"
-                                />{" "}
-                              </button>
-                              {/* edit button */}
-                              <button
-                                onClick={() => editNews(data.id, "Edit")}
-                                className="py-1 px-2 bg-yellow-300 rounded-lg me-1 mb-1"
-                              >
-                                <BiEdit
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="Edit"
-                                  size="1.5em"
-                                />
-                              </button>
-                              {/* delete button */}
-                              <button
-                                onClick={() => deleteData(data.id)}
-                                className="py-1 px-2 bg-red-600 border-0 rounded-lg me-1 mb-1"
-                              >
-                                <MdDeleteForever
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="Delete"
-                                  size="1.5em"
-                                />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </Suspense>
+              <table className="w-full min-w-max table-auto text-left">
+                <thead>
+                  <tr>
+                    {TABLE_HEAD.map((head) => (
+                      <th
+                        key={head}
+                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                      >
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal leading-none opacity-70"
+                        >
+                          {head}
+                        </Typography>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {allNews?.map((data, index) => {
+                    const isLast = index === allNews.length - 1;
+                    const classes = isLast
+                      ? "p-4"
+                      : "p-4 border-b border-blue-gray-50";
+                    return (
+                      <tr key={index}>
+                        <td className={classes}>{index + 1}</td>
+                        <td className={classes}>{data?.author}</td>
+                        <td className={classes}>{data?.title}</td>
+                        <td className={classes}>{data?.src_link}</td>
+                        <td className={classes}>
+                          <img
+                            className="img-thumbnail"
+                            width={140}
+                            height={10}
+                            src={`${BACKEND_BASE_URL}${data?.image}`}
+                            alt={data?.title}
+                          />
+                        </td>
+                        <td className={`${classes}`}>
+                          <div className="flex items-center gap-2">
+                            {/* view button */}
+                            <button
+                              onClick={() => showSingleSlider("View", data.id)}
+                              className="py-1 px-2 bg-cyan-500 rounded-lg me-1 mb-1"
+                            >
+                              <FaEye
+                                style={{
+                                  color: "white",
+                                }}
+                                title="View"
+                                size="1.5em"
+                              />{" "}
+                            </button>
+                            {/* edit button */}
+                            <button
+                              onClick={() => editNews(data.id, "Edit")}
+                              className="py-1 px-2 bg-yellow-300 rounded-lg me-1 mb-1"
+                            >
+                              <BiEdit
+                                style={{
+                                  color: "white",
+                                }}
+                                title="Edit"
+                                size="1.5em"
+                              />
+                            </button>
+                            {/* delete button */}
+                            <button
+                              onClick={() => deleteData(data.id)}
+                              className="py-1 px-2 bg-red-600 border-0 rounded-lg me-1 mb-1"
+                            >
+                              <MdDeleteForever
+                                style={{
+                                  color: "white",
+                                }}
+                                title="Delete"
+                                size="1.5em"
+                              />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

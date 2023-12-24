@@ -31,11 +31,11 @@ const page = () => {
               </p>
             </div>
             <div className="container mb-10">
-            <SearchBoxButton />
+              <SearchBoxButton />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
               <Link
-                 href="/rr-shramik-products/category"
+                href="/rr-shramik-products/category"
                 data-aos="fade-right-150"
                 data-aos-delay="600"
                 className="group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"
@@ -112,7 +112,7 @@ const page = () => {
             </div>
             <div className="grid grid-cols-[repeat(1,minmax(0,1fr))] lg:grid-cols-[repeat(3,minmax(0,320px))] place-content-center gap-8 mx-auto">
               <Link
-               href="/rr-shramik-products/category"
+                href="/rr-shramik-products/category"
                 data-aos="fade-left-150"
                 data-aos-delay="400"
                 className=" group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"
