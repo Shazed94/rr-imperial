@@ -2,7 +2,7 @@
 import { read_all_Users } from "@/utility/api";
 import { Typography } from "@material-tailwind/react";
 import Link from "next/link";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaEye } from "react-icons/fa";
 
 const AdminDownloadUser = () => {
@@ -34,48 +34,45 @@ const AdminDownloadUser = () => {
           <div className="card">
             <div className="card-body">
               <span className="top-border"></span>
-
-              <Suspense fallback={<div className="text-5xl">Loading...</div>}>
-                <table className="w-full min-w-max table-auto text-left mt-2">
-                  <thead>
-                    <tr>
-                      {TABLE_HEAD.map((head) => (
-                        <th
-                          key={head}
-                          className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+              <table className="w-full min-w-max table-auto text-left mt-2">
+                <thead>
+                  <tr>
+                    {TABLE_HEAD.map((head) => (
+                      <th
+                        key={head}
+                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                      >
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal leading-none opacity-70"
                         >
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal leading-none opacity-70"
-                          >
-                            {head}
-                          </Typography>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
+                          {head}
+                        </Typography>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
 
-                  <tbody>
-                    {allCustomers?.map((data, index) => {
-                      const isLast = index === allCustomers.length - 1;
-                      const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
-                      return (
-                        <tr key={index}>
-                          <td className={classes}>{index + 1}</td>
-                          <td className={classes}>
-                            {data?.first_name + " " + data?.last_name}
-                          </td>
-                          <td className={classes}>{data?.email}</td>
-                          <td className={classes}>{data?.contact_no}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </Suspense>
+                <tbody>
+                  {allCustomers?.map((data, index) => {
+                    const isLast = index === allCustomers.length - 1;
+                    const classes = isLast
+                      ? "p-4"
+                      : "p-4 border-b border-blue-gray-50";
+                    return (
+                      <tr key={index}>
+                        <td className={classes}>{index + 1}</td>
+                        <td className={classes}>
+                          {data?.first_name + " " + data?.last_name}
+                        </td>
+                        <td className={classes}>{data?.email}</td>
+                        <td className={classes}>{data?.contact_no}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

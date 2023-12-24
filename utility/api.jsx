@@ -71,6 +71,38 @@ export const read_all_AdminUser = async () => {
     return false;
   }
 };
+//! ================== Edit Admin User ===================
+export const edit_AdminUser = async (id) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/users/edit/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+//! ================== Update Admin User ===================
+export const update_AdminUser = async (id, formdata) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/users/update/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.post(URL, formdata, HEADERS);
+
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
 
 // =============================== Products ==================================
 
@@ -724,6 +756,23 @@ export const edit_Event = async (eventId) => {
     return false;
   }
 };
+//! ================== Delete Gallery Image ===================
+
+export const delete_Event_gallery = async (id) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/events/gallery/delete/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.delete(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
 //! ================== Update Event ===================
 export const update_Event = async (id, formdata) => {
   let URL = `${BACKEND_BASE_URL}/api/admin/events/update/${id}`;
@@ -760,6 +809,122 @@ export const delete_Event = async (id) => {
   }
 
   let URL = `${BACKEND_BASE_URL}/api/admin/events/delete/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  if (isConfirm) {
+    try {
+      const deleteResult = await axios.delete(URL, HEADERS);
+      return deleteResult;
+    } catch (e) {
+      return false;
+    }
+  }
+};
+
+// =============================== Tv Commercials ==================================
+
+//! ================== Read All Tv Commercials ===================
+export const read_all_tvCommercials = async () => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-commercial`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Create New Tv Commercial ===================
+export const create_new_tvCommercial = async (formdata) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-commercial/store`;
+  let HEADERS = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.post(URL, formdata, HEADERS);
+
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== View Single Tv Commercial ===================
+export const view_tvCommercial = async (id) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-commercial/view/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+//! ================== Edit Tv Commercial ===================
+export const edit_tvCommercial = async (videoId) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-commercial/edit/${videoId}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+//! ================== Update Tv Commercial ===================
+export const update_tvCommercial = async (id, formdata) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-commercial/update/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.post(URL, formdata, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Delete single Tv Commercial ===================
+export const delete_tvCommercial = async (id) => {
+  const isConfirm = await Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "green",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    return result.isConfirmed;
+  });
+
+  if (!isConfirm) {
+    return;
+  }
+
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-commercial/delete/${id}`;
   let HEADERS = {
     headers: {
       Authorization: `Bearer ${getCookie("admin_access_token")}`,
@@ -1238,7 +1403,6 @@ export const single_Product_Details_Front = async (productSlug) => {
 
 // //! =============================== All Regional Offices Frontend ==================================
 export const all_Regional_Office_Front = async () => {
-
   let URL = `${BACKEND_BASE_URL}/api/all-regional-offices`;
   try {
     const result = await axios.get(URL);

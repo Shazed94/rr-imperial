@@ -20,7 +20,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Link from "next/link";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
@@ -170,7 +170,7 @@ const AdminRegionalOffices = () => {
                   </Button>
                 </div>
               </div>
-              <Suspense fallback={<div className="text-5xl">Loading...</div>}>
+              
                 <table className="w-full min-w-max table-auto text-left">
                   <thead>
                     <tr>
@@ -251,7 +251,7 @@ const AdminRegionalOffices = () => {
                     })}
                   </tbody>
                 </table>
-              </Suspense>
+             
             </div>
           </div>
         </div>

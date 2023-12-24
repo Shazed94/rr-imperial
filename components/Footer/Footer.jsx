@@ -66,9 +66,6 @@ const Footer = (props) => {
               <a href="https://twitter.com/imperial_rr?lang=en" target="_blank" className="w-10 h-10 flex justify-center items-center rounded bg-[#E71D1D] text-white hover:bg-white hover:text-[#E71D1D] transition-all duration-500">
                 <FaTwitter />
               </a>
-              <a href="/" target="_blank" className="w-10 h-10 flex justify-center items-center rounded bg-[#E71D1D] text-white hover:bg-white hover:text-[#E71D1D] transition-all duration-500">
-                <FaInstagram />
-              </a>
               <a href="https://www.linkedin.com/company/rr-imperial-electricals-ltd/" target="_blank" className="w-10 h-10 flex justify-center items-center rounded bg-[#E71D1D] text-white hover:bg-white hover:text-[#E71D1D] transition-all duration-500">
                 <FaLinkedinIn />
               </a>
@@ -80,19 +77,19 @@ const Footer = (props) => {
           <div className="col-span-12 lg:col-span-2 mb-6 lg:mb-0">
             <h4 className="text-f26 font-bold mb-6">Links</h4>
             <div className="flex flex-col space-y-4">
-              <Link href="/">Who We Are</Link>
-              <Link href="/">Our Brands</Link>
-              <Link href="/">Products</Link>
-              <Link href="/">Contact Us</Link>
+              <Link href="/who-we-are/our-profile">Who We Are</Link>
+              <Link href="/our-brands/rr-kabel">Our Brands</Link>
+              <Link href="/products">Products</Link>
+              <Link href="/contact-us/head-office">Contact Us</Link>
             </div>
           </div>
           <div className="col-span-12 lg:col-span-2 mb-6 lg:mb-0">
             <h4 className="text-f26 font-bold mb-6">Explore</h4>
             <div className="flex flex-col space-y-4">
-              <Link href="/">Media</Link>
-              <Link href="/">Our Story</Link>
-              <Link href="/">Latest Posts</Link>
-              <Link href="/">Help Center</Link>
+              <Link href="/media/news">Media</Link>
+              <Link href="/media/events">Our Story</Link>
+              <Link href="/media/blogs">Latest Posts</Link>
+              <Link href="/career">Help Center</Link>
             </div>
           </div>
           <div className="col-span-12 lg:col-span-4 mb-6 lg:mb-0">

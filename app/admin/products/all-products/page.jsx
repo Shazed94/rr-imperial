@@ -11,7 +11,7 @@ import {
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import Link from "next/link";
 import Swal from "sweetalert2";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { BiEdit } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
@@ -93,104 +93,104 @@ const AllProducts = () => {
                   </Button>
                 </Link>
               </div>
-              <Suspense fallback={<div className="text-5xl">Loading...</div>}>
-                <table className="w-full min-w-max table-auto text-left">
-                  <thead>
-                    <tr>
-                      {TABLE_HEAD.map((head) => (
-                        <th
-                          key={head}
-                          className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+
+              <table className="w-full min-w-max table-auto text-left">
+                <thead>
+                  <tr>
+                    {TABLE_HEAD.map((head) => (
+                      <th
+                        key={head}
+                        className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                      >
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal leading-none opacity-70"
                         >
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal leading-none opacity-70"
+                          {head}
+                        </Typography>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {allProducts?.map((data, index) => {
+                    const isLast = index === allProducts.length - 1;
+                    const classes = isLast
+                      ? "p-4"
+                      : "p-4 border-b border-blue-gray-50";
+                    return (
+                      <tr key={index}>
+                        <td className={classes}>{index + 1}</td>
+                        <td className={classes}>{data?.name}</td>
+                        <td className={classes}>
+                          {data?.category?.category_name}
+                        </td>
+                        <td className={classes}>
+                          <Image
+                            className="img-thumbnail"
+                            width={50}
+                            height={40}
+                            src={`${BACKEND_BASE_URL}${data.image}`}
+                            alt={data.title}
+                          />
+                        </td>
+                        <td className={classes}>
+                          {/* view button */}
+
+                          <button
+                            onClick={() => {
+                              viewProduct(data.id);
+                            }}
+                            className="py-1 px-2 bg-light-blue-600 border-0 rounded-lg me-1 mb-1"
                           >
-                            {head}
-                          </Typography>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {allProducts?.map((data, index) => {
-                      const isLast = index === allProducts.length - 1;
-                      const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
-                      return (
-                        <tr key={index}>
-                          <td className={classes}>{index + 1}</td>
-                          <td className={classes}>{data?.name}</td>
-                          <td className={classes}>
-                            {data?.category?.category_name}
-                          </td>
-                          <td className={classes}>
-                            <Image
-                              className="img-thumbnail"
-                              width={50}
-                              height={40}
-                              src={`${BACKEND_BASE_URL}${data.image}`}
-                              alt={data.title}
-                            />
-                          </td>
-                          <td className={classes}>
-                            {/* view button */}
-
-                            <button
-                              onClick={() => {
-                                viewProduct(data.id);
+                            <FaEye
+                              style={{
+                                color: "white",
                               }}
-                              className="py-1 px-2 bg-light-blue-600 border-0 rounded-lg me-1 mb-1"
-                            >
-                              <FaEye
+                              title="View"
+                              size="1.5em"
+                            />
+                          </button>
+                          {/* edit button */}
+                          <Link href={`edit-product/${data.id}`}>
+                            <button className="py-1 px-2 bg-yellow-800 rounded-lg me-1 mb-1">
+                              <BiEdit
                                 style={{
                                   color: "white",
                                 }}
-                                title="View"
+                                title="Edit"
                                 size="1.5em"
                               />
                             </button>
-                            {/* edit button */}
-                            <Link href={`edit-product/${data.id}`}>
-                              <button className="py-1 px-2 bg-yellow-800 rounded-lg me-1 mb-1">
-                                <BiEdit
-                                  style={{
-                                    color: "white",
-                                  }}
-                                  title="Edit"
-                                  size="1.5em"
-                                />
-                              </button>
-                            </Link>
-                            {/* delete button */}
-                            <button
-                              onClick={() => deleteData(data.id)}
-                              className="py-1 px-2 bg-red-600 border-0 rounded-lg me-1 mb-1"
-                            >
-                              <MdDeleteForever
-                                style={{
-                                  color: "white",
-                                }}
-                                title="Delete"
-                                size="1.5em"
-                              />
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </Suspense>
+                          </Link>
+                          {/* delete button */}
+                          <button
+                            onClick={() => deleteData(data.id)}
+                            className="py-1 px-2 bg-red-600 border-0 rounded-lg me-1 mb-1"
+                          >
+                            <MdDeleteForever
+                              style={{
+                                color: "white",
+                              }}
+                              title="Delete"
+                              size="1.5em"
+                            />
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
       <Dialog
-        open={open} size="xxl"
+        open={open}
+        size="xxl"
         handler={handleOpen}
         animate={{
           mount: { scale: 1, y: 0 },

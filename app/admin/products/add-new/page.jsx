@@ -255,7 +255,7 @@ const AddProduct = () => {
   const [operatingTempValue, setOperatingTempValue] = useState("");
   const [minBendingRadiusValue, setMinBendingRadiusValue] = useState("");
   const [standardValue, setStandardValue] = useState();
-
+console.log(inputFields3);
   const storeData = async (e) => {
     e.preventDefault();
 

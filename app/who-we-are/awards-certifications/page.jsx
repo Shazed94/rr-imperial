@@ -29,7 +29,7 @@ const AwardsCertificates = () => {
       <Header />
       <WhoWeAreMaster>
         <div className="bg-white p-4 lg:p-8 mb-12" id="who-we-are">
-          <div className="grid grid-cols-12 gap-5 ">
+          <div className="grid grid-cols-12 gap-5 mb-12">
             <div className="col-span-12 md:col-span-5 space-y-4 md:space-y-8 lg:space-y-[72px] md:mt-14 lg:mt-0">
               <div
                 className="group bg-[#E6E7E8] hover:bg-[#E62020] hover:text-white transition flex justify-between gap-5 p-3 lg:mt-[70px] rounded-tl-2xl rounded-bl-2xl cursor-pointer"
@@ -198,6 +198,22 @@ const AwardsCertificates = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="grid grid-cols-7 gap-5 place-items-center mx-40">
+            <img src="/img/who-we-are/certificate/certificate-1.png" />
+            <img src="/img/who-we-are/certificate/certificate-2.png" />
+            <img src="/img/who-we-are/certificate/certificate-3.png" />
+            <img src="/img/who-we-are/certificate/certificate-4.png" />
+            <img src="/img/who-we-are/certificate/certificate-5.png" />
+            <img src="/img/who-we-are/certificate/certificate-6.png" />
+            <img src="/img/who-we-are/certificate/certificate-7.png" />
+            <img src="/img/who-we-are/certificate/certificate-8.png" />
+            <img src="/img/who-we-are/certificate/certificate-9.png" />
+            <img src="/img/who-we-are/certificate/certificate-10.png" />
+            <img src="/img/who-we-are/certificate/certificate-11.png" />
+            <img src="/img/who-we-are/certificate/certificate-12.png" />
+            <img src="/img/who-we-are/certificate/certificate-13.png" />
+            <img src="/img/who-we-are/certificate/certificate-14.png" />
           </div>
           {/* <div className="w-full h-96 flex justify-center items-center text-6xl bg-gray-600 mb-12">
             Lottie

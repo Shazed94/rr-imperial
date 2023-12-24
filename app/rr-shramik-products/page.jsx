@@ -31,11 +31,11 @@ const page = () => {
               </p>
             </div>
             <div className="container mb-10">
-            <SearchBoxButton />
+              <SearchBoxButton />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
               <Link
-                 href="/rr-shramik-products/category"
+                href="/rr-shramik-products/category"
                 data-aos="fade-right-150"
                 data-aos-delay="600"
                 className="group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"
@@ -49,7 +49,7 @@ const page = () => {
                 />
                 <span className="absolute bottom-0 left-0 right-0 py-4 bg-[#D46A29] text-white group-hover:text-[#D46A29] z-10  text-center uppercase text-f16 font-bold">
                   SUPER ENAMELLED COPPER WIRE <br />{" "}
-                  <small>* H Class (1800 C)</small>
+                  <small>* H Class (180&deg; C)</small>
                   <span className="w-0 group-hover:w-full group-hover:bg-white duration-300 absolute inset-0 transition-all -z-10"></span>
                 </span>
               </Link>
@@ -68,7 +68,7 @@ const page = () => {
                 />
                 <span className="absolute bottom-0 left-0 right-0 py-4 bg-[#D46A29] text-white group-hover:text-[#D46A29] z-10 text-center uppercase text-f16 font-bold">
                   SUPER ENAMELLED COPPER WIRE <br />{" "}
-                  <small>* 1-1+ Class (2000 C)</small>
+                  <small>* 1-1+ Class (200&deg; C)</small>
                   <span className="w-0 group-hover:w-full group-hover:bg-white duration-300 absolute inset-0 transition-all -z-10"></span>
                 </span>
               </Link>
@@ -112,7 +112,7 @@ const page = () => {
             </div>
             <div className="grid grid-cols-[repeat(1,minmax(0,1fr))] lg:grid-cols-[repeat(3,minmax(0,320px))] place-content-center gap-8 mx-auto">
               <Link
-               href="/rr-shramik-products/category"
+                href="/rr-shramik-products/category"
                 data-aos="fade-left-150"
                 data-aos-delay="400"
                 className=" group rounded-[20px] overflow-hidden border-2 border-[#D46A29] relative"

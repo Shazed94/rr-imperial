@@ -3,7 +3,7 @@ import ToasterAlert from "@/components/ToasterAlert";
 import { create_new_Role, read_all_Permission } from "@/utility/api";
 import { Button, Checkbox, Typography } from "@material-tailwind/react";
 import Link from "next/link";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, {  useEffect, useRef, useState } from "react";
 
 const RoleManagement = () => {
   const roleName = useRef();
