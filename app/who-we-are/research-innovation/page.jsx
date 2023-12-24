@@ -50,6 +50,7 @@ const page = () => {
               requirements at optimum cost.
             </p>
           </div>
+          
           <div className="w-full lg:w-2/3 md:order-1 lg:order-2 my-4 lg:mb-12">
             <ResearchInnovation className="md:h-72 lg:h-[30rem]" />
           </div>
