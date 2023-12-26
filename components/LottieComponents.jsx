@@ -338,7 +338,7 @@ export function FullSizeJson({ className }) {
 export function EmployeeIcon({ className }) {
   const interactivity = {
     mode: "cursor",
-    
+
     actions: [
       {
         position: { x: [0, 1], y: [0, 1] },
