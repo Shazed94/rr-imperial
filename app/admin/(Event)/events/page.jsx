@@ -6,6 +6,7 @@ import {
   delete_Event_gallery,
   edit_Event,
   read_all_Events,
+  read_all_eventsYear,
   update_Event,
   view_Event,
 } from "@/utility/api";
@@ -17,13 +18,11 @@ import {
   DialogHeader,
   Typography,
 } from "@material-tailwind/react";
-import moment from "moment";
-import { getCookie } from "cookies-next";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { AiFillCloseSquare, AiOutlinePlusCircle } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
-import { FaCalendarAlt, FaEye, FaUserTie } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import Parse from "html-react-parser";
@@ -35,6 +34,7 @@ const AdminEvents = () => {
   const eventDesc = useRef();
   const eventImage = useRef();
   const eventGallery = useRef();
+  const eventYearRef = useRef();
 
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState("");
@@ -46,10 +46,14 @@ const AdminEvents = () => {
 
   //=================================== Fetch all Events ===================================
   const [eventsInfo, setEventsInfo] = useState([]);
+  const [eventYear, setEventYear] = useState([]);
 
   useEffect(() => {
     read_all_Events().then((res) => {
       setEventsInfo(res.data.allEvents);
+    });
+    read_all_eventsYear().then((res) => {
+      setEventYear(res.data.allEventYears);
     });
   }, []);
 
@@ -67,7 +71,7 @@ const AdminEvents = () => {
     if (eventImage.current.files[0]) {
       formdata.append("image", eventImage.current.files[0]);
     }
-
+    formdata.append("event_year_id", eventYearRef.current.value);
     selectedImages.forEach((item) => {
       formdata.append("gallery_image[]", item);
     });
@@ -174,6 +178,7 @@ const AdminEvents = () => {
     selectedImages.forEach((item) => {
       formdata.append("gallery_image[]", item);
     });
+    formdata.append("event_year_id", eventYearRef.current.value);
 
     update_Event(editedEventId, formdata).then((response) => {
       if (response.data.status === 200) {
@@ -393,6 +398,20 @@ const AdminEvents = () => {
                       );
                     })}
                   </div>
+                  <div className="mb-1 flex flex-col gap-2 col-span-6">
+                    <select
+                      size="md"
+                      className="border border-gray-300 outline-0 bg-transparent focus:ring-0 rounded-lg"
+                      ref={eventYearRef}
+                    >
+                      <option value="">Select Year</option>
+                      {eventYear?.map((yearName) => (
+                        <option key={yearName.id} value={yearName.id}>
+                          {yearName?.year}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-12">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
                       Image Gallery (up to 10 images)&nbsp;{" "}
@@ -533,6 +552,23 @@ const AdminEvents = () => {
                     )}
                   </div>
 
+                  <div className="mb-1 flex flex-col gap-2 col-span-6">
+                    <select
+                      size="md"
+                      className="border border-gray-300 outline-0 bg-transparent focus:ring-0 rounded-lg"
+                      ref={eventYearRef}
+                    >
+                      <option value="">Select Year</option>
+                      {eventYear?.map((yearName) => (
+                        <option key={yearName.id} value={yearName.id} selected={
+                          yearName.id == editEventVal.event_year_id ? "selected" : ""
+                        }>
+                          {yearName?.year}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
                   <div className="mb-1 flex flex-col gap-2 col-span-12">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
                       Image Gallery (up to 10 images)&nbsp;{" "}
@@ -612,9 +648,6 @@ const AdminEvents = () => {
                       </div>
                     </div>
                   </div>
-                  <span>
-                    {editEventVal?.gallery?.length + selectedImages?.length}
-                  </span>
                   <div className="mb-1 flex flex-col gap-6 col-span-12">
                     <Typography
                       variant="h6"

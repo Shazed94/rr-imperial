@@ -1,14 +1,7 @@
 "use client";
-import {
-  Button,
-  Collapse,
-  Input,
-  Option,
-  Select,
-} from "@material-tailwind/react";
+import { Collapse, Input } from "@material-tailwind/react";
 import axios from "axios";
 import Link from "next/link";
-import { MdOutlineArrowDropDown } from "react-icons/md";
 import { BACKEND_BASE_URL } from "./GlobalVariables";
 import { useEffect, useState } from "react";
 
@@ -34,9 +27,9 @@ export function SearchBoxButton() {
 
   const renderAllCategories = async () => {
     await axios
-      .get(`${BACKEND_BASE_URL}/api/admin/products/categories`)
+      .get(`${BACKEND_BASE_URL}/api/products-categories`)
       .then((res) => {
-        setCategory(res.data.all_product_categories);
+        setCategory(res.data.categories);
       });
   };
 
@@ -93,10 +86,10 @@ export function SearchBoxButton() {
             ))}
           </select>
         </div>
-        <Collapse open={open}>
+        <Collapse open={open} className="overflow-auto max-h-56">
           <div
             id="example-collapse-text"
-            className="max-h-56 rounded-2 overflow-y-auto"
+            className="rounded-lg mt-3 overflow-y-auto bg-gray-100 shadow-lg"
           >
             {isLoading && (
               <div className="spinner-border text-danger m-3" role="status">
@@ -107,17 +100,14 @@ export function SearchBoxButton() {
               searchProduct?.length > 0 &&
               searchProduct?.map((data, i) => (
                 <Link key={i} href={`/product/details/${data.slug}`}>
-                  <div
-                    key={i}
-                    className="search_result_box d-flex p-3 text-dark"
-                  >
-                    <img
-                      src={`${BACKEND_BASE_URL}/${data.image}`}
-                      height={30}
-                      width={30}
-                      alt={data.name}
-                    />
-
+                  <div key={i} className=" flex p-3 text-dark">
+                    <div className="w-20 h-auto object-cover">
+                      <img
+                        src={`${BACKEND_BASE_URL}/${data.image}`}
+                        alt={data.name}
+                        className="w-full h-full"
+                      />
+                    </div>
                     <p className="ms-2 p-0 mb-2">{data.name}</p>
                   </div>
                 </Link>

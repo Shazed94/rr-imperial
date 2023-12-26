@@ -824,6 +824,109 @@ export const delete_Event = async (id) => {
   }
 };
 
+// =============================== Events Year ==================================
+
+//! ================== Read All Events Year ===================
+export const read_all_eventsYear = async () => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/events/years`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Create New Event Year ===================
+export const create_new_eventYear = async (formdata) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/events/years/store`;
+  let HEADERS = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.post(URL, formdata, HEADERS);
+
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Edit Event Year ===================
+export const edit_eventYear = async (eventId) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/events/years/edit/${eventId}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Update Event Year ===================
+export const update_eventYear = async (id, formdata) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/events/years/update/${id}`;
+  let HEADERS = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.post(URL, formdata, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Delete Event Year ===================
+export const delete_eventYear = async (id) => {
+  const isConfirm = await Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "green",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    return result.isConfirmed;
+  });
+
+  if (!isConfirm) {
+    return;
+  }
+
+  let URL = `${BACKEND_BASE_URL}/api/admin/events/years/delete/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  if (isConfirm) {
+    try {
+      const deleteResult = await axios.delete(URL, HEADERS);
+      return deleteResult;
+    } catch (e) {
+      return false;
+    }
+  }
+};
+
 // =============================== Tv Commercials ==================================
 
 //! ================== Read All Tv Commercials ===================

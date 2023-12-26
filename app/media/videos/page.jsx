@@ -5,6 +5,7 @@ import MediaMaster from "@/components/Media/MediaMaster";
 import { all_Media_Front } from "@/utility/api";
 import { Button } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
+import Parse from "html-react-parser";
 
 const Videos = () => {
   const [allVideos, setAllVideos] = useState([]);
@@ -31,17 +32,8 @@ const Videos = () => {
                   }`}
                 >
                   <h4 className="text-f25 text-[#414042] mb-2">{data.title}</h4>
-                  <div className="mb-1">
-                    <p className="text-[#6D6E71]">
-                      The display center aims to improve and prompt the standard
-                      of supply and service of International Quality Cables,
-                      said a press release.
-                    </p>
-                    <p className="text-[#6D6E71]">
-                      Director and CEO of the company Mahboob Hossain Mirdah,
-                      Director ANM Manzoor Murshed, Director Ahmed Ashfaqur
-                      Rahman, Director AM Ahsanul..
-                    </p>
+                  <div className="mt-2">
+                    {Parse(`${data?.description}`)}
                   </div>
                 </div>
                 <div
