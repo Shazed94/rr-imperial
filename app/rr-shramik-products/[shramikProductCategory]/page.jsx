@@ -10,6 +10,7 @@ import QuickNavigation from "@/components/QuickNavigation";
 import { ProductHome } from "@/components/LottieComponents";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
+import { SearchBoxButton } from "@/components/ButtonComponents";
 
 const ShramikProductCategory = ({ params }) => {
   // let paramName = params.productCategory.replace(/-/g, " ");
@@ -41,29 +42,9 @@ const ShramikProductCategory = ({ params }) => {
           {/* {paramName} */}
         </h3>
       </div>
-      <div className="container px-4 lg:px-0">
-        <div className="relative flex w-full ">
-          <Input
-            type="email"
-            className="ps-44 lg:ps-56 py-6 rounded-2xl !bg-[#F2F5F6] placeholder:text-gray-500 focus:!border focus:!border-[#cdcdcd] focus:!border-t focus-within:outline-none"
-            labelProps={{
-              className: "hidden",
-            }}
-            placeholder="Inpur Search Keywords Here"
-          />
-          <Button
-            size="md"
-            color="gray"
-            className="!absolute left-1 top-1 h-[42px] px-3 shadow-none bg-white text-[#6D6E71] rounded-s-lg"
-            // containerProps={{
-            //   className: "w-20",
-            // }}
-          >
-            Select Category{" "}
-            <MdOutlineArrowDropDown className="inline ms-3" size={20} />
-          </Button>
-        </div>
-      </div>
+      {/* <div className="container px-4 lg:px-0">
+        <SearchBoxButton/>
+      </div> */}
       <div className="container grid grid-cols-2 lg:grid-cols-8 place-items-center gap-4 lg:gap-2 py-12">
         <Link
           href="/products/house-wire"

@@ -5,8 +5,8 @@ import { GoArrowRight } from "react-icons/go";
 const ProductsMaster = (props) => {
 
   return (
-    <div className="container flex flex-col lg:flex-row gap-5">
-      <div className="w-full lg:w-[30%] px-4 lg:px-0">
+    <div className="container product_left_bar flex flex-col lg:flex-row gap-5 mb-10">
+      <div className="w-full max-h-[62rem] overflow-auto lg:w-[30%] px-4 lg:px-0">
         {props.productData?.map((product) => (
           <Link
             scroll={false}

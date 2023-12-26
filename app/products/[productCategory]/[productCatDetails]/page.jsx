@@ -124,10 +124,10 @@ const ProductDetails = ({ params }) => {
             HIGH VOLTAGE CABLES
           </button>
         </Link>
-        <Link href="/products/fire-survival" scroll={false}>
+        <Link href="/products/fire-survival-cables" scroll={false}>
           <button
             className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-              params.productCategory === "fire-survival"
+              params.productCategory === "fire-survival-cables"
                 ? "bg-[#E62020]"
                 : "bg-[#D1D3D4]"
             } hover:bg-[#E62020] transition-colors `}
