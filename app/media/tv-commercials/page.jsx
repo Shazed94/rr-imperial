@@ -4,22 +4,13 @@ import Header from "@/components/Header/Header";
 import MediaMaster from "@/components/Media/MediaMaster";
 import { all_Media_Front } from "@/utility/api";
 import {
-  Button,
   Dialog,
   DialogBody,
-  DialogFooter,
   DialogHeader,
-  Tab,
-  TabPanel,
-  Tabs,
-  TabsBody,
-  TabsHeader,
 } from "@material-tailwind/react";
 import moment from "moment";
 import Parse from "html-react-parser";
 import React, { useEffect, useState } from "react";
-import { MdArrowForward } from "react-icons/md";
-import YouTube from "react-youtube";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import Image from "next/image";
 
@@ -36,8 +27,8 @@ const TvCommercials = () => {
   );
   const handleOpen = () => setOpen(!open);
   useEffect(() => {
-    all_Media_Front().then((res) => {
-      setAllTvCommercials(res.data?.allTvCommercials);
+    all_Media_Front("1").then((res) => {
+      setAllTvCommercials(res.data?.allTvCommercials?.data);
     });
   }, []);
 
@@ -99,7 +90,7 @@ const TvCommercials = () => {
       </MediaMaster>
       <Footer />
       <Dialog
-        open={open}
+        open={open} size="lg"
         handler={handleOpen}
         animate={{
           mount: { scale: 1, y: 0 },
@@ -107,10 +98,10 @@ const TvCommercials = () => {
         }}
       >
         <DialogHeader></DialogHeader>
-        <DialogBody className="max-h-[65vh] overflow-auto">
+        <DialogBody className=" overflow-auto">
           <iframe
             width="100%"
-            height="500"
+            height="600"
             src={`https://www.youtube.com/embed/${embedLink}?autoplay=1`}
             title="YouTube video player"
             frameborder="0"

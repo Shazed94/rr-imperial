@@ -1,5 +1,5 @@
 "use client";
-import { Collapse, Input } from "@material-tailwind/react";
+import { Button, Collapse, Input } from "@material-tailwind/react";
 import axios from "axios";
 import Link from "next/link";
 import { BACKEND_BASE_URL } from "./GlobalVariables";
@@ -130,5 +130,29 @@ export function SearchBoxButton() {
         </Button> */}
       </div>
     </form>
+  );
+}
+
+export function LoadMoreNewsButton({ allNews }) {
+  // ================== Load More ========================
+  const loadMoreNews = () => {
+    if (currentPageNum != lastPageNumber) {
+      var pageNum = currentPageNum + 1;
+    }
+    axios
+      .get(`${BACKEND_BASE_URL}/api/all-medias?page=${pageNum}`)
+      .then((res) => {
+        setPaginateNews([...allNews, ...res.data?.allNews?.data]);
+        setCurrentPageNum(pageNum);
+      });
+  };
+  return (
+    currentPageNum != lastPageNumber && (
+      <div className="text-center">
+        <Button variant="outlined" size="lg" onClick={() => loadMoreNews()}>
+          Load More
+        </Button>
+      </div>
+    )
   );
 }

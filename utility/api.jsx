@@ -1463,8 +1463,8 @@ export const all_featured_categories = async () => {
   }
 };
 //! =============================== All Media Frontend ==================================
-export const all_Media_Front = async () => {
-  let URL = `${BACKEND_BASE_URL}/api/all-medias`;
+export const all_Media_Front = async (pagenum) => {
+  let URL = `${BACKEND_BASE_URL}/api/all-medias?page=${pagenum}`;
   try {
     const result = await axios.get(URL);
     return result;
@@ -1475,6 +1475,26 @@ export const all_Media_Front = async () => {
 //! =============================== News Frontend details ==================================
 export const single_News_Front = async (newsId) => {
   let URL = `${BACKEND_BASE_URL}/api/news/${newsId}`;
+  try {
+    const result = await axios.get(URL);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+//! =============================== Events Frontend details ==================================
+export const single_Event_Front = async (eventId) => {
+  let URL = `${BACKEND_BASE_URL}/api/events/${eventId}`;
+  try {
+    const result = await axios.get(URL);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+//! =============================== Blog Frontend details ==================================
+export const single_Blog_Front = async (eventId) => {
+  let URL = `${BACKEND_BASE_URL}/api/blogs/${eventId}`;
   try {
     const result = await axios.get(URL);
     return result;

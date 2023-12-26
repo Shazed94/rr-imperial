@@ -29,7 +29,6 @@ const ProductCategory = ({ params }) => {
     }
   };
 
-  console.log(currentPage);
   const fetchProductData = () => {
     axios
       .get(

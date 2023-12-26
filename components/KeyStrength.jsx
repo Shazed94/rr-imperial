@@ -147,7 +147,7 @@ const KeyStrength = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-6"
           >
             <div className="p-6  rounded-[24px] flex flex-col justify-between border gap-3">
-              {/* <DistrictIcon className={"w-16 h-16"} /> */}
+              <DistrictIcon className={"w-16 h-16"} />
               <h4 className="text-333 text-f18 font-bold">49 Districts</h4>
               <p className="text-333 text-f14 font-normal uppercase">
                 COVERED WITH ANEVER GROWING NETWORK

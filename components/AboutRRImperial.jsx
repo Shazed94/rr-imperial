@@ -1,6 +1,8 @@
 "use client";
 import {
+  AnnualGrowthIcon,
   AwardIcon,
+  AwardLottieWeb,
   CompanyProfileIcon,
   LottieAboutLeft,
   LottieAboutLeft1,
@@ -110,7 +112,10 @@ const AboutRRImperial = () => {
               >
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
                   <CompanyProfileIcon className="w-16 h-16" />
-                  <Link href="/who-we-are/our-profile" className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
+                  <Link
+                    href="/who-we-are/our-profile"
+                    className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors"
+                  >
                     {" "}
                     Company Profile
                   </Link>
@@ -121,7 +126,10 @@ const AboutRRImperial = () => {
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
                   <MissionVisionIcon className="w-16 h-16" />
-                  <Link href="/who-we-are/mission" className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
+                  <Link
+                    href="/who-we-are/mission"
+                    className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors"
+                  >
                     {" "}
                     Mission & Vision
                   </Link>
@@ -132,7 +140,10 @@ const AboutRRImperial = () => {
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
                   <AwardIcon className="w-16 h-16" />
-                  <Link href="/who-we-are/awards-certifications" className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
+                  <Link
+                    href="/who-we-are/awards-certifications"
+                    className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors"
+                  >
                     Awards & Certifications
                   </Link>
                   <p className="text-f14 text-333 font-tahoma-normal">
@@ -141,8 +152,11 @@ const AboutRRImperial = () => {
                   </p>
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
-                  <img src={"/svg/growth.svg"} alt="" className="w-14" />
-                  <Link href="/who-we-are/research-innovation" className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors">
+                  <AnnualGrowthIcon className="w-16 h-16" />
+                  <Link
+                    href="/who-we-are/research-innovation"
+                    className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors"
+                  >
                     Annual Growth
                   </Link>
                   <p className="text-f14 text-333 font-tahoma-normal">

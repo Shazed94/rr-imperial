@@ -1,5 +1,5 @@
 "use client";
-import Lottie from "lottie-react";
+import Lottie, { useLottie } from "lottie-react";
 import heroVideo from "../public/lottie/Slider.json";
 import aboutLeftVideo from "../public/lottie/AboutLeft.json";
 import learnMoreAboutUsBtn from "../public/lottie/BesideButton.json";
@@ -12,6 +12,7 @@ import employeesIcon from "../public/lottie/employeesIcon.json";
 import dealerIcon from "../public/lottie/dealerIcon.json";
 import ourProfile from "../public/lottie/OurProfileWhoWeAre.json";
 import awardCertification from "../public/lottie/CertificateWhoWeAre.json";
+import annualGrowth from "../public/lottie/annualGrowthIcon.json";
 import researchInnovation from "../public/lottie/ResearchInnovationWhoWeAre.json";
 import mission from "../public/lottie/MisionWhoWeAre.json";
 import rrKabel from "../public/lottie/RRKabel.json";
@@ -152,45 +153,205 @@ export function LearnMoreAboutUs({ className }) {
 }
 
 export function AwardIcon({ className }) {
-  const awardLottie = useRef();
-  const playAnimation = () => {
-    const animationInstance = awardLottie.current;
-    animationInstance.play();
-  };
-  const pauseAnimation = () => {
-    const animationInstance = awardLottie.current;
-    animationInstance.pause();
+  const interactivity = {
+    mode: "cursor",
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        visibility: [0, 1],
+        type: "loop",
+        frames: [0, 55],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [0],
+      },
+    ],
   };
 
   return (
     <div>
       <Lottie
-        // lottieRef={awardLottie}
         animationData={awardIcon}
-        options={{ autoplay: false }}
+        loop={false}
+        autoPlay={false}
         className={className}
+        interactivity={interactivity}
       />
     </div>
   );
 }
+
 export function MissionVisionIcon({ className }) {
-  return <Lottie animationData={missionVisionIcon} className={className} />;
+  const interactivity = {
+    mode: "cursor",
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        visibility: [0, 1],
+        type: "loop",
+        frames: [0, 60],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [0],
+      },
+    ],
+  };
+  return (
+    <Lottie
+      animationData={missionVisionIcon}
+      interactivity={interactivity}
+      className={className}
+    />
+  );
 }
 export function CompanyProfileIcon({ className }) {
-  return <Lottie animationData={companyProfileIcon} className={className} />;
+  const interactivity = {
+    mode: "cursor",
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        visibility: [0, 1],
+        type: "loop",
+        frames: [0, 60],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [0],
+      },
+    ],
+  };
+  return (
+    <Lottie
+      animationData={companyProfileIcon}
+      interactivity={interactivity}
+      className={className}
+    />
+  );
+}
+export function AnnualGrowthIcon({ className }) {
+  const interactivity = {
+    mode: "cursor",
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        visibility: [0, 1],
+        type: "loop",
+        frames: [0, 60],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [0],
+      },
+    ],
+  };
+  return (
+    <Lottie
+      animationData={annualGrowth}
+      interactivity={interactivity}
+      className={className}
+    />
+  );
 }
 
 export function DistrictIcon({ className }) {
-  return <Lottie animationData={districtIcon} className={className} />;
+  const interactivity = {
+    mode: "cursor",
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        visibility: [0, 1],
+        type: "loop",
+        frames: [0, 100],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [0],
+      },
+    ],
+  };
+  return <Lottie animationData={districtIcon}  interactivity={interactivity} className={className} />;
 }
 export function DealerIcon({ className }) {
-  return <Lottie animationData={dealerIcon} className={className} />;
+  const interactivity = {
+    mode: "cursor",
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        visibility: [0, 1],
+        type: "loop",
+        frames: [0, 60],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [0],
+      },
+    ],
+  };
+  return (
+    <Lottie
+      animationData={dealerIcon}
+      interactivity={interactivity}
+      className={className}
+    />
+  );
 }
 export function FullSizeJson({ className }) {
-  return <Lottie animationData={FullSize} className={className} />;
+  const interactivity = {
+    mode: "cursor",
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        visibility: [0, 1],
+        type: "loop",
+        frames: [0, 60],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [0],
+      },
+    ],
+  };
+  return (
+    <Lottie
+      animationData={FullSize}
+      interactivity={interactivity}
+      className={className}
+    />
+  );
 }
 export function EmployeeIcon({ className }) {
-  return <Lottie animationData={employeesIcon} className={className} />;
+  const interactivity = {
+    mode: "cursor",
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        visibility: [0, 1],
+        type: "loop",
+        frames: [0, 60],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [0],
+      },
+    ],
+  };
+  return (
+    <Lottie
+      animationData={employeesIcon}
+      interactivity={interactivity}
+      className={className}
+    />
+  );
 }
 export function QualityAssurance({ className }) {
   return <Lottie animationData={qualityAssurance} className={className} />;
