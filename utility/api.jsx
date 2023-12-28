@@ -39,22 +39,6 @@ export const read_all_Permission = async () => {
   }
 };
 
-//! ================== Create New Role ===================
-export const create_new_Role = async (formdata) => {
-  let URL = `${BACKEND_BASE_URL}/api/admin/roles/store`;
-  let HEADERS = {
-    headers: {
-      Authorization: `Bearer ${getCookie("admin_access_token")}`,
-    },
-  };
-  try {
-    const result = await axios.post(URL, formdata, HEADERS);
-
-    return result;
-  } catch (e) {
-    return false;
-  }
-};
 //! ================== Read All Admin User ===================
 export const read_all_AdminUser = async () => {
   let URL = `${BACKEND_BASE_URL}/api/admin/users`;
@@ -97,6 +81,90 @@ export const update_AdminUser = async (id, formdata) => {
   };
   try {
     const result = await axios.post(URL, formdata, HEADERS);
+
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+//! ================== Delete Admin User ===================
+export const delete_AdminUser = async (id) => {
+  const isConfirm = await Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "green",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    return result.isConfirmed;
+  });
+
+  if (!isConfirm) {
+    return;
+  }
+
+  let URL = `${BACKEND_BASE_URL}/api/admin/users/delete/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+
+  if (isConfirm) {
+    try {
+      const deleteResult = await axios.delete(URL, HEADERS);
+      return deleteResult;
+    } catch (e) {
+      return false;
+    }
+  }
+};
+//! ================== User Login Activity ===================
+export const user_Login_Activity = async () => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/users/login-activity`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+
+  try {
+    const result = await axios.get(URL, HEADERS);
+
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== User Login Activity Delete ===================
+export const user_Login_Activity_Delete = async (id) => {
+  const isConfirm = await Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "green",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    return result.isConfirmed;
+  });
+
+  if (!isConfirm) {
+    return;
+  }
+
+  let URL = `${BACKEND_BASE_URL}/api/admin/users/login-activity/delete/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.delete(URL, HEADERS);
 
     return result;
   } catch (e) {

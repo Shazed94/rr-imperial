@@ -1,5 +1,5 @@
 "use client";
-import Lottie, { useLottie } from "lottie-react";
+import Lottie, { useLottie, useLottieInteractivity } from "lottie-react";
 import heroVideo from "../public/lottie/Slider.json";
 import aboutLeftVideo from "../public/lottie/AboutLeft.json";
 import learnMoreAboutUsBtn from "../public/lottie/BesideButton.json";
@@ -162,11 +162,11 @@ export function AwardIcon({ className }) {
         type: "play",
         frames: [0, 90],
       },
-      // {
-      //   position: { x: -1, y: -1 },
-      //   type: "stop",
-      //   frames: [0],
-      // },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [90],
+      },
     ],
   };
 
@@ -193,11 +193,11 @@ export function MissionVisionIcon({ className }) {
         type: "play",
         frames: [0, 90],
       },
-      // {
-      //   position: { x: -1, y: -1 },
-      //   type: "stop",
-      //   frames: [0],
-      // },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [90],
+      },
     ],
   };
   return (
@@ -218,12 +218,11 @@ export function CompanyProfileIcon({ className }) {
         type: "play",
         frames: [0, 90],
       },
-      // {
-      //   position: { x: -1, y: -1 },
-      // visibility: [0, 1],
-      //   type: "play",
-      //   frames: [0,90],
-      // },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [90],
+      },
     ],
   };
   return (
@@ -234,6 +233,7 @@ export function CompanyProfileIcon({ className }) {
     />
   );
 }
+
 export function AnnualGrowthIcon({ className }) {
   const interactivity = {
     mode: "cursor",
@@ -244,11 +244,11 @@ export function AnnualGrowthIcon({ className }) {
         type: "play",
         frames: [0, 90],
       },
-      // {
-      //   position: { x: -1, y: -1 },
-      //   type: "stop",
-      //   frames: [0],
-      // },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [90],
+      },
     ],
   };
   return (
@@ -270,11 +270,11 @@ export function DistrictIcon({ className }) {
         type: "play",
         frames: [0, 60],
       },
-      // {
-      //   position: { x: -1, y: -1 },
-      //   type: "stop",
-      //   frames: [0],
-      // },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [60],
+      },
     ],
   };
   return (
@@ -295,11 +295,11 @@ export function DealerIcon({ className }) {
         type: "play",
         frames: [0, 60],
       },
-      // {
-      //   position: { x: -1, y: -1 },
-      //   type: "stop",
-      //   frames: [0],
-      // },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [60],
+      },
     ],
   };
   return (
@@ -320,11 +320,11 @@ export function FullSizeJson({ className }) {
         type: "play",
         frames: [0, 60],
       },
-      // {
-      //   position: { x: -1, y: -1 },
-      //   type: "stop",
-      //   frames: [0],
-      // },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [60],
+      },
     ],
   };
   return (
@@ -346,11 +346,11 @@ export function EmployeeIcon({ className }) {
         type: "play",
         frames: [0, 60],
       },
-      // {
-      //   position: { x: -1, y: -1 },
-      //   type: "stop",
-      //   frames: [0],
-      // },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [60],
+      },
     ],
   };
   return (

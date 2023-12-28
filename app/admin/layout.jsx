@@ -18,7 +18,7 @@ import { SlCalender } from "react-icons/sl";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { BsSliders, BsCalculator, BsLightbulb } from "react-icons/bs";
 import { BiNews } from "react-icons/bi";
-import { CgEventbrite } from "react-icons/cg";
+import { CgEventbrite, CgLogIn } from "react-icons/cg";
 import { HiOfficeBuilding } from "react-icons/hi";
 import { ImExit } from "react-icons/im";
 import { PiTelevision } from "react-icons/pi";
@@ -26,6 +26,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { deleteCookie, getCookie } from "cookies-next";
 import { admin_logout } from "@/utility/api";
 import toast from "react-hot-toast";
+import { FiActivity } from "react-icons/fi";
 
 const Layout = (props) => {
   const [fetchPermissions, setFetchPermissions] = useState();
@@ -347,6 +348,17 @@ const Layout = (props) => {
                 <FaUser className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                 <span className="text-base font-bold">Users</span>
               </Link>
+              <Link
+                href="/admin/users-login-activity"
+                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                  path == "/admin/users-login-activity" && "bg-[#ED2027]"
+                }`}
+              >
+                <FiActivity className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                <span className="text-base font-bold">
+                  Users Login Activity
+                </span>
+              </Link>
             </>
           ) : (
             <>
@@ -489,6 +501,24 @@ const Layout = (props) => {
               )}
               {fetchPermissions?.map(
                 (data, index) =>
+                  data?.permission_id == "15" && (
+                    <Link
+                      key={index}
+                      href="/admin/tv-commercials"
+                      className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                        path == "/admin/tv-commercials" && "bg-[#E71D1D]"
+                      }`}
+                    >
+                      <FaVideo className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                      <span className="text-base font-bold">
+                        Tv Commercials
+                      </span>
+                    </Link>
+                  )
+              )}
+
+              {fetchPermissions?.map(
+                (data, index) =>
                   data?.permission_id == "9" && (
                     <Link
                       key={index}
@@ -576,6 +606,23 @@ const Layout = (props) => {
                     >
                       <FaUser className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                       <span className="text-base font-bold">Users</span>
+                    </Link>
+                  )
+              )}
+              {fetchPermissions?.map(
+                (data, index) =>
+                  data?.permission_id == "16" && (
+                    <Link
+                      key={index}
+                      href="/admin/users-login-activity"
+                      className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${
+                        path == "/admin/users-login-activity" && "bg-[#ED2027]"
+                      }`}
+                    >
+                      <FiActivity className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                      <span className="text-base font-bold">
+                        Users Login Activity
+                      </span>
                     </Link>
                   )
               )}

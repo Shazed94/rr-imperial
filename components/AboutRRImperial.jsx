@@ -7,6 +7,7 @@ import {
   LottieAboutLeft,
   LottieAboutLeft1,
   MissionVisionIcon,
+  PlaySegmentsOnHover,
 } from "./LottieComponents";
 import { useEffect, useRef } from "react";
 import Aos from "aos";
@@ -112,6 +113,7 @@ const AboutRRImperial = () => {
               >
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
                   <CompanyProfileIcon className="w-16 h-16" />
+ 
                   <Link
                     href="/who-we-are/our-profile"
                     className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors"

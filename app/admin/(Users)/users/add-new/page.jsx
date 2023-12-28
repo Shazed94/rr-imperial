@@ -7,11 +7,13 @@ import { Button, Checkbox, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
-
 const UserAdd = () => {
+  const router = useRouter();
+
   const userName = useRef();
   const userEmail = useRef();
   const userPassword = useRef();
@@ -68,9 +70,9 @@ const UserAdd = () => {
 
         toast.success(response.data.message);
         // Redirect to the dashboard after successful login
+        router.push("/admin/users");
       }
     } catch (error) {
-      console.error(error);
       toast.error("An error occurred during login.");
     }
   };
@@ -178,13 +180,13 @@ const UserAdd = () => {
                         {permission?.map((data, index) => {
                           const isLast = index === permission.length - 1;
                           const classes = isLast
-                            ? "p-4"
-                            : "p-4 border-b border-blue-gray-50";
+                            ? "px-4 py-1"
+                            : "px-4 py-1 border-b border-blue-gray-50";
                           return (
                             <tr key={index}>
                               <td className={classes}>{data?.name}</td>
 
-                              <td className={`${classes}`}>
+                              <td className={`${classes} checkbox_td`}>
                                 <Checkbox
                                   className="self-center"
                                   onChange={handlePermission}

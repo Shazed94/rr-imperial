@@ -1,9 +1,15 @@
 "use client";
 import gsap from "gsap";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { RRShramik } from "./SvgComponents";
+import axios from "axios";
+
+import { BACKEND_BASE_URL } from "./GlobalVariables";
+import { useRouter } from "next/navigation";
 
 const QuickNavigation = () => {
+  const router = useRouter();
+  const searchRef = useRef();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const handleSearchClick = () => {
@@ -17,6 +23,17 @@ const QuickNavigation = () => {
       setIsSearchOpen(false);
     }
   };
+
+  const getResult = (event) => {
+    event.preventDefault();
+
+    router.push(`search/${searchRef.current.value}`);
+    // router.push({
+    //   pathname: "/search",
+    //   query: { searchProducts: searchProducts },
+    // });
+  };
+
   return (
     <>
       <div className="hidden lg:block fixed top-[33%] right-0 z-50">
@@ -33,7 +50,6 @@ const QuickNavigation = () => {
               alt=""
               className="relative scale-[100%] group-hover:scale-[110%] transition"
             />
-        
           </a>
           <div className="group relative top-[24px] -right-2">
             <a href="/pdf/rr_shramik_price_list.pdf" download>
@@ -46,7 +62,8 @@ const QuickNavigation = () => {
               />
             </a>
           </div>
-          <div
+
+          <button
             id="search-icon"
             className="group absolute top-[94px] -right-[10px]"
             onClick={handleSearchClick}
@@ -61,14 +78,18 @@ const QuickNavigation = () => {
               alt=""
               className="absolute top-[24px] right-[65px] scale-[80%] group-hover:scale-[85%] transition z-10"
             />
-          </div>
-          <input
-            id="search-input"
-            type="text"
-            placeholder="Search"
-            className="absolute top-[50%] -right-[205px] h-[46px] w-[244px] bg-[#fefefe] shadow-inner drop-shadow-xl placeholder:text-gray-500 focus-within:outline-none ps-5"
-            style={{ opacity: 0 }}
-          />
+          </button>
+          <form method="POST" onSubmit={(e) => getResult(e)}>
+            <input
+              required
+              id="search-input"
+              type="text"
+              placeholder="Search"
+              className="absolute top-[50%] -right-[205px] h-[46px] w-[244px] bg-[#fefefe] shadow-inner drop-shadow-xl placeholder:text-gray-500 focus-within:outline-none ps-5"
+              style={{ opacity: 0 }}
+              ref={searchRef}
+            />
+          </form>
         </div>
       </div>
     </>

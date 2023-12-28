@@ -3,7 +3,7 @@ import { Button, Collapse, Input } from "@material-tailwind/react";
 import axios from "axios";
 import Link from "next/link";
 import { BACKEND_BASE_URL } from "./GlobalVariables";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function DashboardLinkButton({ link }) {
   return (
@@ -18,12 +18,14 @@ export function DashboardLinkButton({ link }) {
 
 export function SearchBoxButton() {
   // =============== Search Product ====================
+  const categoryRef = useRef();
   const [open, setOpen] = useState(false);
   const [searchProduct, setSearchProduct] = useState([]);
   const [search_string, setSearch_string] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const [category, setCategory] = useState([]);
+  const [category_id, setCategoryId] = useState();
 
   const renderAllCategories = async () => {
     await axios
@@ -41,8 +43,9 @@ export function SearchBoxButton() {
     // e.preventDefault();
     setOpen(true);
     setIsLoading(true);
+    setCategoryId(categoryRef.current.value);
     axios
-      .post(`${BACKEND_BASE_URL}/api/search`, { search_string })
+      .post(`${BACKEND_BASE_URL}/api/search`, { search_string, category_id })
       .then((res) => {
         // if (res.data.search_result.length != 0) {
         setSearchProduct(res.data.search_result);
@@ -79,10 +82,13 @@ export function SearchBoxButton() {
           <select
             size="md"
             className=" border-none outline-0 bg-transparent focus:ring-0 focus:border-none"
+            ref={categoryRef}
           >
             <option value="">Select Category</option>
             {category?.map((categoryInfo) => (
-              <option key={category.id}>{categoryInfo?.category_name}</option>
+              <option key={categoryInfo.id} value={categoryInfo.id}>
+                {categoryInfo?.category_name}
+              </option>
             ))}
           </select>
         </div>

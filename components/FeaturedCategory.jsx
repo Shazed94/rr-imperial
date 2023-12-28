@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BACKEND_BASE_URL } from "./GlobalVariables";
 import { all_featured_categories } from "@/utility/api";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 // gsap.registerPlugin(ScrollTrigger);
 
 const FeaturedCategory = ({ title, data }) => {
@@ -13,6 +13,47 @@ const FeaturedCategory = ({ title, data }) => {
     all_featured_categories().then((res) => {
       setAllCategories(res.data.categories);
     });
+  }, []);
+
+  useEffect(() => {
+    const box1 = document.querySelector(".category_card_1");
+    const box2 = document.querySelector(".category_card_2");
+    const box3 = document.querySelector(".category_card_3");
+    const box4 = document.querySelector(".category_card_4");
+    const box5 = document.querySelector(".category_card_5");
+    const box6 = document.querySelector(".category_card_6");
+    const box7 = document.querySelector(".category_card_7");
+    const box8 = document.querySelector(".category_card_8");
+
+    box1.addEventListener("mouseenter", () => {
+      box1.setAttribute("data-aos-delay", "0");
+    });
+    box2.addEventListener("mouseenter", () => {
+      box2.setAttribute("data-aos-delay", "0");
+    });
+    box3.addEventListener("mouseenter", () => {
+      box3.setAttribute("data-aos-delay", "0");
+    });
+    box4.addEventListener("mouseenter", () => {
+      box4.setAttribute("data-aos-delay", "0");
+    });
+    box5.addEventListener("mouseenter", () => {
+      box5.setAttribute("data-aos-delay", "0");
+    });
+    box6.addEventListener("mouseenter", () => {
+      box6.setAttribute("data-aos-delay", "0");
+    });
+    box7.addEventListener("mouseenter", () => {
+      box7.setAttribute("data-aos-delay", "0");
+    });
+    box8.addEventListener("mouseenter", () => {
+      box8.setAttribute("data-aos-delay", "0");
+    });
+
+    //  box.addEventListener("mouseleave", () => {
+    //    box.setAttribute("data-aos-delay", "600");
+    //  });
+   
   }, []);
 
   return (
@@ -35,7 +76,7 @@ const FeaturedCategory = ({ title, data }) => {
             href={`/products/${allCategories[0]?.category_slug}`}
             data-aos="fade-right-150"
             data-aos-delay="600"
-            className="group category_card rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
+            className="group category_card_1 rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
           >
             <Image
               src={`${BACKEND_BASE_URL}/${allCategories[0]?.category_image}`}
@@ -49,11 +90,12 @@ const FeaturedCategory = ({ title, data }) => {
               <span className="w-0 group-hover:w-full group-hover:bg-white duration-300 absolute inset-0 transition-all -z-10"></span>
             </span>
           </Link>
+
           <Link
             href={`/products/${allCategories[1]?.category_slug}`}
             data-aos="fade-right-150"
             data-aos-delay="400"
-            className="group category_card rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
+            className="group category_card_2 rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
           >
             <Image
               src={`${BACKEND_BASE_URL}/${allCategories[1]?.category_image}`}
@@ -71,7 +113,7 @@ const FeaturedCategory = ({ title, data }) => {
             href={`/products/${allCategories[2]?.category_slug}`}
             data-aos="fade-right-150"
             data-aos-delay="200"
-            className="group category_card  rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
+            className="group category_card_3  rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
           >
             <Image
               src={`${BACKEND_BASE_URL}/${allCategories[2]?.category_image}`}
@@ -88,7 +130,7 @@ const FeaturedCategory = ({ title, data }) => {
           <Link
             href={`/products/${allCategories[3]?.category_slug}`}
             data-aos="fade-right-150"
-            className="group category_card rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
+            className="group category_card_4 rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
           >
             <Image
               src={`${BACKEND_BASE_URL}/${allCategories[3]?.category_image}`}
@@ -105,7 +147,7 @@ const FeaturedCategory = ({ title, data }) => {
           <Link
             href={`/products/${allCategories[4]?.category_slug}`}
             data-aos="fade-left-150"
-            className="group category_card rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
+            className="group category_card_5 rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
           >
             <Image
               src={`${BACKEND_BASE_URL}/${allCategories[4]?.category_image}`}
@@ -123,7 +165,7 @@ const FeaturedCategory = ({ title, data }) => {
             href={`/products/${allCategories[5]?.category_slug}`}
             data-aos="fade-left-150"
             data-aos-delay="200"
-            className="group category_card rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
+            className="group category_card_6 rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
           >
             <Image
               src={`${BACKEND_BASE_URL}/${allCategories[5]?.category_image}`}
@@ -141,7 +183,7 @@ const FeaturedCategory = ({ title, data }) => {
             href={`/products/${allCategories[6]?.category_slug}`}
             data-aos="fade-left-150"
             data-aos-delay="400"
-            className="group category_card rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
+            className="group category_card_7 rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
           >
             <Image
               src={`${BACKEND_BASE_URL}/${allCategories[6]?.category_image}`}
@@ -159,7 +201,7 @@ const FeaturedCategory = ({ title, data }) => {
             href={`/products/${allCategories[7]?.category_slug}`}
             data-aos="fade-left-150"
             data-aos-delay="600"
-            className="group category_card rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
+            className="group category_card_8 rounded-[20px] overflow-hidden border-2 border-[#e61616] relative"
           >
             <Image
               src={`${BACKEND_BASE_URL}/${allCategories[7]?.category_image}`}

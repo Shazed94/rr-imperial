@@ -141,3 +141,7 @@
 .product_left_bar>div::-webkit-scrollbar {
     width: 0 !important;
 }
+
+.checkbox_td label {
+    padding: 4px;
+}

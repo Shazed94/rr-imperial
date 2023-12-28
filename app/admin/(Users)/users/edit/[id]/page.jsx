@@ -73,8 +73,7 @@ const UserEdit = ({ params }) => {
     setSinglePermissionChecked(a);
   }, [selectedOldPermissions]);
 
-
-console.log(singlePermissionChecked)
+  console.log(singlePermissionChecked);
   return (
     <div className="main__container p-4">
       <ToasterAlert />
@@ -82,7 +81,7 @@ console.log(singlePermissionChecked)
         <div className="breadcrumb flex justify-between shadow-lg shadow-cyan-400/80">
           <div className="breadcrumb-item flex items-center ">
             <Link href="/admin/dashboard">Dashboard</Link>
-            <div className="before">Add user</div>
+            <div className="before">Edit user</div>
           </div>
           <Link href="/admin/users" className="breadcrumb-item p-0 text-white">
             All Users
@@ -157,7 +156,7 @@ console.log(singlePermissionChecked)
                           {TABLE_HEAD.map((head) => (
                             <th
                               key={head}
-                              className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                              className="border-b border-blue-gray-100 bg-blue-gray-50 px-4 py-2"
                             >
                               <Typography
                                 variant="small"
@@ -175,14 +174,14 @@ console.log(singlePermissionChecked)
                         {allPermissions?.map((AllPermissions, index) => {
                           const isLast = index === allPermissions.length - 1;
                           const classes = isLast
-                            ? "px-4 py-2"
-                            : "px-4 py-2 border-b border-blue-gray-50";
+                            ? "px-4 py-1"
+                            : "px-4 py-1 border-b border-blue-gray-50";
                           return (
                             <tr key={index}>
                               <td className={classes}>
                                 {AllPermissions?.name}
                               </td>
-                              <td className={`${classes}`}>
+                              <td className={`${classes} checkbox_td`}>
                                 {userInfo?.permission_info?.map(
                                   (permission, i) => {
                                     if (
@@ -194,7 +193,7 @@ console.log(singlePermissionChecked)
                                     }
                                     return (
                                       AllPermissions?.id ==
-                                      permission?.permission_id && (
+                                        permission?.permission_id && (
                                         <Checkbox
                                           key={i}
                                           className="self-center"

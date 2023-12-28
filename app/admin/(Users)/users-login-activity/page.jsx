@@ -1,35 +1,47 @@
 "use client";
 
-import { delete_AdminUser, read_all_AdminUser } from "@/utility/api";
+import {
+  read_all_AdminUser,
+  user_Login_Activity,
+  user_Login_Activity_Delete,
+} from "@/utility/api";
 import { Button, Typography } from "@material-tailwind/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AiFillEye, AiOutlinePlusCircle } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
+import moment from "moment";
 import Swal from "sweetalert2";
 
-const User = () => {
+const UserLoginActivity = () => {
   const [users, setAllUsers] = useState([]);
 
-  const TABLE_HEAD = ["#", "Name", "Email", "Handle"];
+  const TABLE_HEAD = [
+    "#",
+    "Name",
+    "Email",
+    "Login Time",
+    "Logout Time",
+    "Handle",
+  ];
 
   useEffect(() => {
-    read_all_AdminUser().then((res) => {
-      setAllUsers(res.data.all_users);
+    user_Login_Activity().then((res) => {
+      setAllUsers(res.data.user_login_activity);
     });
   }, []);
 
   const deleteData = (id) => {
-    delete_AdminUser(id).then((res) => {
+    user_Login_Activity_Delete(id).then((res) => {
       if (res) {
         Swal.fire({
           icon: "success",
           text: res.data.message,
           confirmButtonColor: "#5eba86",
         });
-        read_all_AdminUser().then((res) => {
-          setAllUsers(res.data.all_users);
+        user_Login_Activity().then((res) => {
+          setAllUsers(res.data.user_login_activity);
         });
       }
     });
@@ -50,21 +62,8 @@ const User = () => {
           <div className="card">
             <div className="card-body">
               <span className="top-border"></span>
-              <div className="my-2">
-                <Link
-                  href="/admin/users/add-new"
-                  className="flex items-center gap-4"
-                >
-                  <Button
-                    className="flex items-center gap-3 rounded-none"
-                    color="cyan"
-                  >
-                    <AiOutlinePlusCircle size={20} />
-                    Add
-                  </Button>
-                </Link>
-              </div>
-              <table className="w-full min-w-max table-auto text-left">
+
+              <table className="w-full min-w-max table-auto text-left mt-8">
                 <thead>
                   <tr>
                     {TABLE_HEAD.map((head) => (
@@ -93,24 +92,23 @@ const User = () => {
                     return (
                       <tr key={index}>
                         <td className={classes}>{index + 1}</td>
-                        <td className={classes}>{data?.name}</td>
-                        <td className={classes}>{data?.email}</td>
+                        <td className={classes}>{data?.user_info?.name}</td>
+                        <td className={classes}>{data?.user_info?.email}</td>
+                        <td className={classes}>
+                          {moment(data?.login_time).format(
+                            "DD MMM Y, h:mm:ss a"
+                          )}
+                        </td>
+                        <td className={classes}>
+                          {data?.logout_time != null
+                            ? moment(data?.logout_time).format(
+                                "DD MMM Y, h:mm:ss a"
+                              )
+                            : "Not yet logged out!"}
+                        </td>
 
                         <td className={`${classes}`}>
                           <div className="flex items-center gap-2">
-                            <Link
-                              href={`/admin/users/edit/${data.id}`}
-                              className="py-1 px-2 bg-yellow-300 rounded-lg me-1 mb-1"
-                            >
-                              <BiEdit
-                                style={{
-                                  color: "white",
-                                }}
-                                title="Edit"
-                                size="1.5em"
-                              />
-                            </Link>
-
                             <button
                               onClick={() => deleteData(data.id)}
                               className="py-1 px-2 bg-red-600 border-0 rounded-lg me-1 mb-1"
@@ -138,4 +136,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default UserLoginActivity;
