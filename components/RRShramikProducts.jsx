@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 
-const RRShramikProducts = () => {
+const RRShramikProductsComponent = () => {
   useEffect(() => {
     const box1 = document.querySelector(".category_card_1");
     const box2 = document.querySelector(".category_card_2");
@@ -194,4 +194,4 @@ const RRShramikProducts = () => {
   );
 };
 
-export default RRShramikProducts;
+export default RRShramikProductsComponent;

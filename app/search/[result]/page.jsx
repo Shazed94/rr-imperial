@@ -11,6 +11,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { MdArrowForward } from "react-icons/md";
 import QuickNavigation from "@/components/QuickNavigation";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const SearchAll = ({ params }) => {
   const [productSearchResult, setProductSearchResult] = useState([]);
@@ -237,7 +238,7 @@ const SearchAll = ({ params }) => {
           <h2 className="text-f28 font-semibold text-red-600 text-center py-16">
             Products
           </h2>
-          <div className="grid grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-7 px-4 lg:px-0">
             {paginatedProducts?.map((data) => (
               <Link
                 key={data.id}
@@ -260,23 +261,23 @@ const SearchAll = ({ params }) => {
             ))}
           </div>
           {productSearchResult.length > 8 && (
-            <div className="flex justify-center gap-4 pt-16">
+            <div className="flex justify-center gap-4 pt-16 max-w-[80%] lg:w-full overflow-x-auto mx-auto">
               <button
                 disabled={currentPage == 1}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPage - 1)}
               >
-                Previous Page
+                <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
-              {Array.from({ length: totalPages }).map((_, index) => (
+              {Array.from({ length: totalPages })?.map((_, index) => (
                 <>
                   <button
                     key={index + 1}
                     className={
                       index + 1 === currentPage
-                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white"
-                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]"
+                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
                     }
                     onClick={() => handleChangePage(index + 1)}
                   >
@@ -287,10 +288,10 @@ const SearchAll = ({ params }) => {
 
               <button
                 disabled={currentPage === totalPages}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPage + 1)}
               >
-                Next Page
+                <FaChevronRight className="text-[#A7A9AC]" />
               </button>
             </div>
           )}
@@ -302,7 +303,7 @@ const SearchAll = ({ params }) => {
           <h2 className="text-f28 font-semibold text-red-600 text-center py-16">
             Product Categories
           </h2>
-          <div className="grid grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-7 px-4 lg:px-0">
             {paginatedProductsCategory?.map((data) => (
               <Link
                 key={data.id}
@@ -327,10 +328,10 @@ const SearchAll = ({ params }) => {
             <div className="flex justify-center gap-4 pt-16">
               <button
                 disabled={currentPageCategory == 1}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageCategory - 1)}
               >
-                Previous Page
+                  <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
               {Array.from({ length: totalPagesCategory }).map((_, index) => (
@@ -351,12 +352,12 @@ const SearchAll = ({ params }) => {
 
               <button
                 disabled={currentPageCategory === totalPagesCategory}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() =>
                   handleChangePageCategory(currentPageCategory + 1)
                 }
               >
-                Next Page
+                  <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -368,7 +369,7 @@ const SearchAll = ({ params }) => {
           <h2 className="text-f28 font-semibold text-red-600 text-center py-16">
             Blogs
           </h2>
-          <div className="grid grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-7 px-4 lg:px-0">
             {paginatedProductsBlog?.map((blog) => (
               <div
                 key={blog.id}
@@ -405,10 +406,10 @@ const SearchAll = ({ params }) => {
             <div className="flex justify-center gap-4 pt-16">
               <button
                 disabled={currentPageBlog == 1}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageBlog - 1)}
               >
-                Previous Page
+                  <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
               {Array.from({ length: totalPagesBlog }).map((_, index) => (
@@ -429,10 +430,10 @@ const SearchAll = ({ params }) => {
 
               <button
                 disabled={currentPageBlog === totalPagesBlog}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePageBlog(currentPageBlog + 1)}
               >
-                Next Page
+                  <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -444,7 +445,7 @@ const SearchAll = ({ params }) => {
           <h2 className="text-f28 font-semibold text-red-600 text-center py-16">
             News
           </h2>
-          <div className="grid grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-7 px-4 lg:px-0">
             {paginatedProductsNews?.map((news) => (
               <div
                 key={news.id}
@@ -481,10 +482,10 @@ const SearchAll = ({ params }) => {
             <div className="flex justify-center gap-4 pt-16">
               <button
                 disabled={currentPageNews == 1}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageNews - 1)}
               >
-                Previous Page
+                  <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
               {Array.from({ length: totalPagesNews }).map((_, index) => (
@@ -505,10 +506,10 @@ const SearchAll = ({ params }) => {
 
               <button
                 disabled={currentPageNews === totalPagesNews}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePageNews(currentPageNews + 1)}
               >
-                Next Page
+                  <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -560,10 +561,10 @@ const SearchAll = ({ params }) => {
             <div className="flex justify-center gap-4 pt-16">
               <button
                 disabled={currentPageVideos == 1}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageVideos - 1)}
               >
-                Previous Page
+                  <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
               {Array.from({ length: totalPagesVideos }).map((_, index) => (
@@ -584,10 +585,10 @@ const SearchAll = ({ params }) => {
 
               <button
                 disabled={currentPageVideos === totalPagesVideos}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePageVideos(currentPageVideos + 1)}
               >
-                Next Page
+                  <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -599,7 +600,7 @@ const SearchAll = ({ params }) => {
           <h2 className="text-f28 font-semibold text-red-600 text-center py-16">
             Events
           </h2>
-          <div className="grid grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-7 px-4 lg:px-0">
             {paginatedProductsEvents?.map((event) => (
               <div
                 key={event.id}
@@ -636,10 +637,10 @@ const SearchAll = ({ params }) => {
             <div className="flex justify-center gap-4 pt-16">
               <button
                 disabled={currentPageEvents == 1}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageEvents - 1)}
               >
-                Previous Page
+                  <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
               {Array.from({ length: totalPagesEvents }).map((_, index) => (
@@ -660,10 +661,10 @@ const SearchAll = ({ params }) => {
 
               <button
                 disabled={currentPageEvents === totalPagesEvents}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePageEvents(currentPageEvents + 1)}
               >
-                Next Page
+                  <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -675,7 +676,7 @@ const SearchAll = ({ params }) => {
           <h2 className="text-f28 font-semibold text-red-600 text-center py-16">
             Tv Commerceials
           </h2>
-          <div className="grid grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-7 px-4 lg:px-0">
             {paginatedProductsTvCommercial?.map((tvCommercial, i) => (
               <div
                 key={i}
@@ -714,10 +715,10 @@ const SearchAll = ({ params }) => {
             <div className="flex justify-center gap-4 pt-16">
               <button
                 disabled={currentPageTvCommercial == 1}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageTvCommercial - 1)}
               >
-                Previous Page
+                  <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
               {Array.from({ length: totalPagesTvCommercial }).map(
@@ -740,12 +741,12 @@ const SearchAll = ({ params }) => {
 
               <button
                 disabled={currentPageTvCommercial === totalPagesTvCommercial}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() =>
                   handleChangePageTvCommercial(currentPageTvCommercial + 1)
                 }
               >
-                Next Page
+                  <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -806,10 +807,10 @@ const SearchAll = ({ params }) => {
             <div className="flex justify-center gap-4 pt-16">
               <button
                 disabled={currentPageRegionalOffice == 1}
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageRegionalOffice - 1)}
               >
-                Previous Page
+                  <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
               {Array.from({ length: totalPagesRegionalOffice }).map(
@@ -834,12 +835,12 @@ const SearchAll = ({ params }) => {
                 disabled={
                   currentPageRegionalOffice === totalPagesRegionalOffice
                 }
-                className="disabled:text-gray-300"
+                className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() =>
                   handleChangePageRegionalOffice(currentPageRegionalOffice + 1)
                 }
               >
-                Next Page
+                  <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}

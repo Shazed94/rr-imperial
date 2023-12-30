@@ -2,7 +2,7 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import { RRShramikLottie } from "@/components/LottieComponents";
 import QuickNavigation from "@/components/QuickNavigation";
-import RRShramikProducts from "@/components/RRShramikProducts";
+import RRShramikProductsComponent from "@/components/RRShramikProducts";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -35,7 +35,7 @@ const page = () => {
             </p>
           </div>
 
-          <RRShramikProducts />
+          <RRShramikProductsComponent />
 
           <div className="bg-[#E6E7E8] py-20 px-4 lg:px-0">
             <h3 className="text-[#D46A29] text-f28 lg:text-f38 font-bold text-center mb-10">

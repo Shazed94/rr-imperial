@@ -31,11 +31,11 @@ const Footer = (props) => {
               <p>Dhaka, Bangladesh</p>
             </div>
           </div>
-          <div className="flex justify-end lg:justify-center items-center gap-5 px-7 lg:ps-20 lg:pr-[105px] py-6 lg:py-14 lg:border-r-2 lg:border-r-gray-600">
-            <div className="flex justify-center items-center bg-[#E71D1D] rounded-[5px] w-20 h-20 order-2 lg:order-1">
+          <div className="flex lg:justify-center items-center gap-5 px-7 lg:ps-20 lg:pr-[105px] py-6 lg:py-14 lg:border-r-2 lg:border-r-gray-600">
+            <div className="flex justify-center items-center bg-[#E71D1D] rounded-[5px] w-20 h-20 ">
               <BiTime size={40} className="text-white" />
             </div>
-            <div className="text-white order-1 lg:order-2">
+            <div className="text-white">
               <p className="text-[20px] font-bold uppercase">WORKING HOURS</p>
               <p>Sat to Thur : 10:00-18:00</p>
               <p>Friday Closed</p>

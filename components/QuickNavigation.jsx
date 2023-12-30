@@ -15,6 +15,7 @@ import {
   PopoverContent,
   PopoverHandler,
 } from "@material-tailwind/react";
+import { IoSearchSharp } from "react-icons/io5";
 
 const QuickNavigation = () => {
   const router = useRouter();
@@ -40,8 +41,9 @@ const QuickNavigation = () => {
     event.preventDefault();
     router.push(`/search/${searchRef.current.value}`);
   };
-  const handleInputBox = () => {
-    setIsSearchOpenMobile(true);
+  const handleMobileSearch = () => {
+  
+     router.push(`/search/${searchRef.current.value}`);
   };
 
   const triggers = {
@@ -132,10 +134,10 @@ const QuickNavigation = () => {
             handler={handleOpenSearchMobile}
             animate={{
               mount: { scale: 1, y: 0 },
-              unmount: { scale: 0.9, y: "500%"  },
+              unmount: { scale: 0.9, y: "500%" },
             }}
           >
-            <DialogBody>
+            <DialogBody className="relative">
               <form method="POST" onSubmit={(e) => getResult(e)}>
                 <input
                   required
@@ -144,6 +146,10 @@ const QuickNavigation = () => {
                   placeholder="Search"
                   className="bg-[#fefefe] shadow-inner placeholder:text-gray-500 ps-5 w-full"
                   ref={searchRef}
+                />
+                <IoSearchSharp
+                  className="absolute right-6 top-6 text-f26 "
+                  onClick={handleMobileSearch}
                 />
               </form>
             </DialogBody>
