@@ -1572,7 +1572,7 @@ export const single_Blog_Front = async (eventId) => {
 };
 // //! =============================== All Price List Frontend ==================================
 export const all_Pricelist_Front = async () => {
-  let URL = `${BACKEND_BASE_URL}/api/admin/price-list`;
+  let URL = `${BACKEND_BASE_URL}/api/get-price-list`;
   try {
     const result = await axios.get(URL);
     return result;

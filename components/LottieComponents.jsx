@@ -70,7 +70,7 @@ export function RRKabel() {
     />
   );
 }
-export function RRShramik() {
+export function RRShramikLottie() {
   return (
     <Lottie
       animationData={rrShramik}

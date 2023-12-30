@@ -14,7 +14,7 @@ const PriceList = () => {
       setAllPricelist(res.data?.price_list);
     });
   };
-  console.log(allPricelist[0]);
+
   useEffect(() => {
     fetchAllPricelist();
   }, []);
@@ -35,7 +35,7 @@ const PriceList = () => {
 
             <a
               target="_blank"
-              href={`${BACKEND_BASE_URL}${allPricelist[0]?.cable_price_list}`}
+              href={`${BACKEND_BASE_URL}${allPricelist?.cable_price_list}`}
               download
               className="flex flex-between items-center bg-[#E6E7E8] px-10 py-1 cursor-pointer hover:bg-[#E71D1D] group transition-colors"
             >
@@ -61,7 +61,7 @@ const PriceList = () => {
             </div>
             <a
               target="_blank"
-              href={`${BACKEND_BASE_URL}${allPricelist[0]?.shramik_price_list}`}
+              href={`${BACKEND_BASE_URL}${allPricelist?.shramik_price_list}`}
               download
               className="flex flex-between items-center bg-[#E6E7E8] px-10 py-1 cursor-pointer hover:bg-[#D46A29] group transition-colors"
             >

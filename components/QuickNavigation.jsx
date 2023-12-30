@@ -1,16 +1,28 @@
 "use client";
 import gsap from "gsap";
 import { useRef, useState } from "react";
-import { RRShramik } from "./SvgComponents";
-import axios from "axios";
-
-import { BACKEND_BASE_URL } from "./GlobalVariables";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+import {
+  Button,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+  Input,
+  Popover,
+  PopoverContent,
+  PopoverHandler,
+} from "@material-tailwind/react";
 
 const QuickNavigation = () => {
   const router = useRouter();
   const searchRef = useRef();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [openSearchMobile, setOpenSearchMobile] = useState(false);
+
+  const handleOpenSearchMobile = () => setOpenSearchMobile(!openSearchMobile);
 
   const handleSearchClick = () => {
     if (!isSearchOpen) {
@@ -26,12 +38,15 @@ const QuickNavigation = () => {
 
   const getResult = (event) => {
     event.preventDefault();
+    router.push(`/search/${searchRef.current.value}`);
+  };
+  const handleInputBox = () => {
+    setIsSearchOpenMobile(true);
+  };
 
-    router.push(`search/${searchRef.current.value}`);
-    // router.push({
-    //   pathname: "/search",
-    //   query: { searchProducts: searchProducts },
-    // });
+  const triggers = {
+    onMouseUp: () => setOpenPopover(true),
+    onMouseLeave: () => setOpenPopover(false),
   };
 
   return (
@@ -90,6 +105,53 @@ const QuickNavigation = () => {
               ref={searchRef}
             />
           </form>
+        </div>
+      </div>
+
+      <div className="block lg:hidden fixed bottom-0 left-0 right-0 bg-[#E71D1D] text-4xl">
+        <div className="flex justify-between items-center px-4">
+          <a
+            href="/pdf/rr_cable_price_list.pdf"
+            className="group relative -right-2"
+            download
+          >
+            <p className="text-white text-f18">Kabel Price List</p>
+          </a>
+
+          <Image
+            src={"/svg/quick_search.svg"}
+            alt=""
+            width={25}
+            height={25}
+            className="scale-[80%] group-hover:scale-[85%] transition z-10"
+            onClick={handleOpenSearchMobile}
+          />
+
+          <Dialog
+            open={openSearchMobile}
+            handler={handleOpenSearchMobile}
+            animate={{
+              mount: { scale: 1, y: 0 },
+              unmount: { scale: 0.9, y: "500%"  },
+            }}
+          >
+            <DialogBody>
+              <form method="POST" onSubmit={(e) => getResult(e)}>
+                <input
+                  required
+                  id="search-input"
+                  type="text"
+                  placeholder="Search"
+                  className="bg-[#fefefe] shadow-inner placeholder:text-gray-500 ps-5 w-full"
+                  ref={searchRef}
+                />
+              </form>
+            </DialogBody>
+          </Dialog>
+
+          <a href="/pdf/rr_shramik_price_list.pdf" download>
+            <p className="text-white text-f18">Shramik Price List</p>
+          </a>
         </div>
       </div>
     </>

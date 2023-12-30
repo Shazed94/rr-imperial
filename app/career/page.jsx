@@ -3,6 +3,7 @@
 import Footer from "@/components/Footer/Footer";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import Header from "@/components/Header/Header";
+import QuickNavigation from "@/components/QuickNavigation";
 import { Input } from "@material-tailwind/react";
 import axios from "axios";
 import { useRef, useState } from "react";
@@ -99,15 +100,6 @@ const CurrentOpenings = () => {
       <section className="container">
         <div className="">
           <img src="/img/career/career.png" alt="" className="" />
-          <h2
-            data-aos="fade-up"
-            data-aos-delay="100"
-            className="absolute right-14 bottom-20 text-right max-w-[550px] text-white text-f38 font-bold"
-          >
-            Wiring <br /> Your Future with <br />
-            Innovative and <br />
-            SUSTAINABLE SOLUTIONS
-          </h2>
         </div>
         <h2 className="text-f38 text-[#ED1D24] font-bold text-center px-4 lg:px-0 py-8">
           Current Openings
@@ -280,6 +272,7 @@ const CurrentOpenings = () => {
         </div>
       </div>
       <Footer />
+      <QuickNavigation />
     </div>
   );
 };

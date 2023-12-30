@@ -5,7 +5,6 @@ import { LottieSlider } from "@/components/LottieComponents";
 import FeaturedCategory from "@/components/FeaturedCategory";
 import AboutRRImperial from "@/components/AboutRRImperial";
 import KeyStrength from "@/components/KeyStrength";
-import { all_featured_categories } from "@/utility/api";
 import Link from "next/link";
 
 export default async function Home() {
