@@ -19,66 +19,6 @@ const KeyStrength = () => {
 
   useEffect(() => {
     AOS.init();
-    // gsap.fromTo(
-    //   [title.current, h4.current],
-    //   { opacity: 0, x: "-200" },
-    //   {
-    //     opacity: 1,
-    //     x: "0",
-    //     duration: 0.8,
-    //     scrollTrigger: {
-    //       trigger: [title.current, h4.current],
-    //       start: "top 80%",
-    //       end: "top 80%",
-    //     //   markers: true,
-    //     },
-    //   }
-    // );
-    // gsap.fromTo(
-    //   p.current,
-    //   { opacity: 0, y: "100" },
-    //   {
-    //     opacity: 1,
-    //     y: "0",
-    //     duration: 0.8,
-    //     scrollTrigger: {
-    //       trigger: p.current,
-    //       start: "top 90%",
-    //       end: "top 90%",
-    //     //   markers: true,
-    //     },
-    //   }
-    // );
-    // gsap.fromTo(
-    //   grid.current,
-    //   { opacity: 0, y: "100" },
-    //   {
-    //     opacity: 1,
-    //     y: "0",
-    //     duration: 0.8,
-    //     scrollTrigger: {
-    //       trigger: grid.current,
-    //       start: "top 80%",
-    //       end: "top 80%",
-    //     //   markers: true,
-    //     },
-    //   }
-    // );
-    // gsap.fromTo(
-    //   Button.current,
-    //   { opacity: 0, y: "100" },
-    //   {
-    //     opacity: 1,
-    //     y: "0",
-    //     duration: 0.8,
-    //     scrollTrigger: {
-    //       trigger: Button.current,
-    //       start: "top 90%",
-    //       end: "top 90%",
-    //     //   markers: true,
-    //     },
-    //   }
-    // );
   }, []);
 
   return (
@@ -150,7 +90,7 @@ const KeyStrength = () => {
               <DistrictIcon className={"w-16 h-16"} />
               <h4 className="text-333 text-f18 font-bold">49 Districts</h4>
               <p className="text-333 text-f14 font-normal uppercase">
-                COVERED WITH ANEVER GROWING NETWORK
+                COVERED WITH A FAST-GROWING NETWORK
               </p>
             </div>
             <div className="p-6 rounded-[24px] flex flex-col justify-between border gap-3">

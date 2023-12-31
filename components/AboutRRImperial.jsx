@@ -113,7 +113,7 @@ const AboutRRImperial = () => {
               >
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
                   <CompanyProfileIcon className="w-16 h-16" />
- 
+
                   <Link
                     href="/who-we-are/our-profile"
                     className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors"
@@ -122,8 +122,8 @@ const AboutRRImperial = () => {
                     Company Profile
                   </Link>
                   <p className="text-f14 text-333 font-tahoma-normal">
-                    RR Imperials is one of the most awarded electricals company
-                    with multiple international certifications
+                    Merging two industry leaders with 45+ years&apos;
+                    experience, aims to lead Bangladesh’s electrical industry.
                   </p>
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
@@ -136,8 +136,8 @@ const AboutRRImperial = () => {
                     Mission & Vision
                   </Link>
                   <p className="text-f14 text-333 font-tahoma-normal">
-                    RR Imperials is one of the most awarded electricals company
-                    with multiple international certifications
+                    RR-Imperial prioritizes quality cables, innovation, and
+                    global leadership for Bangladesh&apos;s growth.
                   </p>
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
@@ -150,7 +150,7 @@ const AboutRRImperial = () => {
                   </Link>
                   <p className="text-f14 text-333 font-tahoma-normal">
                     RR Imperials is one of the most awarded electricals company
-                    with multiple international certifications
+                    with multiple international certifications.
                   </p>
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
@@ -162,8 +162,8 @@ const AboutRRImperial = () => {
                     Annual Growth
                   </Link>
                   <p className="text-f14 text-333 font-tahoma-normal">
-                    RR Imperials is one of the most awarded electricals company
-                    with multiple international certifications
+                    Our company has experienced consistent and remarkable growth
+                    since its inception.
                   </p>
                 </div>
               </div>

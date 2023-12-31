@@ -18,7 +18,7 @@ const page = (props) => {
             cables, take great pride in our commitment to providing high-quality
             products while also ensuring the safety of the environment. We
             understand the importance of our responsibilities not only to our
-            customers but also to the planet, starting from Bangladesh.
+            customers but also to the planet, starting in Bangladesh.
           </p>
 
           <p className="text-[#58595B] font-normal mb-5">
@@ -30,27 +30,26 @@ const page = (props) => {
             practices.
           </p>
           <p className="text-[#58595B] font-normal mb-1">
-            Imperial Group is easily amongst the leaders in the chemicals and
+            Imperial Group is easily among the leaders in the chemicals and
             colorants business in Bangladesh, having contributed to the rise of
-            the now very powerful textile industry of Bangladesh. With an
-            experience of over 20 years in sales and distribution, a
-            country-wide establishment, and a network, Imperial Group is very
-            well-versed with the needs and expectations of the Bangladesh
-            market.
+            the now compelling textile industry in Bangladesh. With over 20
+            years of experience in sales and distribution, a country-wide
+            establishment, and a network, Imperial Group is very well-versed in
+            the needs and expectations of the Bangladesh market.
           </p>
           <p className="text-[#58595B] font-normal mb-5">
-            RR Group is one of the premier enameled wires and cable producers,
-            processing over 50,000 MT of Copper every year. With an experience
-            of over 45 years in the electrical field, RR Group is currently
+            RR Group is one of the premier enameled wire and cable producers,
+            processing over 50,000 MT of copper every year. With over 45 years
+            of experience in the electrical field, RR Group is currently
             exporting its products to over 80 countries worldwide. Its wires and
             cables have been internationally certified to cover all continents.
           </p>
           <p className="text-[#58595B] font-normal mb-5">
-            RR Imperial Electricals Ltd is the amalgamation of two like-minded
-            groups, who share a mutual passion for bringing the best to
-            Bangladesh as it grows rapidly to become a force in Asia. With
+            RR Imperial Electricals Ltd. is the amalgamation of two like-minded
+            groups who share a mutual passion for bringing the best to
+            Bangladesh as it proliferates to become a force in Asia. With
             expertise complementing each other’s strengths, RR Imperial
-            Electricals Ltd aims to be a leader in the horizon of Bangladesh’s
+            Electricals Ltd. aims to be a leader on the horizon of Bangladesh’s
             highly potential electrical industry.
           </p>
         </div>

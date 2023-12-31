@@ -38,67 +38,83 @@ const Header = () => {
               href="/"
               className="group relative font-normal py-5 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
             >
-              <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-              </span>
+              <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
               <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-              <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Home</span>
+              <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                Home
+              </span>
             </Link>
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               className=""
             >
               <MenuHandler>
-
                 <Link
                   href="/"
                   className="group relative font-normal py-5 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Who We Are</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Who We Are
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/who-we-are/our-profile" className="focus-visible:outline-none hover:focus-visible:outline-none">
-                  <MenuItem className="">
-                    Our Profile
-                  </MenuItem>
+                <Link
+                  href="/who-we-are/our-profile"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
+                  <MenuItem className="">Our Profile</MenuItem>
                 </Link>
-                <Link href="/who-we-are/awards-certifications" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/awards-certifications"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Awards & Certifications
                   </MenuItem>
                 </Link>
-                <Link href="/who-we-are/research-innovation" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/research-innovation"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Research & Innovation
                   </MenuItem>
                 </Link>
-                <Link href="/who-we-are/quality-assurance" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/quality-assurance"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Quality Assurance
                   </MenuItem>
                 </Link>
-                {/* <Link href="/who-we-are/research-development" className="focus-visible:outline-none hover:focus-visible:outline-none">
-                  <MenuItem className="hover:focus-visible:outline-none" >
-                    Research & Development
-                  </MenuItem>
-                </Link> */}
-                <Link href="/who-we-are/mission" className="focus-visible:outline-none hover:focus-visible:outline-none">
+
+                <Link
+                  href="/who-we-are/mission"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Mission
                   </MenuItem>
                 </Link>
-                <Link href="/who-we-are/vision" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/vision"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Vision
                   </MenuItem>
                 </Link>
-                <Link href="/who-we-are/policy" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/policy"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Policy
                   </MenuItem>
@@ -108,8 +124,8 @@ const Header = () => {
 
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
             >
@@ -118,30 +134,37 @@ const Header = () => {
                   href="/"
                   className="group relative font-normal py-5 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Our Brands</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Our Brands
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/our-brands/rr-kabel" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/our-brands/rr-kabel"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     RR Kabel
                   </MenuItem>
                 </Link>
-                <Link href="/our-brands/rr-shramik" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/our-brands/rr-shramik"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     RR Shramik
                   </MenuItem>
                 </Link>
               </MenuList>
-            </Menu >
+            </Menu>
 
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
             >
@@ -150,30 +173,37 @@ const Header = () => {
                   href="/"
                   className="group relative font-normal py-5 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Products</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Products
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/products" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/products"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     RR Kabel Products List
                   </MenuItem>
                 </Link>
-                <Link href="/rr-shramik-products" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/rr-shramik-products"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     RR Shramik Products List
                   </MenuItem>
                 </Link>
               </MenuList>
-            </Menu >
+            </Menu>
 
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
             >
@@ -182,29 +212,42 @@ const Header = () => {
                   href="/"
                   className="group relative font-normal py-5 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Media</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Media
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/media/news" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/media/news"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     News
                   </MenuItem>
                 </Link>
-                <Link href="/media/events" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/media/events"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Events
                   </MenuItem>
                 </Link>
-                <Link href="/media/blogs" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/media/blogs"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Blogs
                   </MenuItem>
                 </Link>
-                <Link href="/media/tv-commercials" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/media/tv-commercials"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Tv Commercials
                   </MenuItem>
@@ -214,27 +257,31 @@ const Header = () => {
                     Download
                   </MenuItem>
                 </Link> */}
-                <Link href="/media/videos" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/media/videos"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Videos
                   </MenuItem>
                 </Link>
               </MenuList>
-            </Menu >
+            </Menu>
 
             <Link
               href="/career"
               className="group relative font-normal py-5 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
             >
-              <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-              </span>
+              <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
               <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-              <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Career</span>
+              <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                Career
+              </span>
             </Link>
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
             >
@@ -243,30 +290,37 @@ const Header = () => {
                   href="/"
                   className="group relative font-normal py-5 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Wired</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Wired
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/wired/price-list" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/wired/price-list"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Price List
                   </MenuItem>
                 </Link>
-                <Link href="/wired/kabel-assist-calculator" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/wired/kabel-assist-calculator"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Kabel Assist Calculator
                   </MenuItem>
                 </Link>
               </MenuList>
-            </Menu >
+            </Menu>
 
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
             >
@@ -275,29 +329,36 @@ const Header = () => {
                   href="/contact-us/head-office"
                   className="group relative font-normal py-5 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Contact Us</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Contact Us
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/contact-us/head-office" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/contact-us/head-office"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Head Office
                   </MenuItem>
                 </Link>
-                <Link href="/contact-us/regional-offices" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/contact-us/regional-offices"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Regional Offices
                   </MenuItem>
                 </Link>
               </MenuList>
-            </Menu >
+            </Menu>
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   function NavList() {
@@ -321,48 +382,59 @@ const Header = () => {
               href="/"
               className="group relative font-normal pt-9 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
             >
-              <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-              </span>
+              <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
               <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-              <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Home</span>
+              <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                Home
+              </span>
             </Link>
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
               className=""
             >
               <MenuHandler>
-
                 <Link
-                  href="/"
+                  href="/who-we-are/our-profile"
                   className="group relative font-normal pt-9 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Who We Are</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Who We Are
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/who-we-are/our-profile" className="focus-visible:outline-none hover:focus-visible:outline-none">
-                  <MenuItem className="">
-                    Our Profile
-                  </MenuItem>
+                <Link
+                  href="/who-we-are/our-profile"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
+                  <MenuItem className="">Our Profile</MenuItem>
                 </Link>
-                <Link href="/who-we-are/awards-certifications" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/awards-certifications"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Awards & Certifications
                   </MenuItem>
                 </Link>
-                <Link href="/who-we-are/research-innovation" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/research-innovation"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Research & Innovation
                   </MenuItem>
                 </Link>
-                <Link href="/who-we-are/quality-assurance" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/quality-assurance"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Quality Assurance
                   </MenuItem>
@@ -372,17 +444,26 @@ const Header = () => {
                     Research & Development
                   </MenuItem>
                 </Link> */}
-                <Link href="/who-we-are/mission" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/mission"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Mission
                   </MenuItem>
                 </Link>
-                <Link href="/who-we-are/vision" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/vision"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Vision
                   </MenuItem>
                 </Link>
-                <Link href="/who-we-are/policy" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/who-we-are/policy"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Policy
                   </MenuItem>
@@ -392,103 +473,130 @@ const Header = () => {
 
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
             >
               <MenuHandler>
                 <Link
-                  href="/"
+                  href="/our-brands/rr-kabel"
                   className="group relative font-normal pt-9 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Our Brands</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Our Brands
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/our-brands/rr-kabel" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/our-brands/rr-kabel"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     RR Kabel
                   </MenuItem>
                 </Link>
-                <Link href="/our-brands/rr-shramik" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/our-brands/rr-shramik"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     RR Shramik
                   </MenuItem>
                 </Link>
               </MenuList>
-            </Menu >
+            </Menu>
 
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
             >
               <MenuHandler>
                 <Link
-                  href="/"
+                  href="/products"
                   className="group relative font-normal pt-9 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Products</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Products
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/products" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/products"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     RR Kabel Products List
                   </MenuItem>
                 </Link>
-                <Link href="/rr-shramik-products" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/rr-shramik-products"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     RR Shramik Products List
                   </MenuItem>
                 </Link>
               </MenuList>
-            </Menu >
+            </Menu>
 
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
             >
               <MenuHandler>
                 <Link
-                  href="/"
+                  href="/media/news"
                   className="group relative font-normal pt-9 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Media</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Media
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/media/news" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/media/news"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     News
                   </MenuItem>
                 </Link>
-                <Link href="/media/events" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/media/events"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Events
                   </MenuItem>
                 </Link>
-                <Link href="/media/blogs" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/media/blogs"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Blogs
                   </MenuItem>
                 </Link>
-                <Link href="/media/tv-commercials" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/media/tv-commercials"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Tv Commercials
                   </MenuItem>
@@ -498,59 +606,70 @@ const Header = () => {
                     Download
                   </MenuItem>
                 </Link> */}
-                <Link href="/media/videos" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/media/videos"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Videos
                   </MenuItem>
                 </Link>
               </MenuList>
-            </Menu >
+            </Menu>
 
             <Link
               href="/career"
               className="group relative font-normal pt-9 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
             >
-              <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-              </span>
+              <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
               <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-              <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Career</span>
+              <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                Career
+              </span>
             </Link>
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
             >
               <MenuHandler>
                 <Link
-                  href="/"
+                  href="/wired/price-list"
                   className="group relative font-normal pt-9 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Wired</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Wired
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/wired/price-list" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/wired/price-list"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Price List
                   </MenuItem>
                 </Link>
-                <Link href="/wired/kabel-assist-calculator" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/wired/kabel-assist-calculator"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Kabel Assist Calculator
                   </MenuItem>
                 </Link>
               </MenuList>
-            </Menu >
+            </Menu>
 
             <Menu
               animate={{
-                mount: { y: 0, opacity: 1, },
-                unmount: { y: 25, opacity: 0, },
+                mount: { y: 0, opacity: 1 },
+                unmount: { y: 25, opacity: 0 },
               }}
               allowHover
             >
@@ -559,29 +678,36 @@ const Header = () => {
                   href="/contact-us/head-office"
                   className="group relative font-normal pt-9 px-4 focus-visible:outline-none hover:focus-visible:outline-none overflow-hidden"
                 >
-                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20">
-                  </span>
+                  <span className="block absolute left-0 right-0 bottom-0 h-0 group-hover:bottom-2 group-hover:h-full bg-white transition-all duration-[400ms] delay-200 z-20"></span>
                   <span className="absolute left-0 right-0 bottom-0 bg-gray-400 h-0 group-hover:h-full  transition-all duration-[400ms] flex justify-center items-center z-10"></span>
-                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">Contact Us</span>
+                  <span className="relative z-50 text-white group-hover:text-[#ed1d24] transition-all duration-[400ms]">
+                    Contact Us
+                  </span>
                 </Link>
               </MenuHandler>
               <MenuList>
-                <Link href="/contact-us/head-office" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/contact-us/head-office"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Head Office
                   </MenuItem>
                 </Link>
-                <Link href="/contact-us/regional-offices" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                <Link
+                  href="/contact-us/regional-offices"
+                  className="focus-visible:outline-none hover:focus-visible:outline-none"
+                >
                   <MenuItem className="hover:focus-visible:outline-none">
                     Regional Offices
                   </MenuItem>
                 </Link>
               </MenuList>
-            </Menu >
+            </Menu>
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (

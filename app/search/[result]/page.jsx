@@ -28,6 +28,7 @@ const SearchAll = ({ params }) => {
     useState([]);
 
   const [loading, setLoading] = useState([]);
+  const [visiblePages, setVisiblePages] = useState(4);
 
   // Product Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,14 +38,19 @@ const SearchAll = ({ params }) => {
     (currentPage - 1) * productsPerPage,
     currentPage * productsPerPage
   );
+  console.log(totalPages);
   const handleChangePage = (page) => {
     // Check if page is within valid range
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
+    if (page > currentPage + visiblePages / 3) {
+      setVisiblePages(Math.min(totalPages - page + 1, visiblePages + 4));
+    } else if (page < currentPage - visiblePages / 2) {
+      setVisiblePages(Math.max(page - 1, 4));
+    }
   };
 
-  console.log(paginatedProducts.length);
   // Product Category Pagination
   const [currentPageCategory, setCurrentPageCategory] = useState(1);
   const productsPerPageCategory = 8;
@@ -269,9 +275,8 @@ const SearchAll = ({ params }) => {
               >
                 <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
-
-              {Array.from({ length: totalPages })?.map((_, index) => (
-                <>
+              <div className="hidden lg:flex lg:justify-center lg:gap-4">
+                {Array.from({ length: totalPages })?.map((_, index) => (
                   <button
                     key={index + 1}
                     className={
@@ -283,9 +288,27 @@ const SearchAll = ({ params }) => {
                   >
                     {index + 1}
                   </button>
-                </>
-              ))}
-
+                ))}
+              </div>
+              <div className="flex justify-center lg:gap-4 lg:hidden">
+                {Array.from({ length: totalPages })?.map(
+                  (_, index) =>
+                    index + 1 >= currentPage - visiblePages / 3 &&
+                    index + 1 <= currentPage + visiblePages / 3 && (
+                      <button
+                        key={index + 1}
+                        className={
+                          index + 1 === currentPage
+                            ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                            : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
+                        }
+                        onClick={() => handleChangePage(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    )
+                )}
+              </div>
               <button
                 disabled={currentPage === totalPages}
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
@@ -331,24 +354,43 @@ const SearchAll = ({ params }) => {
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageCategory - 1)}
               >
-                  <FaChevronLeft className="text-[#A7A9AC] " />
+                <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
-              {Array.from({ length: totalPagesCategory }).map((_, index) => (
-                <>
+              <div className="hidden lg:flex lg:justify-center lg:gap-4">
+                {Array.from({ length: totalPagesCategory })?.map((_, index) => (
                   <button
                     key={index + 1}
                     className={
                       index + 1 === currentPageCategory
-                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white"
-                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]"
+                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
                     }
-                    onClick={() => handleChangePageCategory(index + 1)}
+                    onClick={() => handleChangePage(index + 1)}
                   >
                     {index + 1}
                   </button>
-                </>
-              ))}
+                ))}
+              </div>
+              <div className="flex justify-center lg:gap-4 lg:hidden">
+                {Array.from({ length: totalPagesCategory })?.map(
+                  (_, index) =>
+                    index + 1 >= currentPageCategory - visiblePages / 3 &&
+                    index + 1 <= currentPageCategory + visiblePages / 3 && (
+                      <button
+                        key={index + 1}
+                        className={
+                          index + 1 === currentPageCategory
+                            ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                            : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
+                        }
+                        onClick={() => handleChangePage(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    )
+                )}
+              </div>
 
               <button
                 disabled={currentPageCategory === totalPagesCategory}
@@ -357,7 +399,7 @@ const SearchAll = ({ params }) => {
                   handleChangePageCategory(currentPageCategory + 1)
                 }
               >
-                  <FaChevronRight className="text-[#A7A9AC] " />
+                <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -409,31 +451,50 @@ const SearchAll = ({ params }) => {
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageBlog - 1)}
               >
-                  <FaChevronLeft className="text-[#A7A9AC] " />
+                <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
-              {Array.from({ length: totalPagesBlog }).map((_, index) => (
-                <>
+              <div className="hidden lg:flex lg:justify-center lg:gap-4">
+                {Array.from({ length: totalPagesBlog })?.map((_, index) => (
                   <button
                     key={index + 1}
                     className={
                       index + 1 === currentPageBlog
-                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white"
-                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]"
+                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
                     }
-                    onClick={() => handleChangePageBlog(index + 1)}
+                    onClick={() => handleChangePage(index + 1)}
                   >
                     {index + 1}
                   </button>
-                </>
-              ))}
+                ))}
+              </div>
+              <div className="flex justify-center lg:gap-4 lg:hidden">
+                {Array.from({ length: totalPagesBlog })?.map(
+                  (_, index) =>
+                    index + 1 >= currentPageBlog - visiblePages / 3 &&
+                    index + 1 <= currentPageBlog + visiblePages / 3 && (
+                      <button
+                        key={index + 1}
+                        className={
+                          index + 1 === currentPageBlog
+                            ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                            : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
+                        }
+                        onClick={() => handleChangePage(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    )
+                )}
+              </div>
 
               <button
                 disabled={currentPageBlog === totalPagesBlog}
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePageBlog(currentPageBlog + 1)}
               >
-                  <FaChevronRight className="text-[#A7A9AC] " />
+                <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -485,31 +546,50 @@ const SearchAll = ({ params }) => {
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageNews - 1)}
               >
-                  <FaChevronLeft className="text-[#A7A9AC] " />
+                <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
-              {Array.from({ length: totalPagesNews }).map((_, index) => (
-                <>
+              <div className="hidden lg:flex lg:justify-center lg:gap-4">
+                {Array.from({ length: totalPagesNews })?.map((_, index) => (
                   <button
                     key={index + 1}
                     className={
                       index + 1 === currentPageNews
-                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white"
-                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]"
+                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
                     }
-                    onClick={() => handleChangePageNews(index + 1)}
+                    onClick={() => handleChangePage(index + 1)}
                   >
                     {index + 1}
                   </button>
-                </>
-              ))}
+                ))}
+              </div>
+              <div className="flex justify-center lg:gap-4 lg:hidden">
+                {Array.from({ length: totalPagesNews })?.map(
+                  (_, index) =>
+                    index + 1 >= currentPageNews - visiblePages / 3 &&
+                    index + 1 <= currentPageNews + visiblePages / 3 && (
+                      <button
+                        key={index + 1}
+                        className={
+                          index + 1 === currentPageNews
+                            ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                            : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
+                        }
+                        onClick={() => handleChangePage(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    )
+                )}
+              </div>
 
               <button
                 disabled={currentPageNews === totalPagesNews}
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePageNews(currentPageNews + 1)}
               >
-                  <FaChevronRight className="text-[#A7A9AC] " />
+                <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -564,31 +644,50 @@ const SearchAll = ({ params }) => {
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageVideos - 1)}
               >
-                  <FaChevronLeft className="text-[#A7A9AC] " />
+                <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
-              {Array.from({ length: totalPagesVideos }).map((_, index) => (
-                <>
+              <div className="hidden lg:flex lg:justify-center lg:gap-4">
+                {Array.from({ length: totalPagesVideos })?.map((_, index) => (
                   <button
                     key={index + 1}
                     className={
                       index + 1 === currentPageVideos
-                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white"
-                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]"
+                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
                     }
-                    onClick={() => handleChangePageVideos(index + 1)}
+                    onClick={() => handleChangePage(index + 1)}
                   >
                     {index + 1}
                   </button>
-                </>
-              ))}
+                ))}
+              </div>
+              <div className="flex justify-center lg:gap-4 lg:hidden">
+                {Array.from({ length: totalPagesVideos })?.map(
+                  (_, index) =>
+                    index + 1 >= currentPageVideos - visiblePages / 3 &&
+                    index + 1 <= currentPageVideos + visiblePages / 3 && (
+                      <button
+                        key={index + 1}
+                        className={
+                          index + 1 === currentPageVideos
+                            ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                            : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
+                        }
+                        onClick={() => handleChangePage(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    )
+                )}
+              </div>
 
               <button
                 disabled={currentPageVideos === totalPagesVideos}
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePageVideos(currentPageVideos + 1)}
               >
-                  <FaChevronRight className="text-[#A7A9AC] " />
+                <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -640,31 +739,50 @@ const SearchAll = ({ params }) => {
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageEvents - 1)}
               >
-                  <FaChevronLeft className="text-[#A7A9AC] " />
+                <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
-              {Array.from({ length: totalPagesEvents }).map((_, index) => (
-                <>
+              <div className="hidden lg:flex lg:justify-center lg:gap-4">
+                {Array.from({ length: totalPagesEvents })?.map((_, index) => (
                   <button
                     key={index + 1}
                     className={
                       index + 1 === currentPageEvents
-                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white"
-                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]"
+                        ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                        : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
                     }
-                    onClick={() => handleChangePageEvents(index + 1)}
+                    onClick={() => handleChangePage(index + 1)}
                   >
                     {index + 1}
                   </button>
-                </>
-              ))}
+                ))}
+              </div>
+              <div className="flex justify-center lg:gap-4 lg:hidden">
+                {Array.from({ length: totalPagesEvents })?.map(
+                  (_, index) =>
+                    index + 1 >= currentPageEvents - visiblePages / 3 &&
+                    index + 1 <= currentPageEvents + visiblePages / 3 && (
+                      <button
+                        key={index + 1}
+                        className={
+                          index + 1 === currentPageEvents
+                            ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                            : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
+                        }
+                        onClick={() => handleChangePage(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    )
+                )}
+              </div>
 
               <button
                 disabled={currentPageEvents === totalPagesEvents}
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePageEvents(currentPageEvents + 1)}
               >
-                  <FaChevronRight className="text-[#A7A9AC] " />
+                <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -718,26 +836,45 @@ const SearchAll = ({ params }) => {
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageTvCommercial - 1)}
               >
-                  <FaChevronLeft className="text-[#A7A9AC] " />
+                <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
-              {Array.from({ length: totalPagesTvCommercial }).map(
-                (_, index) => (
-                  <>
+              <div className="hidden lg:flex lg:justify-center lg:gap-4">
+                {Array.from({ length: totalPagesTvCommercial })?.map(
+                  (_, index) => (
                     <button
                       key={index + 1}
                       className={
                         index + 1 === currentPageTvCommercial
-                          ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white"
-                          : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]"
+                          ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                          : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
                       }
-                      onClick={() => handleChangePageTvCommercial(index + 1)}
+                      onClick={() => handleChangePage(index + 1)}
                     >
                       {index + 1}
                     </button>
-                  </>
-                )
-              )}
+                  )
+                )}
+              </div>
+              <div className="flex justify-center lg:gap-4 lg:hidden">
+                {Array.from({ length: totalPagesTvCommercial })?.map(
+                  (_, index) =>
+                    index + 1 >= currentPageTvCommercial - visiblePages / 3 &&
+                    index + 1 <= currentPageTvCommercial + visiblePages / 3 && (
+                      <button
+                        key={index + 1}
+                        className={
+                          index + 1 === currentPageTvCommercial
+                            ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                            : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
+                        }
+                        onClick={() => handleChangePage(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    )
+                )}
+              </div>
 
               <button
                 disabled={currentPageTvCommercial === totalPagesTvCommercial}
@@ -746,7 +883,7 @@ const SearchAll = ({ params }) => {
                   handleChangePageTvCommercial(currentPageTvCommercial + 1)
                 }
               >
-                  <FaChevronRight className="text-[#A7A9AC] " />
+                <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}
@@ -810,26 +947,46 @@ const SearchAll = ({ params }) => {
                 className="disabled:text-gray-300 bg-[#F2F5F6] px-3"
                 onClick={() => handleChangePage(currentPageRegionalOffice - 1)}
               >
-                  <FaChevronLeft className="text-[#A7A9AC] " />
+                <FaChevronLeft className="text-[#A7A9AC] " />
               </button>
 
-              {Array.from({ length: totalPagesRegionalOffice }).map(
-                (_, index) => (
-                  <>
+              <div className="hidden lg:flex lg:justify-center lg:gap-4">
+                {Array.from({ length: totalPagesRegionalOffice })?.map(
+                  (_, index) => (
                     <button
                       key={index + 1}
                       className={
                         index + 1 === currentPageRegionalOffice
-                          ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white"
-                          : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]"
+                          ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                          : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
                       }
-                      onClick={() => handleChangePageRegionalOffice(index + 1)}
+                      onClick={() => handleChangePage(index + 1)}
                     >
                       {index + 1}
                     </button>
-                  </>
-                )
-              )}
+                  )
+                )}
+              </div>
+              <div className="flex justify-center lg:gap-4 lg:hidden">
+                {Array.from({ length: totalPagesRegionalOffice })?.map(
+                  (_, index) =>
+                    index + 1 >= currentPageRegionalOffice - visiblePages / 3 &&
+                    index + 1 <=
+                      currentPageRegionalOffice + visiblePages / 3 && (
+                      <button
+                        key={index + 1}
+                        className={
+                          index + 1 === currentPageRegionalOffice
+                            ? "w-10 h-10 bg-[#E62020] flex justify-center items-center text-white "
+                            : "w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC] "
+                        }
+                        onClick={() => handleChangePage(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    )
+                )}
+              </div>
 
               <button
                 disabled={
@@ -840,7 +997,7 @@ const SearchAll = ({ params }) => {
                   handleChangePageRegionalOffice(currentPageRegionalOffice + 1)
                 }
               >
-                  <FaChevronRight className="text-[#A7A9AC] " />
+                <FaChevronRight className="text-[#A7A9AC] " />
               </button>
             </div>
           )}

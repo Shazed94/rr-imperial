@@ -473,7 +473,6 @@ const ProductDetails = ({ params }) => {
               </div>
             </Link>
           ))}
-
         </div>
       </div>
 
@@ -489,22 +488,20 @@ const ProductDetails = ({ params }) => {
         size="lg"
       >
         <DialogBody className="relative">
-          <TransformWrapper>
-            <TransformComponent className="relative ">
-              {singleProduct?.product_cable_design_parameter.map(
-                (parameter) => (
-                  <Image
-                    key={parameter.id}
-                    src={`${BACKEND_BASE_URL}/${parameter?.cable_design_parameter}`}
-                    alt=""
-                    className="object-fill"
-                    width={1200}
-                    height={800}
-                  />
-                )
-              )}
-            </TransformComponent>
-          </TransformWrapper>
+          {singleProduct?.product_cable_design_parameter.map((parameter) => (
+            <TransformWrapper key={parameter.id}>
+              <TransformComponent className="relative ">
+                <Image
+            
+                  src={`${BACKEND_BASE_URL}/${parameter?.cable_design_parameter}`}
+                  alt=""
+                  className="object-fill"
+                  width={1200}
+                  height={800}
+                />
+              </TransformComponent>
+            </TransformWrapper>
+          ))}
         </DialogBody>
       </Dialog>
     </div>

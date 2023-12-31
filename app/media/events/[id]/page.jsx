@@ -3,22 +3,33 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import MediaMaster from "@/components/Media/MediaMaster";
 import { single_Event_Front } from "@/utility/api";
-import { Button } from "@material-tailwind/react";
+import { Button, Dialog, DialogBody } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
 import Parse from "html-react-parser";
-import { useEffect, useState } from "react";
-import moment from "moment";
+import { useEffect, useRef, useState } from "react";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 
 const EventDetails = ({ params }) => {
+  const sinistraRef = useRef(null);
   const [singleEvent, setSingleEvent] = useState([]);
+  const [singleGalleryImagePreview, setSinglesGalleryImagePreview] = useState();
   const fetchAllMedia = () => {
     single_Event_Front(params.id).then((res) => {
       setSingleEvent(res.data?.singleEvent);
-      console.log(res.data);
     });
   };
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = (event) => {
+    setOpen(!open);
+    const clickedImage = event.target?.closest("img");
+    if (clickedImage) {
+      setSinglesGalleryImagePreview(clickedImage.src);
+    }
+  };
+
   useEffect(() => {
     fetchAllMedia();
   }, []);
@@ -53,7 +64,11 @@ const EventDetails = ({ params }) => {
               <h3 className="text-center text-f20 mb-8">Image Gallery</h3>
               <div className="grid grid-cols-3 gap-7">
                 {singleEvent?.gallery.map((image) => (
-                  <div key={image.id}>
+                  <div
+                    key={image.id}
+                    onClick={(e) => handleOpen(e)}
+                    className="cursor-pointer"
+                  >
                     <img
                       src={`${BACKEND_BASE_URL}/${image?.gallery_image}`}
                       alt=""
@@ -65,6 +80,25 @@ const EventDetails = ({ params }) => {
           )}
         </div>
       </MediaMaster>
+      <Dialog
+        open={open}
+        handler={handleOpen}
+        animate={{
+          mount: { scale: 1, y: 0 },
+          unmount: { scale: 0.9, y: 150 },
+        }}
+        size="lg"
+      >
+        <DialogBody className="relative">
+          <TransformWrapper>
+            <TransformComponent className="relative ">
+              <div className="">
+                <img src={singleGalleryImagePreview} alt="" />
+              </div>
+            </TransformComponent>
+          </TransformWrapper>
+        </DialogBody>
+      </Dialog>
       <Footer />
     </div>
   );

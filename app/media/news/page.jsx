@@ -42,10 +42,10 @@ const News = () => {
       <MediaMaster>
         <div className="bg-white p-4 lg:p-8 mb-12" id="">
           {allNews?.map((news, i) => (
-            <div key={i} className="flex gap-10 mb-10">
+            <div key={i} className="flex flex-col lg:flex-row gap-10 mb-10">
               <div
-                className={`w-1/2 flex flex-col justify-center ${
-                  (i + 1) % 2 == 1 ? "order-1" : "order-2"
+                className={`w-full lg:w-1/2 flex flex-col justify-center ${
+                  (i + 1) % 2 == 1 ? "order-2 lg:order-1" : "order-2 lg:order-2"
                 }`}
               >
                 <h4 className="text-f25 text-[#414042] mb-2">{news?.title}</h4>
@@ -61,7 +61,9 @@ const News = () => {
                 </Link>
               </div>
               <div
-                className={`w-1/2 ${(i + 1) % 2 == 1 ? "order-2" : "order-1"}`}
+                className={`w-full lg:w-1/2 ${
+                  (i + 1) % 2 == 1 ? "order-1 lg:order-2" : "order-1"
+                }`}
               >
                 <img src={`${BACKEND_BASE_URL}/${news.image}`} alt="" />
               </div>

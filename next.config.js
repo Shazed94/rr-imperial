@@ -4,7 +4,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'rr-server.trodad.xyz',
+                hostname: 'api.rr-imperial.com',
 
             },
         ],

@@ -43,14 +43,14 @@ export default async function Home() {
               </Link>
             </div>
             <img
-              src={"svg/graph_1.svg"}
+              src={"img/graph_1.png"}
               alt=""
-              className="hidden lg:block absolute -top-2 -left-14 -rotate-[20deg] scale-[65%]"
+              className="hidden lg:block absolute -top-2 -left-5 -rotate-[20deg] scale-[65%]"
             />
             <img
-              src={"svg/graph_2.svg"}
+              src={"img/graph_2.png"}
               alt=""
-              className="hidden lg:block absolute -bottom-10 -right-12 rotate-[20deg] scale-[65%]"
+              className="hidden lg:block absolute -bottom-10 -right-0 rotate-[20deg] scale-[65%]"
             />
           </div>
         </section>

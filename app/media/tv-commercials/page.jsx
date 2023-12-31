@@ -37,7 +37,7 @@ const TvCommercials = () => {
       <Header />
       <MediaMaster>
         <div className="bg-white p-8 mb-12" id="">
-          <div className="grid grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {allTvCommercials?.map((tvCommercial, i) => (
               <div
                 key={i}
@@ -72,20 +72,6 @@ const TvCommercials = () => {
               </div>
             ))}
           </div>
-          {/* <div className="flex justify-center items-center gap-4 my-10">
-            <div className="w-10 h-10 bg-[#E62020] flex justify-center items-center text-white">
-              1
-            </div>
-            <div className="w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]">
-              2
-            </div>
-            <div className="w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]">
-              3
-            </div>
-            <div className="w-10 h-10 bg-[#F2F5F6] flex justify-center items-center text-[#A7A9AC]">
-              4
-            </div>
-          </div> */}
         </div>
       </MediaMaster>
       <Footer />

@@ -16,10 +16,10 @@ const page = () => {
       <div className="container max-w-2xl text-center px-4 lg:px-0 py-6 lg:py-14">
         <h3 className="text-[#E62020] text-f25 font-bold">Contact Details</h3>
         <p className="text-[#58595B]">
-          Welcome to RR Imperial Electrical Ltd. Please feel free to contact
-          with us any time. We are always here for your help. For any kind of
-          queries please submit the forms below. And for sales related
-          information, Corporate Sales Hotline: +880 17 55552582, 017 55552589.
+          Welcome to RR Imperial Electrical Ltd. Please feel free to contact us
+          at any time. We are always here to help you. For any kind of query,
+          please submit the forms below. For sales-related information, call the
+          Corporate Sales Hotline(s): +880 17 55552582, 017 55552589.
         </p>
       </div>
 

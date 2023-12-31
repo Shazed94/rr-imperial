@@ -42,8 +42,7 @@ const QuickNavigation = () => {
     router.push(`/search/${searchRef.current.value}`);
   };
   const handleMobileSearch = () => {
-  
-     router.push(`/search/${searchRef.current.value}`);
+    router.push(`/search/${searchRef.current.value}`);
   };
 
   const triggers = {
@@ -110,24 +109,25 @@ const QuickNavigation = () => {
         </div>
       </div>
 
-      <div className="block lg:hidden fixed bottom-0 left-0 right-0 bg-[#E71D1D] text-4xl">
+      <div className="block lg:hidden fixed bottom-0 left-0 right-0 bg-[#E71D1D] border-t border-white text-4xl z-50">
         <div className="flex justify-between items-center px-4">
           <a
             href="/pdf/rr_cable_price_list.pdf"
-            className="group relative -right-2"
+            className="group relative -right-2 "
             download
           >
             <p className="text-white text-f18">Kabel Price List</p>
           </a>
-
-          <Image
-            src={"/svg/quick_search.svg"}
-            alt=""
-            width={25}
-            height={25}
-            className="scale-[80%] group-hover:scale-[85%] transition z-10"
-            onClick={handleOpenSearchMobile}
-          />
+          <div className="py-3 h-full px-2 border-r border-l border-white">
+            <Image
+              src={"/svg/quick_search.svg"}
+              alt=""
+              width={25}
+              height={25}
+              className="scale-[80%] group-hover:scale-[85%] transition z-10 "
+              onClick={handleOpenSearchMobile}
+            />
+          </div>
 
           <Dialog
             open={openSearchMobile}
