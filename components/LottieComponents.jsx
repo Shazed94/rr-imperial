@@ -12,6 +12,7 @@ import employeesIcon from "../public/lottie/employeesIcon.json";
 import dealerIcon from "../public/lottie/dealerIcon.json";
 import ourProfile from "../public/lottie/OurProfileWhoWeAre.json";
 import awardCertification from "../public/lottie/CertificateWhoWeAre.json";
+import newAward from "../public/lottie/newlottiejs.json";
 import annualGrowth from "../public/lottie/annualGrowthIcon.json";
 import researchInnovation from "../public/lottie/ResearchInnovationWhoWeAre.json";
 import mission from "../public/lottie/MisionWhoWeAre.json";
@@ -42,6 +43,34 @@ export function AwardCertification({ className }) {
     />
   );
 }
+export function AwardCertificationNew({ className }) {
+  const interactivity = {
+    mode: "cursor",
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        visibility: [0, 1],
+        type: "play",
+        frames: [0, 90],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: "stop",
+        frames: [90],
+      },
+    ],
+  };
+
+  return (
+    <Lottie
+      animationData={newAward}
+      loop={false}
+      autoPlay={false}
+      className={className}
+      interactivity={interactivity}
+    />
+  );
+}
 export function ResearchInnovation({ className }) {
   return (
     <Lottie
@@ -57,7 +86,7 @@ export function Mission({ className }) {
       animationData={mission}
       loop={true}
       className={className}
-      // style={{ height: 520 }}
+    // style={{ height: 520 }}
     />
   );
 }
@@ -66,7 +95,7 @@ export function RRKabel() {
     <Lottie
       animationData={rrKabel}
       loop={true}
-      // style={{ height: 520 }}
+    // style={{ height: 520 }}
     />
   );
 }
@@ -75,7 +104,7 @@ export function RRShramikLottie() {
     <Lottie
       animationData={rrShramik}
       loop={true}
-      // style={{ height: 520 }}
+    // style={{ height: 520 }}
     />
   );
 }
@@ -84,7 +113,7 @@ export function WhoWeAreHome() {
     <Lottie
       animationData={whoWeAre}
       loop={true}
-      // style={{ height: 520 }}
+    // style={{ height: 520 }}
     />
   );
 }
@@ -93,7 +122,7 @@ export function MediaHome() {
     <Lottie
       animationData={media}
       loop={true}
-      // style={{ height: 520 }}
+    // style={{ height: 520 }}
     />
   );
 }
@@ -105,7 +134,7 @@ export function DownloadIcon() {
     <Lottie
       animationData={downloadIcon}
       loop={true}
-      // style={{ height: 520 }}
+    // style={{ height: 520 }}
     />
   );
 }

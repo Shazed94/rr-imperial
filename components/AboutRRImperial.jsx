@@ -1,6 +1,7 @@
 "use client";
 import {
   AnnualGrowthIcon,
+  AwardCertificationNew,
   AwardIcon,
   AwardLottieWeb,
   CompanyProfileIcon,
@@ -140,18 +141,22 @@ const AboutRRImperial = () => {
                     global leadership for Bangladesh&apos;s growth.
                   </p>
                 </div>
-                <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
-                  <AwardIcon className="w-16 h-16" />
+                <div className="p-0 bg-white rounded-lg flex flex-col justify-between gap-2 relative">
+                  {/* <AwardIcon className="w-16 h-16" /> */}
+                  <AwardCertificationNew className="absolute z-40" />
+
                   <Link
                     href="/who-we-are/awards-certifications"
-                    className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors"
+                    className="text-333 text-f28 font-bold hover:text-[#e61616] absolute top-20 left-5 z-50 transition-colors"
                   >
                     Awards & Certifications
                   </Link>
-                  <p className="text-f14 text-333 font-tahoma-normal">
+                  <p className="text-f14 text-333 font-tahoma-normal absolute bottom-4 left-5">
                     RR Imperials is one of the most awarded electricals company
                     with multiple international certifications.
                   </p>
+
+
                 </div>
                 <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
                   <AnnualGrowthIcon className="w-16 h-16" />
