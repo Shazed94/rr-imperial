@@ -1,71 +1,19 @@
 "use client";
 import {
   AnnualGrowthIcon,
-  AwardCertificationNew,
-  AwardIcon,
-  AwardLottieWeb,
+  AwardCertificationHome,
   CompanyProfileIcon,
   LottieAboutLeft,
-  LottieAboutLeft1,
   MissionVisionIcon,
-  PlaySegmentsOnHover,
 } from "./LottieComponents";
 import { useEffect, useRef } from "react";
 import Aos from "aos";
 import Link from "next/link";
 
 const AboutRRImperial = () => {
-  const h2 = useRef();
-  const p = useRef();
-  const grid = useRef();
 
   useEffect(() => {
     Aos.init();
-    // gsap.fromTo(
-    //   h2.current,
-    //   { opacity: 0, x: "-100" },
-    //   {
-    //     opacity: 1,
-    //     x: "0",
-    //     duration: 1,
-    //     scrollTrigger: {
-    //       trigger: h2.current,
-    //       start: "top 90%",
-    //       end: "top 90%",
-    //       //   markers: true,
-    //     },
-    //   }
-    // );
-    // gsap.fromTo(
-    //   p.current,
-    //   { opacity: 0, y: "100" },
-    //   {
-    //     opacity: 1,
-    //     y: "0",
-    //     duration: 1,
-    //     scrollTrigger: {
-    //       trigger: p.current,
-    //       start: "top 90%",
-    //       end: "top 90%",
-    //       //   markers: true,
-    //     },
-    //   }
-    // );
-    // gsap.fromTo(
-    //   grid.current,
-    //   { opacity: 0, x: "100" },
-    //   {
-    //     opacity: 1,
-    //     x: "0",
-    //     duration: 1,
-    //     scrollTrigger: {
-    //       trigger: grid.current,
-    //       start: "top 90%",
-    //       end: "top 90%",
-    //       //   markers: true,
-    //     },
-    //   }
-    // );
   }, []);
 
   return (
@@ -112,39 +60,37 @@ const AboutRRImperial = () => {
                 data-aos-easing="ease-in-out"
                 className="grid grod-cols-1 lg:grid-cols-2 gap-6"
               >
-                <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
-                  <CompanyProfileIcon className="w-16 h-16" />
+                <div className="h-[210px] bg-white rounded-lg flex flex-col justify-between gap-2 relative">
+                  <CompanyProfileIcon className="absolute z-40" />
 
                   <Link
                     href="/who-we-are/our-profile"
-                    className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors"
+                    className="text-333 text-f28 font-bold hover:text-[#e61616] absolute top-20 left-5 z-50 transition-colors"
                   >
                     {" "}
                     Company Profile
                   </Link>
-                  <p className="text-f14 text-333 font-tahoma-normal">
+                  <p className="text-f14 text-333 font-tahoma-normal absolute bottom-4 left-5">
                     Merging two industry leaders with 45+ years&apos;
                     experience, aims to lead Bangladesh’s electrical industry.
                   </p>
                 </div>
-                <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
-                  <MissionVisionIcon className="w-16 h-16" />
+                <div className="h-[210px] bg-white rounded-lg flex flex-col justify-between gap-2 relative">
+                  <MissionVisionIcon className="absolute z-40" />
                   <Link
                     href="/who-we-are/mission"
-                    className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors"
+                    className="text-333 text-f28 font-bold hover:text-[#e61616] absolute top-20 left-5 z-50 transition-colors"
                   >
                     {" "}
                     Mission & Vision
                   </Link>
-                  <p className="text-f14 text-333 font-tahoma-normal">
+                  <p className="text-f14 text-333 font-tahoma-normal absolute bottom-[35px] left-5">
                     RR-Imperial prioritizes quality cables, innovation, and
                     global leadership for Bangladesh&apos;s growth.
                   </p>
                 </div>
-                <div className="p-0 bg-white rounded-lg flex flex-col justify-between gap-2 relative">
-                  {/* <AwardIcon className="w-16 h-16" /> */}
-                  <AwardCertificationNew className="absolute z-40" />
-
+                <div className="h-[190px] bg-white rounded-lg flex flex-col justify-between gap-2 relative">
+                  <AwardCertificationHome className="absolute z-40" />
                   <Link
                     href="/who-we-are/awards-certifications"
                     className="text-333 text-f28 font-bold hover:text-[#e61616] absolute top-20 left-5 z-50 transition-colors"
@@ -156,17 +102,16 @@ const AboutRRImperial = () => {
                     with multiple international certifications.
                   </p>
 
-
                 </div>
-                <div className="p-4 bg-white rounded-lg flex flex-col justify-between gap-2">
-                  <AnnualGrowthIcon className="w-16 h-16" />
+                <div className="h-[190px] bg-white rounded-lg flex flex-col justify-between gap-2 relative">
+                  <AnnualGrowthIcon className="absolute z-40" />
                   <Link
                     href="/who-we-are/research-innovation"
-                    className="text-333 text-f28 font-bold hover:text-[#e61616] transition-colors"
+                    className="text-333 text-f28 font-bold hover:text-[#e61616] absolute top-20 left-5 z-50  transition-colors"
                   >
                     Annual Growth
                   </Link>
-                  <p className="text-f14 text-333 font-tahoma-normal">
+                  <p className="text-f14 text-333 font-tahoma-normal absolute bottom-4 left-5">
                     Our company has experienced consistent and remarkable growth
                     since its inception.
                   </p>

@@ -1,7 +1,7 @@
 "use client";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-import { AwardCertification } from "@/components/LottieComponents";
+import {  AwardCertificationWhoWeAre } from "@/components/LottieComponents";
 import WhoWeAreMaster from "@/components/WhoWeAre/WhoWeAreMaster";
 import {
   Button,
@@ -112,7 +112,7 @@ const AwardsCertificates = () => {
               </div>
             </div>
             <div className="hidden md:block col-span-2">
-              <AwardCertification className="h-[480px] lg:h-[650px]" />
+              <AwardCertificationWhoWeAre className="h-[480px] lg:h-[650px]" />
             </div>
             <div className="col-span-12 md:col-span-5 space-y-4 md:space-y-8 lg:space-y-[72px] md:mt-14 lg:mt-0">
               <div

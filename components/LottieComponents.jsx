@@ -1,5 +1,5 @@
 "use client";
-import Lottie, { useLottie, useLottieInteractivity } from "lottie-react";
+import Lottie from "lottie-react";
 import heroVideo from "../public/lottie/Slider.json";
 import aboutLeftVideo from "../public/lottie/AboutLeft.json";
 import learnMoreAboutUsBtn from "../public/lottie/BesideButton.json";
@@ -11,7 +11,7 @@ import FullSize from "../public/lottie/fullSize.json";
 import employeesIcon from "../public/lottie/employeesIcon.json";
 import dealerIcon from "../public/lottie/dealerIcon.json";
 import ourProfile from "../public/lottie/OurProfileWhoWeAre.json";
-import awardCertification from "../public/lottie/CertificateWhoWeAre.json";
+import awardCertificationWhoweare from "../public/lottie/CertificateWhoWeAre.json";
 import newAward from "../public/lottie/newlottiejs.json";
 import annualGrowth from "../public/lottie/annualGrowthIcon.json";
 import researchInnovation from "../public/lottie/ResearchInnovationWhoWeAre.json";
@@ -34,16 +34,16 @@ export function LottieSlider() {
 export function OurProfile() {
   return <Lottie animationData={ourProfile} loop={true} />;
 }
-export function AwardCertification({ className }) {
+export function AwardCertificationWhoWeAre({ className }) {
   return (
     <Lottie
-      animationData={awardCertification}
+      animationData={awardCertificationWhoweare}
       loop={true}
       className={className}
     />
   );
 }
-export function AwardCertificationNew({ className }) {
+export function AwardCertificationHome({ className }) {
   const interactivity = {
     mode: "cursor",
     actions: [
