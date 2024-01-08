@@ -2,7 +2,7 @@ import { SearchBoxButton } from "@/components/ButtonComponents";
 import FeaturedCategory from "@/components/FeaturedCategory";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-import { ProductHome } from "@/components/LottieComponents";
+import { ProductHomeLottie } from "@/components/LottieComponents";
 import QuickNavigation from "@/components/QuickNavigation";
 
 const ProductCategories = () => {
@@ -25,7 +25,7 @@ const ProductCategories = () => {
         <span className="absolute block h-0.5 right-10 left-16 bottom-16 bg-white"></span>
       </div> */}
       <div className="container">
-        <ProductHome />
+        <ProductHomeLottie />
       </div>
 
       <div className="container max-w-5xl text-center py-6 lg:py-14">

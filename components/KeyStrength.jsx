@@ -86,31 +86,31 @@ const KeyStrength = () => {
             data-aos-duration="800"
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-6"
           >
-            <div className="h-[190px] rounded-[24px] flex flex-col justify-between border gap-3 relative">
-              <DistrictIcon className="absolute z-40" />
-              <h4 className="text-333 text-f18 font-bold absolute top-[100px] left-5 z-50">49 Districts</h4>
-              <p className="text-333 text-f14 font-normal  absolute top-[140px] left-5 uppercase">
+            <div className="h-[210px] rounded-[24px] flex flex-col justify-between border gap-3 relative">
+              <DistrictIcon className="absolute z-40 -top-[10px] left-[-10px] lg:top-0 lg:left-0" />
+              <h4 className="text-333 text-f18 font-bold absolute top-[135px] lg:top-[110px] left-5 z-50">49 Districts</h4>
+              <p className="text-333 text-f14 font-normal absolute top-[168px] lg:top-[150px] left-5 uppercase">
                 COVERED WITH A FAST-GROWING NETWORK
               </p>
             </div>
-            <div className="h-[190px] rounded-[24px] flex flex-col justify-between border gap-3 relative">
-              <FullSizeJson className="absolute z-40" />
-              <h4 className="text-333 text-f18 font-bold absolute top-[100px] left-5 z-50">27 Full Size</h4>
-              <p className="text-333 text-f14 font-normal absolute top-[140px] left-5 uppercase">
+            <div className="h-[210px] rounded-[24px] flex flex-col justify-between border gap-3 relative">
+              <FullSizeJson className="absolute z-40 -top-[10px] left-[-10px] lg:top-0 lg:left-0" />
+              <h4 className="text-333 text-f18 font-bold absolute top-[135px] lg:top-[110px] left-5 z-50">27 Full Size</h4>
+              <p className="text-333 text-f14 font-normal absolute top-[168px] lg:top-[150px] left-5 uppercase">
                 OPERATION HUB
               </p>
             </div>
-            <div className="h-[190px] rounded-[24px] flex flex-col justify-between border gap-3 relative">
-              <EmployeeIcon className="absolute z-40" />
-              <h4 className="text-333 text-f18 font-bold absolute top-[100px] left-5 z-50">1000+</h4>
-              <p className="text-333 text-f14 font-normal absolute top-[140px] left-5 uppercase">
+            <div className="h-[210px] rounded-[24px] flex flex-col justify-between border gap-3 relative">
+              <EmployeeIcon className="absolute z-40 -top-[10px] left-[-10px] lg:top-0 lg:left-0" />
+              <h4 className="text-333 text-f18 font-bold absolute top-[135px] lg:top-[110px] left-5 z-50">1000+</h4>
+              <p className="text-333 text-f14 font-normal absolute top-[168px] lg:top-[150px] left-5 uppercase">
                 EMPLOYEES
               </p>
             </div>
-            <div className="h-[190px] rounded-[24px] flex flex-col justify-end border gap-3 relative">
-              <DealerIcon className="absolute z-40" />
-              <h4 className="text-333 text-f18 font-bold absolute top-[100px] left-5 z-50">4500+</h4>
-              <p className="text-333 text-f14 font-normal absolute top-[140px] left-5 uppercase">
+            <div className="h-[210px] rounded-[24px] flex flex-col justify-end border gap-3 relative">
+              <DealerIcon className="absolute z-40 -top-[10px] left-[-10px] lg:top-0 lg:left-0" />
+              <h4 className="text-333 text-f18 font-bold absolute top-[135px] lg:top-[110px] left-5 z-50">4500+</h4>
+              <p className="text-333 text-f14 font-normal absolute top-[168px] lg:top-[150px] left-5 uppercase">
                 PROUD DEALERS
               </p>
             </div>

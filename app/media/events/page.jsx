@@ -53,10 +53,10 @@ const Events = () => {
   //     setCurrentPageNum(pageNum);
   //   });
   // };
-  const result = allEventsYears?.map((eventYearInfo) => {
+  const result = allEventsYears.slice(0, 1)?.map((eventYearInfo) => {
     return eventYearInfo?.event_info?.map((event) => event);
   });
-  console.log(result);
+  console.log(parseInt(result[0]?.slice(0, 1)?.map((res) => res.event_year_id)[0]));
   useEffect(() => {
     fetchAllMedia();
 
@@ -67,73 +67,75 @@ const Events = () => {
       <Header />
       <MediaMaster>
         <div className="bg-white p-4 lg:p-8 mb-6 lg:mb-12" id="">
-          <Tabs value={6} className="">
-            <>
-              <TabsHeader
-                className="bg-[#D1D3D4] pb-2 rounded-none flex items-center"
-                indicatorProps={{
-                  className: "bg-[#ED1D24] shadow-none rounded-none",
-                }}
-              >
-                {allEventsYears?.map((eventYear) => (
-                  <Tab
-                    key={eventYear.id}
-                    value={eventYear?.id}
-                    className="shadow-none text-white py-3"
-                  >
-                    {eventYear?.year}
-                  </Tab>
-                ))}
-              </TabsHeader>
-              <TabsBody
-                animate={{
-                  initial: { y: 250 },
-                  mount: { y: 0 },
-                  unmount: { y: 250 },
-                }}
-              >
-                {allEventsYears?.map((eventYearInfo) => (
-                  <TabPanel
-                    key={eventYearInfo.id}
-                    value={eventYearInfo?.id}
-                    className="pt-4 px-0 grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-10"
-                  >
-                    {eventYearInfo?.event_info?.map((event) => (
-                      <div key={event.id} className="">
-                        <Link key={event.id} href={`events/${event.id}`}>
-                          <div className="group bg-[#E6E7E8] rounded-2xl h-full p-3 hover:scale-105 hover:bg-[#ED1D24] transition-all">
-                            <img
-                              src={`${BACKEND_BASE_URL}/${event?.image}`}
-                              alt=""
-                              className="w-full"
-                            />
-                            <div className="p-4 flex flex-col justify-between ">
-                              <div className="flex items-center gap-4 mb-3">
-                                <div className="bg-[#ED1D24] group-hover:bg-white text-white group-hover:text-[#ED1D24] rounded-md flex flex-col justify-center items-center px-3 py-1 leading-tight">
-                                  <span>
-                                    {moment(event.created_at).format("MMM")}
-                                  </span>
-                                  <span>
-                                    {moment(event.created_at).format("DD")}
-                                  </span>
+          {allEventsYears.slice(0, 1)?.map((eventYear) => (
+            <Tabs key={eventYear?.id} value={eventYear?.id} className="">
+              <>
+                <TabsHeader
+                  className="bg-[#D1D3D4] pb-2 rounded-none flex items-center"
+                  indicatorProps={{
+                    className: "bg-[#ED1D24] shadow-none rounded-none",
+                  }}
+                >
+                  {allEventsYears?.map((eventYear) => (
+                    <Tab
+                      key={eventYear.id}
+                      value={eventYear?.id}
+                      className="shadow-none text-white py-3 flex-wrap"
+                    >
+                      {eventYear?.year}
+                    </Tab>
+                  ))}
+                </TabsHeader>
+                <TabsBody
+                  animate={{
+                    initial: { y: 250 },
+                    mount: { y: 0 },
+                    unmount: { y: 250 },
+                  }}
+                >
+                  {allEventsYears?.map((eventYearInfo) => (
+                    <TabPanel
+                      key={eventYearInfo.id}
+                      value={eventYearInfo?.id}
+                      className="pt-4 px-0 grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-10"
+                    >
+                      {eventYearInfo?.event_info?.map((event) => (
+                        <div key={event.id} className="">
+                          <Link key={event.id} href={`events/${event.id}`}>
+                            <div className="group bg-[#E6E7E8] rounded-2xl h-full p-3 hover:scale-105 hover:bg-[#ED1D24] transition-all">
+                              <img
+                                src={`${BACKEND_BASE_URL}/${event?.image}`}
+                                alt=""
+                                className="w-full"
+                              />
+                              <div className="p-4 flex flex-col justify-between ">
+                                <div className="flex items-center gap-4 mb-3">
+                                  <div className="bg-[#ED1D24] group-hover:bg-white text-white group-hover:text-[#ED1D24] rounded-md flex flex-col justify-center items-center px-3 py-1 leading-tight">
+                                    <span>
+                                      {moment(event.publishing_date).format("MMM")}
+                                    </span>
+                                    <span>
+                                      {moment(event.publishing_date).format("DD")}
+                                    </span>
+                                  </div>
+                                  <h4 className="text-[#414042] group-hover:text-white text-f18 font-bold truncate">
+                                    {event.title}
+                                  </h4>
                                 </div>
-                                <h4 className="text-[#414042] group-hover:text-white text-f18 font-bold truncate">
-                                  {event.title}
-                                </h4>
-                              </div>
-                              <div className="mt-2 text-f16 text-[#6D6E71] group-hover:text-white">
-                                {Parse(`${event?.description.slice(0, 200)}`)}
+                                <div className="mt-2 text-f16 text-[#6D6E71] group-hover:text-white">
+                                  {Parse(`${event?.description.slice(0, 200)}`)}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </Link>
-                      </div>
-                    ))}
-                  </TabPanel>
-                ))}
-              </TabsBody>
-            </>
-          </Tabs>
+                          </Link>
+                        </div>
+                      ))}
+                    </TabPanel>
+                  ))}
+                </TabsBody>
+              </>
+            </Tabs>
+          ))}
           {/* <div className="flex justify-center gap-4">
             <button
               disabled={currentPage == 1}

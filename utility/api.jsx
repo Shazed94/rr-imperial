@@ -1365,6 +1365,110 @@ export const delete_Contact = async (id) => {
 
 // =============================== Regional Offices ==================================
 
+// =============================== Divisions ==================================
+
+//! ================== Read All Divisions ===================
+export const read_all_divisions = async () => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/regional-offices/divisions`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Create New Division ===================
+export const create_new_division = async (formdata) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/regional-offices/divisions/store`;
+  let HEADERS = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.post(URL, formdata, HEADERS);
+
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Edit Division ===================
+export const edit_division = async (eventId) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/regional-offices/divisions/edit/${eventId}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Update Division ===================
+export const update_division = async (id, formdata) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/regional-offices/divisions/update/${id}`;
+  let HEADERS = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.post(URL, formdata, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Delete Division ===================
+export const delete_division = async (id) => {
+  const isConfirm = await Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "green",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    return result.isConfirmed;
+  });
+
+  if (!isConfirm) {
+    return;
+  }
+
+  let URL = `${BACKEND_BASE_URL}/api/admin/regional-offices/divisions/delete/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  if (isConfirm) {
+    try {
+      const deleteResult = await axios.delete(URL, HEADERS);
+      return deleteResult;
+    } catch (e) {
+      return false;
+    }
+  }
+};
+
+
 //! ================== Read All Offices ===================
 export const read_all_Offices = async () => {
   let URL = `${BACKEND_BASE_URL}/api/admin/regional-offices`;

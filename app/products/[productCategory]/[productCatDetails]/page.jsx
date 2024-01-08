@@ -2,7 +2,7 @@
 import Footer from "@/components/Footer/Footer";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import Header from "@/components/Header/Header";
-import { ProductHome } from "@/components/LottieComponents";
+import { ProductHomeLottie } from "@/components/LottieComponents";
 import ProductsMaster from "@/components/Products/ProductsMaster";
 import QuickNavigation from "@/components/QuickNavigation";
 import { single_Product_Details_Front } from "@/utility/api";
@@ -49,7 +49,7 @@ const ProductDetails = ({ params }) => {
     <div>
       <Header />
       <div className="container">
-        <ProductHome className="" />
+        <ProductHomeLottie className="" />
       </div>
       <div className="container max-w-5xl text-center py-6 lg:py-14">
         <h3 className="text-[#E62020] text-f28 lg:text-f38 font-bold uppercase ">

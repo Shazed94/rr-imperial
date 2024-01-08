@@ -34,6 +34,7 @@ const AdminNews = () => {
   const newsAuthor = useRef();
   const newsTitle = useRef();
   const newsLink = useRef();
+  const newsPublishingDate = useRef();
   const newsDesc = useRef();
   const newsImage = useRef();
 
@@ -63,6 +64,7 @@ const AdminNews = () => {
     formdata.append("author", newsAuthor.current.value);
     formdata.append("title", newsTitle.current.value);
     formdata.append("src_link", newsLink.current.value);
+    formdata.append("publishing_date", newsPublishingDate.current.value);
     formdata.append("description", descVal);
     if (newsImage.current.files[0]) {
       formdata.append("image", newsImage.current.files[0]);
@@ -128,6 +130,8 @@ const AdminNews = () => {
     formdata.append("author", newsAuthor.current.value);
     formdata.append("title", newsTitle.current.value);
     formdata.append("src_link", newsLink.current.value);
+    formdata.append("publishing_date", newsPublishingDate.current.value);
+
     formdata.append("description", descVal);
     if (newsImage.current.files[0]) {
       formdata.append("image", newsImage.current.files[0]);
@@ -202,7 +206,7 @@ const AdminNews = () => {
                 </div>
               </div>
 
-              <table className="w-full min-w-max table-auto text-left">
+              <table className="w-full min-w-max text-left">
                 <thead>
                   <tr>
                     {TABLE_HEAD.map((head) => (
@@ -226,7 +230,7 @@ const AdminNews = () => {
                   {allNews?.map((data, index) => {
                     const isLast = index === allNews.length - 1;
                     const classes = isLast
-                      ? "p-4"
+                      ? "p-4 "
                       : "p-4 border-b border-blue-gray-50";
                     return (
                       <tr key={index}>
@@ -296,7 +300,7 @@ const AdminNews = () => {
         </div>
       </div>
       <Dialog
-        open={open}
+        open={open} size="lg"
         animate={{
           mount: { scale: 1, y: 0 },
           unmount: { scale: 0.9, y: -100 },
@@ -342,6 +346,7 @@ const AdminNews = () => {
                       required
                     />
                   </div>
+                  
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
                     <label
                       htmlFor="newsAuthor"
@@ -356,11 +361,29 @@ const AdminNews = () => {
                       defaultValue={getCookie("adminName")}
                       type="text"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="News Link"
+                      placeholder="News Author"
                       required
                     />
                   </div>
+
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
+                    <label
+                      htmlFor="newsPublishingDate"
+                      className="block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      News Publishing Date
+                    </label>
+
+                    <input
+                      id="newsPublishingDate"
+                      ref={newsPublishingDate}
+                      type="date"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="News Publishing Date"
+                      required
+                    />
+                  </div>
+                  <div className="mb-1 flex flex-col gap-2 col-span-12">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
                       News Image (700*400)&nbsp;{" "}
                     </label>
@@ -482,6 +505,24 @@ const AdminNews = () => {
                     />
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
+                    <label
+                      htmlFor="newsPublishingDate"
+                      className="block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      News Publishing Date
+                    </label>
+
+                    <input 
+                      id="newsPublishingDate"
+                      ref={newsPublishingDate}
+                      defaultValue={editNewsVal?.publishing_date}
+                      type="date"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="News Publishing Date"
+                      required
+                    />
+                  </div>
+                  <div className="mb-1 flex flex-col gap-2 col-span-12">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
                       News Image (700*400)&nbsp;{" "}
                     </label>
@@ -551,11 +592,11 @@ const AdminNews = () => {
                   <FaUserTie />
                   &nbsp; {singleNewsInfo.author}
                 </div>
-                <p>
+                <div className="flex justify-center items-center">
                   <FaCalendarAlt />
                   &nbsp;
                   {moment(singleNewsInfo.created_at).format("DD-MM-Y")}
-                </p>
+                </div>
               </div>
 
               <div className="text-center my-5">

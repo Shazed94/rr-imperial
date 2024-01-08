@@ -126,7 +126,7 @@ export function MediaHome() {
     />
   );
 }
-export function ProductHome({ className }) {
+export function ProductHomeLottie({ className }) {
   return <Lottie animationData={product} loop={true} className={className} />;
 }
 export function DownloadIcon() {

@@ -34,6 +34,7 @@ const AdminEvents = () => {
   const eventDesc = useRef();
   const eventImage = useRef();
   const eventGallery = useRef();
+  const eventPublishingDate = useRef();
   const eventYearRef = useRef();
 
   const [open, setOpen] = useState(false);
@@ -72,6 +73,7 @@ const AdminEvents = () => {
       formdata.append("image", eventImage.current.files[0]);
     }
     formdata.append("event_year_id", eventYearRef.current.value);
+    formdata.append("publishing_date", eventPublishingDate.current.value);
     selectedImages.forEach((item) => {
       formdata.append("gallery_image[]", item);
     });
@@ -123,7 +125,7 @@ const AdminEvents = () => {
   const onSelectFile = (event) => {
     const selectedFiles = event.target.files;
     const selectedFilesArray = Array.from(selectedFiles);
-    const imagesArray = selectedFilesArray.map((file) => {
+    const imagesArray = selectedFilesArray?.map((file) => {
       return file;
     });
 
@@ -179,6 +181,7 @@ const AdminEvents = () => {
       formdata.append("gallery_image[]", item);
     });
     formdata.append("event_year_id", eventYearRef.current.value);
+    formdata.append("publishing_date", eventPublishingDate.current.value);
 
     update_Event(editedEventId, formdata).then((response) => {
       if (response.data.status === 200) {
@@ -399,6 +402,9 @@ const AdminEvents = () => {
                     })}
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
+                    <label className="block text-sm font-medium text-gray-900 dark:text-white">
+                      Select Year
+                    </label>
                     <select
                       size="md"
                       className="border border-gray-300 outline-0 bg-transparent focus:ring-0 rounded-lg"
@@ -411,6 +417,16 @@ const AdminEvents = () => {
                         </option>
                       ))}
                     </select>
+                  </div>
+                  <div className="mb-1 flex flex-col gap-2 col-span-6">
+                    <label className="block text-sm font-medium text-gray-900 dark:text-white">
+                      Select Publishting date
+                    </label>
+                    <input
+                      type="date"
+                      className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      ref={eventPublishingDate}
+                    />
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-12">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
@@ -553,6 +569,9 @@ const AdminEvents = () => {
                   </div>
 
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
+                  <label className="block text-sm font-medium text-gray-900 dark:text-white">
+                      Select Year&nbsp;{" "}
+                    </label>
                     <select
                       size="md"
                       className="border border-gray-300 outline-0 bg-transparent focus:ring-0 rounded-lg"
@@ -567,6 +586,18 @@ const AdminEvents = () => {
                         </option>
                       ))}
                     </select>
+                  </div>
+
+                  <div className="mb-1 flex flex-col gap-2 col-span-6">
+                    <label className="block text-sm font-medium text-gray-900 dark:text-white">
+                      Select Publishting date
+                    </label>
+                    <input
+                      type="date"
+                      className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      ref={eventPublishingDate}
+                      defaultValue={editEventVal?.publishing_date}
+                    />
                   </div>
 
                   <div className="mb-1 flex flex-col gap-2 col-span-12">

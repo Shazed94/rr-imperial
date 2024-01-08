@@ -39,7 +39,7 @@ const NewsDetails = ({ params }) => {
           <div className="bg-[#E62020] text-white px-4 lg:px-8 py-1 mb-8 flex flex-col lg:flex-row lg:justify-between lg:items-center">
             <h2 className="text-f20 lg:text-f25">{singleNews?.title}</h2>
             <span className="">
-              {moment(singleNews.created_at).format("DD-MM-Y")}
+              {moment(singleNews.publishing_date).format("DD-MM-Y")}
             </span>
           </div>
           <div className="mt-2 mb-12">{Parse(`${singleNews.description}`)}</div>

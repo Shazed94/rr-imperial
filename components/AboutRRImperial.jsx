@@ -6,7 +6,7 @@ import {
   LottieAboutLeft,
   MissionVisionIcon,
 } from "./LottieComponents";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Aos from "aos";
 import Link from "next/link";
 

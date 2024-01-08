@@ -7,7 +7,7 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import Footer from "@/components/Footer/Footer";
 import ProductsMaster from "@/components/Products/ProductsMaster";
 import QuickNavigation from "@/components/QuickNavigation";
-import { ProductHome } from "@/components/LottieComponents";
+import { ProductHomeLottie } from "@/components/LottieComponents";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import { SearchBoxButton } from "@/components/ButtonComponents";
@@ -34,7 +34,7 @@ const ShramikProductCategory = ({ params }) => {
     <div>
       <Header />
       <div className="container">
-        <ProductHome />
+        <ProductHomeLottie />
       </div>
 
       <div className="container max-w-5xl text-center py-6 lg:py-14">

@@ -38,12 +38,12 @@ const EventDetails = ({ params }) => {
       <Header />
       <MediaMaster>
         <div className="bg-white p-8 mb-12" id="">
-          <div className="relative h-[450px] mb-8">
+          <div className="relative h-[600px] mb-8">
             <Image
               src={`${BACKEND_BASE_URL}/${singleEvent?.image}`}
               alt=""
               fill
-              className="object-fill"
+              className="w-full h-full object-fill"
             />
           </div>
           <div className="flex justify-between items-center bg-[#E62020] text-white px-4 py-1 mb-8">
