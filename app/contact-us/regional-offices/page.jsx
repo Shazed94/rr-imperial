@@ -61,7 +61,7 @@ const ContactUs = () => {
                   <Tab
                     key={regional_office.id}
                     value={regional_office?.id}
-                    className="shadow-none text-white py-3 flex-wrap"
+                    className="shadow-none text-white py-0 flex-wrap"
                   >
                     <button
                       className={`w-36 px-4 py-4 rounded-xl text-white bg-[#D1D3D4] ${activeOffice == regional_office.name ? "bg-[#E62020]" : "bg-[#D1D3D4]"
@@ -115,10 +115,10 @@ const ContactUs = () => {
                             </div>
                             <div className="pt-5 flex items-center">
                               <div
-                                className="block relative bg-[#E62020] w-40 py-7 px-14 ms-auto "
+                                className="block relative bg-[#E62020] w-40 py-7 mx-auto"
                               >
                                 <button
-                                  className="absolute inset-0 text-f20 bg-[#939598] rounded-br-[40px] border-[#E62020] text-white"
+                                  className="absolute inset-0 flex items-center justify-center py-5 bg-white border-t border-r border-white transition-all hover:border-t hover:border-r hover:rounded-br-[55px] hover:border-t-[#E62020] hover:border-r-[#E62020] text-f20 text-black"
                                   onClick={() => handleOpen(regionalOffices.name, office_info?.map_link)}
                                 >
                                   Map Link
