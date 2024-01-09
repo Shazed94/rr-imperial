@@ -1,8 +1,9 @@
-import { Roboto } from "next/font/google";
+import ScrollToTop from "@/components/ScrollToTop";
 import "aos/dist/aos.css";
+import { Roboto } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 import "react-medium-image-zoom/dist/styles.css";
 import "./globals.css";
-import NextTopLoader from "nextjs-toploader";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -10,10 +11,8 @@ const roboto = Roboto({
 });
 
 export const metadata = {
-  title:
-    " RR Imperial | Leading Wire & Cable Manufacturer Company in Bangladesh",
-  description:
-    "Get all types of wires and cables from India's leading cable company, RR Kabel. Know more.",
+  title: " RR Imperial | Leading Wire & Cable Manufacturer Company in Bangladesh",
+  description: "Get all types of wires and cables from India's leading cable company, RR Kabel. Know more.",
 };
 
 export default function RootLayout({ children }) {
@@ -23,13 +22,9 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={roboto.className}>
-        <NextTopLoader
-          color="#ED1D24"
-          height={3}
-          speed={200}
-          shadow="0 0 10px #2299DD,0 0 5px #2299DD"
-        />
+        <NextTopLoader color="#ED1D24" height={3} speed={200} shadow="0 0 10px #2299DD,0 0 5px #2299DD" />
         {children}
+        <ScrollToTop />
       </body>
     </html>
   );
