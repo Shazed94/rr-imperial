@@ -13,7 +13,7 @@ export default async function Home() {
   // });
   return (
     <>
-      <div className="homepage">
+      <div className="overflow-hidden md:overflow-visible homepage">
         <Header />
         <section className="mb-10 lotte_video lg:mb-20">
           <LottieSlider />
