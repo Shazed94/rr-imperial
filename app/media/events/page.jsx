@@ -95,7 +95,7 @@ const Events = () => {
                                     <span>{moment(event.publishing_date).format("MMM")}</span>
                                     <span>{moment(event.publishing_date).format("DD")}</span>
                                   </div>
-                                  <h4 className="text-[#414042] group-hover:text-white text-f18 font-bold">{event.title}</h4>
+                                  <h4 className="text-[#414042] group-hover:text-white text-f18 font-bold line-clamp-2">{event.title}</h4>
                                 </div>
                                 <div className="mt-2 text-f16 text-[#6D6E71] group-hover:text-white">{Parse(`${event?.description.slice(0, 200)}`)}</div>
                               </div>
