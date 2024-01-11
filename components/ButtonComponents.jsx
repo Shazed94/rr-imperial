@@ -2,15 +2,12 @@
 import { Button, Collapse, Input } from "@material-tailwind/react";
 import axios from "axios";
 import Link from "next/link";
-import { BACKEND_BASE_URL } from "./GlobalVariables";
 import { useEffect, useRef, useState } from "react";
+import { BACKEND_BASE_URL } from "./GlobalVariables";
 
 export function DashboardLinkButton({ link }) {
   return (
-    <Link
-      href={link}
-      className="px-4 py-3 rounded-lg hover:scale-105 transition-all bg-cyan-700 text-white w-[92px]"
-    >
+    <Link href={link} className="px-4 py-3 rounded-lg hover:scale-105 transition-all bg-cyan-700 text-white w-[92px]">
       View All
     </Link>
   );
@@ -28,11 +25,9 @@ export function SearchBoxButton() {
   const [category_id, setCategoryId] = useState();
 
   const renderAllCategories = async () => {
-    await axios
-      .get(`${BACKEND_BASE_URL}/api/products-categories`)
-      .then((res) => {
-        setCategory(res.data.categories);
-      });
+    await axios.get(`${BACKEND_BASE_URL}/api/products-categories`).then((res) => {
+      setCategory(res.data.categories);
+    });
   };
 
   useEffect(() => {
@@ -57,6 +52,7 @@ export function SearchBoxButton() {
   };
 
   useEffect(() => {
+    getResult();
     if (search_string == "") {
       setOpen(false);
       setSearchProduct([]);
@@ -73,17 +69,13 @@ export function SearchBoxButton() {
           }}
           placeholder="Inpur Search Keywords Here"
           onChange={(e) => {
-            setSearch_string(e.target.value), getResult();
+            setSearch_string(e.target.value);
           }}
           value={search_string}
           required
         />
         <div className="absolute top-[6px] flex w-56 flex-col gap-6">
-          <select
-            size="md"
-            className=" border-none outline-0 bg-transparent focus:ring-0 focus:border-none"
-            ref={categoryRef}
-          >
+          <select size="md" className="bg-transparent border-none outline-0 focus:ring-0 focus:border-none" ref={categoryRef}>
             <option value="">Select Category</option>
             {category?.map((categoryInfo) => (
               <option key={categoryInfo.id} value={categoryInfo.id}>
@@ -93,34 +85,25 @@ export function SearchBoxButton() {
           </select>
         </div>
         <Collapse open={open} className="overflow-auto max-h-56">
-          <div
-            id="example-collapse-text"
-            className="rounded-lg mt-3 overflow-y-auto bg-gray-100 shadow-lg"
-          >
+          <div id="example-collapse-text" className="mt-3 overflow-y-auto bg-gray-100 rounded-lg shadow-lg">
             {isLoading && (
-              <div className="spinner-border text-danger m-3" role="status">
+              <div className="m-3 spinner-border text-danger" role="status">
                 <span className="visually-hidden">Loading...</span>
               </div>
             )}
             {!isLoading &&
               searchProduct?.length > 0 &&
               searchProduct?.map((data, i) => (
-                <Link key={i} href={`/product/details/${data.slug}`}>
-                  <div key={i} className=" flex p-3 text-dark">
-                    <div className="w-20 h-auto object-cover">
-                      <img
-                        src={`${BACKEND_BASE_URL}/${data.image}`}
-                        alt={data.name}
-                        className="w-full h-full"
-                      />
+                <Link key={i} href={`/products/details/${data.slug}`}>
+                  <div key={i} className="flex p-3 text-dark">
+                    <div className="object-cover w-20 h-auto">
+                      <img src={`${BACKEND_BASE_URL}/${data.image}`} alt={data.name} className="w-full h-full" />
                     </div>
-                    <p className="ms-2 p-0 mb-2">{data.name}</p>
+                    <p className="p-0 mb-2 ms-2">{data.name}</p>
                   </div>
                 </Link>
               ))}
-            {!isLoading && searchProduct?.length == 0 && (
-              <p className="p-3">No Product Found</p>
-            )}
+            {!isLoading && searchProduct?.length == 0 && <p className="p-3">No Product Found</p>}
           </div>
         </Collapse>
         {/* <Button
@@ -145,12 +128,10 @@ export function LoadMoreNewsButton({ allNews }) {
     if (currentPageNum != lastPageNumber) {
       var pageNum = currentPageNum + 1;
     }
-    axios
-      .get(`${BACKEND_BASE_URL}/api/all-medias?page=${pageNum}`)
-      .then((res) => {
-        setPaginateNews([...allNews, ...res.data?.allNews?.data]);
-        setCurrentPageNum(pageNum);
-      });
+    axios.get(`${BACKEND_BASE_URL}/api/all-medias?page=${pageNum}`).then((res) => {
+      setPaginateNews([...allNews, ...res.data?.allNews?.data]);
+      setCurrentPageNum(pageNum);
+    });
   };
   return (
     currentPageNum != lastPageNumber && (

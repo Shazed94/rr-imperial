@@ -4,18 +4,11 @@ import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import Header from "@/components/Header/Header";
 import MediaMaster from "@/components/Media/MediaMaster";
 import { all_Media_Front } from "@/utility/api";
-import {
-  Button,
-  Tab,
-  TabPanel,
-  Tabs,
-  TabsBody,
-  TabsHeader,
-} from "@material-tailwind/react";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { Tab, TabPanel, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
 import Parse from "html-react-parser";
 import moment from "moment";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Events = () => {
   const [allEvents, setAllEvents] = useState([]);
@@ -66,7 +59,7 @@ const Events = () => {
     <div>
       <Header />
       <MediaMaster>
-        <div className="bg-white p-4 lg:p-8 mb-6 lg:mb-12" id="">
+        <div className="p-4 mb-6 bg-white lg:p-8 lg:mb-12" id="">
           {allEventsYears.slice(0, 1)?.map((eventYear) => (
             <Tabs key={eventYear?.id} value={eventYear?.id} className="">
               <>
@@ -77,11 +70,7 @@ const Events = () => {
                   }}
                 >
                   {allEventsYears?.map((eventYear) => (
-                    <Tab
-                      key={eventYear.id}
-                      value={eventYear?.id}
-                      className="shadow-none text-white py-3 flex-wrap"
-                    >
+                    <Tab key={eventYear.id} value={eventYear?.id} className="flex-wrap py-3 text-white shadow-none">
                       {eventYear?.year}
                     </Tab>
                   ))}
@@ -94,37 +83,21 @@ const Events = () => {
                   }}
                 >
                   {allEventsYears?.map((eventYearInfo) => (
-                    <TabPanel
-                      key={eventYearInfo.id}
-                      value={eventYearInfo?.id}
-                      className="pt-4 px-0 grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-10"
-                    >
+                    <TabPanel key={eventYearInfo.id} value={eventYearInfo?.id} className="grid grid-cols-1 gap-4 px-0 pt-4 lg:grid-cols-3 lg:gap-10">
                       {eventYearInfo?.event_info?.map((event) => (
                         <div key={event.id} className="">
                           <Link key={event.id} href={`events/${event.id}`}>
                             <div className="group bg-[#E6E7E8] rounded-2xl h-full p-3 hover:scale-105 hover:bg-[#ED1D24] transition-all">
-                              <img
-                                src={`${BACKEND_BASE_URL}/${event?.image}`}
-                                alt=""
-                                className="w-full"
-                              />
-                              <div className="p-4 flex flex-col justify-between ">
+                              <img src={`${BACKEND_BASE_URL}/${event?.image}`} alt="" className="w-full" />
+                              <div className="flex flex-col justify-between p-4 ">
                                 <div className="flex items-center gap-4 mb-3">
                                   <div className="bg-[#ED1D24] group-hover:bg-white text-white group-hover:text-[#ED1D24] rounded-md flex flex-col justify-center items-center px-3 py-1 leading-tight">
-                                    <span>
-                                      {moment(event.publishing_date).format("MMM")}
-                                    </span>
-                                    <span>
-                                      {moment(event.publishing_date).format("DD")}
-                                    </span>
+                                    <span>{moment(event.publishing_date).format("MMM")}</span>
+                                    <span>{moment(event.publishing_date).format("DD")}</span>
                                   </div>
-                                  <h4 className="text-[#414042] group-hover:text-white text-f18 font-bold truncate">
-                                    {event.title}
-                                  </h4>
+                                  <h4 className="text-[#414042] group-hover:text-white text-f18 font-bold">{event.title}</h4>
                                 </div>
-                                <div className="mt-2 text-f16 text-[#6D6E71] group-hover:text-white">
-                                  {Parse(`${event?.description.slice(0, 200)}`)}
-                                </div>
+                                <div className="mt-2 text-f16 text-[#6D6E71] group-hover:text-white">{Parse(`${event?.description.slice(0, 200)}`)}</div>
                               </div>
                             </div>
                           </Link>

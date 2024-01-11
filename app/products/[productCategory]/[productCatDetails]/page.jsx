@@ -7,13 +7,13 @@ import ProductsMaster from "@/components/Products/ProductsMaster";
 import QuickNavigation from "@/components/QuickNavigation";
 import { single_Product_Details_Front } from "@/utility/api";
 import { Button, Dialog, DialogBody, Input } from "@material-tailwind/react";
+import axios from "axios";
+import Parse from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import Parse from "html-react-parser";
-import axios from "axios";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const ProductDetails = ({ params }) => {
   let paramName = params.productCategory.replace(/-/g, " ");
@@ -26,13 +26,9 @@ const ProductDetails = ({ params }) => {
   const [productInfo, setProductInfo] = useState([{}]);
 
   const fetchProductData = () => {
-    axios
-      .get(
-        `${BACKEND_BASE_URL}/api/products-categories/${params.productCategory}`
-      )
-      .then((res) => {
-        setProductInfo(res?.data?.products);
-      });
+    axios.get(`${BACKEND_BASE_URL}/api/products-categories/${params.productCategory}`).then((res) => {
+      setProductInfo(res?.data?.products);
+    });
   };
 
   useEffect(() => {
@@ -51,10 +47,8 @@ const ProductDetails = ({ params }) => {
       <div className="container">
         <ProductHomeLottie className="" />
       </div>
-      <div className="container max-w-5xl text-center py-6 lg:py-14">
-        <h3 className="text-[#E62020] text-f28 lg:text-f38 font-bold uppercase ">
-          {paramName}
-        </h3>
+      <div className="container max-w-5xl py-6 text-center lg:py-14">
+        <h3 className="text-[#E62020] text-f28 lg:text-f38 font-bold uppercase ">{paramName}</h3>
       </div>
       <div className="container px-4 lg:px-0">
         <div className="relative flex w-full ">
@@ -74,123 +68,44 @@ const ProductDetails = ({ params }) => {
             //   className: "w-20",
             // }}
           >
-            Select Category{" "}
-            <MdOutlineArrowDropDown className="inline ms-3" size={20} />
+            Select Category <MdOutlineArrowDropDown className="inline ms-3" size={20} />
           </Button>
         </div>
       </div>
-      <div className="container grid grid-cols-2 lg:grid-cols-8 place-items-center gap-4 lg:gap-2 py-12">
-        <Link
-          href="/products/house-wire"
-          scroll={false}
-          className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-            params.productCategory === "house-wire"
-              ? "bg-[#E62020]"
-              : "bg-[#D1D3D4]"
-          }  hover:bg-[#E62020] transition-colors `}
-        >
+      <div className="container grid grid-cols-2 gap-4 py-12 lg:grid-cols-8 place-items-center lg:gap-2">
+        <Link href="/products/house-wire" scroll={false} className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${params.productCategory === "house-wire" ? "bg-[#E62020]" : "bg-[#D1D3D4]"}  hover:bg-[#E62020] transition-colors `}>
           <button>HOUSE WIRE CABLES</button>
         </Link>
-        <Link
-          href="/products/low-voltage-cables"
-          scroll={false}
-          className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-            params.productCategory === "low-voltage-cables"
-              ? "bg-[#E62020]"
-              : "bg-[#D1D3D4]"
-          } hover:bg-[#E62020] transition-colors `}
-        >
+        <Link href="/products/low-voltage-cables" scroll={false} className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${params.productCategory === "low-voltage-cables" ? "bg-[#E62020]" : "bg-[#D1D3D4]"} hover:bg-[#E62020] transition-colors `}>
           <button>LOW VOLTAGE CABLES</button>
         </Link>
-        <Link
-          href="/products/medium-voltage-cables"
-          scroll={false}
-          className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-            params.productCategory === "medium-voltage-cables"
-              ? "bg-[#E62020]"
-              : "bg-[#D1D3D4]"
-          } hover:bg-[#E62020] transition-colors `}
-        >
+        <Link href="/products/medium-voltage-cables" scroll={false} className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${params.productCategory === "medium-voltage-cables" ? "bg-[#E62020]" : "bg-[#D1D3D4]"} hover:bg-[#E62020] transition-colors `}>
           <button>MEDIUM VOLTAGE CABLES</button>
         </Link>
         <Link href="/products/high-voltage-cables" scroll={false}>
-          <button
-            className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-              params.productCategory === "high-voltage-cables"
-                ? "bg-[#E62020]"
-                : "bg-[#D1D3D4]"
-            } hover:bg-[#E62020] transition-colors `}
-          >
-            HIGH VOLTAGE CABLES
-          </button>
+          <button className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${params.productCategory === "high-voltage-cables" ? "bg-[#E62020]" : "bg-[#D1D3D4]"} hover:bg-[#E62020] transition-colors `}>HIGH VOLTAGE CABLES</button>
         </Link>
         <Link href="/products/fire-survival-cables" scroll={false}>
-          <button
-            className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-              params.productCategory === "fire-survival-cables"
-                ? "bg-[#E62020]"
-                : "bg-[#D1D3D4]"
-            } hover:bg-[#E62020] transition-colors `}
-          >
-            FIRE SURVIVAL CABLES
-          </button>
+          <button className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${params.productCategory === "fire-survival-cables" ? "bg-[#E62020]" : "bg-[#D1D3D4]"} hover:bg-[#E62020] transition-colors `}>FIRE SURVIVAL CABLES</button>
         </Link>
         <Link href="/products/communication-cables" scroll={false}>
-          <button
-            className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-              params.productCategory === "communication-cables"
-                ? "bg-[#E62020]"
-                : "bg-[#D1D3D4]"
-            } hover:bg-[#E62020] transition-colors `}
-          >
-            COMMUNICATION CABLES
-          </button>
+          <button className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${params.productCategory === "communication-cables" ? "bg-[#E62020]" : "bg-[#D1D3D4]"} hover:bg-[#E62020] transition-colors `}>COMMUNICATION CABLES</button>
         </Link>
         <Link href="/products/instrumentation-cables" scroll={false}>
-          <button
-            className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-              params.productCategory === "instrumentation-cables"
-                ? "bg-[#E62020]"
-                : "bg-[#D1D3D4]"
-            } hover:bg-[#E62020] transition-colors `}
-          >
-            INSTRUMENTATION CABLES
-          </button>
+          <button className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${params.productCategory === "instrumentation-cables" ? "bg-[#E62020]" : "bg-[#D1D3D4]"} hover:bg-[#E62020] transition-colors `}>INSTRUMENTATION CABLES</button>
         </Link>
         <Link href="/products/overhead-conductor" scroll={false}>
-          <button
-            className={`w-40 px-4 py-3 font-normal text- rounded-xl text-white ${
-              params.productCategory === "overhead-conductor"
-                ? "bg-[#E62020]"
-                : "bg-[#D1D3D4]"
-            } hover:bg-[#E62020] transition-colors`}
-          >
-            OVERHEAD CABLES
-          </button>
+          <button className={`w-40 px-4 py-3 font-normal text- rounded-xl text-white ${params.productCategory === "overhead-conductor" ? "bg-[#E62020]" : "bg-[#D1D3D4]"} hover:bg-[#E62020] transition-colors`}>OVERHEAD CABLES</button>
         </Link>
       </div>
-      <ProductsMaster
-        productData={productInfo}
-        productCategory={params.productCategory}
-      >
+      <ProductsMaster productData={productInfo} productCategory={params.productCategory}>
         <div className="bg-[#F2F5F6] p-4 lg:p-5 mb-6 lg:mb-14">
-          <h2 className="text-[#E62020] text-f18 lg:text-f22 font-bold mb-5">
-            {singleProduct?.name}
-          </h2>
+          <h2 className="text-[#E62020] text-f18 lg:text-f22 font-bold mb-5">{singleProduct?.name}</h2>
 
           <div className="flex flex-col lg:flex-row bg-white rounded-[17px] mb-12 py-10">
             <div className="w-full lg:w-1/2 flex flex-wrap flex-col items-center justify-center lg:border-r lg:border-r-[#D1D3D4]">
-              <Image
-                src={`${BACKEND_BASE_URL}/${singleProduct?.image}`}
-                alt=""
-                width={380}
-                height={50}
-                quality={100}
-                className="mx-auto mb-5"
-              />
-              <h5 className="text-[#E62020] text-f16 font-normal mb-5">
-                *REACH | RoHS | CE
-              </h5>
+              <Image src={`${BACKEND_BASE_URL}/${singleProduct?.image}`} alt="" width={380} height={50} quality={100} className="mx-auto mb-5" />
+              <h5 className="text-[#E62020] text-f16 font-normal mb-5">*REACH | RoHS | CE</h5>
               <Image
                 src={`${BACKEND_BASE_URL}/${singleProduct?.small_image}`}
                 alt=""
@@ -200,25 +115,19 @@ const ProductDetails = ({ params }) => {
                 className="mx-auto mb-8"
               />
             </div>
-            <div className="w-full lg:w-1/2 flex flex-wrap flex-col gap-8 items-center lg:ps-6">
+            <div className="flex flex-col flex-wrap items-center w-full gap-8 lg:w-1/2 lg:ps-6">
               {/* {singleProduct?.product_characteristics.length > 0 && ( */}
 
-              <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
-                CHARACTERISTICS
-              </h4>
+              <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">CHARACTERISTICS</h4>
               <div className="relative w-full ">
-                <img
-                  src={`${BACKEND_BASE_URL}/${singleProduct?.c_image}`}
-                  alt=""
-                  className="mb-2 mx-auto"
-                />
+                <img src={`${BACKEND_BASE_URL}/${singleProduct?.c_image}`} alt="" className="mx-auto mb-2" />
               </div>
-              {/* <div className="grid grid-cols-4 lg:grid-cols-6 gap-3">
+              {/* <div className="grid grid-cols-4 gap-3 lg:grid-cols-6">
                     {singleProduct?.product_characteristics?.map(
                       (characteristic) => (
                         <div
                           key={characteristic.id}
-                          className="flex flex-col items-center text-center relative"
+                          className="relative flex flex-col items-center text-center"
                         >
                           <Image
                             src={`${BACKEND_BASE_URL}/${characteristic?.c_image}`}
@@ -236,22 +145,16 @@ const ProductDetails = ({ params }) => {
 
               {/* {singleProduct?.product_installation_conditions.length > 0 && ( */}
 
-              <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">
-                INSTALLATION CONDITION
-              </h4>
+              <h4 className="text-[#E62020] text-f20 font-normal text-center mb-4">INSTALLATION CONDITION</h4>
               <div className="relative w-full ">
-                <img
-                  src={`${BACKEND_BASE_URL}/${singleProduct?.ic_image}`}
-                  alt=""
-                  className="mb-2 mx-auto"
-                />
+                <img src={`${BACKEND_BASE_URL}/${singleProduct?.ic_image}`} alt="" className="mx-auto mb-2" />
               </div>
               {/* <div className="grid grid-cols-7 gap-3">
                     {singleProduct?.product_installation_conditions?.map(
                       (characteristic) => (
                         <div
                           key={characteristic.id}
-                          className="flex flex-col items-center text-center relative"
+                          className="relative flex flex-col items-center text-center"
                         >
                           <Image
                             src={`${BACKEND_BASE_URL}/${characteristic?.ic_image}`}
@@ -272,12 +175,10 @@ const ProductDetails = ({ params }) => {
           </div>
           {singleProduct?.product_test_parameter?.length > 0 && (
             <div className="mb-10">
-              <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-                TEST PARAMETERS
-              </h4>
+              <h4 className="text-[#E62020] text-f20 font-normal mb-3">TEST PARAMETERS</h4>
               <table className="w-full">
                 <thead className="">
-                  <tr className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                  <tr className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
                     <th className="py-2">TEST</th>
                     <th className="py-2">TEST METHOD</th>
                     <th className="py-2">VALUES</th>
@@ -286,10 +187,7 @@ const ProductDetails = ({ params }) => {
                 <tbody className="text-center">
                   {singleProduct?.product_test_parameter?.map((parameter) => (
                     <>
-                      <tr
-                        key={parameter.id}
-                        className="even:bg-white/90 odd:bg-gray-100/50"
-                      >
+                      <tr key={parameter.id} className="even:bg-white/90 odd:bg-gray-100/50">
                         <td className="py-2">{parameter?.test_name}</td>
                         <td className="py-2">{parameter?.test_method}</td>
                         <td className="py-2">{parameter?.test_value}</td>
@@ -303,9 +201,7 @@ const ProductDetails = ({ params }) => {
 
           {singleProduct?.application && (
             <div className="mb-10">
-              <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-                APPLICATION
-              </h4>
+              <h4 className="text-[#E62020] text-f20 font-normal mb-3">APPLICATION</h4>
 
               {Parse(`${singleProduct?.application}`)}
             </div>
@@ -313,24 +209,20 @@ const ProductDetails = ({ params }) => {
 
           {singleProduct?.construction && (
             <div className="mb-10">
-              <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-                CONSTRUCTION
-              </h4>
+              <h4 className="text-[#E62020] text-f20 font-normal mb-3">CONSTRUCTION</h4>
               <div className="">{Parse(`${singleProduct?.construction}`)}</div>
             </div>
           )}
 
           {singleProduct?.properties && (
             <div className="mb-10">
-              <h4 className="text-[#E62020] text-f20 font-normal mb-3">
-                PROPERTIES
-              </h4>
+              <h4 className="text-[#E62020] text-f20 font-normal mb-3">PROPERTIES</h4>
               <div className="">{Parse(`${singleProduct?.properties}`)}</div>
             </div>
           )}
           {singleProduct?.voltage_grade && (
             <div className="mb-10">
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
                 <div className="">
                   <h4 className="text-[#E62020] text-f20 font-normal mb-3">
                     <span className="span"> VOLTAGE GRADE</span>
@@ -370,7 +262,7 @@ const ProductDetails = ({ params }) => {
             <h4 className="text-[#E62020] text-f20 font-normal mb-3">
               <span className="span">COLOR</span>
             </h4>
-            <div className="text-black flex gap-2">
+            <div className="flex gap-2 text-black">
               <div className="min-w-max">Insulated Core:</div>
               <div>
                 {singleProduct?.colors?.map((data, index) => {
@@ -387,9 +279,7 @@ const ProductDetails = ({ params }) => {
                           >
                             <span className="absolute w-full h-1 top-[6px] bg-green-400"></span>
                           </div>
-                          <div className="ms-1">
-                            {data?.color_info?.name} &nbsp;
-                          </div>
+                          <div className="ms-1">{data?.color_info?.name} &nbsp;</div>
                         </div>
                       ) : (
                         <div className="flex flex-wrap items-center">
@@ -400,9 +290,7 @@ const ProductDetails = ({ params }) => {
                               marginLeft: "5px",
                             }}
                           ></div>
-                          <div className="ms-1">
-                            {data?.color_info?.name} &nbsp;
-                          </div>
+                          <div className="ms-1">{data?.color_info?.name} &nbsp;</div>
                         </div>
                       )}
                     </>
@@ -433,43 +321,24 @@ const ProductDetails = ({ params }) => {
           </div>
           {singleProduct?.product_cable_design_parameter.length > 0 &&
             singleProduct?.product_cable_design_parameter.map((parameter) => (
-              <div
-                key={parameter.id}
-                className="cursor-pointer mt-5"
-                onClick={handleOpen}
-              >
-                <img
-                  src={`${BACKEND_BASE_URL}/${parameter?.cable_design_parameter}`}
-                  alt=""
-                  className="mx-auto"
-                />
+              <div key={parameter.id} className="mt-5 cursor-pointer" onClick={handleOpen}>
+                <img src={`${BACKEND_BASE_URL}/${parameter?.cable_design_parameter}`} alt="" className="mx-auto" />
               </div>
             ))}
         </div>
       </ProductsMaster>
 
-      <div className="text-center px-4 lg:px-0 mb-12">
-        <h2 className="text-f28 lg:text-f38 text-[#E62020] font-bold mb-6 lg:mb-14">
-          RELATED PRODUCTS
-        </h2>
-        <div className="flex flex-col lg:flex-row justify-center gap-5">
-          {productInfo.slice(0, 4)?.map((product) => (
-            <Link
-              key={product.id}
-              href={`/products/${params.productCategory}/${product.slug}`}
-            >
+      <div className="px-4 mb-12 text-center lg:px-0">
+        <h2 className="text-f28 lg:text-f38 text-[#E62020] font-bold mb-6 lg:mb-14">RELATED PRODUCTS</h2>
+        <div className="flex flex-col justify-center gap-5 lg:flex-row">
+          {productInfo?.slice(0, 4)?.map((product) => (
+            <Link key={product.id} href={`/products/${params.productCategory}/${product.slug}`}>
               <div className="group bg-[#F2F5F6] rounded-3xl overflow-hidden">
                 <div className="p-6">
-                  <img
-                    src={"/img/product/cable.png"}
-                    alt=""
-                    className="w-full mt-16"
-                  />
+                  <img src={"/img/product/cable.png"} alt="" className="w-full mt-16" />
                 </div>
                 <hr className="bg-white h-[3px]" />
-                <div className="px-6 py-3 group-hover:bg-[#E62020] group-hover:text-white transition-colors text-center">
-                  {product?.name}
-                </div>
+                <div className="px-6 py-3 group-hover:bg-[#E62020] group-hover:text-white transition-colors text-center">{product?.name}</div>
               </div>
             </Link>
           ))}
@@ -491,14 +360,7 @@ const ProductDetails = ({ params }) => {
           {singleProduct?.product_cable_design_parameter.map((parameter) => (
             <TransformWrapper key={parameter.id}>
               <TransformComponent className="relative ">
-                <Image
-            
-                  src={`${BACKEND_BASE_URL}/${parameter?.cable_design_parameter}`}
-                  alt=""
-                  className="object-fill"
-                  width={1200}
-                  height={800}
-                />
+                <Image src={`${BACKEND_BASE_URL}/${parameter?.cable_design_parameter}`} alt="" className="object-fill" width={1200} height={800} />
               </TransformComponent>
             </TransformWrapper>
           ))}
