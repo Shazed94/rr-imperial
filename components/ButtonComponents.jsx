@@ -94,7 +94,8 @@ export function SearchBoxButton() {
             {!isLoading &&
               searchProduct?.length > 0 &&
               searchProduct?.map((data, i) => (
-                <Link key={i} href={`/products/details/${data.slug}`}>
+                // <Link key={i} href={`/products/details/${data.slug}`}>
+                <Link key={i} href={`/products/${data?.category.category_slug}/${data.slug}`}>
                   <div key={i} className="flex p-3 text-dark">
                     <div className="object-cover w-20 h-auto">
                       <img src={`${BACKEND_BASE_URL}/${data.image}`} alt={data.name} className="w-full h-full" />
