@@ -335,7 +335,7 @@ const ProductDetails = ({ params }) => {
             <Link key={product.id} href={`/products/${params.productCategory}/${product.slug}`}>
               <div className="group bg-[#F2F5F6] rounded-3xl overflow-hidden">
                 <div className="p-6">
-                  <img src={BACKEND_BASE_URL + product.image} alt="" className="w-full mt-16" />
+                  <img src={BACKEND_BASE_URL + product?.image} alt="" className="w-full mt-16" />
                 </div>
                 <hr className="bg-white h-[3px]" />
                 <div className="px-6 py-3 group-hover:bg-[#E62020] group-hover:text-white transition-colors text-center">{product?.name}</div>
