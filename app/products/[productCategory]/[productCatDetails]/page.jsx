@@ -328,14 +328,14 @@ const ProductDetails = ({ params }) => {
         </div>
       </ProductsMaster>
 
-      <div className="px-4 mb-12 text-center lg:px-0">
+      <div className="container px-4 mb-12 text-center lg:px-0">
         <h2 className="text-f28 lg:text-f38 text-[#E62020] font-bold mb-6 lg:mb-14">RELATED PRODUCTS</h2>
         <div className="flex flex-col justify-center gap-5 lg:flex-row">
           {productInfo?.slice(0, 4)?.map((product) => (
             <Link key={product.id} href={`/products/${params.productCategory}/${product.slug}`}>
               <div className="group bg-[#F2F5F6] rounded-3xl overflow-hidden">
-                <div className="p-6">
-                  <img src={BACKEND_BASE_URL + product?.image} alt="" className="w-full mt-16" />
+                <div className="">
+                  <img src={BACKEND_BASE_URL + product?.image} alt="" className="w-full mt-8" />
                 </div>
                 <hr className="bg-white h-[3px]" />
                 <div className="px-6 py-3 group-hover:bg-[#E62020] group-hover:text-white transition-colors text-center">{product?.name}</div>
