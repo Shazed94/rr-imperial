@@ -32,7 +32,7 @@ const page = (props) => {
                 MR. M. HARES AHMED
               </h1>
               <h2>MANAGING DIRECTOR</h2>
-              <h2 className="mb-4">OF IMPERIAL ALLIED CHEMICALS LIMITED</h2>
+              <h2 className="mb-4">IMPERIAL ALLIED CHEMICALS LIMITED</h2>
               <p className="text-[#58595B] font-normal mb-5 text-justify">
                 Mr. M. Hares Ahmed was born in a religious Muslim family in
                 Chattogram. He has obtained a B.Sc. (Honors), and M.Sc. in
@@ -62,7 +62,7 @@ const page = (props) => {
               </h1>
               <h2 className="lg:text-right md:text-left">DIRECTOR AND CEO</h2>
               <h2 className="lg:text-right md:text-left mb-4">
-                OF RR-Imperial Electricals Ltd & IMPERIAL ALLIED CHEMICALS
+                RR-Imperial Electricals Ltd & IMPERIAL ALLIED CHEMICALS
                 LIMITED
               </h2>
               <p className="text-[#58595B] font-normal mb-5 text-right text-justify">
