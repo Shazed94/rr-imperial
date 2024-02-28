@@ -193,14 +193,14 @@ const Layout = (props) => {
                   </Link>
                 </div>
               </ul>
-              <Link
+              {/* <Link
                 href="/admin/sliders"
                 className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${path == "/admin/sliders" && "bg-[#ED2027]"
                   }`}
               >
                 <BsSliders className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
                 <span className="text-base font-bold">Slider Elements</span>
-              </Link>
+              </Link> */}
               <Link
                 href="/admin/calculator"
                 className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:text-gray-100 hover:bg-[#EA3C3C] group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${path == "/admin/calculator" && "bg-[#E71D1D]"

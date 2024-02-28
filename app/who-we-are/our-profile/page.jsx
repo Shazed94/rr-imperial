@@ -28,25 +28,27 @@ const page = (props) => {
               </div>
             </div>
             <div className="w-full lg:w-2/3">
-              <h1 className="text-[#ED1C24] text-f28 font-bold mb-4">MR. M. HARES AHMED</h1>
+              <h1 className="text-[#ED1C24] text-f28 font-bold mb-4">
+                MR. M. HARES AHMED
+              </h1>
               <h2>MANAGING DIRECTOR</h2>
               <h2 className="mb-4">OF IMPERIAL ALLIED CHEMICALS LIMITED</h2>
               <p className="text-[#58595B] font-normal mb-5 text-justify">
                 Mr. M. Hares Ahmed was born in a religious Muslim family in
                 Chattogram. He has obtained a B.Sc. (Honors), and M.Sc. in
                 Physics from Chattogram University. After completing his
-                education, he joined in a reputed textile dyeing & printing
+                education, he joined a reputed textile dyeing & printing
                 industry as a Manager. He started business as director in
                 Phoenix Fabrics Limited, Tejgaon I/A, Dhaka, a pioneer industry
-                in the field of fabrics dyeing, printing & finishing. Side by
-                side with his industry business, he started the business of
-                textile dye stuffs and Chemicals in 1990 in the name of Imperial
-                International Limited, Imperial Dye-Chem Co. Ltd, and Imperial
-                Allied Chemicals Ltd. He is the managing director of these
-                companies. He is also the managing director of Imperial
-                Composite Fabrics Ltd & RR-Imperial Electricals Ltd. He is the
-                father of two sons and two daughters. Mr. Ahmed visited many
-                countries for business purposes.
+                in fabrics dyeing, printing & finishing. Alongside his industry
+                business, he started the textile Dyestuffs and Chemicals
+                business in 1990 in the name of Imperial International Limited,
+                Imperial Dye-Chem Co. Ltd, and Imperial Allied Chemicals Ltd. He
+                is the managing director of these companies. He is also the
+                managing director of Imperial Composite Fabrics Ltd &
+                RR-Imperial Electricals Ltd. He is the father of two sons and
+                two daughters. Mr. Ahmed visited many countries for business
+                purposes.
               </p>
             </div>
           </div>
@@ -55,35 +57,38 @@ const page = (props) => {
             id="who-we-are"
           >
             <div className="w-full lg:w-2/3 md:order-2 lg:order-1">
-              <h1 className="text-[#ED1C24] text-f28 font-bold mb-4 lg:text-right md:text-left">MR. MAHBOOB HOSSIAN MIRDAH</h1>
-              <h2 className="lg:text-right md:text-left">DIRECTOR</h2>
+              <h1 className="text-[#ED1C24] text-f28 font-bold mb-4 lg:text-right md:text-left">
+                MR. MAHBOOB HOSSIAN MIRDAH
+              </h1>
+              <h2 className="lg:text-right md:text-left">DIRECTOR AND CEO</h2>
               <h2 className="lg:text-right md:text-left mb-4">
-                OF RR-Imperial Electricals ltd & IMPERIAL ALLIED CHEMICALS
+                OF RR-Imperial Electricals Ltd & IMPERIAL ALLIED CHEMICALS
                 LIMITED
               </h2>
               <p className="text-[#58595B] font-normal mb-5 text-right text-justify">
                 Mr. Mahboob Hossain Mirdah S/O, Late Mohammad Hossain Mirdah
                 comes from a religious Muslim family in Dhaka. He completed a
-                graduation degree from Jagannath College, Dhaka. After complet
-                ing of education, he went to Japan for training. After returning
-                home, he started service in Phoenix Fabrics Ltd. Tejgaon I/A,
-                Dhaka, one of the leading fabric dyeing, printing & finishing
-                Industries. He started a business of textile dyestuffs &
-                Chemicals in 1991 in the name of Imperial International Limited
-                and Imperial Dye Chem. Co. Ltd. as a director of these
+                graduation degree from Jagannath College, Dhaka. After
+                completing his education, he went to Japan for training. After
+                returning home, he started service in Phoenix Fabrics Ltd.
+                Tejgaon I/A, Dhaka, one of the leading fabric dyeing, printing &
+                finishing Industries. He started a business of textile dyestuffs
+                & Chemicals in 1991 under the name of Imperial International
+                Limited and Imperial Dye Chem. Co. Ltd. as a director of these
                 companies. He is also the director of Imperial Composite Fabrics
-                Limited and Imperial Allied Chemicals Ltd. He is the Director&
-                CEO of RR-Imperial Electricals Ltd since 2011. He is the father
-                of a son and a daughter. He is attached to several
+                Limited and Imperial Allied Chemicals Ltd. He has been the
+                Director& CEO of RR-Imperial Electricals Ltd since 2011. He is
+                the father of a son and a daughter. He is attached to several
                 socio-cultural organizations. He is the Vice President of the
                 UNESCO Club Association in Bangladesh and the Honorable Chairman
                 of the Initiative for Total Reform (ITR). He visited many
-                countries for business purposes and also as representative of
-                the UNESCO Club Association. He is also a member of Bangladesh
-                Chemical Importers & Merchants Association, India-Bangladesh
-                Chamber of Commerce and Industry (IBCCI), Bangladesh Electrical
-                Merchandise Manufacturers As sociation (BEMMA) and Electronics
-                Safety and Security Association of Bangladesh (ESSAB).
+                countries for business purposes and also as a representative of
+                the UNESCO Club Association. He is also a member of the
+                Bangladesh Chemical Importers & Merchants Association,
+                India-Bangladesh Chamber of Commerce and Industry (IBCCI),
+                Bangladesh Electrical Merchandise Manufacturers As Sociation
+                (BEMMA) and Electronics Safety and Security Association of
+                Bangladesh (ESSAB).
               </p>
             </div>
             <div className="w-full lg:w-1/3 md:order-1 lg:order-2 my-4 lg:mb-12">
@@ -93,7 +98,10 @@ const page = (props) => {
                   alt=""
                   className="relative z-10"
                 />
-                <div style={{width: "95%"}} className="absolute -top-[14px] -left-[-12px] h-full bg-[#ED1C24] z-0"></div>
+                <div
+                  style={{ width: "95%" }}
+                  className="absolute -top-[14px] -left-[-5px] h-full bg-[#ED1C24] z-0"
+                ></div>
               </div>
             </div>
           </div>

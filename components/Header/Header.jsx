@@ -219,9 +219,16 @@ const Header = () => {
   function NavList() {
     return (
       <div className="container flex justify-between p-0">
-        <div className="hidden lg:block w-[45%] bg-white h-24">
+        {/* <div className="hidden lg:block w-[45%] bg-white h-24">
           <Link href="/" className="relative grid h-full w-72 ps-10">
             <Image src="/img/logo.png" alt="logo" width={350} height={60} className="self-center " />
+          </Link>
+        </div> */}
+
+        <div className="hidden lg:flex items-center justify-center bg-white h-24">
+          <Link href="/" className="flex items-center">
+            <Image src="/img/logo.png" alt="logo" width={220} height={40} className="ml-5" />
+            <Image src="/img/maid-in-bangladesh.png" alt="logo" width={120} height={30} className="ml-10 mr-5" />
           </Link>
         </div>
 
