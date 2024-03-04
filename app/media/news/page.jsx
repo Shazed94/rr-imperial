@@ -40,7 +40,7 @@ const News = () => {
     <div>
       <Header />
       <MediaMaster>
-        <div className="bg-white p-4 lg:p-8 mb-12" id="">
+        {/* <div className="bg-white p-4 lg:p-8 mb-12" id="">
           {allNews?.map((news, i) => (
             <div key={i} className="flex flex-col lg:flex-row gap-10 mb-10">
               <div
@@ -70,10 +70,6 @@ const News = () => {
             </div>
           ))}
           <div className="flex justify-center my-4 lg:my-10 pt-10">
-            {/* <Button variant="outlined" size="lg">
-              Load More
-            </Button> */}
-
             {currentPageNum != lastPageNumber && (
               <div className="text-center">
                 <Button
@@ -85,13 +81,54 @@ const News = () => {
                 </Button>
               </div>
             )}
-
-            {/* <LoadMoreButton
-              currentPageNum={currentPageNum}
-              lastPageNumber={lastPageNumber}
-              allNews={allNews}
-            /> */}
           </div>
+        </div> */}
+
+        <div className="bg-white p-4 lg:p-8 mb-6 lg:mb-12" id="">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-10 mb-8">
+          {allNews?.map((news, i) => (
+              <div
+                key={i}
+                className="bg-[#E6E7E8] rounded-2xl p-3 min-h-[510px] hover:scale-105 relative cursor-pointer hover:bg-[#ED1D24] transition-all"
+              >
+                <div className="w-full min-h-[15rem] object-cover">
+                  <img
+                    src={`${BACKEND_BASE_URL}/${news.image}`}
+                    alt=""
+                    className=" w-full h-full "
+                  />
+                </div>
+
+                <div className="bg-white rounded-2xl p-4 flex flex-col justify-between z-20 h-64 absolute bottom-3 left-3 right-3">
+                  <h4 className="text-[#414042] text-f20 font-bold mb-3">
+                    {news?.title}
+                  </h4>
+
+                  <div className="mt-2 text-[#6D6E71]">
+                    {Parse(`${news?.description.slice(0, 150)}...`)}
+                  </div>
+
+                  <Link
+                    href={`news/${news.id}`}
+                    className="flex items-center text-f20 text-[#E62020] gap-2"
+                  >
+                    Read More <MdArrowForward />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+          {currentPageNum != lastPageNumber && (
+            <div className="text-center">
+              <Button
+                variant="outlined"
+                size="lg"
+                onClick={() => loadMoreNews()}
+              >
+                Load More
+              </Button>
+            </div>
+          )}
         </div>
       </MediaMaster>
       <Footer />

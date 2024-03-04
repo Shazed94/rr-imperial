@@ -44,7 +44,7 @@ const Blogs = () => {
             {allBlogs?.map((blog) => (
               <div
                 key={blog.id}
-                className="bg-[#E6E7E8] rounded-2xl p-3 min-h-[510px] hover:scale-105 transition relative"
+                className="bg-[#E6E7E8] rounded-2xl p-3 min-h-[510px] hover:scale-105 relative cursor-pointer hover:bg-[#ED1D24] transition-all"
               >
                 <div className="w-full min-h-[15rem] object-cover">
                   <img

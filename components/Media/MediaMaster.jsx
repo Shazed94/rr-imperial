@@ -66,7 +66,7 @@ const MediaMaster = (props) => {
                     <News fill="#ED1D24" className={"w-10 h-10"} />
                   </div>
                   <span className="w-32 text-center px-1 pt-3 pb-1 border-[#A7A9AC]">
-                    News
+                  Print Media
                   </span>
                 </>
               ) : (
@@ -75,7 +75,7 @@ const MediaMaster = (props) => {
                     <News fill="#939598" className={"w-10 h-10"} />
                   </div>
                   <span className="w-32 text-center border-2 rounded-lg px-1 pt-[23px] pb-1 border-[#A7A9AC] relative -top-4 min-h-[68px]">
-                    News
+                  Print Media
                   </span>
                 </>
               )}
