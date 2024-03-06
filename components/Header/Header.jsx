@@ -147,6 +147,9 @@ const Header = () => {
                 <Link href="/media/tv-commercials" className="focus-visible:outline-none hover:focus-visible:outline-none">
                   <MenuItem className="hover:focus-visible:outline-none">Tv Commercials</MenuItem>
                 </Link>
+                <Link href="/media/tv-media" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                  <MenuItem className="hover:focus-visible:outline-none">Tv Media</MenuItem>
+                </Link>
                 {/* <Link href="/media/download" className="focus-visible:outline-none hover:focus-visible:outline-none">
                   <MenuItem className="hover:focus-visible:outline-none">
                     Download
@@ -358,6 +361,9 @@ const Header = () => {
                 </Link>
                 <Link href="/media/tv-commercials" className="focus-visible:outline-none hover:focus-visible:outline-none">
                   <MenuItem className="hover:focus-visible:outline-none">Tv Commercials</MenuItem>
+                </Link>
+                <Link href="/media/tv-media" className="focus-visible:outline-none hover:focus-visible:outline-none">
+                  <MenuItem className="hover:focus-visible:outline-none">Tv Media</MenuItem>
                 </Link>
                 {/* <Link href="/media/download" className="focus-visible:outline-none hover:focus-visible:outline-none">
                   <MenuItem className="hover:focus-visible:outline-none">

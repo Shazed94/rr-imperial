@@ -1111,6 +1111,120 @@ export const delete_tvCommercial = async (id) => {
   }
 };
 
+//! ================== Read All Tv Media ===================
+export const read_all_tvMedias = async () => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-media`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Create New Tv Media ===================
+export const create_new_tvMedia = async (formdata) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-media/store`;
+  let HEADERS = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.post(URL, formdata, HEADERS);
+
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== View Single Tv media ===================
+export const view_tvMedia = async (id) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-media/view/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+//! ================== Edit Tv media ===================
+export const edit_tvMedia = async (videoId) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-media/edit/${videoId}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.get(URL, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+//! ================== Update Tv media ===================
+export const update_tvMedia = async (id, formdata) => {
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-media/update/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  try {
+    const result = await axios.post(URL, formdata, HEADERS);
+    return result;
+  } catch (e) {
+    return false;
+  }
+};
+
+//! ================== Delete single Tv media ===================
+export const delete_tvMedia = async (id) => {
+  const isConfirm = await Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "green",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    return result.isConfirmed;
+  });
+
+  if (!isConfirm) {
+    return;
+  }
+
+  let URL = `${BACKEND_BASE_URL}/api/admin/tv-media/delete/${id}`;
+  let HEADERS = {
+    headers: {
+      Authorization: `Bearer ${getCookie("admin_access_token")}`,
+    },
+  };
+  if (isConfirm) {
+    try {
+      const deleteResult = await axios.delete(URL, HEADERS);
+      return deleteResult;
+    } catch (e) {
+      return false;
+    }
+  }
+};
+
 // =============================== Videos ==================================
 
 //! ================== Read All Videos ===================

@@ -284,6 +284,14 @@ const Layout = (props) => {
                 <span className="text-base font-bold">Tv Commercials</span>
               </Link>
               <Link
+                href="/admin/tv-media"
+                className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${path == "/admin/tv-medias" && "bg-[#E71D1D]"
+                  }`}
+              >
+                <FaVideo className=" me-4 text-f22 group-[.w-20]/sidebar:me-0" />
+                <span className="text-base font-bold">Tv Media</span>
+              </Link>
+              <Link
                 href="/admin/videos"
                 className={`flex items-center px-8 py-2 mb-1 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer transition-colors duration-300 ${path == "/admin/videos" && "bg-[#E71D1D]"
                   }`}

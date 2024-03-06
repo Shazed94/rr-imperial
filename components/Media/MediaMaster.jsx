@@ -49,7 +49,7 @@ const MediaMaster = (props) => {
       </section>
       <main className="bg-[#E6E7E8]">
         <section className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-8 text-white pt-5">
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-8 text-white pt-5">
             <Link
               href="/media/news"
               id="news"
@@ -166,6 +166,36 @@ const MediaMaster = (props) => {
                   </div>
                   <span className="w-32 text-center border-2 rounded-lg px-1 pt-[23px] pb-1 border-[#A7A9AC] relative -top-4 min-h-[68px]">
                     Tv Commercials
+                  </span>
+                </>
+              )}
+            </Link>
+            <Link
+              href="/media/tv-media"
+              id="tvCommercials"
+              scroll={false}
+              className={`flex flex-col items-center hover:bg-white transition rounded-tl-lg rounded-tr-lg px-2 ${
+                filteredPathname[2] == "tv-media"
+                  ? "text-[#ED1D24] bg-white"
+                  : "text-[#939598]"
+              }  text-f16 font-normal group`}
+            >
+              {filteredPathname[2] == "tv-medias" ? (
+                <>
+                  <div className="mt-2 p-3 z-10">
+                    <TvCommercials fill="#ED1D24" className={"w-10 h-10"} />
+                  </div>
+                  <span className="w-32 text-center px-1 pt-3 pb-1 border-[#A7A9AC]">
+                    Tv Media
+                  </span>
+                </>
+              ) : (
+                <>
+                  <div className="border-2 mt-2 p-3 border-[#A7A9AC] rounded-full bg-[#E6E7E8] group-hover:bg-white transition z-10">
+                    <TvCommercials fill="#939598" className={"w-10 h-10"} />
+                  </div>
+                  <span className="w-32 text-center border-2 rounded-lg px-1 pt-[23px] pb-1 border-[#A7A9AC] relative -top-4 min-h-[68px]">
+                    Tv Media
                   </span>
                 </>
               )}
