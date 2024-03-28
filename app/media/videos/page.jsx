@@ -33,30 +33,25 @@ const Videos = () => {
     fetchAllMedia();
   }, []);
   return (
+    
     <div>
       <Header />
       <MediaMaster>
-        <div className="bg-white p-4 lg:p-8 mv-6 lg:mb-12" id="">
-          {allVideos?.map((data, i) => (
-            <div key={data.id}>
-              <div className="flex flex-col lg:flex-row gap-10">
-                <div
-                  className={`w-full lg:w-1/2 flex flex-col justify-center ${
-                    (i + 1) % 2 == 1 ? "order-1" : "order-1 lg:order-2"
-                  }`}
-                >
-                  <h4 className="text-f25 text-[#414042] mb-2">{data.title}</h4>
-                  <div className="mt-2">{Parse(`${data?.description}`)}</div>
-                </div>
-                <div
-                  className={`w-full lg:w-1/2 ${
-                    (i + 1) % 2 == 1 ? "order-1 lg:order-2" : "order-1"
-                  }`}
-                >
-                  <div className="relative">
-                    <iframe
+      <div className="bg-white p-8 mb-12" id="">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            {allVideos?.map((data, i) => (
+              <div
+                key={i}
+                onClick={() => {
+                  handleOpen();
+                  setEmbedLink(tvCommercial.videoLink);
+                }}
+                className="group bg-[#E6E7E8] rounded-2xl p-3 cursor-pointer hover:scale-105 hover:bg-[#ED1D24] transition-all"
+              >
+                <div className="relative w-full h-56">
+                  <iframe
                       width="100%"
-                      height="300"
+                      height="220"
                       src={`https://www.youtube.com/embed/${data.videoLink}`}
                       title="YouTube video player"
                       frameborder="0"
@@ -64,27 +59,34 @@ const Videos = () => {
                       allowfullscreen=""
                       className="relative z-10"
                     ></iframe>
-                    <div className="absolute -top-[14px] -left-[12px] w-full h-full bg-[#ED1C24] z-0"></div>
+                </div>
+
+                <div className=" p-4 flex flex-col justify-between ">
+                  <div className="flex items-center justify-between gap-4 mb-3">
+                    <h4 className="text-[#414042] group-hover:text-white text-f18 font-bold">
+                      {data.title}
+                    </h4>
                   </div>
+                  <h4 className="text-[#414042] group-hover:text-white text-f25 font-bold">
+                    {Parse(`${data?.description}`)}
+                  </h4>
                 </div>
               </div>
-              <hr className="h-[3px] bg-[#E6E7E8] my-10" />
-            </div>
-          ))}
-          
-          <div className="flex justify-center my-5 lg:my-10 pt-5 lg:pt-10">
-            {currentPageNum != lastPageNumber && (
-              <div className="text-center">
-                <Button
-                  variant="outlined"
-                  size="lg"
-                  onClick={() => loadMoreVideos()}
-                >
-                  Load More
-                </Button>
-              </div>
-            )}
+            ))}
           </div>
+          <div className="flex justify-center my-5 lg:my-10 pt-5 lg:pt-10">
+                {currentPageNum != lastPageNumber && (
+                  <div className="text-center">
+                    <Button
+                      variant="outlined"
+                      size="lg"
+                      onClick={() => loadMoreVideos()}
+                    >
+                      Load More
+                    </Button>
+                  </div>
+                )}
+              </div>
         </div>
       </MediaMaster>
       <Footer />

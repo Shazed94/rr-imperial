@@ -7,6 +7,7 @@ import {
   Events,
   News,
   TvCommercials,
+  TvMedias,
   Videos,
 } from "../SvgComponents";
 import { usePathname } from "next/navigation";
@@ -155,8 +156,8 @@ const MediaMaster = (props) => {
                   <div className="mt-2 p-3 z-10">
                     <TvCommercials fill="#ED1D24" className={"w-10 h-10"} />
                   </div>
-                  <span className="w-32 text-center px-1 pt-3 pb-1 border-[#A7A9AC]">
-                    Tv Commercials
+                  <span className="w-34 text-center px-1 pt-3 pb-1 border-[#A7A9AC]">
+                    TV Commercials
                   </span>
                 </>
               ) : (
@@ -164,8 +165,8 @@ const MediaMaster = (props) => {
                   <div className="border-2 mt-2 p-3 border-[#A7A9AC] rounded-full bg-[#E6E7E8] group-hover:bg-white transition z-10">
                     <TvCommercials fill="#939598" className={"w-10 h-10"} />
                   </div>
-                  <span className="w-32 text-center border-2 rounded-lg px-1 pt-[23px] pb-1 border-[#A7A9AC] relative -top-4 min-h-[68px]">
-                    Tv Commercials
+                  <span className="w-34 text-center border-2 rounded-lg px-1 pt-[23px] pb-1 border-[#A7A9AC] relative -top-4 min-h-[68px]">
+                    TV Commercials
                   </span>
                 </>
               )}
@@ -180,22 +181,22 @@ const MediaMaster = (props) => {
                   : "text-[#939598]"
               }  text-f16 font-normal group`}
             >
-              {filteredPathname[2] == "tv-medias" ? (
+              {filteredPathname[2] == "tv-media" ? (
                 <>
                   <div className="mt-2 p-3 z-10">
-                    <TvCommercials fill="#ED1D24" className={"w-10 h-10"} />
+                    <TvMedias fill="#ED1D24" className={"w-10 h-10"} />
                   </div>
                   <span className="w-32 text-center px-1 pt-3 pb-1 border-[#A7A9AC]">
-                    Tv Media
+                    TV News Media
                   </span>
                 </>
               ) : (
                 <>
                   <div className="border-2 mt-2 p-3 border-[#A7A9AC] rounded-full bg-[#E6E7E8] group-hover:bg-white transition z-10">
-                    <TvCommercials fill="#939598" className={"w-10 h-10"} />
+                    <TvMedias fill="#939598" className={"w-10 h-10"} />
                   </div>
                   <span className="w-32 text-center border-2 rounded-lg px-1 pt-[23px] pb-1 border-[#A7A9AC] relative -top-4 min-h-[68px]">
-                    Tv Media
+                    TV News Media
                   </span>
                 </>
               )}

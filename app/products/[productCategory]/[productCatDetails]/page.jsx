@@ -356,7 +356,7 @@ const ProductDetails = ({ params }) => {
         }}
         size="lg"
       >
-        <DialogBody className="relative">
+          <DialogBody className="relative" style={{ overflowY: 'scroll', maxHeight: '90vh' }}>
           {singleProduct?.product_cable_design_parameter.map((parameter) => (
             <TransformWrapper key={parameter.id}>
               <TransformComponent className="relative ">
