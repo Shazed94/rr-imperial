@@ -158,7 +158,7 @@ const Layout = (props) => {
             </Link>
           </li>
 
-          <LinkwithCookies path={path}/>
+          <LinkwithCookies path={path} fetchPermissions={fetchPermissions} />
 
           <li
             className="flex items-center px-8 py-2 text-gray-300 hover:bg-[#EA3C3C] hover:text-gray-100 group-[.w-20]/sidebar:px-2 group-[.w-20]/sidebar:justify-center group-[.selected]:text-gray-50 cursor-pointer"

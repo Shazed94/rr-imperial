@@ -2,15 +2,15 @@
 import Link from "next/link";
 import { MdOutlineEventAvailable, MdOutlineMapsHomeWork } from "react-icons/md";
 import {
-  FaProductHunt,
-  FaBookReader,
-  FaVideo,
-  FaUsers,
-  FaUser,
+    FaProductHunt,
+    FaBookReader,
+    FaVideo,
+    FaUsers,
+    FaUser,
 } from "react-icons/fa";
 import {
-  AiFillContacts,
-  AiOutlineFilePdf,
+    AiFillContacts,
+    AiOutlineFilePdf,
 } from "react-icons/ai";
 import { SlCalender } from "react-icons/sl";
 import { IoChevronDownOutline } from "react-icons/io5";
@@ -18,10 +18,10 @@ import { BsSliders, BsCalculator, BsLightbulb } from "react-icons/bs";
 import { BiNews } from "react-icons/bi";
 import { CgEventbrite, CgLogIn } from "react-icons/cg";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
-import {  getCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { FiActivity } from "react-icons/fi";
 
-const LinkwithCookies = ({path}) => {
+const LinkwithCookies = ({ path, fetchPermissions }) => {
     return (
         <div>
             {getCookie("user_type") == "1" && getCookie("admin_staff") == "0" ? (
