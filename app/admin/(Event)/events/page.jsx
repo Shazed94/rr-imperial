@@ -730,7 +730,7 @@ const AdminEvents = () => {
           <Button
             variant="text"
             color="indigo"
-            onClick={() => setOpen(false)}
+            onClick={() => {setOpen(false);setDescVal("", "html");}}
             className="mr-1"
           >
             <span>Cancel</span>

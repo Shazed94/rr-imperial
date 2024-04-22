@@ -25,6 +25,7 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import Parse from "html-react-parser";
 import dynamic from "next/dynamic";
+import ReactPlayer from "react-player";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 const AdminTvMedia = () => {
@@ -98,7 +99,7 @@ const AdminTvMedia = () => {
   const showSingleTvMediaData = (modalValue, id) => {
     view_tvMedia(id).then((res) => {
       setModalData(modalValue);
-      setSingletvMediaInfo(res.data.singleMedia);
+      setSingletvMediaInfo(res.data.singleCommercial);
       setOpen(true);
     });
   };
@@ -335,7 +336,7 @@ const AdminTvMedia = () => {
                       YouTube Thumbnail&nbsp;{" "}
                     </label>
 
-                    <input
+                    <input required
                       type="file"
                       className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-4  file:border-0 file:text-sm file:font-semibold
                                 file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 border border-gray-300 rounded-lg"
@@ -359,7 +360,7 @@ const AdminTvMedia = () => {
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                      YouTube Embed Link&nbsp;{" "}
+                      YouTube Video URL&nbsp;{" "}
                     </label>
 
                     <input
@@ -461,7 +462,7 @@ const AdminTvMedia = () => {
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                      YouTube Embed Link&nbsp;{" "}
+                    YouTube Video URL&nbsp;{" "}
                     </label>
 
                     <input
@@ -508,14 +509,17 @@ const AdminTvMedia = () => {
               <h4>{singleTvMediaInfo?.title}</h4>
 
               <div className="text-center my-5">
-                <iframe
+                {/* <iframe width="560" height="315" src="https://www.youtube.com/watch?v=d7iDgjSxfnk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
+                {/* <iframe
                   width="100%"
                   height="450"
                   src={`https://www.youtube.com/embed/${singleTvMediaInfo?.videoLink}`}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen={true}
-                ></iframe>
+                ></iframe> */}
+
+                <ReactPlayer url={`${singleTvMediaInfo?.videoLink}`} />
               </div>
               <div className="mt-2">
                 {Parse(`${singleTvMediaInfo?.description}`)}
@@ -527,7 +531,7 @@ const AdminTvMedia = () => {
           <Button
             variant="text"
             color="indigo"
-            onClick={() => setOpen(false)}
+            onClick={() => { setOpen(false); setDescVal("", "html") }}
             className="mr-1"
           >
             <span>Cancel</span>

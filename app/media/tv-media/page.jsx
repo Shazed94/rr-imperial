@@ -13,6 +13,7 @@ import Parse from "html-react-parser";
 import React, { useEffect, useState } from "react";
 import { BACKEND_BASE_URL } from "@/components/GlobalVariables";
 import Image from "next/image";
+import ReactPlayer from "react-player";
 
 const TvMedias = () => {
   const [allTvMedias, setAllTvMedias] = useState([]);
@@ -85,7 +86,7 @@ const TvMedias = () => {
       >
         <DialogHeader></DialogHeader>
         <DialogBody className=" overflow-auto">
-          <iframe
+          {/* <iframe
             width="100%"
             height="600"
             src={`https://www.youtube.com/embed/${embedLink}?autoplay=1`}
@@ -93,7 +94,8 @@ const TvMedias = () => {
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen=""
-          ></iframe>
+          ></iframe> */}
+          <ReactPlayer url={`${embedLink}`} width="100%" height="600px" />
         </DialogBody>
       </Dialog>
     </div>
