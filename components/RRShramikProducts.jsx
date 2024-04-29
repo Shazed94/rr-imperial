@@ -59,7 +59,7 @@ const RRShramikProductsComponent = () => {
                 />
                 <span className="absolute bottom-0 left-0 right-0 py-4 bg-[#D46A29] text-white group-hover:text-[#D46A29] z-10  text-center uppercase text-f16 font-bold">
                   SUPER ENAMELLED COPPER WIRE <br />{" "}
-                  <small>* H Class (180&#176; C)</small>
+                  <small>H Class (180&#176;)</small>
                   <span className="w-0 group-hover:w-full group-hover:bg-white duration-300 absolute inset-0 transition-all -z-10"></span>
                 </span>
               </div>
@@ -80,7 +80,7 @@ const RRShramikProductsComponent = () => {
                 />
                 <span className="absolute bottom-0 left-0 right-0 py-4 bg-[#D46A29] text-white group-hover:text-[#D46A29] z-10 text-center uppercase text-f16 font-bold">
                   SUPER ENAMELLED COPPER WIRE <br />{" "}
-                  <small>* 1-1+ Class (200&#176; C)</small>
+                  <small>H+ Class (200&#176;)</small>
                   <span className="w-0 group-hover:w-full group-hover:bg-white duration-300 absolute inset-0 transition-all -z-10"></span>
                 </span>
               </div>
