@@ -1,21 +1,16 @@
 "use client";
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import {
-  Button,
   Dialog,
   DialogBody,
-  DialogFooter,
-  DialogHeader,
-  Input,
-  Popover,
-  PopoverContent,
-  PopoverHandler,
 } from "@material-tailwind/react";
 import { IoSearchSharp } from "react-icons/io5";
+import { all_Pricelist_Front } from "@/utility/api";
+import { BACKEND_BASE_URL } from "./GlobalVariables";
 
 const QuickNavigation = () => {
   const router = useRouter();
@@ -50,14 +45,26 @@ const QuickNavigation = () => {
     onMouseLeave: () => setOpenPopover(false),
   };
 
+  const [allPricelist, setAllPricelist] = useState([]);
+  const fetchAllPricelist = () => {
+    all_Pricelist_Front().then((res) => {
+      setAllPricelist(res.data?.price_list);
+    });
+  };
+
+  useEffect(() => {
+    fetchAllPricelist();
+  }, []);
+
   return (
     <>
       <div className="hidden lg:block fixed top-[33%] right-0 z-50">
         <div className="relative w-32 h-60">
           <a
-            href="/pdf/rr_cable_price_list.pdf"
-            className="group relative -right-2"
+            target="_blank"
+            href={`${BACKEND_BASE_URL}${allPricelist?.cable_price_list}`}
             download
+            className="group relative -right-2"
           >
             <img
               src={"/svg/rr-kabel.svg"}
@@ -68,7 +75,11 @@ const QuickNavigation = () => {
             />
           </a>
           <div className="group relative top-[24px] -right-2">
-            <a href="/pdf/rr_shramik_price_list.pdf" download>
+            <a
+              target="_blank"
+              href={`${BACKEND_BASE_URL}${allPricelist?.shramik_price_list}`}
+              download
+            >
               <img
                 src={"/svg/rr-shramik.svg"}
                 width={120}
