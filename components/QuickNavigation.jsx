@@ -4,10 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-import {
-  Dialog,
-  DialogBody,
-} from "@material-tailwind/react";
+import { Dialog, DialogBody } from "@material-tailwind/react";
 import { IoSearchSharp } from "react-icons/io5";
 import { all_Pricelist_Front } from "@/utility/api";
 import { BACKEND_BASE_URL } from "./GlobalVariables";
@@ -123,7 +120,7 @@ const QuickNavigation = () => {
       <div className="block lg:hidden fixed bottom-0 left-0 right-0 bg-[#E71D1D] border-t border-white text-4xl z-50">
         <div className="flex justify-between items-center px-4">
           <a
-            href="/pdf/rr_cable_price_list.pdf"
+            href={`${BACKEND_BASE_URL}${allPricelist?.cable_price_list}`}
             className="group relative -right-2 "
             download
           >
@@ -166,7 +163,10 @@ const QuickNavigation = () => {
             </DialogBody>
           </Dialog>
 
-          <a href="/pdf/rr_shramik_price_list.pdf" download>
+          <a
+            href={`${BACKEND_BASE_URL}${allPricelist?.shramik_price_list}`}
+            download
+          >
             <p className="text-white text-f18">Shramik Price List</p>
           </a>
         </div>
