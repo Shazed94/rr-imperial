@@ -3,11 +3,7 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import MediaMaster from "@/components/Media/MediaMaster";
 import { all_Media_Front } from "@/utility/api";
-import {
-  Dialog,
-  DialogBody,
-  DialogHeader,
-} from "@material-tailwind/react";
+import { Dialog, DialogBody, DialogHeader } from "@material-tailwind/react";
 import moment from "moment";
 import Parse from "html-react-parser";
 import React, { useEffect, useState } from "react";
@@ -77,7 +73,8 @@ const TvMedias = () => {
       </MediaMaster>
       <Footer />
       <Dialog
-        open={open} size="lg"
+        open={open}
+        size="lg"
         handler={handleOpen}
         animate={{
           mount: { scale: 1, y: 0 },
@@ -95,7 +92,14 @@ const TvMedias = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen=""
           ></iframe> */}
-          <ReactPlayer url={`${embedLink}`} width="100%" height="600px" />
+          <ReactPlayer
+            url={`${embedLink}`}
+            width="100%"
+            height="600px"
+            controls={true}
+            playing={true} // Autoplay enabled
+            muted={true}
+          />
         </DialogBody>
       </Dialog>
     </div>

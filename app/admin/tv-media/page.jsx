@@ -74,6 +74,7 @@ const AdminTvMedia = () => {
       formdata.append("thumbnail", tvMediaPoster.current.files[0]);
     }
     formdata.append("description", descVal);
+
     formdata.append("videoLink", tvMediaLink.current.value);
 
     create_new_tvMedia(formdata).then((response) => {
@@ -159,13 +160,8 @@ const AdminTvMedia = () => {
     });
   };
 
-  const TABLE_HEAD = [
-    "#",
-    "Tv Media Title",
-    "Thumbnail",
-    "Video",
-    "Handle",
-  ];
+  const TABLE_HEAD = ["#", "Tv Media Title", "Thumbnail", "Handle"];
+  console.log(singleTvMediaInfo);
   return (
     // <AdminMaster>
     <div className="main__container p-4">
@@ -236,7 +232,7 @@ const AdminTvMedia = () => {
                             alt={data?.title}
                           />
                         </td>
-                        <td className={classes}>
+                        {/* <td className={classes}>
                           <button
                             className="bg-transparent text-red-600 border-0"
                             onClick={() =>
@@ -245,7 +241,7 @@ const AdminTvMedia = () => {
                           >
                             <FaYoutube size="2.5em" />
                           </button>
-                        </td>
+                        </td> */}
                         <td className={`${classes}`}>
                           <div className="flex items-center gap-2">
                             {/* view button */}
@@ -336,7 +332,8 @@ const AdminTvMedia = () => {
                       YouTube Thumbnail&nbsp;{" "}
                     </label>
 
-                    <input required
+                    <input
+                      required
                       type="file"
                       className="block w-full text-sm text-slate-500 file:mr-4 file:py-3 file:px-4  file:border-0 file:text-sm file:font-semibold
                                 file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 border border-gray-300 rounded-lg"
@@ -360,7 +357,7 @@ const AdminTvMedia = () => {
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                      YouTube Video URL&nbsp;{" "}
+                      YouTube / Facebook Link&nbsp;{" "}
                     </label>
 
                     <input
@@ -462,7 +459,7 @@ const AdminTvMedia = () => {
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                    YouTube Video URL&nbsp;{" "}
+                      YouTube / Facebook Link&nbsp;{" "}
                     </label>
 
                     <input
@@ -519,7 +516,13 @@ const AdminTvMedia = () => {
                   allowFullScreen={true}
                 ></iframe> */}
 
-                <ReactPlayer url={`${singleTvMediaInfo?.videoLink}`} />
+                <ReactPlayer
+                  url={`${singleTvMediaInfo?.videoLink}`}
+                  controls={true}
+                  width={"100%"}
+                  playing={true} // Autoplay enabled
+                  muted={true}
+                />
               </div>
               <div className="mt-2">
                 {Parse(`${singleTvMediaInfo?.description}`)}
@@ -531,7 +534,10 @@ const AdminTvMedia = () => {
           <Button
             variant="text"
             color="indigo"
-            onClick={() => { setOpen(false); setDescVal("", "html") }}
+            onClick={() => {
+              setOpen(false);
+              setDescVal("", "html");
+            }}
             className="mr-1"
           >
             <span>Cancel</span>

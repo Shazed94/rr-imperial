@@ -6,6 +6,7 @@ import { all_Media_Front } from "@/utility/api";
 import { Button } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
 import Parse from "html-react-parser";
+import ReactPlayer from "react-player";
 
 const Videos = () => {
   const [allVideos, setVideos] = useState([]);
@@ -33,11 +34,10 @@ const Videos = () => {
     fetchAllMedia();
   }, []);
   return (
-    
     <div>
       <Header />
       <MediaMaster>
-      <div className="bg-white p-8 mb-12" id="">
+        <div className="bg-white p-8 mb-12" id="">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {allVideos?.map((data, i) => (
               <div
@@ -49,7 +49,7 @@ const Videos = () => {
                 className="group bg-[#E6E7E8] rounded-2xl p-3 cursor-pointer hover:scale-105 hover:bg-[#ED1D24] transition-all"
               >
                 <div className="relative w-full h-56">
-                  <iframe
+                  {/* <iframe
                       width="100%"
                       height="220"
                       src={`https://www.youtube.com/embed/${data.videoLink}`}
@@ -58,7 +58,13 @@ const Videos = () => {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowfullscreen=""
                       className="relative z-10"
-                    ></iframe>
+                    ></iframe> */}
+                  <ReactPlayer
+                    url={`${data.videoLink}`}
+                    width="100%"
+                    height="220px"
+                    controls={true}
+                  />
                 </div>
 
                 <div className=" p-4 flex flex-col justify-between ">
@@ -75,18 +81,18 @@ const Videos = () => {
             ))}
           </div>
           <div className="flex justify-center my-5 lg:my-10 pt-5 lg:pt-10">
-                {currentPageNum != lastPageNumber && (
-                  <div className="text-center">
-                    <Button
-                      variant="outlined"
-                      size="lg"
-                      onClick={() => loadMoreVideos()}
-                    >
-                      Load More
-                    </Button>
-                  </div>
-                )}
+            {currentPageNum != lastPageNumber && (
+              <div className="text-center">
+                <Button
+                  variant="outlined"
+                  size="lg"
+                  onClick={() => loadMoreVideos()}
+                >
+                  Load More
+                </Button>
               </div>
+            )}
+          </div>
         </div>
       </MediaMaster>
       <Footer />

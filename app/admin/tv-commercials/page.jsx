@@ -31,6 +31,7 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import Parse from "html-react-parser";
 import dynamic from "next/dynamic";
+import ReactPlayer from "react-player";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 const AdminTvCommercials = () => {
@@ -168,7 +169,7 @@ const AdminTvCommercials = () => {
     "#",
     "Tv Commercial Title",
     "Thumbnail",
-    "Video",
+    // "Video",
     "Handle",
   ];
   return (
@@ -241,7 +242,7 @@ const AdminTvCommercials = () => {
                             alt={data?.title}
                           />
                         </td>
-                        <td className={classes}>
+                        {/* <td className={classes}>
                           <button
                             className="bg-transparent text-red-600 border-0"
                             onClick={() =>
@@ -250,7 +251,7 @@ const AdminTvCommercials = () => {
                           >
                             <FaYoutube size="2.5em" />
                           </button>
-                        </td>
+                        </td> */}
                         <td className={`${classes}`}>
                           <div className="flex items-center gap-2">
                             {/* view button */}
@@ -365,7 +366,7 @@ const AdminTvCommercials = () => {
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                      YouTube Embed Link&nbsp;{" "}
+                      YouTube / Facebbok Link&nbsp;{" "}
                     </label>
 
                     <input
@@ -460,14 +461,14 @@ const AdminTvCommercials = () => {
                         width={80}
                         height={50}
                         src={`${BACKEND_BASE_URL}/${editTvCommercialVal?.thumbnail}`}
-                        alt={newsTitle}
+                        alt={tvCommercialTitle}
                         name="img"
                       />
                     )}
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                      YouTube Embed Link&nbsp;{" "}
+                      YouTube / Facebook Link&nbsp;{" "}
                     </label>
 
                     <input
@@ -514,14 +515,21 @@ const AdminTvCommercials = () => {
               <h4>{singleTvCommercialInfo?.title}</h4>
 
               <div className="text-center my-5">
-                <iframe
+                {/* <iframe
                   width="100%"
                   height="450"
                   src={`https://www.youtube.com/embed/${singleTvCommercialInfo?.videoLink}`}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen={true}
-                ></iframe>
+                ></iframe> */}
+                <ReactPlayer
+                  url={`${singleTvCommercialInfo?.videoLink}`}
+                  controls={true}
+                  width={"100%"}
+                  playing={true} // Autoplay enabled
+                  muted={true}
+                />
               </div>
               <div className="mt-2">
                 {Parse(`${singleTvCommercialInfo?.description}`)}

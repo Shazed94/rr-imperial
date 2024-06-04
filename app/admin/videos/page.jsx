@@ -25,6 +25,7 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import Parse from "html-react-parser";
 import dynamic from "next/dynamic";
+import ReactPlayer from "react-player";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
 const AdminVideos = () => {
@@ -153,7 +154,7 @@ const AdminVideos = () => {
     });
   };
 
-  const TABLE_HEAD = ["#", "Video Title", "Video", "Handle"];
+  const TABLE_HEAD = ["#", "Video Title", "Handle"];
   return (
     // <AdminMaster>
     <div className="main__container p-4">
@@ -215,14 +216,14 @@ const AdminVideos = () => {
                       <tr key={index}>
                         <td className={classes}>{index + 1}</td>
                         <td className={classes}>{data?.title}</td>
-                        <td className={classes}>
+                        {/* <td className={classes}>
                           <button
                             className="bg-transparent text-red-600 border-0"
                             onClick={() => showSingleVideoData("View", data.id)}
                           >
                             <FaYoutube size="2.5em" />
                           </button>
-                        </td>
+                        </td> */}
                         <td className={`${classes}`}>
                           <div className="flex items-center gap-2">
                             {/* view button */}
@@ -310,7 +311,7 @@ const AdminVideos = () => {
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                      YouTube Embed Link&nbsp;{" "}
+                      YouTube / Facebook Link&nbsp;{" "}
                     </label>
 
                     <input
@@ -375,7 +376,7 @@ const AdminVideos = () => {
                   </div>
                   <div className="mb-1 flex flex-col gap-2 col-span-6">
                     <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                      YouTube Embed Link&nbsp;{" "}
+                      YouTube / Facebook Link&nbsp;{" "}
                     </label>
 
                     <input
@@ -422,14 +423,23 @@ const AdminVideos = () => {
               <h4>{singleVideoInfo?.title}</h4>
 
               <div className="text-center my-5">
-                <iframe
+                {/* <iframe
                   width="100%"
                   height="450"
                   src={`https://www.youtube.com/embed/${singleVideoInfo?.videoLink}`}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen={true}
-                ></iframe>
+                ></iframe> */}
+
+                <ReactPlayer
+                  url={`${singleVideoInfo?.videoLink}`}
+                  width="100%"
+                  height="600px"
+                  controls={true}
+                  playing={true} // Autoplay enabled
+                  muted={true}
+                />
               </div>
               <div className="mt-2">
                 {Parse(`${singleVideoInfo?.description}`)}
