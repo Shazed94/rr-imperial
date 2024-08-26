@@ -129,13 +129,13 @@ const page = (props) => {
             establishment, and a network, Imperial Group is very well-versed in
             the needs and expectations of the Bangladesh market.
           </p>
-          <p className="text-[#58595B] font-normal mb-5">
+          {/* <p className="text-[#58595B] font-normal mb-5">
             RR Group is one of the premier enameled wire and cable producers,
             processing over 50,000 MT of copper every year. With over 45 years
             of experience in the electrical field, RR Group is currently
             exporting its products to over 80 countries worldwide. Its wires and
             cables have been internationally certified to cover all continents.
-          </p>
+          </p> */}
           <p className="text-[#58595B] font-normal mb-5">
             RR Imperial Electricals Ltd. is the amalgamation of two like-minded
             groups who share a mutual passion for bringing the best to
