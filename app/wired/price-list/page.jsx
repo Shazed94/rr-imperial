@@ -40,7 +40,7 @@ const PriceList = () => {
               className="flex flex-between items-center bg-[#E6E7E8] px-10 py-1 cursor-pointer hover:bg-[#E71D1D] group transition-colors"
             >
               <div className="text-[#939598] flex-1 group-hover:text-white ">
-                Price List 11-07-21
+                RR Kabel Price List
               </div>
               <div>
                 <DownloadCloud
@@ -66,7 +66,7 @@ const PriceList = () => {
               className="flex flex-between items-center bg-[#E6E7E8] px-10 py-1 cursor-pointer hover:bg-[#D46A29] group transition-colors"
             >
               <div className="text-[#939598] flex-1 group-hover:text-white">
-                Price List 11-07-21
+              RR Shramik Price List
               </div>
               <div>
                 <DownloadCloud
