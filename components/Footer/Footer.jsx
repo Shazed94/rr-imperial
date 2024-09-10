@@ -58,7 +58,7 @@ const Footer = (props) => {
         <div className="container grid grid-cols-12 gap-4 lg:gap-20 text-white py-6 lg:py-14">
           <div className="col-span-12 lg:col-span-4 lg:pr-20 mb-6 lg:mb-0">
             <h4 className="text-f25  font-bold mb-6">About Us</h4>
-            <p className="text-[17px] leading-relaxed mb-8">RR Imperial Electricals Ltd. is One of the leading electrical wires and cables manufacturers in the world, & it&apos;s a joint venture company.</p>
+            <p className="text-[17px] leading-relaxed mb-8">RR-Imperial Electricals Limited is an ISO-certified sister concern of Imperial Group. Manufacturer of Electric Cables, Super Enamelled Wires, Bare Copper Strips etc.</p>
             <div className="flex gap-4 lg:gap-5">
               <a href="https://www.facebook.com/RRImperialElectricalLimited/" target="_blank" className="w-10 h-10 flex justify-center items-center rounded bg-[#E71D1D] text-white hover:bg-white hover:text-[#E71D1D] transition-all duration-500">
                 <FaFacebookF />

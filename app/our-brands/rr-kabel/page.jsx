@@ -24,10 +24,10 @@ const page = () => {
           className="mx-auto mb-6"
         />
         <div className="px-4 lg:px-12 mb-6 lg:mb-14">
-          <p className="text-f16 text-[#58595B] font-normal">
+          {/* <p className="text-f16 text-[#58595B] font-normal">
             One of the leading electrical wires and cables manufacturers in the
             world, RR Kabel is a joint venture company.
-          </p>
+          </p> */}
           <p className="text-f16 text-[#58595B] font-normal">
             RR Kabel is a pioneer in wire design, technology, and applicability.
             The focus on cutting-edge technology and research has continually
@@ -77,9 +77,7 @@ const page = () => {
 
             <div>
               <p className="text-f16 text-[#58595B] font-normal mb-10">
-                RR Kabel is manufactured in Bangladesh by RR Imperial
-                Electricals Ltd, an ambitious ISO-certified joint venture
-                between Imperial Group, Bangladesh, and RR Group. Incorporated
+              RR Kabel is manufactured in Bangladesh by RR Imperial Electricals Ltd, an ambitious ISO-certified sister concern of Imperial Group. RR Kabel is a pioneer in wire design, technology, and applicability. Incorporated
                 with the objective of manufacturing, processing, selling, and
                 distributing heavy-duty cables and wires for industrial usage,
                 Low voltage, HT cables, and other electrical products. RR
@@ -102,7 +100,7 @@ const page = () => {
               </p>
             </div>
           </div>
-          <p className="text-f16 text-[#58595B] font-normal">
+          {/* <p className="text-f16 text-[#58595B] font-normal">
             RR Group is one of the premier enameled wires and cable producers,
             processing over 50,000 MT of Copper every year. With an experience
             of over 45 years in the electrical field, RR Group is currently
@@ -114,7 +112,7 @@ const page = () => {
             expertise complementing each other&apos;s strengths, RR Imperial
             Electricals Ltd aims to be a leader in the horizon of Bangladesh’s
             highly potential electrical industry.
-          </p>
+          </p> */}
         </div>
         <div className="text-center">
           <h2 className="text-[#E82429] text-f38 font-bold mb-12">
