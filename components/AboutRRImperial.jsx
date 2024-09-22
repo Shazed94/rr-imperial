@@ -45,12 +45,7 @@ const AboutRRImperial = () => {
                   data-aos-easing="ease-in-out"
                   className="text-333 text-f14 font-tahoma-normal"
                 >
-                  One of the leading electrical wires and cables manufacturers
-                  in the world, RR Kabel is a joint venture company. RR Kabel is
-                  a pioneer in wire design, technology, and applicability. The
-                  focus on cutting-edge technology and research has continually
-                  enhanced the products&apos; efficiency, reliability, and
-                  safety aspects.
+                  RR-Imperial Electricals Limited is an ISO-certified sister concern of Imperial Group. Manufacturer of Electric Cables, Super Enamelled Wires, Bare Copper Strips etc.
                 </p>
               </div>
               <div

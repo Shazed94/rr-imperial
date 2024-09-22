@@ -63,9 +63,7 @@ const SubmitQueryForm = () => {
           Submit Your Queries!
         </h2>
         <p className="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-          similique illum aut dignissimos, voluptas explicabo tempore dolores
-          sapiente laborum natus!
+          Have questions? Share them here and get quick answers!
         </p>
       </div>
       <form onSubmit={storeData}>

@@ -32,23 +32,29 @@ const page = (props) => {
                 MR. M. HARES AHMED
               </h1>
               <h2>MANAGING DIRECTOR</h2>
-              <h2 className="mb-4">IMPERIAL ALLIED CHEMICALS LIMITED</h2>
+              <h2 className="mb-4">RR Imperial Electricals Ltd.</h2>
               <p className="text-[#58595B] font-normal mb-5 text-justify">
-                Mr. M. Hares Ahmed was born in a religious Muslim family in
-                Chattogram. He has obtained a B.Sc. (Honors), and M.Sc. in
-                Physics from Chattogram University. After completing his
-                education, he joined a reputed textile dyeing & printing
-                industry as a Manager. He started business as director in
-                Phoenix Fabrics Limited, Tejgaon I/A, Dhaka, a pioneer industry
-                in fabrics dyeing, printing & finishing. Alongside his industry
-                business, he started the textile Dyestuffs and Chemicals
-                business in 1990 in the name of Imperial International Limited,
-                Imperial Dye-Chem Co. Ltd, and Imperial Allied Chemicals Ltd. He
-                is the managing director of these companies. He is also the
-                managing director of Imperial Composite Fabrics Ltd &
-                RR-Imperial Electricals Ltd. He is the father of two sons and
-                two daughters. Mr. Ahmed visited many countries for business
-                purposes.
+                M. Hares Ahmed, a visionary thinker with exceptional leadership skills, hard work, dedication and 
+                empathy, has been the primary influence behind the success of RR Imperial Electricals Ltd. over the past 
+                decades. Born into an aristocratic Muslim family in Chattogram in 1948, M. Hares Ahmed has 
+                accomplished extraordinary achievements in his academic pursuits. After obtaining his B.Sc. (Honors) 
+                and M.Sc. in Physics from Chattogram University, he started his career as a Manager at a prestigious 
+                textile dyeing and printing company.<br/><br/>
+
+                From the very beginning, Hares Ahmed had a very strong desire to start his own venture. Destined to be 
+                an entrepreneur he started his own business as a Director of Phoenix Fabrics Limited, which was 
+                established in Tejgaon Dhaka. Phoenix Fabrics Limited is considered as one of the pioneers in fabrics 
+                dyeing, printing and finishing industry in Bangladesh. Additionally, he launched a textile dyestuffs and 
+                chemicals business in 1990 under the names Imperial International Limited, Imperial Dye-Chem Co. Ltd  
+                and Imperial Allied Chemicals Ltd, all operating simultaneously. As the Managing Director of these 
+                ventures, his exceptional leadership led to rapid growth, quickly establishing the companies as industry 
+                leaders in Bangladesh. He is also the Managing Director of Imperial Composite Fabrics Ltd.<br/><br/>
+
+                For M. Hares Ahmed, family is his top priority and he is blessed with two sons and two daughters. All of 
+                his children are highly successful and are making significant contributions in their respective fields. He 
+                enjoys traveling, as he loves exploring new cultures, people and ways of life from around the world. As a 
+                true patriot, Hares Ahmed and his business ventures are significantly contributing to Bangladesh's 
+                economy and positioning Bangladeshi products as top contenders on the international stage. 
               </p>
             </div>
           </div>
@@ -62,33 +68,33 @@ const page = (props) => {
               </h1>
               <h2 className="lg:text-right md:text-left">DIRECTOR AND CEO</h2>
               <h2 className="lg:text-right md:text-left mb-4">
-                RR-Imperial Electricals Ltd & IMPERIAL ALLIED CHEMICALS
-                LIMITED
+                RR Imperial Electricals Ltd.
               </h2>
               <p className="text-[#58595B] font-normal mb-5 text-right text-justify">
-                Mr. Mahboob Hossain Mirdah S/O, Late Mohammad Hossain Mirdah
-                comes from a religious Muslim family in Dhaka. He completed a
-                graduation degree from Jagannath College, Dhaka. After
-                completing his education, he went to Japan for training. After
-                returning home, he started service in Phoenix Fabrics Ltd.
-                Tejgaon I/A, Dhaka, one of the leading fabric dyeing, printing &
-                finishing Industries. He started a business of textile dyestuffs
-                & Chemicals in 1991 under the name of Imperial International
-                Limited and Imperial Dye Chem. Co. Ltd. as a director of these
-                companies. He is also the director of Imperial Composite Fabrics
-                Limited and Imperial Allied Chemicals Ltd. He has been the
-                Director& CEO of RR-Imperial Electricals Ltd since 2011. He is
-                the father of a son and a daughter. He is attached to several
-                socio-cultural organizations. He is the Vice President of the
-                UNESCO Club Association in Bangladesh and the Honorable Chairman
-                of the Initiative for Total Reform (ITR). He visited many
-                countries for business purposes and also as a representative of
-                the UNESCO Club Association. He is also a member of the
-                Bangladesh Chemical Importers & Merchants Association,
-                India-Bangladesh Chamber of Commerce and Industry (IBCCI),
-                Bangladesh Electrical Merchandise Manufacturers As Sociation
-                (BEMMA) and Electronics Safety and Security Association of
-                Bangladesh (ESSAB).
+                Mahboob Hossain Mirdha is a highly skilled individual with remarkable business acumen and a 
+                philanthropic nature. He was born in a prestigious Muslim family in Dhaka in 1955 and his father is 
+                Mohammad Hossain Mirdah. After graduating from Jagannath College, he traveled to Japan for training 
+                in fabric dyeing, textiles, and chemicals. Having the required experience and proficiency, upon his return 
+                he started working for Phoenix Fabrics Limited.  <br/><br/>
+                Equipped with the knowledge he gained from his training in Japan and his strong desire to start his own 
+                business, Mahboob Hossain Mirdha founded his textile dyestuffs and chemicals company in 1991, 
+                naming it Imperial International Limited and Imperial Dye Chem Co. Ltd. He served as the director of 
+                both companies. With his extensive experience and expertise in these fields, he is currently the Director 
+                of Imperial Composite Fabrics Limited and Imperial Allied Chemicals Ltd.   Since the inception of RR 
+                Imperial Electricals Limited in 2011, he has elevated the company to new heights as the Managing 
+                Director and CEO.  <br/><br/>
+                He is a proud father of a son and daughter, both of whom have achieved remarkable feats in various 
+                fields. Mahboob Hossain Mirdha truly believes that we all have certain responsibilities towards the 
+                society and should make positive contribution towards the improvement of the society within our 
+                capacities. He is involved with several socio-cultural organizations, serving as the Vice President of the 
+                UNESCO Club Association in Bangladesh and the Chairman of the Initiative for Total Reform (ITR). He has 
+                traveled around the globe for business purposes and through the UNESCO Club Association, allowing 
+                him to experience various cultures, people and business practices. As a prominent figure in Bangladesh's 
+                business arena, he is actively engaged with multiple associations and chambers. He is an active member 
+                of Bangladesh Chemical Importers & Merchants Association, India-Bangladesh Chamber of Commerce 
+                and Industry (IBCCI), Bangladesh Electrical Merchandise Manufacturers Association (BEMMA) and 
+                Electronics Safety and Security Association of Bangladesh (ESSAB). Mahboob Hossain Mirdha's pursuit of 
+                excellence inspires him to introduce innovative thinking into his business practices regularly.  
               </p>
             </div>
             <div className="w-full lg:w-1/3 md:order-1 lg:order-2 my-4 lg:mb-12">

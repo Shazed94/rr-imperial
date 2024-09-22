@@ -29,7 +29,7 @@ const page = () => {
               RR Shramik is the first and only super-enamelled copper wire
               manufacturer in Bangladesh. The company uses 100% imported LME
               (London Metal Exchange) registered grade “A” copper cathode to
-              manufacture H Class (180o c) super-enamelled copper wire. RR
+              manufacture  H+ Class (200 Degree) super-enamelled copper wire. RR
               Shramik has been an electrical wire manufacturer with a strong
               presence in the international market for a long time.
             </p>
@@ -67,7 +67,7 @@ const page = () => {
                     Increases motor durability
                   </p>
                   <p className="text-f18 lg:text-f20 text-[#58595B] font-normal">
-                    High-temperature resistance (up to 180o Celsius)
+                    High-temperature resistance (up to 200 Degree)
                   </p>
                 </div>
               </div>

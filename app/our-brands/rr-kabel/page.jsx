@@ -82,7 +82,7 @@ const page = () => {
                 distributing heavy-duty cables and wires for industrial usage,
                 Low voltage, HT cables, and other electrical products. RR
                 Imperial Electricals also has an extended product line under the
-                brand name of RR Shamika, manufacturing Super Enameled wires,
+                brand name of RR Shramik, manufacturing Super Enameled wires,
                 copper strips (bare and paper insulated), and bus bars. RR
                 Imperial aims to enhance customer satisfaction by consistently
                 meeting the needs and expectations related to products and

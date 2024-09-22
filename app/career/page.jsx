@@ -113,7 +113,7 @@ const CurrentOpenings = () => {
             encounters.
           </p>
           <p className="text-[#6D6E71]">
-            Send your resumes to hr@it@rr-imperial.com as soon as possible.
+            Send your resumes to admin.hr@rr-imperial.com as soon as possible.
           </p>
 
           <h3 className="text-[#E6E7E8] text-f28 lg:text-f38 font-bold py-10 lg:py-24">
