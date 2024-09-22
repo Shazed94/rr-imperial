@@ -53,7 +53,7 @@ const page = (props) => {
                 For M. Hares Ahmed, family is his top priority and he is blessed with two sons and two daughters. All of 
                 his children are highly successful and are making significant contributions in their respective fields. He 
                 enjoys traveling, as he loves exploring new cultures, people and ways of life from around the world. As a 
-                true patriot, Hares Ahmed and his business ventures are significantly contributing to Bangladesh's 
+                true patriot, Hares Ahmed and his business ventures are significantly contributing to Bangladesh&apos;s 
                 economy and positioning Bangladeshi products as top contenders on the international stage. 
               </p>
             </div>
@@ -89,11 +89,11 @@ const page = (props) => {
                 capacities. He is involved with several socio-cultural organizations, serving as the Vice President of the 
                 UNESCO Club Association in Bangladesh and the Chairman of the Initiative for Total Reform (ITR). He has 
                 traveled around the globe for business purposes and through the UNESCO Club Association, allowing 
-                him to experience various cultures, people and business practices. As a prominent figure in Bangladesh's 
+                him to experience various cultures, people and business practices. As a prominent figure in Bangladesh&apos;s 
                 business arena, he is actively engaged with multiple associations and chambers. He is an active member 
-                of Bangladesh Chemical Importers & Merchants Association, India-Bangladesh Chamber of Commerce 
+                of Bangladesh Chemical Importers &amp; Merchants Association, India-Bangladesh Chamber of Commerce 
                 and Industry (IBCCI), Bangladesh Electrical Merchandise Manufacturers Association (BEMMA) and 
-                Electronics Safety and Security Association of Bangladesh (ESSAB). Mahboob Hossain Mirdha's pursuit of 
+                Electronics Safety and Security Association of Bangladesh (ESSAB). Mahboob Hossain Mirdha&apos;s pursuit of 
                 excellence inspires him to introduce innovative thinking into his business practices regularly.  
               </p>
             </div>

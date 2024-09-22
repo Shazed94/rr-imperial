@@ -87,7 +87,7 @@ const page = () => {
                 Imperial aims to enhance customer satisfaction by consistently
                 meeting the needs and expectations related to products and
                 services. RR Kabel achieved 2 valuable certifications: one is UL
-                and another is VDE .
+                and another is VDE.
               </p>
               <p className="text-f16 text-[#58595B] font-normal">
                 Imperial Group is easily among the leaders in the chemicals and
