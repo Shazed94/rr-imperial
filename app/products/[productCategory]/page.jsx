@@ -61,15 +61,15 @@ const ProductCategory = ({ params }) => {
       </div>
       <div className="container grid grid-cols-2 lg:grid-cols-8 place-items-center gap-4 lg:gap-2 py-12">
         <Link
-          href="/products/home-electrical-wire"
+          href="/products/house-wire"
           scroll={false}
           className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-            params.productCategory === "home-electrical-wire"
+            params.productCategory === "house-wire"
               ? "bg-[#E62020]"
               : "bg-[#D1D3D4]"
           }  hover:bg-[#E62020] transition-colors `}
         >
-          <button>Home Electrical Wire</button>
+          <button>HOUSE WIRE CABLES</button>
         </Link>
         <Link
           href="/products/low-voltage-cables"
