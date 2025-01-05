@@ -5,6 +5,13 @@ import Header from "@/components/Header/Header";
 import { ProductHomeLottie } from "@/components/LottieComponents";
 import QuickNavigation from "@/components/QuickNavigation";
 
+export const metadata = {
+  title: "Best Cable in Bangladesh | RR Imperial",
+  description: "Discover a wide range of high-quality cable products from RR Imperial, including low, medium, and high voltage cables, fire survival cables, and more. Our solutions are designed for residential, commercial, and industrial use.",
+  keywords:"rr kabel products, rr cabel products, rr kabel products bd, rr cabel products bd, rr kabel products in bangladesh, rr cabel products in bangladesh"
+};
+
+
 const ProductCategories = () => {
   // const [allCategories, setAllCategories] = useState([]);
   // useEffect(() => {
