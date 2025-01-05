@@ -47,15 +47,15 @@ const ShramikProductCategory = ({ params }) => {
       </div> */}
       <div className="container grid grid-cols-2 lg:grid-cols-8 place-items-center gap-4 lg:gap-2 py-12">
         <Link
-          href="/products/house-wire"
+          href="/products/home-electrical-wire"
           scroll={false}
           className={`w-40 px-2 py-3 font-normal rounded-xl text-white ${
-            params.productCategory === "house-wire"
+            params.productCategory === "home-electrical-wire"
               ? "bg-[#E62020]"
               : "bg-[#D1D3D4]"
           }  hover:bg-[#E62020] transition-colors `}
         >
-          <button>HOUSE WIRE CABLES</button>
+          <button>Home Electrical Wire</button>
         </Link>
         <Link
           href="/products/low-voltage-cables"
