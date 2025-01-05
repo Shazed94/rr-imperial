@@ -11,8 +11,9 @@ const roboto = Roboto({
 });
 
 export const metadata = {
-  title: " RR Imperial | Leading Wire & Cable Manufacturer Company in Bangladesh",
-  description: "Get all types of wires and cables from India's leading cable company, RR Kabel. Know more.",
+  title: "RR Kabel – Best Electric Cable & Wire in Bangladesh | RR Imperial",
+  description: "RR Kabel by RR Imperial – the best electric cable and wire brand in Bangladesh. RR Kabel offer the best electric cable and wire solutions in Bangladesh which is trusted by industries for quality and reliability. RR Kabel is also familiar as RR Cable & RR Kable.",
+  keywords:"RR Kable, RR Cable, best electric cable in bangladesh, best cable company in bangladesh, best electric wire in bangladesh"
 };
 
 export default function RootLayout({ children }) {
