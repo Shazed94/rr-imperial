@@ -4,6 +4,11 @@ import { QualityAssurance } from "@/components/LottieComponents";
 import WhoWeAreMaster from "@/components/WhoWeAre/WhoWeAreMaster";
 import React from "react";
 
+export const metadata = {
+  title: "Comprehensive Quality Assurance by RR Imperial",
+  description: "RR Imperial delivers unmatched product reliability through rigorous quality assurance practices. With multiple certifications and global standards compliance, we ensure safety, durability, and environmental care in every product.",
+};
+
 const page = () => {
   return (
     <div>
