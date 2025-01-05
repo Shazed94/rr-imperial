@@ -4,6 +4,11 @@ import { ResearchInnovation } from "@/components/LottieComponents";
 import WhoWeAreMaster from "@/components/WhoWeAre/WhoWeAreMaster";
 import React from "react";
 
+export const metadata = {
+  title: "Research & Innovation | RR Imperial",
+  description: "RR Imperial drives innovation with cutting-edge research and advanced technologies. Our R&D excellence ensures reliable, sustainable, and innovative solutions for the harshest environments.",
+};
+
 const page = () => {
   return (
     <div>
