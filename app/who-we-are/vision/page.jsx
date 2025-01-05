@@ -3,6 +3,10 @@ import Header from "@/components/Header/Header";
 import { Vision } from "@/components/LottieComponents";
 import WhoWeAreMaster from "@/components/WhoWeAre/WhoWeAreMaster";
 import React from "react";
+export const metadata = {
+  title: "RR Imperial’s Vision: Striving for Safety and Excellence",
+  description: "Explore RR Imperial's vision to become a globally recognized leader in manufacturing safe, high-quality cables and wires that meet international standards."
+};
 
 const page = () => {
   return (
