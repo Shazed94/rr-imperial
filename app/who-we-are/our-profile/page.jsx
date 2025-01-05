@@ -2,6 +2,11 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import { OurProfile } from "@/components/LottieComponents";
 import WhoWeAreMaster from "@/components/WhoWeAre/WhoWeAreMaster";
+export const metadata = {
+  title: "Who We Are",
+  description: "RR-Imperial Electricals Limited is an ISO-certified sister concern of Imperial Group. Manufacturer of Electric Cables, Super Enamelled Wires, Bare Copper Strips etc. Explore the story behind RR Imperial, including our goals, leadership, and the strategies that fuel our success in the electrical manufacturing sector.",
+  keywords:"RR Imperial, RR Imperial Company Profile, best electric wire company in bangladesh"
+};
 
 const page = (props) => {
   return (
