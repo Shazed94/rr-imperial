@@ -4,6 +4,10 @@ import { Policy } from "@/components/LottieComponents";
 import WhoWeAreMaster from "@/components/WhoWeAre/WhoWeAreMaster";
 import Image from "next/image";
 import React from "react";
+export const metadata = {
+  title: "RR Imperial’s Policy Standards: Quality, Safety, and Sustainability",
+  description: "At RR Imperial Electricals Limited -we dedicate ourselves to the Safety and Health Policy to improve our performance and strive to achieve zero accidents continuously."
+};
 
 const page = () => {
   return (
