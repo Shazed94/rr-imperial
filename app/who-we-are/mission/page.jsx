@@ -2,6 +2,10 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import { Mission } from "@/components/LottieComponents";
 import WhoWeAreMaster from "@/components/WhoWeAre/WhoWeAreMaster";
+export const metadata = {
+  title: "RR Imperial’s Mission: Driving Growth Through Innovation",
+  description: "RR Imperial's mission to deliver top-quality cables and wires using advanced technology. Our commitment to safety, innovation, and national growth ensures customer satisfaction and continuous improvement.",
+};
 
 const MissionPage = () => {
   return (
