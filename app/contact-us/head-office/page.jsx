@@ -2,6 +2,12 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import QuickNavigation from "@/components/QuickNavigation";
 import SubmitQueryForm from "@/components/SubmitQueryForm";
+export const metadata = {
+  title: "Head Office",
+  description: "Welcome to RR Imperial Electrical Ltd. Please feel free to contact us at any time. We are always here to help you. For any kind of query, please submit the forms below. For sales-related information, call the Corporate Sales Hotline(s): +880 17 55552582, 017 55552589."
+};
+
+
 
 const page = () => {
   return (
