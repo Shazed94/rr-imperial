@@ -7,6 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+export const metadata = {
+  title: "RR Shramik: Super Enamelled Copper Wire",
+  description: "RR Shramik is the first and only super-enamelled copper wire manufacturer in Bangladesh. The company uses 100% imported LME (London Metal Exchange) registered grade “A” copper cathode to manufacture H+ Class (200 Degree) super-enamelled copper wire.",
+  keywords:"high-temperature copper wires, electrical copper strips, super enamelled wires, copper wire solutions, durable copper wires"
+};
+
+
 const page = () => {
   return (
     <div>
